@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{76093D39-3D41-47FE-8E65-E44F2A9A8BFA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7BC692AA-75BB-4E68-BFBB-4CF1E668FA59}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Honeymoonshop", "src\Honeymoonshop\Honeymoonshop.xproj", "{691CEC98-A711-41D8-A5D3-BFA83184B9AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{691CEC98-A711-41D8-A5D3-BFA83184B9AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{691CEC98-A711-41D8-A5D3-BFA83184B9AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{691CEC98-A711-41D8-A5D3-BFA83184B9AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{691CEC98-A711-41D8-A5D3-BFA83184B9AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{691CEC98-A711-41D8-A5D3-BFA83184B9AE} = {76093D39-3D41-47FE-8E65-E44F2A9A8BFA}
+	EndGlobalSection
+EndGlobal

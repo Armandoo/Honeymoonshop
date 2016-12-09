@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Honeymoon Shop</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/opmaak.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/opmaak.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <div class="container">
+        <header class="row">
+            <a href="#" class="col-md-1 text-uppercase bold">website</a>
+            <a href="#" class="col-md-1 text-uppercase bold active">webshop</a>
+            <span class="glyphicon glyphicon-search col-md-1 pull-right" aria-hidden="true"></span>
+            <span class="col-md-2 text-uppercase pull-right"><strong>T</strong> (010) 4126143</span>
+        </header>
+
+        <div class="row text-uppercase" id="navbar">
+
+            <h1 class="col-md-5 col-xs-1">Honeymoon Shop</h1>
+            <nav class="col-md-7 bold text-center">
+                <a class="col-md-1 active" href="#">
+                    Home
+                </a>
+                <a class="col-md-1" href="#">
+                    Bruid
+                </a>
+                <a class="col-md-2" href="#">
+                    Bruidegom
+                </a>
+                <a class="col-md-2" href="#">
+                    De Winkel
+                </a>
+                <a class="col-md-1" href="#">
+                    Blog
+                </a>
+                <a class="col-md-2" href="#">
+                    Contact
+                </a>
+                <a class="col-md-3" href="#">
+                    Afspraak maken
+                </a>
+            </nav>
+
+
+            <div class="col-md-12 text-center header ">
+                <span>
+                    Al bijna 50 jaar de grootste bruidzaak van Nederland.
+                </span>
+                </br>
+                <span class="text-uppercase">
+                    <strong>Hoe kunnen we jou helpen?</strong>
+                </span>
+            </div>
+
+            <div class="col-md-12 text-uppercase buttongroup text-center">
+                <div class="col-md-6">
+                    <a class="col-md-5 pull-right" href="#"><strong>Bruid</strong></a>
+                </div>
+                <div class="col-md-6">
+                    <a class="col-md-5" href="#"><strong>Bruidegom</strong></a>
+                </div>
+            </div>
+
+        </div>
+        @RenderBody()
+        <footer class="row">
+            <div class="col-md-12 text-center bold text-uppercase contact center">
+                <div class="col-md-3">
+                    <p class="text-capitalize">Afspraak</p>
+                    Maak een<br>pasafspraak
+                </div>
+                <div class="col-md-3">
+                    <p class="text-capitalize">Social</p>
+                    volg ons
+                </div>
+                <div class="col-md-3">
+                    <p class="text-capitalize">Reviews</p>
+                    bekijk onze reviews
+                </div>
+            </div>
+
+            <div class="col-md-12 text-center">
+                Korte Hoogstraat 4, 3011 GL Rotterdam <strong>email</strong> info@honeymoonshop.nl
+                <strong>tel</strong> (010) 412 61 43 <strong>whatsapp</strong> (06) 25 19 99 27 <br>
+                <strong>Openingstijden MA</strong> 12.00-17.30 <strong>DI t/m VR</strong> 09.30-17.30
+                <strong>ZA</strong> 09.30-17.30 <strong>ZO</strong> 11.00-17.00
+            </div>
+            <div class="col-md-12 text-center" id="footerimg">
+                <img src="http://placekitten.com/g/50/50" alt="wedding img" />
+                <img src="http://placekitten.com/g/50/50" alt="wedding img" />
+            </div>
+
+            <div class="col-md-12 center">
+                <ul class="col-md-3">
+                    <li class="active text-uppercase bold">winkel</li>
+                    <li><a href="#">Over de Honeymoon shop</a></li>
+                    <li><a href="#">Servicepunten</a></li>
+                    <li><a href="#">Routebeschrijving</a></li>
+                    <li><a href="#">Beurzen en evenementen</a></li>
+                    <li><a href="#">Vacatures</a></li>
+                    <li><a href="#">Verkoopvoorwaarden</a></li>
+                    <li><a href="#">CBW erkend</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+
+                <ul class="col-md-3">
+                    <li class="active text-uppercase bold">service</li>
+                    <li><a href="#">Beoordelingen</a></li>
+                    <li><a href="#">Dressfinder</a></li>
+                    <li><a href="#">Gratis trouwmagazine</a></li>
+                    <li><a href="#">Nieuwsbrief</a></li>
+                    <li><a href="#">Veel gestelde vragen</a></li>
+                    <li><a href="#">CBW erkend</a></li>
+                    <li><a href="#">Reinigen van je trouwjurk</a></li>
+                    <li><a href="#">10 redenen</a></li>
+                    <li><a href="#">Beoordelingen</a></li>
+                </ul>
+
+                <ul class="col-md-3">
+                    <li class="active text-uppercase bold">acties</li>
+                    <li><a href="#">The Grand Wedding Show</a></li>
+                    <li><a href="#">Summer Sale</a></li>
+                    <li><a href="#">Trouwjurken onder de 1000 euro</a></li>
+                    <li><a href="#">Trouwjurken voor de volslanke bruid</a></li>
+                </ul>
+            </div>
+
+
+        </footer>
+    </div>
+
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
