@@ -6,7 +6,7 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>691cec98-a711-41d8-a5d3-bfa83184b9ae</ProjectGuid>
+    <ProjectGuid>405441d3-6697-4731-8eb6-ef2005c4894a</ProjectGuid>
     <RootNamespace>Honeymoonshop</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
