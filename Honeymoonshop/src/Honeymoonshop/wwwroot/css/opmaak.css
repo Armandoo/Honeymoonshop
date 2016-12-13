@@ -84,9 +84,14 @@ nav>:last-child{
 	background-color:#F0597C;
 }
 
-#navbar{
-	background-image:url("http://placekitten.com/g/1400/800");
-	min-height:800px;
+.headerimg{
+    margin-top:-80px;
+    z-index:-1;
+    padding:0px;
+}
+
+#headerbuttons{
+    margin-top:-565px;
 }
 
 #navbar span{
@@ -335,4 +340,32 @@ footer ul.col-md-3, .blogevenement{
     background-color: #F0597C;
     color: white;
     font-weight: bold;
+}
+
+.productform{
+    margin-top:-5px;
+}
+
+.spotlight {
+    margin-bottom:20px;
+}
+
+.producten h3{
+    padding:20px 0;
+}
+
+.bg-white{
+    background-color:white;
+}
+
+.collectielijn{
+    margin-top:20px;
+    border-color:black;
+    flex:1;
+}
+
+.test{ /*rename*/
+    display:flex;
+    margin:20px;
+    padding:20px 0px;
 }

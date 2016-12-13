@@ -31,5 +31,11 @@ namespace Honeymoonshop.Controllers
         {
             return View();
         }
+
+        public IActionResult Catalogus()
+        {
+            return View();
+        }
+
     }
 }
