@@ -18,8 +18,8 @@ a:hover{
 	color:#F15A7B;
 }
 
-.container{
-	width:1400px;
+.container {
+    width: 1400px;
 }
 
 .bold {
@@ -325,4 +325,14 @@ footer ul.col-md-3, .blogevenement{
 
 .blogitem img{
 	margin-left:-15px;
+}
+
+.form-horizontal .form-group {
+    margin-top: 20px;
+}
+
+.btn {
+    background-color: #F0597C;
+    color: white;
+    font-weight: bold;
 }
