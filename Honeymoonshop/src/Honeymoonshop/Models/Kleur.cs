@@ -9,6 +9,5 @@ namespace Honeymoonshop.Models
     {
         public int id { get; set; }
         public string kleur { get; set; }
-        public virtual List<Product> producten { get; set; }
     }
 }
