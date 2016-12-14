@@ -7,28 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Honeymoonshop.Data;
 using Honeymoonshop.Models;
-using Microsoft.AspNetCore.Authorization;
-using Honeymoonshop.Models.ProductViewModels;
 
 namespace Honeymoonshop.Controllers
 {
-    public class ProductController : Controller
+    public class KenmerkController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ProductController(ApplicationDbContext context)
+        public KenmerkController(ApplicationDbContext context)
         {
             _context = context;    
         }
 
-        // GET: Product
-        [Authorize]
+        // GET: Kenmerk
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Producten.ToListAsync());
+            return View(await _context.Kenmerken.ToListAsync());
         }
 
-        // GET: Product/Details/5
+        // GET: Kenmerk/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,44 +33,38 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Producten.SingleOrDefaultAsync(m => m.artikelnummer == id);
-            if (product == null)
+            var kenmerk = await _context.Kenmerken.SingleOrDefaultAsync(m => m.id == id);
+            if (kenmerk == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(kenmerk);
         }
 
-        // GET: Product/Create
-        [Authorize]
+        // GET: Kenmerk/Create
         public IActionResult Create()
         {
-            
-            return View(new CreateProduct() {   Kenmerken = _context.Kenmerken.ToList(),
-                                                Merken = _context.Merken.ToList(),
-                                                Categorieen = _context.Category.ToList()});
+            return View();
         }
 
-        // POST: Product/Create
+        // POST: Kenmerk/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("artikelnummer,categorie,merk,prijs")] Product product)
+        public async Task<IActionResult> Create([Bind("id,naam,neklijn,silhouette,stijl")] Kenmerk kenmerk)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
+                _context.Add(kenmerk);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(product);
+            return View(kenmerk);
         }
 
-        // GET: Product/Edit/5
-        [Authorize]
+        // GET: Kenmerk/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,23 +72,22 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Producten.SingleOrDefaultAsync(m => m.artikelnummer == id);
-            if (product == null)
+            var kenmerk = await _context.Kenmerken.SingleOrDefaultAsync(m => m.id == id);
+            if (kenmerk == null)
             {
                 return NotFound();
             }
-            return View(product);
+            return View(kenmerk);
         }
 
-        // POST: Product/Edit/5
+        // POST: Kenmerk/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("artikelnummer,categorie,merk,prijs")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("id,naam,neklijn,silhouette,stijl")] Kenmerk kenmerk)
         {
-            if (id != product.artikelnummer)
+            if (id != kenmerk.id)
             {
                 return NotFound();
             }
@@ -106,12 +96,12 @@ namespace Honeymoonshop.Controllers
             {
                 try
                 {
-                    _context.Update(product);
+                    _context.Update(kenmerk);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.artikelnummer))
+                    if (!KenmerkExists(kenmerk.id))
                     {
                         return NotFound();
                     }
@@ -122,11 +112,10 @@ namespace Honeymoonshop.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            return View(product);
+            return View(kenmerk);
         }
 
-        // GET: Product/Delete/5
-        [Authorize]
+        // GET: Kenmerk/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,30 +123,29 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Producten.SingleOrDefaultAsync(m => m.artikelnummer == id);
-            if (product == null)
+            var kenmerk = await _context.Kenmerken.SingleOrDefaultAsync(m => m.id == id);
+            if (kenmerk == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(kenmerk);
         }
 
-        // POST: Product/Delete/5
-        [Authorize]
+        // POST: Kenmerk/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.Producten.SingleOrDefaultAsync(m => m.artikelnummer == id);
-            _context.Producten.Remove(product);
+            var kenmerk = await _context.Kenmerken.SingleOrDefaultAsync(m => m.id == id);
+            _context.Kenmerken.Remove(kenmerk);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        private bool ProductExists(int id)
+        private bool KenmerkExists(int id)
         {
-            return _context.Producten.Any(e => e.artikelnummer == id);
+            return _context.Kenmerken.Any(e => e.id == id);
         }
     }
 }

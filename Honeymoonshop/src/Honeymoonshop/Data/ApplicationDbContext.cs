@@ -11,6 +11,10 @@ namespace Honeymoonshop.Data
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public virtual DbSet<Product> Producten { get; set; }
+        public virtual DbSet<Kleur> Kleuren { get; set; }
+        public virtual DbSet<Kenmerk> Kenmerken { get; set; }
+        public virtual DbSet<Merk> Merken { get; set; }
+        public virtual DbSet<ProductImage> ProductAfbeeldingen { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -24,6 +28,8 @@ namespace Honeymoonshop.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<Category> Category { get; set; }
         
     }
 }

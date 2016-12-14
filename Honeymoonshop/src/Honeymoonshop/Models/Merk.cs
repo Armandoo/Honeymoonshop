@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Honeymoonshop.Models
 {
-    public class ProductImage
+    public class Merk
     {
         public int id { get; set; }
-        public string bestandsNaam { get; set; }
+        public string merkNaam { get; set; }
     }
 }

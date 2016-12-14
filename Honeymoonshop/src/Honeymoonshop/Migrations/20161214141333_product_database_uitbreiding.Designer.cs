@@ -8,9 +8,10 @@ using Honeymoonshop.Data;
 namespace Honeymoonshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161214141333_product_database_uitbreiding")]
+    partial class product_database_uitbreiding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -63,18 +64,6 @@ namespace Honeymoonshop.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("Honeymoonshop.Models.Category", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("naam");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.Kenmerk", b =>

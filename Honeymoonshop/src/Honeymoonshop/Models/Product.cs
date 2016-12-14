@@ -13,12 +13,12 @@ namespace Honeymoonshop.Models
         public int id { get; set; }
         public int artikelnummer { get; set; }
         public int prijs { get; set; }
-        public string merk { get; set; }
+        public Merk merk { get; set; }
+        public virtual List<Kenmerk> kenmerken { get; set; }
         public int categorie { get; set; }
+        public List<Kleur> kleuren { get; set; }
+        public List<ProductImage> afbeeldingen { get; set; }
+        public string omschrijving { get; set; }
 
-        public Product()
-        {
-            this.categorie = 10;
-        }
     }
 }

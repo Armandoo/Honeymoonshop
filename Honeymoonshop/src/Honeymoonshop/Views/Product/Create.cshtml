@@ -1,40 +1,44 @@
+@model Honeymoonshop.Models.ProductViewModels.CreateProduct
 @{
     ViewData["Title"] = "Product toevoegen";
 }
 
-<form class="form-horizontal productform" asp-action="create" asp-controller="product" method="post">
-    <div class="form-group bold">Trouwjurk toevoegen</div>
+<form class="form-horizontal" asp-controller="product" asp-action="create" method="post">
+    <!--<div class="form-group categorie">
+        <label class="col-md-2 control-label productform">Categorie</label>
+        <select class="Categorie" name="categorie" onchange="showDiv(this)">
+            <option value="1">Trouwjurken</option>
+            <option value="2">Pakken</option>
+            <option value="3">Accesoires</option>
+        </select>
+    </div>-->
     <div class="form-group artikelnummer">
         <label for="inputArtikel3" class="col-sm-2 control-label">Artikelnummer</label>
         <div class="col-md-4">
-            <input type="text" class="form-control" name="artikelnummer" placeholder="Artikelnummer">
+            <input required="required" type="text" class="form-control" name="artikelnummer" placeholder="Artikelnummer">
         </div>
     </div>
-    <div class="form-group merk">
-        <label for="inputMerk3" class="col-sm-2 control-label">Merk</label>
+    <div class="col-md-12">
+        <label for="Merk" class="col-sm-2 control-label">Merk</label>
         <div class="col-md-4">
-            <input type="text" class="form-control" name="merk" placeholder="Merk">
+            <select name="merk">
+            @foreach (var m in Model.Merken)
+            {
+                <option value="@m.merkNaam" >@m.merkNaam</option>
+            }</select>
+            
         </div>
     </div>
-    <div class="form-group stijl">
-        <label for="inputStijl3" class="col-sm-2 control-label">Stijl</label>
-        <div class="col-md-4">
-            <input type="text" class="form-control" name="stijl" placeholder="Stijl">
-        </div>
-    </div>
-    <div class="form-group neklijn">
-        <label for="inputNeklijn3" class="col-sm-2 control-label">Neklijn</label>
-        <div class="col-md-4">
-            <input type="text" class="form-control" name="neklijn" placeholder="Neklijn">
-        </div>
-    </div>
-    <div class="form-group silhouette">
-        <label for="inputNeklijn3" class="col-sm-2 control-label">Silhouette</label>
-        <div class="col-md-4">
-            <input type="text" class="form-control" name="silhouette" placeholder="Silhouette">
-        </div>
-    </div>
-    <div class="form-group kleur">
+
+
+    <!--kenmerken checkboxen-->
+    @foreach(var km in Model.Kenmerken)
+    {
+        <input type="checkbox" name="kenmerk" value="@km.naam" /> @km.naam
+
+    }
+
+    <div class="form-group jurkkleur">          <!-- <--- uit db halen en vullen-->
         <label for="inputKleur3" class="col-sm-2 control-label">Kleur</label>
         <div class="col-md-4">
             <input type="checkbox" name="kleur" value="Ivoorwit">Ivoor/ wit<br>
@@ -42,10 +46,33 @@
             <input type="checkbox" name="kleur" value="Gekleurd">Gekleurd<br>
         </div>
     </div>
+    <!--<div class="form-group model">
+        <label class="col-sm-2 control-label">Model</label>
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="model" placeholder="Model">
+        </div>
+    </div>-->
+    <div class="form-group soort"> <!--categorie uit database-->
+        <label for="inputArtikel3" class="col-sm-2 control-label">Categorie</label>
+        <div class="col-md-4">
+            <select name="categorie">
+                @foreach(var c in Model.Categorieen)
+                {
+                    <option value="@c.id">@c.naam</option>
+                }
+            </select>
+        </div>
+    </div>
     <div class="form-group prijs">
         <label for="inputMerk3" class="col-sm-2 control-label">Prijs</label>
         <div class="col-md-4">
             <input type="text" class="form-control" name="prijs" placeholder="Prijs">
+        </div>
+    </div>
+    <div class="form-group omschrijving">
+        <label for="omschrijving" class="col-sm-2 control-label">Omschrijving</label>
+        <div class="col-md-4">
+            <textarea class="form-control" name="omschrijving" placeholder="Omschrijving"></textarea>
         </div>
     </div>
     <div class="form-group">

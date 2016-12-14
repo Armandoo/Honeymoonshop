@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace Honeymoonshop.Models
 {
-    public class ProductImage
+    public class Kleur
     {
         public int id { get; set; }
-        public string bestandsNaam { get; set; }
+        public string kleur { get; set; }
+        public virtual List<Product> producten { get; set; }
     }
 }
