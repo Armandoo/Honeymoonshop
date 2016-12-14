@@ -4,12 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Honeymoonshop.Models;
+using Honeymoonshop.Data;
 
 namespace Honeymoonshop.Controllers
 {
     [Authorize]
     public class AdminController : Controller
     {
+        private ApplicationDbContext Context;
+
+        public AdminController(ApplicationDbContext context)
+        {
+            this.Context = context;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -19,10 +28,18 @@ namespace Honeymoonshop.Controllers
             return View();
         }
 
-        public IActionResult TrouwjurkToevoegen()
+        public IActionResult ProductToevoegen()
         {
             ViewData["Message"] = "Trouwjurken";
 
+            return View();
+        }
+        
+        [HttpPost]
+        public IActionResult ProductToevoegen(Product p)
+        {
+            Context.Producten.Add(p);
+            Context.SaveChanges();
             return View();
         }
 
@@ -38,6 +55,16 @@ namespace Honeymoonshop.Controllers
             ViewData["Message"] = "Accesoires";
 
             return View();
+        }
+
+        public IActionResult ProductOverzicht()
+        {
+            return View(new List<Product>());
+        }
+
+        public IActionResult CategorieOverzicht()
+        {
+            return View(new List<Category>());
         }
     }
 }

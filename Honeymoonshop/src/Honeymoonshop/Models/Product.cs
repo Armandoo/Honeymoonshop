@@ -9,11 +9,16 @@ namespace Honeymoonshop.Models
 {
     public class Product
     {
-        [Key]
+        
+        public int id { get; set; }
         public int artikelnummer { get; set; }
-        public int minimaleprijs { get; set; }
-        public int maximaleprijs { get; set; }
+        public int prijs { get; set; }
         public string merk { get; set; }
         public int categorie { get; set; }
+
+        public Product()
+        {
+            this.categorie = 10;
+        }
     }
 }

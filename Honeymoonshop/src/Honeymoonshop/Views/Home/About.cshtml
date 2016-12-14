@@ -1,33 +1,25 @@
-﻿@{
-    ViewData["Title"] = "Login";
-}
-<div class="col-md-12">
-    <form class="form-horizontal">
-        <div class="form-group">
-            <label for="inputGebruikersnaam3" class="col-sm-2 control-label">Gebruikersnaam: </label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="inputGebruikersnaam" placeholder="Gebruikersnaam">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">Wachtwoord: </label>
-            <div class="col-sm-4">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="Wachtwoord">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"> Onthoud mij
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Log in</button>
-            </div>
-        </div>
-    </form>
-</div>
+﻿@model List<Product>
+<h2>Product overzicht</h2>
+
+<a asp-action="productToevoegen" asp-controller="admin">+</a>
+<table class="table-striped">
+    <tr>
+        <th>#</th>
+        <th>Merk</th>
+        <th></th>
+    </tr>
+    <tr>
+        @foreach(var product in Model)
+        {
+            <td>@product.artikelnummer</td>
+            <td>@product.merk</td>
+            <td>
+                <a asp-action="productWijzigen" asp-controller="admin">wijzig</a>
+                <a asp-action="verwijder" asp-controller="admin">delete</a>
+            </td>
+
+
+        }
+    </tr>
+
+</table>

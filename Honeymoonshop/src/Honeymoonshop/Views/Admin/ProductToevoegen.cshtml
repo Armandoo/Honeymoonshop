@@ -1,47 +1,51 @@
 ﻿@{
-    ViewData["Title"] = "Trouwjurk toevoegen";
+    ViewData["Title"] = "Product toevoegen";
 }
 
-<form class="form-horizontal productform">
+<form class="form-horizontal productform" asp-action="productToevoegen" asp-controller="admin" method="post">
     <div class="form-group bold">Trouwjurk toevoegen</div>
     <div class="form-group artikelnummer">
         <label for="inputArtikel3" class="col-sm-2 control-label">Artikelnummer</label>
         <div class="col-md-4">
-            <input type="text" class="form-control" id="artikelnummer" placeholder="Artikelnummer">
+            <input type="text" class="form-control" name="artikelnummer" placeholder="Artikelnummer">
         </div>
     </div>
     <div class="form-group merk">
         <label for="inputMerk3" class="col-sm-2 control-label">Merk</label>
         <div class="col-md-4">
-            <input type="text" class="form-control" id="merk" placeholder="Merk">
+            <input type="text" class="form-control" name="merk" placeholder="Merk">
         </div>
     </div>
     <div class="form-group stijl">
         <label for="inputStijl3" class="col-sm-2 control-label">Stijl</label>
         <div class="col-md-4">
-            <input type="text" class="form-control" id="stijl" placeholder="Stijl">
+            <input type="text" class="form-control" name="stijl" placeholder="Stijl">
         </div>
     </div>
     <div class="form-group neklijn">
         <label for="inputNeklijn3" class="col-sm-2 control-label">Neklijn</label>
         <div class="col-md-4">
-            <input type="text" class="form-control" id="neklijn" placeholder="Neklijn">
+            <input type="text" class="form-control" name="neklijn" placeholder="Neklijn">
         </div>
     </div>
     <div class="form-group silhouette">
         <label for="inputNeklijn3" class="col-sm-2 control-label">Silhouette</label>
         <div class="col-md-4">
-            <input type="text" class="form-control" id="silhouette" placeholder="Silhouette">
+            <input type="text" class="form-control" name="silhouette" placeholder="Silhouette">
         </div>
     </div>
     <div class="form-group kleur">
         <label for="inputKleur3" class="col-sm-2 control-label">Kleur</label>
         <div class="col-md-4">
-            <select>
-                <option value="Ivoor/ wit">Ivoor/ wit</option>
-                <option value="Ivoor met kleur">Ivoor met kleur</option>
-                <option value="Gekleurd">Gekleurd</option>
-            </select>
+            <input type="checkbox" name="kleur" value="Ivoorwit">Ivoor/ wit<br>
+            <input type="checkbox" name="kleur" value="Ivoormetkleur">Ivoor met kleur<br>
+            <input type="checkbox" name="kleur" value="Gekleurd">Gekleurd<br>
+        </div>
+    </div>
+    <div class="form-group prijs">
+        <label for="inputMerk3" class="col-sm-2 control-label">Prijs</label>
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="prijs" placeholder="Prijs">
         </div>
     </div>
     <div class="form-group">

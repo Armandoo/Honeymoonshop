@@ -1,0 +1,56 @@
+@model Honeymoonshop.Models.Product
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>Product</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="artikelnummer" />
+        <div class="form-group">
+            <label asp-for="categorie" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="categorie" class="form-control" />
+                <span asp-validation-for="categorie" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="merk" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="merk" class="form-control" />
+                <span asp-validation-for="merk" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="prijs" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="prijs" class="form-control" />
+                <span asp-validation-for="prijs" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+</html>
