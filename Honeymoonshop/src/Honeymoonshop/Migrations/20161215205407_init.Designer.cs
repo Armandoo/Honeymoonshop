@@ -8,7 +8,7 @@ using Honeymoonshop.Data;
 namespace Honeymoonshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161214124914_init")]
+    [Migration("20161215205407_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,6 +66,90 @@ namespace Honeymoonshop.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Honeymoonshop.Models.Category", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("naam");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Category");
+                });
+
+            modelBuilder.Entity("Honeymoonshop.Models.Kenmerk", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("naam");
+
+                    b.Property<string>("neklijn");
+
+                    b.Property<string>("silhouette");
+
+                    b.Property<string>("stijl");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Kenmerken");
+                });
+
+            modelBuilder.Entity("Honeymoonshop.Models.Kenmerkproduct", b =>
+                {
+                    b.Property<int>("kenmerkId");
+
+                    b.Property<int>("productId");
+
+                    b.HasKey("kenmerkId", "productId");
+
+                    b.HasIndex("kenmerkId");
+
+                    b.HasIndex("productId");
+
+                    b.ToTable("Kenmerkproduct");
+                });
+
+            modelBuilder.Entity("Honeymoonshop.Models.Kleur", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("naam");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Kleuren");
+                });
+
+            modelBuilder.Entity("Honeymoonshop.Models.Kleurproduct", b =>
+                {
+                    b.Property<int>("kleurId");
+
+                    b.Property<int>("productId");
+
+                    b.HasKey("kleurId", "productId");
+
+                    b.HasIndex("kleurId");
+
+                    b.HasIndex("productId");
+
+                    b.ToTable("ktKleurProduct");
+                });
+
+            modelBuilder.Entity("Honeymoonshop.Models.Merk", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("merkNaam");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Merken");
+                });
+
             modelBuilder.Entity("Honeymoonshop.Models.Product", b =>
                 {
                     b.Property<int>("id")
@@ -73,15 +157,37 @@ namespace Honeymoonshop.Migrations
 
                     b.Property<int>("artikelnummer");
 
-                    b.Property<int>("categorie");
+                    b.Property<int>("categorieId");
 
-                    b.Property<string>("merk");
+                    b.Property<int>("merkId");
+
+                    b.Property<string>("omschrijving");
 
                     b.Property<int>("prijs");
 
                     b.HasKey("id");
 
+                    b.HasIndex("categorieId");
+
+                    b.HasIndex("merkId");
+
                     b.ToTable("Producten");
+                });
+
+            modelBuilder.Entity("Honeymoonshop.Models.ProductImage", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("Productid");
+
+                    b.Property<string>("bestandsNaam");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Productid");
+
+                    b.ToTable("ProductAfbeeldingen");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -189,6 +295,52 @@ namespace Honeymoonshop.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Honeymoonshop.Models.Kenmerkproduct", b =>
+                {
+                    b.HasOne("Honeymoonshop.Models.Kenmerk", "kenmerk")
+                        .WithMany("producten")
+                        .HasForeignKey("kenmerkId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Honeymoonshop.Models.Product", "product")
+                        .WithMany("kenmerken")
+                        .HasForeignKey("productId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Honeymoonshop.Models.Kleurproduct", b =>
+                {
+                    b.HasOne("Honeymoonshop.Models.Kleur", "kleur")
+                        .WithMany("producten")
+                        .HasForeignKey("kleurId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Honeymoonshop.Models.Product", "product")
+                        .WithMany("kleuren")
+                        .HasForeignKey("productId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Honeymoonshop.Models.Product", b =>
+                {
+                    b.HasOne("Honeymoonshop.Models.Category", "categorie")
+                        .WithMany()
+                        .HasForeignKey("categorieId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Honeymoonshop.Models.Merk", "merk")
+                        .WithMany()
+                        .HasForeignKey("merkId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Honeymoonshop.Models.ProductImage", b =>
+                {
+                    b.HasOne("Honeymoonshop.Models.Product")
+                        .WithMany("afbeeldingen")
+                        .HasForeignKey("Productid");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

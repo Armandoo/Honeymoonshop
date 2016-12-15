@@ -1,0 +1,70 @@
+@model Honeymoonshop.Models.ProductViewModels.CreateProduct
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>Product</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="product.artikelnummer" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="product.artikelnummer" class="form-control" />
+                <span asp-validation-for="product.artikelnummer" class="text-danger" />
+            </div>
+        </div>
+        @foreach (var kleur in Model.Kleuren)
+        {
+            <input type="checkbox" value="@kleur.id" name="kleur" /> @kleur.naam
+        }
+        @foreach (var kenmerk in Model.Kenmerken)
+        {
+            <input type="checkbox" value="@kenmerk.id" name="kenmerk" /> @kenmerk.naam
+        }
+
+        <div class="form-group">
+            <label asp-for="product.categorieId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="product.categorieId" class ="form-control" asp-items="Model.Categorieen"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="product.merkId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="product.merkId" class ="form-control" asp-items="Model.Merken"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="product.omschrijving" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="product.omschrijving" class="form-control" />
+                <span asp-validation-for="product.omschrijving" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="product.prijs" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="product.prijs" class="form-control" />
+                <span asp-validation-for="product.prijs" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
