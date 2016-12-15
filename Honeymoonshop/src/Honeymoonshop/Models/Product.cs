@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Honeymoonshop.Models
 {
@@ -15,8 +16,8 @@ namespace Honeymoonshop.Models
         public int prijs { get; set; }
         public Merk merk { get; set; }
         public virtual List<Kenmerk> kenmerken { get; set; }
-        public int categorie { get; set; }
-        public List<Kleur> kleuren { get; set; }
+        public Category categorie { get; set; }
+        public virtual List<Kleurproduct> kleuren { get; set; }
         public List<ProductImage> afbeeldingen { get; set; }
         public string omschrijving { get; set; }
 

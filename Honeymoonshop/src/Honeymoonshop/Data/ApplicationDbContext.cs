@@ -16,6 +16,8 @@ namespace Honeymoonshop.Data
         public virtual DbSet<Merk> Merken { get; set; }
         public virtual DbSet<ProductImage> ProductAfbeeldingen { get; set; }
 
+        public virtual DbSet<Kleurproduct> ktKleurProduct { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -27,6 +29,10 @@ namespace Honeymoonshop.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+            builder.Entity<Kleurproduct>().HasKey(kp => new { kp.kleurId, kp.productId});
+            builder.Entity<Kleurproduct>().HasOne(k => k.product).WithMany(p => p.kleuren).HasForeignKey(k => k.productId);
+            builder.Entity<Kleurproduct>().HasOne(k => k.kleur).WithMany(p => p.producten).HasForeignKey(k => k.kleurId);
+
         }
 
         public DbSet<Category> Category { get; set; }
