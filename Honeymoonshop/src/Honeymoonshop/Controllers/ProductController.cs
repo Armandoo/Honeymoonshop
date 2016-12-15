@@ -52,7 +52,8 @@ namespace Honeymoonshop.Controllers
             
             return View(new CreateProduct() {   Kenmerken = _context.Kenmerken.ToList(),
                                                 Merken = _context.Merken.ToList(),
-                                                Categorieen = _context.Category.ToList()});
+                                                Categorieen = _context.Category.ToList(),
+                                                Kleuren = _context.Kleuren.ToList()});
         }
 
         // POST: Product/Create

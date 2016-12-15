@@ -22,28 +22,35 @@
         <label for="Merk" class="col-sm-2 control-label">Merk</label>
         <div class="col-md-4">
             <select name="merk">
-            @foreach (var m in Model.Merken)
+                @foreach (var m in Model.Merken)
             {
-                <option value="@m.merkNaam" >@m.merkNaam</option>
-            }</select>
-            
+                    <option value="@m.id">@m.merkNaam</option>
+                }
+            </select>
+
         </div>
     </div>
 
 
     <!--kenmerken checkboxen-->
-    @foreach(var km in Model.Kenmerken)
+    @foreach (var km in Model.Kenmerken)
     {
-        <input type="checkbox" name="kenmerk" value="@km.naam" /> @km.naam
+        <input type="checkbox" name="kenmerk" value="@km.id" /> @km.naam
 
     }
 
-    <div class="form-group jurkkleur">          <!-- <--- uit db halen en vullen-->
+    <div class="form-group jurkkleur">
+        <!-- <--- uit db halen en vullen-->
         <label for="inputKleur3" class="col-sm-2 control-label">Kleur</label>
         <div class="col-md-4">
-            <input type="checkbox" name="kleur" value="Ivoorwit">Ivoor/ wit<br>
-            <input type="checkbox" name="kleur" value="Ivoormetkleur">Ivoor met kleur<br>
-            <input type="checkbox" name="kleur" value="Gekleurd">Gekleurd<br>
+            @if (Model.Kleuren.Count > 0)
+            {
+                @foreach (var kleur in Model.Kleuren)
+                {
+                    <input type="checkbox" value="@kleur.id" name="kleur" /> @kleur.kleur <br />
+
+                }
+            }
         </div>
     </div>
     <!--<div class="form-group model">
@@ -52,11 +59,12 @@
             <input type="text" class="form-control" name="model" placeholder="Model">
         </div>
     </div>-->
-    <div class="form-group soort"> <!--categorie uit database-->
+    <div class="form-group soort">
+        <!--categorie uit database-->
         <label for="inputArtikel3" class="col-sm-2 control-label">Categorie</label>
         <div class="col-md-4">
             <select name="categorie">
-                @foreach(var c in Model.Categorieen)
+                @foreach (var c in Model.Categorieen)
                 {
                     <option value="@c.id">@c.naam</option>
                 }

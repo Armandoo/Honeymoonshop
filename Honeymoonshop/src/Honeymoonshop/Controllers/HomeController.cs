@@ -45,5 +45,10 @@ namespace Honeymoonshop.Controllers
             return View();
         }
 
+        public IActionResult ProductPagina()
+        {
+            return View();
+        }
+
     }
 }
