@@ -17,6 +17,7 @@ namespace Honeymoonshop.Data
         public virtual DbSet<ProductImage> ProductAfbeeldingen { get; set; }
 
         public virtual DbSet<Kleurproduct> ktKleurProduct { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -39,7 +40,7 @@ namespace Honeymoonshop.Data
 
         }
 
-        public DbSet<Category> Category { get; set; }
+
         
     }
 }
