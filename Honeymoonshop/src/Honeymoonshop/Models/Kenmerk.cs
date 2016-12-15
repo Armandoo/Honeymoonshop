@@ -12,5 +12,7 @@ namespace Honeymoonshop.Models
         public string stijl { get; set; }
         public string neklijn { get; set; }
         public string silhouette { get; set; }
+
+        public List<Kenmerkproduct> producten { get; set; }
     }
 }
