@@ -6,7 +6,7 @@
 
 <h2>Create</h2>
 
-<form asp-action="Create">
+<form asp-action="Create" enctype="multipart/form-data">
     <div class="form-horizontal">
         <h4>Product</h4>
         <hr />
@@ -30,13 +30,13 @@
         <div class="form-group">
             <label asp-for="product.categorieId" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="product.categorieId" class ="form-control" asp-items="Model.Categorieen"></select>
+                <select asp-for="product.categorieId" class="form-control" asp-items="Model.Categorieen"></select>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="product.merkId" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="product.merkId" class ="form-control" asp-items="Model.Merken"></select>
+                <select asp-for="product.merkId" class="form-control" asp-items="Model.Merken"></select>
             </div>
         </div>
         <div class="form-group">
@@ -55,10 +55,17 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="file" name="afbeeldingen" />
+                <input type="file" name="afbeeldingen" />
+                <input type="file" name="afbeeldingen" />
             </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+
         </div>
-    </div>
 </form>
 
 <div>

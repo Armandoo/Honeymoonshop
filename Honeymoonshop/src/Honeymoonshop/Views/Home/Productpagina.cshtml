@@ -1,4 +1,8 @@
-﻿<div class="productcontainer row">
+﻿@model Honeymoonshop.Models.Product
+@{
+    Product product = ViewData["Product"] as Product;
+}
+<div class="productcontainer row">
     <div id="productpagina" class="row">
         <div id="breadcrumb col-md-12"><a href="#"><img src="~/images/arrow.png" />Terug naar overzicht</a></div>
         <div class="col-md-3">
@@ -10,16 +14,36 @@
             <img src="http://placekitten.com/g/700/800" class="pull-right" />
         </div>
         <div class="col-md-3">
-            <h4>Merk</h4>
-            <p>artikel nr. 12294</p>
-            <p>Omschrijving</p>
-            <p>
-                <span>Merk: <a href="#">Merknaam</a></span><br />
-                <span>Kenmerken: <a href="#">Kenmerk</a></span><br />
-                <span>Prijsindicatie: €7.500</span><br />
-                <span>Beschikbare kleuren: Krentenbollen</span><br />
-            </p>
-            <p>Deze jurk passen!</p>
+            <h4>@product.merk.merkNaam</h4>
+            <p>artikel nr. @product.artikelnummer</p>
+            <p>@product.omschrijving</p>
+            <div>
+                <p>
+                    <span>Merk: <a href="#">@product.merk.merkNaam</a></span><br />
+                </p>
+                <p>
+                    <span>Kenmerken: 
+                        @{
+                            foreach (Kenmerkproduct kenmerkproduct in product.kenmerken)
+                            {
+                                <a href="#">@kenmerkproduct.kenmerk.naam</a>
+                            }
+                        }
+                    </span><br />
+                </p>
+                <p>
+                    <span>Prijsindicatie: €@product.prijs</span><br />
+                </p>
+                <p>
+                    <span>Beschikbare kleuren: @{
+                        foreach (Kleurproduct kleurproduct in product.kleuren)
+                        {
+                            <span>@kleurproduct.kleur.naam</span>
+                        }
+                    }</span><br />
+                </p>
+                <p>Kom deze jurk passen!</p>
+            </div>
             <a href="#" class="text-uppercase">Pasafspraak maken</a>
         </div>
     </div>
@@ -55,7 +79,7 @@
     </div>
     <div class="row" id="tussenkopje">
         <hr class="col-md-3" />
-        <h4 class="col-md-4 text-uppercase text-center">Of zijn deze jurken meer iets voor jou?</h4>
+        <h4 class="col-md-4 text-uppercase text-center">Of zijn deze @product.categorie.naam meer iets voor jou?</h4>
         <hr class="col-md-3" />
     </div>
     <div class="row" id="alternatieven">

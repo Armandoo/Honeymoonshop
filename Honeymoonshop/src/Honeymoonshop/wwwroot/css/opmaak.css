@@ -413,17 +413,35 @@ footer ul.col-md-3, .blogevenement{
  
 #productpagina>:last-child>h4{
     font-size:24px;
+    margin-bottom:1px;
 }
  
 #productpagina>:last-child>p{
     margin-bottom:40px;
 }
  
-#productpagina>:last-child>p>span>a{
+#productpagina>:last-child>div>p>span>a{
     color:pink;
 }
+
+#productpagina>:last-child>div>p{
+    margin-bottom:5px;
+}
+
+#productpagina>:last-child>div{
+    margin-bottom:40px;
+}
+
+#productpagina>:last-child>div>p:last-child{
+    margin-top:20px;
+    margin-bottom:-20px;
+}
+
+#productpagina>:last-child>a{
+    padding-top:220px;
+}
  
-#productpagina>:last-child>p>span>a:hover{
+#productpagina>:last-child>div>p>span>a:hover{
     color:black;
 }
  
@@ -476,4 +494,8 @@ footer ul.col-md-3, .blogevenement{
 .productcontainer{
     background-color:white;
     border-top: 2px solid rgb(229, 229, 229);
+}
+
+.omschrijving{
+    padding-bottom:px;
 }

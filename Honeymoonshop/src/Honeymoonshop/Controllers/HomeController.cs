@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Honeymoonshop.Data;
+using Honeymoonshop.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Honeymoonshop.Controllers
 {
@@ -45,10 +47,14 @@ namespace Honeymoonshop.Controllers
             return View();
         }
 
-        public IActionResult ProductPagina()
+        public IActionResult ProductPagina(int id)
         {
+            var hetProduct = Context.Producten.Include(x => x.kleuren).ThenInclude(x => x.kleur).Include(x => x.categorie).Include(x => x.kenmerken).ThenInclude(x => x.kenmerk).FirstOrDefault(product => product.id == id);
+            var hetMerk = Context.Merken.FirstOrDefault(merk => merk.id == hetProduct.merkId);
+            hetProduct.merk = hetMerk;
+            ViewData["Product"] = hetProduct;
+
             return View();
         }
-
     }
 }

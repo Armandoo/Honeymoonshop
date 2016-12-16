@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Honeymoonshop.Data;
 using Honeymoonshop.Models;
 using Honeymoonshop.Models.ProductViewModels;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Honeymoonshop.Controllers
 {
@@ -57,13 +59,14 @@ namespace Honeymoonshop.Controllers
 
             });
         }
-
+        
+        //refactoren
         // POST: Products/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,artikelnummer,categorieId,merkId,omschrijving,prijs")] Product product, string[] kleur, string[] kenmerk)
+        public async Task<IActionResult> Create([Bind("id,artikelnummer,categorieId,merkId,omschrijving,prijs")] Product product, string[] kleur, string[] kenmerk, IFormFile[] afbeeldingen)
         {
             if (kleur!=null)
             {
@@ -87,6 +90,28 @@ namespace Honeymoonshop.Controllers
                     if (int.TryParse(k, out kenmerkId))
                     {
                         product.kenmerken.Add(new Kenmerkproduct() { kenmerkId = kenmerkId });
+                    }
+                }
+            }
+
+            product.afbeeldingen = new List<ProductImage>();
+            foreach (var afbeelding in afbeeldingen)
+            {
+                if (afbeelding != null)
+                {
+                    var uploads = Path.Combine("", "wwwroot/images/productenimages");
+                    if (afbeeldingen.Length > 0)
+                    {
+                        if (Path.GetExtension(afbeelding.FileName).ToLower() == ".jpg"
+                        || Path.GetExtension(afbeelding.FileName).ToLower() == ".png"
+                        || Path.GetExtension(afbeelding.FileName).ToLower() == ".gif"
+                        || Path.GetExtension(afbeelding.FileName).ToLower() == ".jpeg") { }
+
+                        using (var fileStream = new FileStream(Path.Combine(uploads, afbeelding.FileName), FileMode.Create))
+                        {
+                            product.afbeeldingen.Add(new ProductImage() { bestandsNaam = afbeelding.FileName });
+                            await afbeelding.CopyToAsync(fileStream);
+                        }
                     }
                 }
             }
