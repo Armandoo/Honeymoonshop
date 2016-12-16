@@ -70,14 +70,24 @@ namespace Honeymoonshop.Controllers
                 product.kleuren = new List<Kleurproduct>();
                 foreach(var k in kleur)
                 {
-                    int kleurToAdd =
-                        _context.Kleuren.
-                        Where(x =>
-                        x.id == int.Parse(k))
-                        .First().id;
-                    product.kleuren.Add(new Kleurproduct() {
-                        kleurId = kleurToAdd,
-                        productId = product.id });
+                    var kleurId = 0;
+                    if (int.TryParse(k,out kleurId))
+                    {
+                        product.kleuren.Add(new Kleurproduct() { kleurId = kleurId });
+                    }
+                }
+            }
+
+            if (kleur != null)
+            {
+                product.kenmerken = new List<Kenmerkproduct>();
+                foreach (var k in kenmerk)
+                {
+                    var kenmerkId = 0;
+                    if (int.TryParse(k, out kenmerkId))
+                    {
+                        product.kenmerken.Add(new Kenmerkproduct() { kenmerkId = kenmerkId });
+                    }
                 }
             }
             if (ModelState.IsValid)
