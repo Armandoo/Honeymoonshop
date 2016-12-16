@@ -78,7 +78,7 @@ namespace Honeymoonshop.Controllers
                 }
             }
 
-            if (kleur != null)
+            if (kenmerk != null)
             {
                 product.kenmerken = new List<Kenmerkproduct>();
                 foreach (var k in kenmerk)
