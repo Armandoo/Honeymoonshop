@@ -10,6 +10,8 @@ namespace Honeymoonshop.Models
     {
         public int id { get; set; }
         public string naam { get; set; }
+        public string kleurCode { get; set; }
+
         public List<Kleurproduct> producten { get; set; }
     }
 }

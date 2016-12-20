@@ -121,9 +121,16 @@ namespace Honeymoonshop.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["categorieId"] = new SelectList(_context.Category, "id", "id", product.categorieId);
-            ViewData["merkId"] = new SelectList(_context.Merken, "id", "id", product.merkId);
-            return View(product);
+            return View(new CreateProduct()
+            {
+                Categorieen = new SelectList(_context.Category, "id", "naam"),
+                Merken = new SelectList(_context.Merken, "id", "merkNaam"),
+                Kenmerken = _context.Kenmerken.ToList(),
+                Kleuren = _context.Kleuren.ToList(),
+                product = product
+
+
+            });
         }
 
         // GET: Products/Edit/5
@@ -141,7 +148,16 @@ namespace Honeymoonshop.Controllers
             }
             ViewData["categorieId"] = new SelectList(_context.Category, "id", "id", product.categorieId);
             ViewData["merkId"] = new SelectList(_context.Merken, "id", "id", product.merkId);
-            return View(product);
+            return View(new CreateProduct()
+            {
+                Categorieen = new SelectList(_context.Category, "id", "naam"),
+                Merken = new SelectList(_context.Merken, "id", "merkNaam"),
+                Kenmerken = _context.Kenmerken.ToList(),
+                Kleuren = _context.Kleuren.ToList(),
+                product = product
+
+
+            });
         }
 
         // POST: Products/Edit/5
@@ -149,11 +165,59 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,artikelnummer,categorieId,merkId,omschrijving,prijs")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("id,artikelnummer,categorieId,merkId,omschrijving,prijs")] Product product, string[] kleur, string[] kenmerk, IFormFile[] afbeeldingen)
         {
             if (id != product.id)
             {
                 return NotFound();
+            }
+
+            if (kleur != null)
+            {
+                product.kleuren = new List<Kleurproduct>();
+                foreach (var k in kleur)
+                {
+                    var kleurId = 0;
+                    if (int.TryParse(k, out kleurId))
+                    {
+                        product.kleuren.Add(new Kleurproduct() { kleurId = kleurId });
+                    }
+                }
+            }
+
+            if (kenmerk != null)
+            {
+                product.kenmerken = new List<Kenmerkproduct>();
+                foreach (var k in kenmerk)
+                {
+                    var kenmerkId = 0;
+                    if (int.TryParse(k, out kenmerkId))
+                    {
+                        product.kenmerken.Add(new Kenmerkproduct() { kenmerkId = kenmerkId });
+                    }
+                }
+            }
+
+            product.afbeeldingen = new List<ProductImage>();
+            foreach (var afbeelding in afbeeldingen)
+            {
+                if (afbeelding != null)
+                {
+                    var uploads = Path.Combine("", "wwwroot/images/productenimages");
+                    if (afbeeldingen.Length > 0)
+                    {
+                        if (Path.GetExtension(afbeelding.FileName).ToLower() == ".jpg"
+                        || Path.GetExtension(afbeelding.FileName).ToLower() == ".png"
+                        || Path.GetExtension(afbeelding.FileName).ToLower() == ".gif"
+                        || Path.GetExtension(afbeelding.FileName).ToLower() == ".jpeg") { }
+
+                        using (var fileStream = new FileStream(Path.Combine(uploads, afbeelding.FileName), FileMode.Create))
+                        {
+                            product.afbeeldingen.Add(new ProductImage() { bestandsNaam = afbeelding.FileName });
+                            await afbeelding.CopyToAsync(fileStream);
+                        }
+                    }
+                }
             }
 
             if (ModelState.IsValid)
@@ -176,9 +240,16 @@ namespace Honeymoonshop.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["categorieId"] = new SelectList(_context.Category, "id", "id", product.categorieId);
-            ViewData["merkId"] = new SelectList(_context.Merken, "id", "id", product.merkId);
-            return View(product);
+            return View(new CreateProduct()
+            {
+                Categorieen = new SelectList(_context.Category, "id", "naam"),
+                Merken = new SelectList(_context.Merken, "id", "merkNaam"),
+                Kenmerken = _context.Kenmerken.ToList(),
+                Kleuren = _context.Kleuren.ToList(),
+                product = product
+
+
+            });
         }
 
         // GET: Products/Delete/5

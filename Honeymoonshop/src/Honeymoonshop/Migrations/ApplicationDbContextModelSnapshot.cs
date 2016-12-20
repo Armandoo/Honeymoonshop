@@ -115,6 +115,8 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("kleurCode");
+
                     b.Property<string>("naam");
 
                     b.HasKey("id");

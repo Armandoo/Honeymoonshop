@@ -8,8 +8,8 @@ using Honeymoonshop.Data;
 namespace Honeymoonshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161215205407_init")]
-    partial class init
+    [Migration("20161220094803_new")]
+    partial class @new
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -115,6 +115,8 @@ namespace Honeymoonshop.Migrations
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("kleurCode");
 
                     b.Property<string>("naam");
 

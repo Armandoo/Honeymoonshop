@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Honeymoonshop.Migrations
 {
-    public partial class init : Migration
+    public partial class @new : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -69,6 +69,7 @@ namespace Honeymoonshop.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    kleurCode = table.Column<string>(nullable: true),
                     naam = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

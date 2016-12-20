@@ -53,7 +53,7 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,naam")] Kleur kleur)
+        public async Task<IActionResult> Create([Bind("naam,kleurCode")] Kleur kleur)
         {
             if (ModelState.IsValid)
             {
