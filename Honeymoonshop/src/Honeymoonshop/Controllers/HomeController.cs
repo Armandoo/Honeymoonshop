@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Honeymoonshop.Data;
 using Microsoft.AspNetCore.Mvc;
+using Honeymoonshop.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Honeymoonshop.Controllers
 {
@@ -14,6 +16,21 @@ namespace Honeymoonshop.Controllers
         public HomeController(ApplicationDbContext context)
         {
             this.Context = context;
+        }
+
+        public IActionResult Dressfinder()
+        {
+            var producten = Context.Producten.Include(x => x.merk);
+            //  .Select(p => p.Merk);
+           /* var producten = Context.Producten;
+            List<Product> deProducten = new List<Product>();
+           /* foreach (Product product in producten)
+            {
+                var hetMerk = Context.Merken.FirstOrDefault(merk => merk.id == product.merkId);
+                product.merk = hetMerk;
+                deProducten.Add(product);
+            }*/
+            return View(producten.ToList());
         }
 
         public IActionResult Index()

@@ -38,6 +38,9 @@ namespace Honeymoonshop.Data
             builder.Entity<Kenmerkproduct>().HasOne(k => k.product).WithMany(p => p.kenmerken).HasForeignKey(k => k.productId);
             builder.Entity<Kenmerkproduct>().HasOne(k => k.kenmerk).WithMany(p => p.producten).HasForeignKey(k => k.kenmerkId);
 
+            builder.Entity<Kleurproduct>().HasMany(x => x.productimages).WithOne(x => x.kleurproduct);
+           
+
         }
 
 

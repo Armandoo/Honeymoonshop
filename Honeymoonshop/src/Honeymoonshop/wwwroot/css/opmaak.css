@@ -84,27 +84,51 @@ nav>:last-child{
 	background-color:#F0597C;
 }
 
-.headerimg{
+
+.banner{
     margin-top:-80px;
     z-index:-1;
     padding:0px;
+    display:flex;
+    justify-content:center;
 }
 
-#headerbuttons{
-    margin-top:-565px;
+.home-bannerkop, .about-bannerkop{
+    font-size:130px;
+    margin-bottom:-115px;
+	color:white;
+    font-family: 'Playball', cursive;
+    opacity:0.5;
 }
 
-#navbar span{
+.home-bannertekst{
+    padding-bottom:50px;
+}
+
+.bannercontent, .about-bannercontent{
+    position:absolute;
+    align-self:center;
+    padding-bottom:20px;
+}
+
+
+
+.bannercontent:nth-child(2){
+    font-size:28px;
 	color:white;
 }
 
-.buttongroup {
+.bannercontent span:last-child{
+    font-size:36px;
+	color:white;
+}
+
+.home-buttongroup {
 	font-size: 15px;
-	padding-bottom:200px;
 	
 }
 
-.buttongroup a{
+.home-buttongroup a{
 	padding-top: 15px;
 	padding-bottom:15px;
 	border:5px solid white;
@@ -112,7 +136,7 @@ nav>:last-child{
 	display:block;
 }
 
-.buttongroup >div:first-child a{
+.home-buttongroup >div:first-child a{
 	background-color:#F0597C;
 	border:5px solid #F0597C;
 }
@@ -122,7 +146,7 @@ nav>:last-child{
 	margin:10px 0px;
 }
 
-#navbar .buttongroup{
+#navbar home.buttongroup{
 	margin-top:145px;
 	
 }
@@ -477,3 +501,121 @@ footer ul.col-md-3, .blogevenement{
     background-color:white;
     border-top: 2px solid rgb(229, 229, 229);
 }
+
+h4 .col-md{
+
+}
+
+.catalogusitems{
+    display:flex;
+    margin:20px;
+    padding:20px 0px;
+}
+
+.catalogusartikelnummer{
+    display:none;
+}
+
+.catalogusitem:hover{
+    
+      
+    transition:  0.3s ease-in-out;
+    transform: scale(1.1);
+    z-index:2;
+    box-shadow: 2px 2px 5px #DBDBDC;
+
+}
+
+.catalogusitem:hover .catalogusartikelnummer{
+    
+    display:block;
+
+}
+
+
+.containercollectieitem{
+    position:relative;
+}
+
+
+.filter ul{
+    list-style-type:none;
+    padding: 0;
+}
+
+.categorieen li{
+    background-color:#FCE8E7;
+    margin:3px;
+    padding-left:10px;
+    font-weight:bold;
+    font-size:16px;
+}
+
+.filterkeuzes>:first-child li{
+    border-top:3px #D9D9DB;
+    background-color:#FCFCFC;
+    border-bottom:1px #D9D9DB;
+}
+
+.collectieimg{
+    padding:0px;
+}
+
+.filterkeuzes input[type="radio"]{
+    margin:5px 5px 10px 10px;
+    height:18px;
+    width:18px;
+    border-radius:5px;
+}
+
+.filterkeuzes div:first-child{
+    border-top:2px solid #D9D9DB;
+    border-bottom:2px solid #D9D9DB;
+    background-color:#F6F6F6;
+}
+
+.filterverfijnen>:first-child{
+    border-top:2px solid #D9D9DB;
+    border-bottom:2px solid #D9D9DB;
+}
+
+ .filterkeuzes div:first-child, .filterverfijnen li{
+     padding:5px 5px 3px 10px;
+ }   
+
+.filterkeuzes>:last-child div{
+    border-top:none;
+    background-color:#FCFCFC;
+}
+
+.filterkeuzes img, .filterverfijnen img{
+   
+    max-width:12px;
+}
+
+.filterkeuzes fieldset, .filterverfijnen fieldset{
+    height:125px;
+    overflow-y:scroll;
+}
+
+.filterverfijnen {
+    padding:5px;
+    border-bottom:2px solid #D9D9DB;
+}
+
+ .head-filter{
+     
+    border-bottom:2px solid #D9D9DB;
+}
+
+
+ .filterverfijnen li, .filterkeuzes li{
+    font-size:16px;
+    
+}
+
+
+ .filterverfijnen img, .filterkeuzes img{
+     margin-right:10px;
+ }
+
