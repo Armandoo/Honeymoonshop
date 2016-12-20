@@ -437,17 +437,35 @@ footer ul.col-md-3, .blogevenement{
  
 #productpagina>:last-child>h4{
     font-size:24px;
+    margin-bottom:1px;
 }
  
 #productpagina>:last-child>p{
     margin-bottom:40px;
 }
  
-#productpagina>:last-child>p>span>a{
+#productpagina>:last-child>div>p>span>a{
     color:pink;
 }
+
+#productpagina>:last-child>div>p{
+    margin-bottom:5px;
+}
+
+#productpagina>:last-child>div{
+    margin-bottom:40px;
+}
+
+#productpagina>:last-child>div>p:last-child{
+    margin-top:20px;
+    margin-bottom:-20px;
+}
+
+#productpagina>:last-child>a{
+    padding-top:220px;
+}
  
-#productpagina>:last-child>p>span>a:hover{
+#productpagina>:last-child>div>p>span>a:hover{
     color:black;
 }
  
@@ -501,121 +519,3 @@ footer ul.col-md-3, .blogevenement{
     background-color:white;
     border-top: 2px solid rgb(229, 229, 229);
 }
-
-h4 .col-md{
-
-}
-
-.catalogusitems{
-    display:flex;
-    margin:20px;
-    padding:20px 0px;
-}
-
-.catalogusartikelnummer{
-    display:none;
-}
-
-.catalogusitem:hover{
-    
-      
-    transition:  0.3s ease-in-out;
-    transform: scale(1.1);
-    z-index:2;
-    box-shadow: 2px 2px 5px #DBDBDC;
-
-}
-
-.catalogusitem:hover .catalogusartikelnummer{
-    
-    display:block;
-
-}
-
-
-.containercollectieitem{
-    position:relative;
-}
-
-
-.filter ul{
-    list-style-type:none;
-    padding: 0;
-}
-
-.categorieen li{
-    background-color:#FCE8E7;
-    margin:3px;
-    padding-left:10px;
-    font-weight:bold;
-    font-size:16px;
-}
-
-.filterkeuzes>:first-child li{
-    border-top:3px #D9D9DB;
-    background-color:#FCFCFC;
-    border-bottom:1px #D9D9DB;
-}
-
-.collectieimg{
-    padding:0px;
-}
-
-.filterkeuzes input[type="radio"]{
-    margin:5px 5px 10px 10px;
-    height:18px;
-    width:18px;
-    border-radius:5px;
-}
-
-.filterkeuzes div:first-child{
-    border-top:2px solid #D9D9DB;
-    border-bottom:2px solid #D9D9DB;
-    background-color:#F6F6F6;
-}
-
-.filterverfijnen>:first-child{
-    border-top:2px solid #D9D9DB;
-    border-bottom:2px solid #D9D9DB;
-}
-
- .filterkeuzes div:first-child, .filterverfijnen li{
-     padding:5px 5px 3px 10px;
- }   
-
-.filterkeuzes>:last-child div{
-    border-top:none;
-    background-color:#FCFCFC;
-}
-
-.filterkeuzes img, .filterverfijnen img{
-   
-    max-width:12px;
-}
-
-.filterkeuzes fieldset, .filterverfijnen fieldset{
-    height:125px;
-    overflow-y:scroll;
-}
-
-.filterverfijnen {
-    padding:5px;
-    border-bottom:2px solid #D9D9DB;
-}
-
- .head-filter{
-     
-    border-bottom:2px solid #D9D9DB;
-}
-
-
- .filterverfijnen li, .filterkeuzes li{
-    font-size:16px;
-    
-}
-
-
- .filterverfijnen img, .filterkeuzes img{
-     margin-right:10px;
- }
-
