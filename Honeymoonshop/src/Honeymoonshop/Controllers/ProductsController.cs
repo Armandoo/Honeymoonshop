@@ -94,27 +94,7 @@ namespace Honeymoonshop.Controllers
                 }
             }
 
-            product.afbeeldingen = new List<ProductImage>();
-            foreach (var afbeelding in afbeeldingen)
-            {
-                if (afbeelding != null)
-                {
-                    var uploads = Path.Combine("", "wwwroot/images/productenimages");
-                    if (afbeeldingen.Length > 0)
-                    {
-                        if (Path.GetExtension(afbeelding.FileName).ToLower() == ".jpg"
-                        || Path.GetExtension(afbeelding.FileName).ToLower() == ".png"
-                        || Path.GetExtension(afbeelding.FileName).ToLower() == ".gif"
-                        || Path.GetExtension(afbeelding.FileName).ToLower() == ".jpeg") { }
-
-                        using (var fileStream = new FileStream(Path.Combine(uploads, afbeelding.FileName), FileMode.Create))
-                        {
-                            product.afbeeldingen.Add(new ProductImage() { bestandsNaam = afbeelding.FileName });
-                            await afbeelding.CopyToAsync(fileStream);
-                        }
-                    }
-                }
-            }
+            
             if (ModelState.IsValid)
             {
                 _context.Add(product);
