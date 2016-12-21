@@ -394,30 +394,42 @@ footer ul.col-md-3, .blogevenement{
     padding:20px 0px;
 }
 
+
 #productpagina{
     font-size:14px;
 }
  
 /*Overzicht knop*/
-#productpagina>:first-child{
+#productpagina>:nth-child(2){
     padding: 50px 0px 50px 50px;
     text-decoration:underline;
     text-decoration-color:rgb(132, 132, 132);
 }
+/*
+#productpagina>:nth-child(n+3){
+    background-color:red;
+}*/
  
-#productpagina>:first-child a{
+#productpagina>:nth-child(2) a{
     color: rgb(132, 132, 132);
 }
  
-#productpagina>div:first-child{
+#productpagina>div:nth-child(2){
     margin-left: 20px;
 }
  
 /*Extra images*/
-#productpagina>div:nth-child(2)>img{
+#productpagina>div:nth-child(3)>img{
     margin-bottom:20px;
     margin-right: 20px;
+    width: 250px;
 }
+
+/*Product image main image*/
+#productpagina>div:nth-child(4)>img{
+    width:100%;
+}
+
 /*Productinformatie*/
 #productpagina>:last-child>:last-child{
     background-color:#F0597C;
@@ -494,6 +506,15 @@ footer ul.col-md-3, .blogevenement{
     margin:auto;
     justify-content:center;
 }
+
+#alternatieven>div>div>div{
+    height:400px;
+}
+
+#alternatieven img{
+    max-width: 300px;
+    max-height: 400px;
+}
  
 #bijpassend>a>div:last-child, #alternatieven>a>div:last-child{
     margin:30px 0px 60px 0px;
@@ -518,4 +539,19 @@ footer ul.col-md-3, .blogevenement{
 .productcontainer{
     background-color:white;
     border-top: 2px solid rgb(229, 229, 229);
+}
+
+#breadcrumbcontainer{
+    padding:10px 0px 0px 30px;
+}
+
+.breadcrumb {background: rgba(255, 255, 255, 0); border: 0px solid rgba(255, 255, 255, 1); border-radius: 4px; display: block;}
+.breadcrumb li {font-size: 14px;}
+.breadcrumb a {color: rgba(247, 171, 186, 1);}
+.breadcrumb a:hover {color: rgba(0, 0, 0, 1);}
+.breadcrumb>.active {color: rgba(148, 148, 148, 1);}
+.breadcrumb>li+li:before {color: rgba(204, 204, 204, 1); content: "\2771\00a0";}
+
+.breadcrumb a{
+    text-decoration:underline;
 }

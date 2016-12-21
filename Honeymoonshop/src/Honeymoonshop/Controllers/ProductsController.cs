@@ -109,18 +109,16 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,artikelnummer,categorieId,merkId,omschrijving,prijs")] Product product, string[] kleur, string[] kenmerk, IFormFile[] afbeeldingen)
+        public async Task<IActionResult> Create([Bind("id,artikelnummer,categorieId,merkId,omschrijving,prijs")] Product product, string[] kleur, string[] kenmerk)
         {
-            if (kleur!=null)
+            if (kleur != null)
             {
                 product.kleuren = new List<Kleurproduct>();
-                foreach(var k in kleur)
+                foreach (var k in kleur)
                 {
                     var kleurId = 0;
-                    if (int.TryParse(k,out kleurId))
-                    {
-                        product.kleuren.Add(new Kleurproduct() { kleurId = kleurId });
-                    }
+                    int.TryParse(k, out kleurId);
+                    product.kleuren.Add(new Kleurproduct() { kleur = _context.Kleuren.ToList().Find(x => x.id == kleurId) });
                 }
             }
 
@@ -130,28 +128,27 @@ namespace Honeymoonshop.Controllers
                 foreach (var k in kenmerk)
                 {
                     var kenmerkId = 0;
-                    if (int.TryParse(k, out kenmerkId))
-                    {
-                        product.kenmerken.Add(new Kenmerkproduct() { kenmerkId = kenmerkId });
-                    }
+                    int.TryParse(k, out kenmerkId);
+                    product.kenmerken.Add(new Kenmerkproduct() { kenmerk = _context.Kenmerken.ToList().Find(x => x.id == kenmerkId) });
+
                 }
             }
 
-           
+
             if (ModelState.IsValid)
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+
             return View(new CreateProduct()
             {
-                Categorieen = new SelectList(_context.Category, "id", "naam"),
-                Merken = new SelectList(_context.Merken, "id", "merkNaam"),
+                Categorieen = new SelectList(_context.Category, "id", "naam", product.categorie),
+                Merken = new SelectList(_context.Merken, "id", "merkNaam", product.merk.id),
                 Kenmerken = _context.Kenmerken.ToList(),
                 Kleuren = _context.Kleuren.ToList(),
                 product = product
-
 
             });
         }
@@ -164,14 +161,20 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Producten.SingleOrDefaultAsync(m => m.id == id);
+            var product = _context.Producten.Include(x => x.kleuren).ThenInclude(x => x.kleur)
+                           .Include(x => x.kenmerken).ThenInclude(x => x.kenmerk).SingleOrDefault(x => x.id == id);
             if (product == null)
             {
                 return NotFound();
             }
-            ViewData["categorieId"] = new SelectList(_context.Category, "id", "id", product.categorieId);
-            ViewData["merkId"] = new SelectList(_context.Merken, "id", "id", product.merkId);
-            return View(product);
+            return View(new CreateProduct()
+            {
+                Categorieen = new SelectList(_context.Category, "id", "naam"),
+                Merken = new SelectList(_context.Merken, "id", "merkNaam"),
+                Kenmerken = _context.Kenmerken.ToList(),
+                Kleuren = _context.Kleuren.ToList(),
+                product = product
+            });
         }
 
         // POST: Products/Edit/5
@@ -179,41 +182,33 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,artikelnummer,categorieId,merkId,omschrijving,prijs")] Product product, string[] kleur, string[] kenmerk, IFormFile[] afbeeldingen)
+        public async Task<IActionResult> Edit(int id, [Bind("id,artikelnummer,categorieId,merkId,omschrijving,prijs")] Product product, string[] kleur, string[] kenmerk)
         {
             if (id != product.id)
             {
                 return NotFound();
             }
 
-            if (kleur != null)
-            {
-                product.kleuren = new List<Kleurproduct>();
-                foreach (var k in kleur)
-                {
-                    var kleurId = 0;
-                    if (int.TryParse(k, out kleurId))
-                    {
-                        product.kleuren.Add(new Kleurproduct() { kleurId = kleurId });
-                    }
-                }
-            }
-
-            if (kenmerk != null)
-            {
-                product.kenmerken = new List<Kenmerkproduct>();
-                foreach (var k in kenmerk)
-                {
-                    var kenmerkId = 0;
-                    if (int.TryParse(k, out kenmerkId))
-                    {
-                        product.kenmerken.Add(new Kenmerkproduct() { kenmerkId = kenmerkId });
-                    }
-                }
-            }
-            
             if (ModelState.IsValid)
             {
+                // var kt = new List<Kleurproduct>();
+                //foreach(var k in kleur)
+                // {
+                //     var kid = 0;
+                //     Kleurproduct kp = null;
+                //     if(int.TryParse(k, out kid))
+                //     {
+                //         kp = _context.ktKleurProduct.Include(x => x.kleur).Where(x => x.productId == product.id && x.kleur == _context.Kleuren.Where(kl => kl.id == kid).Single()).SingleOrDefault();
+                //         if (kp != null)
+                //         {
+                //             kt.Add(kp);
+                //         }else
+                //         {
+                //             kt.Add(new Kleurproduct() { kleur = _context.Kleuren.Where(x => x.id == kid).SingleOrDefault()});
+                //         }
+
+                //     }
+                //}
                 try
                 {
                     _context.Update(product);
@@ -232,16 +227,8 @@ namespace Honeymoonshop.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            return View(new CreateProduct()
-            {
-                Categorieen = new SelectList(_context.Category, "id", "naam"),
-                Merken = new SelectList(_context.Merken, "id", "merkNaam"),
-                Kenmerken = _context.Kenmerken.ToList(),
-                Kleuren = _context.Kleuren.ToList(),
-                product = product
 
-
-            });
+            return View(product);
         }
 
         // GET: Products/Delete/5

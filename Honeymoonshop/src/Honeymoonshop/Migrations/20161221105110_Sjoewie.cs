@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Honeymoonshop.Migrations
 {
-    public partial class @new : Migration
+    public partial class Sjoewie : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +40,7 @@ namespace Honeymoonshop.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    categorietype = table.Column<string>(nullable: true),
+                    isAccessoire = table.Column<bool>(nullable: false),
                     naam = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

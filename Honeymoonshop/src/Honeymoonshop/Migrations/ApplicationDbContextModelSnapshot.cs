@@ -70,7 +70,7 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("categorietype");
+                    b.Property<bool>("isAccessoire");
 
                     b.Property<string>("naam");
 
@@ -180,19 +180,15 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("KleurproductkleurId");
-
-                    b.Property<int?>("KleurproductproductId");
-
                     b.Property<string>("bestandsNaam");
 
-                    b.Property<int?>("kleurImageid");
+                    b.Property<int?>("kleurproductkleurId");
+
+                    b.Property<int?>("kleurproductproductId");
 
                     b.HasKey("id");
 
-                    b.HasIndex("kleurImageid");
-
-                    b.HasIndex("KleurproductkleurId", "KleurproductproductId");
+                    b.HasIndex("kleurproductkleurId", "kleurproductproductId");
 
                     b.ToTable("ProductAfbeeldingen");
                 });
@@ -345,13 +341,9 @@ namespace Honeymoonshop.Migrations
 
             modelBuilder.Entity("Honeymoonshop.Models.ProductImage", b =>
                 {
-                    b.HasOne("Honeymoonshop.Models.Kleur", "kleurImage")
-                        .WithMany()
-                        .HasForeignKey("kleurImageid");
-
-                    b.HasOne("Honeymoonshop.Models.Kleurproduct")
+                    b.HasOne("Honeymoonshop.Models.Kleurproduct", "kleurproduct")
                         .WithMany("images")
-                        .HasForeignKey("KleurproductkleurId", "KleurproductproductId");
+                        .HasForeignKey("kleurproductkleurId", "kleurproductproductId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
