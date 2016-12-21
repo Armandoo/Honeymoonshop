@@ -1,0 +1,195 @@
+@model IEnumerable<Honeymoonshop.Models.Product>
+
+<div class="row ">
+<div class="col-md-12 banner">
+    <img src="http://placekitten.com/g/1400/500" />
+    <div class="bannercontent">
+        <div class="col-md-12 text-center about-bannertekst">
+            <div class="about-bannerkop">Dressfinder</div></br>
+            <span class="about-tweedekoptekst">
+                Op zoek naar de perfecte jurk
+            </span>
+            </br>
+            <span class="text-uppercase about-derdekoptekst">
+                <strong>Van begin tot eind kunnen wij je helpen</strong>
+            </span>
+        </div>
+    </div>
+</div>
+</div>
+<ol class="breadcrumb col-lg-12">
+    <li><a href="/home">Home</a></li>
+    <li><a href="#">Bruid</a></li>
+    <li><a href="#">Dressfinder</a></li>
+</ol>
+<div class="row bg-white filter">
+    <div class="col-md-2">
+        <h2>Categorieen</h2>
+        <ul class="categorieen">
+            <li>
+                <a>
+                    Summer SALE
+                </a>
+            </li>
+            <li>
+                Nieuwe collectie
+            </li>
+            <li>
+                Alle jurken bekijken
+            </li>
+        </ul>
+
+        <span>
+            <b>Filter op:</b>
+        </span>
+
+        <ul class="filterkeuzes">
+            <li>
+                <a onclick="toggleMerken()">
+                    <div>
+                        <span>Merk</span>
+                        <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
+
+                    </div>
+                </a>
+                <fieldset class="merken">
+                    <ul>
+                        <li>
+                            <input type="radio" name="kantradio" class="filterradiobuttons" />
+                            Diane legrand
+                        </li>
+                        <li>
+                            <input type="radio" name="kantradio" class="filterradiobuttons" />
+                            Ladybird
+                        </li>
+                        <li>
+                            <input type="radio" name="kantradio" class="filterradiobuttons" />
+                            Pronovias
+                        </li>
+                        <li>
+                            <input type="radio" name="kantradio" class="filterradiobuttons" />
+                            Maggie Sottero
+                        </li>
+                        <li>
+                            <input type="radio" name="kantradio" class="filterradiobuttons" />
+                            Eddy K
+                        </li>
+                    </ul>
+                </fieldset>
+            </li>
+            <li>
+                <a onclick="toggleStijlen()">
+                    <div>
+                        <span>Stijl Jurk</span>
+                        <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
+                    </div>
+                </a>
+                <fieldset class="stijlen">
+                    <ul>
+                        <li>
+                            <span class="radiobuttons">
+                                <input type="radio" name="rbkant" class="filterradiobuttons" />
+                            </span>
+                            Kant
+                        </li>
+                        <li>
+                            <input type="radio" name="rbklassiekebruid" class="filterradiobuttons" />
+                            Klassieke bruid
+                        </li>
+                        <li>
+                            <input type="radio" name="rbprinsesbruid" class="filterradiobuttons" />
+                            Prinses bruid
+                        </li>
+                        <li>
+                            <input type="radio" name="rbruchesrok" class="filterradiobuttons" />
+                            Ruches Rok
+                        </li>
+                        <li>
+                            <input type="radio" name="rbmodieuzebruid" class="filterradiobuttons" />
+                            Modieuze bruid
+                        </li>
+                    </ul>
+                </fieldset>
+            </li>
+            <li>
+                <div>
+                    <span>Prijs</span>
+
+
+                    <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
+                </div>
+            </li>
+            <li>
+                <div>€100</div>
+            </li>
+        </ul>
+        <span>
+            <strong>Filters verfijnen:</strong>
+        </span>
+        <ul class="filterverfijnen">
+            <li>
+                <span>Neklijn</span>
+                <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
+
+            </li>
+            <li class="head-filter">
+                <span>Silhouette</span>
+                <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
+            </li>
+            <li class="head-filter">
+                <span>Kleur</span>
+                <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
+            </li>
+            <li>
+                <input type="radio" name="ivoorofwit" value="" /> Ivoor/ wit
+            </li>
+            <li>
+                <input type="radio" name="ivoormetkleur" /> Ivoor met kleur
+            </li>
+            <li>
+                <input type="radio" name="gekleurd" /> Gekleurd
+            </li>
+        </ul>
+
+
+    </div>
+    <div class="col-md-10 producten">
+        <div class="col-md-12 spotlight"><img src="https://placekitten.com/g/1100/600" /></div>
+        <a href="#"><div class="col-md-4 col-item"><img src="https://placekitten.com/g/340/320" /></div></a>
+        <a href="#"><div class="col-md-4 col-item"><img src="https://placekitten.com/g/340/320" /></div></a>
+        <a href="#"><div class="col-md-4 col-item"><img src="https://placekitten.com/g/340/320" /></div></a>
+        <div class="clearfix"></div>
+
+        <div class="catalogusitems">
+            <hr class="col-md-3 collectielijn" />
+            <h4 class="col-md-3 text-uppercase text-center bold">nieuwe collection</h4>
+
+            <hr class="col-md-3 collectielijn" />
+        </div>
+        @foreach (var product in Model)
+        {
+            <div class="containercollectieitem">
+                <a href="home/productpagina/@product.id">
+                    <div class="col-md-4 col-item catalogusitem">
+
+                        <img src="https://placekitten.com/g/340/320" />
+                        <p>@product.merk.merkNaam</p>
+                        <span class="catalogusartikelnummer">
+                            artikel nr. @product.artikelnummer
+
+                        </span>
+                    </div>
+                </a>
+            </div>
+        }
+
+       
+        
+    </div>
+
+</div>
+<div class="row a">
+    <div class="col-md-12 collectieimg">
+        <img src="https://placekitten.com/g/1400/625">
+    </div>
+</div>

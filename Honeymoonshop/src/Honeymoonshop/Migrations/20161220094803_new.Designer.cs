@@ -71,6 +71,8 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("categorietype");
+
                     b.Property<string>("naam");
 
                     b.HasKey("id");
@@ -83,13 +85,9 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("kenmerktype");
+
                     b.Property<string>("naam");
-
-                    b.Property<string>("neklijn");
-
-                    b.Property<string>("silhouette");
-
-                    b.Property<string>("stijl");
 
                     b.HasKey("id");
 
@@ -161,6 +159,8 @@ namespace Honeymoonshop.Migrations
 
                     b.Property<int>("categorieId");
 
+                    b.Property<bool>("geslacht");
+
                     b.Property<int>("merkId");
 
                     b.Property<string>("omschrijving");
@@ -181,13 +181,15 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("Productid");
-
                     b.Property<string>("bestandsNaam");
+
+                    b.Property<int?>("kleurproductkleurId");
+
+                    b.Property<int?>("kleurproductproductId");
 
                     b.HasKey("id");
 
-                    b.HasIndex("Productid");
+                    b.HasIndex("kleurproductkleurId", "kleurproductproductId");
 
                     b.ToTable("ProductAfbeeldingen");
                 });
@@ -333,16 +335,16 @@ namespace Honeymoonshop.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Honeymoonshop.Models.Merk", "merk")
-                        .WithMany()
+                        .WithMany("producten")
                         .HasForeignKey("merkId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.ProductImage", b =>
                 {
-                    b.HasOne("Honeymoonshop.Models.Product")
-                        .WithMany("afbeeldingen")
-                        .HasForeignKey("Productid");
+                    b.HasOne("Honeymoonshop.Models.Kleurproduct", "kleurproduct")
+                        .WithMany("productimages")
+                        .HasForeignKey("kleurproductkleurId", "kleurproductproductId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

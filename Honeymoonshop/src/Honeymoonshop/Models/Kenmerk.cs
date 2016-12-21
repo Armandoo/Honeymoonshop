@@ -9,10 +9,8 @@ namespace Honeymoonshop.Models
     {
         public int id { get; set; }
         public string naam { get; set; }
-        public string stijl { get; set; }
-        public string neklijn { get; set; }
-        public string silhouette { get; set; }
-
+        public string kenmerktype { get; set; }
+        
         public List<Kenmerkproduct> producten { get; set; }
     }
 }

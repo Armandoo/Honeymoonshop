@@ -70,6 +70,8 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("categorietype");
+
                     b.Property<string>("naam");
 
                     b.HasKey("id");
@@ -82,13 +84,9 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("kenmerktype");
+
                     b.Property<string>("naam");
-
-                    b.Property<string>("neklijn");
-
-                    b.Property<string>("silhouette");
-
-                    b.Property<string>("stijl");
 
                     b.HasKey("id");
 
@@ -159,6 +157,8 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("artikelnummer");
 
                     b.Property<int>("categorieId");
+
+                    b.Property<bool>("geslacht");
 
                     b.Property<int>("merkId");
 
@@ -338,7 +338,7 @@ namespace Honeymoonshop.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Honeymoonshop.Models.Merk", "merk")
-                        .WithMany()
+                        .WithMany("producten")
                         .HasForeignKey("merkId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

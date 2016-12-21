@@ -84,27 +84,51 @@ nav>:last-child{
 	background-color:#F0597C;
 }
 
-.headerimg{
+
+.banner{
     margin-top:-80px;
     z-index:-1;
     padding:0px;
+    display:flex;
+    justify-content:center;
 }
 
-#headerbuttons{
-    margin-top:-565px;
+.home-bannerkop, .about-bannerkop{
+    font-size:130px;
+    margin-bottom:-115px;
+	color:white;
+    font-family: 'Playball', cursive;
+    opacity:0.5;
 }
 
-#navbar span{
+.home-bannertekst{
+    padding-bottom:50px;
+}
+
+.bannercontent, .about-bannercontent{
+    position:absolute;
+    align-self:center;
+    padding-bottom:20px;
+}
+
+
+
+.bannercontent:nth-child(2){
+    font-size:28px;
 	color:white;
 }
 
-.buttongroup {
+.bannercontent span:last-child{
+    font-size:36px;
+	color:white;
+}
+
+.home-buttongroup {
 	font-size: 15px;
-	padding-bottom:200px;
 	
 }
 
-.buttongroup a{
+.home-buttongroup a{
 	padding-top: 15px;
 	padding-bottom:15px;
 	border:5px solid white;
@@ -112,7 +136,7 @@ nav>:last-child{
 	display:block;
 }
 
-.buttongroup >div:first-child a{
+.home-buttongroup >div:first-child a{
 	background-color:#F0597C;
 	border:5px solid #F0597C;
 }
@@ -122,7 +146,7 @@ nav>:last-child{
 	margin:10px 0px;
 }
 
-#navbar .buttongroup{
+#navbar home.buttongroup{
 	margin-top:145px;
 	
 }
@@ -494,8 +518,4 @@ footer ul.col-md-3, .blogevenement{
 .productcontainer{
     background-color:white;
     border-top: 2px solid rgb(229, 229, 229);
-}
-
-.omschrijving{
-    padding-bottom:px;
 }

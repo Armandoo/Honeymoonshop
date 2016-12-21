@@ -9,7 +9,7 @@ namespace Honeymoonshop.Models
     {
         public int id { get; set; }
         public string bestandsNaam { get; set; }
-        public Kleur kleurImage { get; set; }
 
+        public Kleurproduct kleurproduct { get; set; }
     }
 }

@@ -12,5 +12,6 @@ namespace Honeymoonshop.Models
 
         public int productId { get; set; }
         public Product product { get; set; }
+
     }
 }

@@ -40,6 +40,7 @@ namespace Honeymoonshop.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    categorietype = table.Column<string>(nullable: true),
                     naam = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -53,10 +54,8 @@ namespace Honeymoonshop.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    naam = table.Column<string>(nullable: true),
-                    neklijn = table.Column<string>(nullable: true),
-                    silhouette = table.Column<string>(nullable: true),
-                    stijl = table.Column<string>(nullable: true)
+                    kenmerktype = table.Column<string>(nullable: true),
+                    naam = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -167,6 +166,7 @@ namespace Honeymoonshop.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     artikelnummer = table.Column<int>(nullable: false),
                     categorieId = table.Column<int>(nullable: false),
+                    geslacht = table.Column<bool>(nullable: false),
                     merkId = table.Column<int>(nullable: false),
                     omschrijving = table.Column<string>(nullable: true),
                     prijs = table.Column<int>(nullable: false)
@@ -287,17 +287,18 @@ namespace Honeymoonshop.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Productid = table.Column<int>(nullable: true),
-                    bestandsNaam = table.Column<string>(nullable: true)
+                    bestandsNaam = table.Column<string>(nullable: true),
+                    kleurproductkleurId = table.Column<int>(nullable: true),
+                    kleurproductproductId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductAfbeeldingen", x => x.id);
                     table.ForeignKey(
-                        name: "FK_ProductAfbeeldingen_Producten_Productid",
-                        column: x => x.Productid,
-                        principalTable: "Producten",
-                        principalColumn: "id",
+                        name: "FK_ProductAfbeeldingen_ktKleurProduct_kleurproductkleurId_kleurproductproductId",
+                        columns: x => new { x.kleurproductkleurId, x.kleurproductproductId },
+                        principalTable: "ktKleurProduct",
+                        principalColumns: new[] { "kleurId", "productId" },
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -343,9 +344,9 @@ namespace Honeymoonshop.Migrations
                 column: "merkId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductAfbeeldingen_Productid",
+                name: "IX_ProductAfbeeldingen_kleurproductkleurId_kleurproductproductId",
                 table: "ProductAfbeeldingen",
-                column: "Productid");
+                columns: new[] { "kleurproductkleurId", "kleurproductproductId" });
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -384,9 +385,6 @@ namespace Honeymoonshop.Migrations
                 name: "Kenmerkproduct");
 
             migrationBuilder.DropTable(
-                name: "ktKleurProduct");
-
-            migrationBuilder.DropTable(
                 name: "ProductAfbeeldingen");
 
             migrationBuilder.DropTable(
@@ -408,16 +406,19 @@ namespace Honeymoonshop.Migrations
                 name: "Kenmerken");
 
             migrationBuilder.DropTable(
-                name: "Kleuren");
-
-            migrationBuilder.DropTable(
-                name: "Producten");
+                name: "ktKleurProduct");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Kleuren");
+
+            migrationBuilder.DropTable(
+                name: "Producten");
 
             migrationBuilder.DropTable(
                 name: "Category");
