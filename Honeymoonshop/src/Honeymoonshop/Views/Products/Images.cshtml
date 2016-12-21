@@ -1,0 +1,40 @@
+﻿@model Honeymoonshop.Models.Product
+
+
+@{
+    ViewData["Title"] = "Images";
+}
+
+<h2>Images</h2>
+
+    <div class="form-horizontal">
+        <h4>Kleur</h4>
+        <hr />
+
+        <div class="form-group">
+            @foreach (var p in Model.kleuren)
+            {
+               <form asp-action="Images" enctype="multipart/form-data">
+                   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                   <input type="hidden" asp-for="id" />
+                   <input type="hidden" name="kid" value="@p.kleurId"/>
+                    <label>Kleur: @p.kleur.naam</label>
+                    <input type="file" name="afbeeldingen" multiple />
+                   <div class="form-group">
+                       <div class="col-md-offset-2 col-md-10">
+                           <input type="submit" value="Save" class="btn btn-default" />
+                       </div>
+                   </div>
+                  </form>
+                    }
+</div>
+
+    </div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

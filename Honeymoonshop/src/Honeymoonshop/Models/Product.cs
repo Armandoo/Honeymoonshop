@@ -20,7 +20,7 @@ namespace Honeymoonshop.Models
         public Category categorie { get; set; }
         public virtual List<Kleurproduct> kleuren { get; set; }
         public virtual List<Kenmerkproduct> kenmerken { get; set; }
-        public List<ProductImage> afbeeldingen { get; set; }
+        //public List<ProductImage> afbeeldingen { get; set; }
         public string omschrijving { get; set; }
 
     }

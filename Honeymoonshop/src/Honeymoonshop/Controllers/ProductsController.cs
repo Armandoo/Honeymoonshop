@@ -10,6 +10,7 @@ using Honeymoonshop.Models;
 using Honeymoonshop.Models.ProductViewModels;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Honeymoonshop.Models.Utils;
 
 namespace Honeymoonshop.Controllers
 {
@@ -59,7 +60,49 @@ namespace Honeymoonshop.Controllers
 
             });
         }
-        
+
+        [HttpGet]
+        public IActionResult Images(int id)
+        {
+            var product =_context.Producten.Include(p => p.kleuren).ThenInclude(x => x.kleur).SingleOrDefault(p => p.id == id);
+            return View(product);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Images(int id, int kid,  IFormFile[] afbeeldingen)
+        {
+            var product = _context.Producten.Include(p => p.kleuren).ThenInclude(l => l.kleur).Include(f => f.kleuren).SingleOrDefault(p => p.id == id);
+            var kleur = _context.Kleuren.SingleOrDefault(k => k.id == kid);
+
+            var x = FileUploader<ProductImage>.UploadImages(afbeeldingen);
+
+            var kp = _context.ktKleurProduct.ToList().Find(f => f.kleur == kleur && f.productId == product.id);
+            kp.images = x;
+            product.kleuren.Add(kp);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(product);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProductExists(product.id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Index");
+            }
+            return View(product);
+        }
+
+
         //refactoren
         // POST: Products/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -94,27 +137,7 @@ namespace Honeymoonshop.Controllers
                 }
             }
 
-            product.afbeeldingen = new List<ProductImage>();
-            foreach (var afbeelding in afbeeldingen)
-            {
-                if (afbeelding != null)
-                {
-                    var uploads = Path.Combine("", "wwwroot/images/productenimages");
-                    if (afbeeldingen.Length > 0)
-                    {
-                        if (Path.GetExtension(afbeelding.FileName).ToLower() == ".jpg"
-                        || Path.GetExtension(afbeelding.FileName).ToLower() == ".png"
-                        || Path.GetExtension(afbeelding.FileName).ToLower() == ".gif"
-                        || Path.GetExtension(afbeelding.FileName).ToLower() == ".jpeg") { }
-
-                        using (var fileStream = new FileStream(Path.Combine(uploads, afbeelding.FileName), FileMode.Create))
-                        {
-                            product.afbeeldingen.Add(new ProductImage() { bestandsNaam = afbeelding.FileName });
-                            await afbeelding.CopyToAsync(fileStream);
-                        }
-                    }
-                }
-            }
+           
             if (ModelState.IsValid)
             {
                 _context.Add(product);
@@ -148,16 +171,7 @@ namespace Honeymoonshop.Controllers
             }
             ViewData["categorieId"] = new SelectList(_context.Category, "id", "id", product.categorieId);
             ViewData["merkId"] = new SelectList(_context.Merken, "id", "id", product.merkId);
-            return View(new CreateProduct()
-            {
-                Categorieen = new SelectList(_context.Category, "id", "naam"),
-                Merken = new SelectList(_context.Merken, "id", "merkNaam"),
-                Kenmerken = _context.Kenmerken.ToList(),
-                Kleuren = _context.Kleuren.ToList(),
-                product = product
-
-
-            });
+            return View(product);
         }
 
         // POST: Products/Edit/5
@@ -197,29 +211,7 @@ namespace Honeymoonshop.Controllers
                     }
                 }
             }
-
-            product.afbeeldingen = new List<ProductImage>();
-            foreach (var afbeelding in afbeeldingen)
-            {
-                if (afbeelding != null)
-                {
-                    var uploads = Path.Combine("", "wwwroot/images/productenimages");
-                    if (afbeeldingen.Length > 0)
-                    {
-                        if (Path.GetExtension(afbeelding.FileName).ToLower() == ".jpg"
-                        || Path.GetExtension(afbeelding.FileName).ToLower() == ".png"
-                        || Path.GetExtension(afbeelding.FileName).ToLower() == ".gif"
-                        || Path.GetExtension(afbeelding.FileName).ToLower() == ".jpeg") { }
-
-                        using (var fileStream = new FileStream(Path.Combine(uploads, afbeelding.FileName), FileMode.Create))
-                        {
-                            product.afbeeldingen.Add(new ProductImage() { bestandsNaam = afbeelding.FileName });
-                            await afbeelding.CopyToAsync(fileStream);
-                        }
-                    }
-                }
-            }
-
+            
             if (ModelState.IsValid)
             {
                 try
