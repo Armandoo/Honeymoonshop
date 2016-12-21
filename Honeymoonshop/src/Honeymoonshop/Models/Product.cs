@@ -22,6 +22,6 @@ namespace Honeymoonshop.Models
         public virtual List<Kleurproduct> kleuren { get; set; }
         public virtual List<Kenmerkproduct> kenmerken { get; set; }
         public string omschrijving { get; set; }
-
+        public List<ProductImage> afbeeldingen { get; internal set; }
     }
 }

@@ -374,6 +374,10 @@ footer ul.col-md-3, .blogevenement{
     margin-bottom:20px;
 }
 
+.producten{
+    padding:0px;
+}
+
 .producten h3{
     padding:20px 0;
 }
@@ -519,3 +523,137 @@ footer ul.col-md-3, .blogevenement{
     background-color:white;
     border-top: 2px solid rgb(229, 229, 229);
 }
+
+.catalogusitems{
+    display:flex;
+    margin:20px;
+    padding:20px 0px;
+}
+
+.catalogusartikelnummer{
+    display:none;
+}
+
+.catalogusitem:hover{
+    margin:-30px 0px;
+    
+    z-index:2;
+    box-shadow: 2px 2px 5px #DBDBDC;
+    background-color:white;
+    padding:30px 10px;
+
+}
+
+.catalogusitem:hover .catalogusartikelnummer{
+    
+    display:block;
+
+}
+
+
+.containercollectieitem{
+    position:relative;
+}
+
+
+.filter ul{
+    list-style-type:none;
+    padding: 0;
+}
+
+.categorieen li{
+    background-color:#FCE8E7;
+    margin:3px;
+    padding-left:10px;
+    font-weight:bold;
+    font-size:16px;
+}
+
+.filterkeuzes>:first-child li{
+    border-top:3px #D9D9DB;
+    background-color:#FCFCFC;
+    border-bottom:1px #D9D9DB;
+}
+
+.container-collectie-img{
+    padding:0px;
+}
+
+.dressfinder-banner, .container-collectie-img img{
+    max-width:100%;
+}
+
+.filterkeuzes, .categorieen{
+    padding-left:0px;
+}
+
+.categorieen, .filterkeuzes, .filterverfijnen, .filerkeuzes ul {
+    list-style-type:none;
+}
+
+.filterkeuzes input[type="radio"]{
+    margin:5px 5px 10px 10px;
+    height:18px;
+    width:18px;
+    border-radius:5px;
+}
+
+.filterkeuzes div:first-child{
+    border-top:2px solid #D9D9DB;
+    border-bottom:2px solid #D9D9DB;
+    background-color:#F6F6F6;
+}
+
+.filterverfijnen>:first-child{
+    border-top:2px solid #D9D9DB;
+    border-bottom:2px solid #D9D9DB;
+}
+
+ .filterkeuzes div:first-child, .filterverfijnen li{
+     padding:5px 5px 3px 10px;
+ }   
+
+.filterkeuzes>:last-child div{
+    border-top:none;
+    background-color:#FCFCFC;
+}
+
+.filterkeuzes img, .filterverfijnen img{
+   
+    max-width:12px;
+}
+
+.filterkeuzes fieldset, .filterverfijnen fieldset{
+    height:125px;
+    overflow-y:scroll;
+}
+
+.filterverfijnen {
+    padding:5px;
+    border-bottom:2px solid #D9D9DB;
+}
+
+ .head-filter{
+     
+    border-bottom:2px solid #D9D9DB;
+}
+
+
+ .filterverfijnen li, .filterkeuzes li{
+    font-size:16px;
+    
+}
+
+
+ .filterverfijnen img, .filterkeuzes img{
+     margin-right:10px;
+ }
+
+ .container-dressfinder{
+     display:flex;
+     justify-content:center;
+ }
+
+ .col-item img{
+     max-width:100%;
+ }

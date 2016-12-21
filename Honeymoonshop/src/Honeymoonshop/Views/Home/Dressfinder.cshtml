@@ -1,4 +1,4 @@
-@model IEnumerable<Honeymoonshop.Models.Product>
+@model List<Honeymoonshop.Models.Product>
 
 <div class="row ">
 <div class="col-md-12 banner">
@@ -17,12 +17,14 @@
     </div>
 </div>
 </div>
-<ol class="breadcrumb col-lg-12">
+<!--<ol class="breadcrumb col-lg-12">
     <li><a href="/home">Home</a></li>
     <li><a href="#">Bruid</a></li>
     <li><a href="#">Dressfinder</a></li>
-</ol>
-<div class="row bg-white filter">
+</ol>-->
+
+
+<div class="row bg-white container-dressfinder">
     <div class="col-md-2">
         <h2>Categorieen</h2>
         <ul class="categorieen">
@@ -111,17 +113,26 @@
                     </ul>
                 </fieldset>
             </li>
+            <!--
+ Filterprijs
+                -->
             <li>
-                <div>
-                    <span>Prijs</span>
+                <form name="filterprijsform" method="post">
+                    <span>Min Prijs</span>
+                    <input type="range" name="minprijs" id="minprijs" value="" min="1" max="1000" 
+                           oninput="priceOutputId.value = priceInputId.value">
 
+                    <output name="priceOutputMinPrijs" id="priceOutputMinPrijs"></output>
 
-                    <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
-                </div>
+                    <span>Max Prijs</span>
+                    <input type="range" name="maxprijs" id="maxprijs" value="" min="1001" max="2000"
+                           oninput="priceOutputId.value = priceInputId.value">
+                    <output name="priceOutputMaxPrijs" id="priceOutputMaxPrijs"></output>
+
+                    <input type="submit" />
+                </form>
             </li>
-            <li>
-                <div>€100</div>
-            </li>
+           
         </ul>
         <span>
             <strong>Filters verfijnen:</strong>
@@ -150,46 +161,44 @@
                 <input type="radio" name="gekleurd" /> Gekleurd
             </li>
         </ul>
-
-
-    </div>
-    <div class="col-md-10 producten">
-        <div class="col-md-12 spotlight"><img src="https://placekitten.com/g/1100/600" /></div>
-        <a href="#"><div class="col-md-4 col-item"><img src="https://placekitten.com/g/340/320" /></div></a>
-        <a href="#"><div class="col-md-4 col-item"><img src="https://placekitten.com/g/340/320" /></div></a>
-        <a href="#"><div class="col-md-4 col-item"><img src="https://placekitten.com/g/340/320" /></div></a>
-        <div class="clearfix"></div>
-
-        <div class="catalogusitems">
-            <hr class="col-md-3 collectielijn" />
-            <h4 class="col-md-3 text-uppercase text-center bold">nieuwe collection</h4>
-
-            <hr class="col-md-3 collectielijn" />
         </div>
-        @foreach (var product in Model)
-        {
-            <div class="containercollectieitem">
-                <a href="home/productpagina/@product.id">
-                    <div class="col-md-4 col-item catalogusitem">
+        <div class="col-md-8 spotlight"><img class="dressfinder-banner img-responsive" src="~/images/dressfinder-banner.png" />
+            <div class="col-md-12 producten ">
+                <a href="#"><div class="col-md-4 col-item"><img src="https://placekitten.com/g/340/320" /></div></a>
+                <a href="#"><div class="col-md-4 col-item"><img src="https://placekitten.com/g/340/320" /></div></a>
+                <a href="#"><div class="col-md-4 col-item"><img src="https://placekitten.com/g/340/320" /></div></a>
+                <div class="clearfix"></div>
 
-                        <img src="https://placekitten.com/g/340/320" />
-                        <p>@product.merk.merkNaam</p>
-                        <span class="catalogusartikelnummer">
-                            artikel nr. @product.artikelnummer
+                <div class="catalogusitems">
+                    <hr class="col-md-3 collectielijn" />
+                    <h4 class="col-md-3 text-uppercase text-center bold">nieuwe collection</h4>
 
-                        </span>
-                    </div>
-                </a>
+                    <hr class="col-md-3 collectielijn" />
+                </div>
+                @foreach (var product in Model)
+                {
+                    <row>
+                        <div class="containercollectieitem">
+                            <a href="home/productpagina/@product.id">
+                                <div class="col-md-4 col-item catalogusitem img-responsive">
+
+                                    <img src="https://placekitten.com/g/340/320" />
+                                    <p>@product.merk.merkNaam</p>
+                                    prijs @product.prijs
+                                    <span class="catalogusartikelnummer">
+                                        artikel nr. @product.artikelnummer
+
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </row>
+                }
             </div>
-        }
-
-       
-        
-    </div>
-
+        </div>
 </div>
 <div class="row a">
-    <div class="col-md-12 collectieimg">
-        <img src="https://placekitten.com/g/1400/625">
+    <div class="col-md-12 container-collectie-img">
+        <img src="~/images/dressfinder-footer.png">
     </div>
 </div>

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Honeymoonshop.Data;
 using Honeymoonshop.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Honeymoonshop.Models.FilterViewModels;
 
 namespace Honeymoonshop.Controllers
 {
@@ -17,9 +19,10 @@ namespace Honeymoonshop.Controllers
             this.Context = context;
         }
 
+        
         public IActionResult Dressfinder()
         {
-            var producten = Context.Producten.Include(x => x.merk);
+            var producten = Context.Producten.Include(x => x.merk).ToList();
             //  .Select(p => p.Merk);
            /* var producten = Context.Producten;
             List<Product> deProducten = new List<Product>();
@@ -28,9 +31,24 @@ namespace Honeymoonshop.Controllers
                 var hetMerk = Context.Merken.FirstOrDefault(merk => merk.id == product.merkId);
                 product.merk = hetMerk;
                 deProducten.Add(product);
-            }*/
-            return View(producten.ToList());
+            }*/ 
+
+            return View(producten);
         }
+
+        [HttpPost]
+        public IActionResult Dressfinder(FilterProduct filterproduct)
+        {
+
+            /*var priceOut = 10000;
+            int.TryParse(filterproduct.priceInputName, out priceOut);
+            var producten = Context.Producten.Include(x => x.merk).ToList().FindAll(x => x.prijs <= priceOut);*/
+
+            //var producten = Context.Producten.Where(x => x.prijs < filterproduct.maxPrijs && x.prijs > filterproduct.minPrijs ).Include(x => x.merk).ToList();
+            var producten = Context.Producten.Include(x => x.merk).Where(x => x.prijs < filterproduct.minPrijs && x.prijs < filterproduct.maxPrijs).ToList();
+            return View(producten);
+        }   
+
 
         public IActionResult Index()
         {
@@ -70,5 +88,6 @@ namespace Honeymoonshop.Controllers
 
             return View();
         }
+
     }
 }
