@@ -70,7 +70,7 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("categorietype");
+                    b.Property<bool>("isAccessoire");
 
                     b.Property<string>("naam");
 
@@ -113,7 +113,7 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("kleurcode");
+                    b.Property<string>("kleurCode");
 
                     b.Property<string>("naam");
 
@@ -342,7 +342,7 @@ namespace Honeymoonshop.Migrations
             modelBuilder.Entity("Honeymoonshop.Models.ProductImage", b =>
                 {
                     b.HasOne("Honeymoonshop.Models.Kleurproduct", "kleurproduct")
-                        .WithMany("productimages")
+                        .WithMany("images")
                         .HasForeignKey("kleurproductkleurId", "kleurproductproductId");
                 });
 

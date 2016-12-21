@@ -1,4 +1,4 @@
-@model Honeymoonshop.Models.Product
+@model Honeymoonshop.Models.ProductViewModels.CreateProduct
 
 @{
     ViewData["Title"] = "Edit";
@@ -11,40 +11,65 @@
         <h4>Product</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="id" />
+        <input type="hidden" asp-for="product.id" />
         <div class="form-group">
-            <label asp-for="artikelnummer" class="col-md-2 control-label"></label>
+            <label asp-for="product.artikelnummer" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="artikelnummer" class="form-control" />
-                <span asp-validation-for="artikelnummer" class="text-danger" />
+                <input asp-for="product.artikelnummer" class="form-control" />
+                <span asp-validation-for="product.artikelnummer" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="categorieId" class="control-label col-md-2"></label>
+            <label class="col-md-2 control-label"> Kleuren</label>
             <div class="col-md-10">
-                <select asp-for="categorieId" class="form-control" asp-items="ViewBag.categorieId"></select>
-                <span asp-validation-for="categorieId" class="text-danger" />
+                @foreach (var item in Model.Kleuren)
+                {
+                    @Html.CheckBox("kleur", (Model.product.kleuren.FindAll(x => x.kleur.id == item.id).ToList().Count > 0), new { value = item.id });
+                    @item.naam
+                }
+
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="merkId" class="control-label col-md-2"></label>
+            <label class="col-md-2 control-label"> Kenmerken</label>
             <div class="col-md-10">
-                <select asp-for="merkId" class="form-control" asp-items="ViewBag.merkId"></select>
-                <span asp-validation-for="merkId" class="text-danger" />
+                @foreach (var item in Model.Kenmerken)
+                {
+                    @Html.CheckBox("kenmerk", (Model.product.kenmerken.FindAll(x => x.kenmerk.id == item.id).ToList().Count > 0), new { value = item.id });
+                    @item.naam
+                }
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="omschrijving" class="col-md-2 control-label"></label>
+            <label asp-for="product.categorieId" class="control-label col-md-2"></label>
             <div class="col-md-10">
-                <input asp-for="omschrijving" class="form-control" />
-                <span asp-validation-for="omschrijving" class="text-danger" />
+                <div class="col-md-12">
+                    <select asp-for="product.categorieId" class="form-control col-md-12" asp-items="Model.Categorieen"></select>
+                </div>
+                <span asp-validation-for="product.categorieId" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="prijs" class="col-md-2 control-label"></label>
+            <label asp-for="product.merkId" class="control-label col-md-2"></label>
             <div class="col-md-10">
-                <input asp-for="prijs" class="form-control" />
-                <span asp-validation-for="prijs" class="text-danger" />
+                <div class="col-md-12">
+                    <select asp-for="product.merkId" class="form-control col-md-12" asp-items="Model.Merken"></select>
+                </div>
+                <span asp-validation-for="product.merkId" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="product.omschrijving" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="product.omschrijving" class="form-control" />
+                <span asp-validation-for="product.omschrijving" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="product.prijs" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="product.prijs" class="form-control" />
+                <span asp-validation-for="product.prijs" class="text-danger" />
             </div>
         </div>
         <div class="form-group">

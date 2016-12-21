@@ -16,6 +16,6 @@ namespace Honeymoonshop.Models
         public int kleurId { get; set; }
         public Kleur kleur { get; set; }
 
-        public List<ProductImage> productimages { get; set; }
+        public List<ProductImage> images { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace Honeymoonshop.Controllers
 
         public CategorieController(ApplicationDbContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: Categories
@@ -53,7 +53,7 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,naam")] Category category)
+        public async Task<IActionResult> Create([Bind("id,naam,isAccessoire")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,naam")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("id,naam,isAccessoire")] Category category)
         {
             if (id != category.id)
             {

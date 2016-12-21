@@ -16,7 +16,7 @@ namespace Honeymoonshop.Controllers
 
         public KenmerkController(ApplicationDbContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: Kenmerk
@@ -53,7 +53,7 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,naam,neklijn,silhouette,stijl")] Kenmerk kenmerk)
+        public async Task<IActionResult> Create([Bind("id,naam,kenmerktype")] Kenmerk kenmerk)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,naam,neklijn,silhouette,stijl")] Kenmerk kenmerk)
+        public async Task<IActionResult> Edit(int id, [Bind("id,naam,kenmerktype")] Kenmerk kenmerk)
         {
             if (id != kenmerk.id)
             {

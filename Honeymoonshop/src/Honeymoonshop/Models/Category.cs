@@ -11,6 +11,6 @@ namespace Honeymoonshop.Models
         [Key]
         public int id { get; set; }
         public string naam { get; set; }
-        public String categorietype { get; set; }
+        public bool isAccessoire { get; set; }
     }
 }

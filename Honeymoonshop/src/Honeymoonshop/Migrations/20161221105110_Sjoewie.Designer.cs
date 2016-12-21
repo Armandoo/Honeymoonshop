@@ -8,8 +8,8 @@ using Honeymoonshop.Data;
 namespace Honeymoonshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161219134308_init")]
-    partial class init
+    [Migration("20161221105110_Sjoewie")]
+    partial class Sjoewie
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,7 +71,7 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("categorietype");
+                    b.Property<bool>("isAccessoire");
 
                     b.Property<string>("naam");
 
@@ -114,7 +114,7 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("kleurcode");
+                    b.Property<string>("kleurCode");
 
                     b.Property<string>("naam");
 
@@ -343,7 +343,7 @@ namespace Honeymoonshop.Migrations
             modelBuilder.Entity("Honeymoonshop.Models.ProductImage", b =>
                 {
                     b.HasOne("Honeymoonshop.Models.Kleurproduct", "kleurproduct")
-                        .WithMany("productimages")
+                        .WithMany("images")
                         .HasForeignKey("kleurproductkleurId", "kleurproductproductId");
                 });
 
