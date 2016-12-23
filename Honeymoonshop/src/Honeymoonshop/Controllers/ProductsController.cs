@@ -38,7 +38,11 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Producten.SingleOrDefaultAsync(m => m.id == id);
+            var product = await _context.Producten.Include(x => x.merk)
+                .Include(x => x.categorie)
+                .Include(x => x.kenmerken).ThenInclude(x => x.kenmerk)
+                .Include(x => x.kleuren).ThenInclude(x => x.kleur)
+                .SingleOrDefaultAsync(m => m.id == id);
             if (product == null)
             {
                 return NotFound();
@@ -56,6 +60,7 @@ namespace Honeymoonshop.Controllers
                 Kenmerken =  _context.Kenmerken.ToList(),
                 Kleuren = _context.Kleuren.ToList(),
                 product = new Product()
+
                 
 
             });
@@ -109,7 +114,7 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,artikelnummer,categorieId,merkId,omschrijving,prijs")] Product product, string[] kleur, string[] kenmerk)
+        public async Task<IActionResult> Create([Bind("id,artikelnummer,geslacht,categorieId,merkId,omschrijving,prijs")] Product product, string[] kleur, string[] kenmerk)
         {
             if (kleur != null)
             {
@@ -182,7 +187,7 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,artikelnummer,categorieId,merkId,omschrijving,prijs")] Product product, string[] kleur, string[] kenmerk)
+        public async Task<IActionResult> Edit(int id, [Bind("id,artikelnummer,geslacht,categorieId,merkId,omschrijving,prijs")] Product product, string[] kleur, string[] kenmerk)
         {
             if (id != product.id)
             {

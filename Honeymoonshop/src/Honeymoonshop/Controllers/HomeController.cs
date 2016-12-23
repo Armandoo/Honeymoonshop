@@ -65,41 +65,12 @@ namespace Honeymoonshop.Controllers
         public IActionResult ProductPagina(int id)
         {
             //Rewritten na images met kleur zijn gekoppeld
-            var hetProduct = Context.ktKleurProduct.Include(k => k.kleur).Include(x => x.product).ThenInclude(x => x.merk).Include(x => x.product.kleuren).Include(c => c.product.categorie).Include(x => x.images).FirstOrDefault(kleurproduct => kleurproduct.productId == id);
-            List<Product> gerelateerdeProducten = new List<Product>();
-
-            var gerelateerdProduct = Context.ktKleurProduct.Include(x => x.product).ThenInclude(x => x.merk).Include(x => x.images).Take(4).Where(kleurproduct => kleurproduct.product.categorieId == hetProduct.product.categorieId);
-
-
-            /*//Oud
-            var hetProduct = Context.Producten.Include(mrk => mrk.merk).Include(x => x.kleuren).ThenInclude(x => x.kleur).Include(x => x.categorie).Include(x => x.kenmerken).ThenInclude(x => x.kenmerk).Include(img => img.afbeeldingen).FirstOrDefault(product => product.id == id);
-            //var hetMerk = Context.Merken.FirstOrDefault(merk => merk.id == hetProduct.merkId);
-            //hetProduct.merk = hetMerk;
-            List<ProductImage> productAfbeeldingen = new List<ProductImage>();
-            List<Product> gerelateerdeProducten = new List<Product>();
-            int i = 0;
-
-
-            foreach (Product p in Context.Producten)
-            {
-                if (i < 4)
-                {
-                    p.merk = Context.Merken.FirstOrDefault(merk => merk.id == p.merkId);
-                    var afb = Context.ProductAfbeeldingen.Include(prodimg => prodimg.product).FirstOrDefault(img => img.product.id == p.id);
-                    List<ProductImage> afbLijst = new List<ProductImage>();
-                    afbLijst.Add(afb);
-                    p.afbeeldingen = afbLijst;
-                    gerelateerdeProducten.Add(p);
-                    i++;
-                }
-                else
-                {
-                    break;
-                }
-            }*/
+            var hetProduct = Context.ktKleurProduct.Include(k => k.kleur).Include(x => x.product).ThenInclude(x => x.merk).Include(x => x.product.kleuren).Include(c => c.product.categorie).Include(x => x.images).Include(x => x.product.kenmerken).ThenInclude(x => x.kenmerk).FirstOrDefault(kleurproduct => kleurproduct.productId == id);
+            var gerelateerdeProducten = Context.ktKleurProduct.Include(x => x.product).ThenInclude(x => x.merk).Include(x => x.images).Take(4).Where(kleurproduct => kleurproduct.product.categorieId == hetProduct.product.categorieId && kleurproduct.productId != id).ToList();
+            var accessoires = Context.ktKleurProduct.Include(x => x.product).ThenInclude(x => x.merk).Include(x => x.images).Take(4).Where(kleurproduct => kleurproduct.kleurId == hetProduct.kleurId && kleurproduct.product.categorie.isAccessoire == true).ToList();
             ViewData["gerelateerdeProducten"] = gerelateerdeProducten;
             ViewData["Product"] = hetProduct;
-
+            ViewData["Accessoires"] = accessoires;
             return View();
         }
     }
