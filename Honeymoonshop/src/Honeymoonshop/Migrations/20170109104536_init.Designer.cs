@@ -8,14 +8,30 @@ using Honeymoonshop.Data;
 namespace Honeymoonshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161221105110_Sjoewie")]
-    partial class Sjoewie
+    [Migration("20170109104536_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Honeymoonshop.Models.Afspraak", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("datum");
+
+                    b.Property<int?>("klantid");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("klantid");
+
+                    b.ToTable("Afspraken");
+                });
 
             modelBuilder.Entity("Honeymoonshop.Models.ApplicationUser", b =>
                 {
@@ -109,6 +125,28 @@ namespace Honeymoonshop.Migrations
                     b.ToTable("Kenmerkproduct");
                 });
 
+            modelBuilder.Entity("Honeymoonshop.Models.Klant", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("achternaam");
+
+                    b.Property<string>("email");
+
+                    b.Property<int>("telefoonnummer");
+
+                    b.Property<DateTime>("trouwDatum");
+
+                    b.Property<string>("voornaam");
+
+                    b.Property<bool>("wilBrief");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Klanten");
+                });
+
             modelBuilder.Entity("Honeymoonshop.Models.Kleur", b =>
                 {
                     b.Property<int>("id")
@@ -159,7 +197,7 @@ namespace Honeymoonshop.Migrations
 
                     b.Property<int>("categorieId");
 
-                    b.Property<bool>("geslacht");
+                    b.Property<string>("geslacht");
 
                     b.Property<int>("merkId");
 
@@ -299,6 +337,13 @@ namespace Honeymoonshop.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Honeymoonshop.Models.Afspraak", b =>
+                {
+                    b.HasOne("Honeymoonshop.Models.Klant", "klant")
+                        .WithMany("afspraken")
+                        .HasForeignKey("klantid");
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.Kenmerkproduct", b =>

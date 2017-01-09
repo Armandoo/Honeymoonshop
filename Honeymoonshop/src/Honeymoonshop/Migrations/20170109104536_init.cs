@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Honeymoonshop.Migrations
 {
-    public partial class Sjoewie : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,6 +60,24 @@ namespace Honeymoonshop.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Kenmerken", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Klanten",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    achternaam = table.Column<string>(nullable: true),
+                    email = table.Column<string>(nullable: true),
+                    telefoonnummer = table.Column<int>(nullable: false),
+                    trouwDatum = table.Column<DateTime>(nullable: false),
+                    voornaam = table.Column<string>(nullable: true),
+                    wilBrief = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Klanten", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -159,6 +177,26 @@ namespace Honeymoonshop.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Afspraken",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    datum = table.Column<DateTime>(nullable: false),
+                    klantid = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Afspraken", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Afspraken_Klanten_klantid",
+                        column: x => x.klantid,
+                        principalTable: "Klanten",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Producten",
                 columns: table => new
                 {
@@ -166,7 +204,7 @@ namespace Honeymoonshop.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     artikelnummer = table.Column<int>(nullable: false),
                     categorieId = table.Column<int>(nullable: false),
-                    geslacht = table.Column<bool>(nullable: false),
+                    geslacht = table.Column<string>(nullable: true),
                     merkId = table.Column<int>(nullable: false),
                     omschrijving = table.Column<string>(nullable: true),
                     prijs = table.Column<int>(nullable: false)
@@ -303,6 +341,11 @@ namespace Honeymoonshop.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Afspraken_klantid",
+                table: "Afspraken",
+                column: "klantid");
+
+            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
@@ -382,6 +425,9 @@ namespace Honeymoonshop.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Afspraken");
+
+            migrationBuilder.DropTable(
                 name: "Kenmerkproduct");
 
             migrationBuilder.DropTable(
@@ -401,6 +447,9 @@ namespace Honeymoonshop.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Klanten");
 
             migrationBuilder.DropTable(
                 name: "Kenmerken");

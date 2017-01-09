@@ -14,19 +14,19 @@
         <div class="form-group">
             @foreach (var p in Model.kleuren)
             {
-               <form asp-action="Images" enctype="multipart/form-data" class="dropzone dz-clickable dz-started">
+               <form asp-controller="Products" asp-action="Images" enctype="multipart/form-data">
                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                    <input type="hidden" asp-for="id" />
-                   <input type="hidden" name="kid" value="@p.kleurId"/>
+                  <input type="hidden" name="kid" value="@p.kleurId"/>
                     <label>Kleur: @p.kleur.naam</label>
                     
                    <div class="form-group">
                        <div class="col-md-offset-2 col-md-10">
-                           <!--<input type="submit" value="Save" class="btn btn-default" /> -->
+                           <input type="file" name="afbeeldingen" multiple class="dz-hidden-input" />
+                           <input type="submit" value="Save" class="btn btn-default" />
                        </div>
                    </div>
                   </form>
-                <!--<input type="file" name="file" multiple class="dz-hidden-input"/> -->
             }
 </div>
 
