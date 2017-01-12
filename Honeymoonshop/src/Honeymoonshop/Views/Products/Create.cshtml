@@ -36,7 +36,16 @@
                 }
             </div>
         </div>
-
+        <div class="form-group">
+            <label asp-for="product.geslacht" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select input asp-for="product.geslacht">
+                    <option value="bruid">Bruid</option>
+                    <option value="bruidegom">Bruidegom</option>
+                    <option value="geen">Geen</option>
+                </select>
+            </div>
+        </div>
         <div class="form-group">
             <label asp-for="product.categorie" class="col-md-2 control-label"></label>
             <div class="col-md-10">

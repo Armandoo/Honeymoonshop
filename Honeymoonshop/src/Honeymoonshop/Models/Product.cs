@@ -17,7 +17,7 @@ namespace Honeymoonshop.Models
         public int merkId { get; set; }
         public virtual Merk merk { get; set; }
         public int categorieId { get; set; }
-        public bool geslacht { get; set; }
+        public String geslacht { get; set; }
         public Category categorie { get; set; }
         public virtual List<Kleurproduct> kleuren { get; set; }
         public virtual List<Kenmerkproduct> kenmerken { get; set; }

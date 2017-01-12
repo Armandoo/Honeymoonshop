@@ -17,6 +17,22 @@ namespace Honeymoonshop.Migrations
                 .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Honeymoonshop.Models.Afspraak", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("datum");
+
+                    b.Property<int?>("klantid");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("klantid");
+
+                    b.ToTable("Afspraken");
+                });
+
             modelBuilder.Entity("Honeymoonshop.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id");
@@ -109,6 +125,26 @@ namespace Honeymoonshop.Migrations
                     b.ToTable("Kenmerkproduct");
                 });
 
+            modelBuilder.Entity("Honeymoonshop.Models.Klant", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("email");
+
+                    b.Property<string>("naam");
+
+                    b.Property<int>("telefoonnummer");
+
+                    b.Property<DateTime>("trouwDatum");
+
+                    b.Property<bool>("wilBrief");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Klanten");
+                });
+
             modelBuilder.Entity("Honeymoonshop.Models.Kleur", b =>
                 {
                     b.Property<int>("id")
@@ -159,7 +195,7 @@ namespace Honeymoonshop.Migrations
 
                     b.Property<int>("categorieId");
 
-                    b.Property<bool>("geslacht");
+                    b.Property<string>("geslacht");
 
                     b.Property<int>("merkId");
 
@@ -303,6 +339,13 @@ namespace Honeymoonshop.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Honeymoonshop.Models.Afspraak", b =>
+                {
+                    b.HasOne("Honeymoonshop.Models.Klant", "klant")
+                        .WithMany("afspraken")
+                        .HasForeignKey("klantid");
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.Kenmerkproduct", b =>

@@ -1,7 +1,7 @@
 ﻿@model Honeymoonshop.Models.Product
 @{
-    /*Product product = ViewData["Product"] as Product;
-    List<Product> gerelateerdeProducten = ViewData["gerelateerdeProducten"] as List<Product>;*/
+    List<Kleurproduct> gerelateerdeProducten = ViewData["gerelateerdeProducten"] as List<Kleurproduct>;
+    List<Kleurproduct> accessoires = ViewData["Accessoires"] as List<Kleurproduct>;
     Kleurproduct hetProduct = ViewData["Product"] as Kleurproduct;
 }
 <div class="productcontainer row">
@@ -9,21 +9,21 @@
         <div id="breadcrumbcontainer">
             <ol class="breadcrumb">
                 <li>
-                    <a href="#">Home</a>
+                    <a href="/home/">Home</a>
                 </li>
                 <li>
-                    <a href="#">Bruid</a>
+                    <a href="#" class="text-capitalize">@hetProduct.product.geslacht</a>
                 </li>
                 <li>
-                    <a href="#">Dressfinder</a>
+                    <a href="/home/dressfinder">Dressfinder</a>
                 </li>
                 <li>
-                    <a href="#">Collectienaam</a>
+                    <a href="#">@hetProduct.product.categorie.naam</a>
                 </li>
                 <li class="active">@hetProduct.product.merk.merkNaam, @hetProduct.product.artikelnummer</li>
             </ol>
         </div>
-        <div id="col-md-12"><a href="#"><img src="~/images/arrow.png" />Terug naar overzicht</a></div>
+        <div id="col-md-12"><a href="/home/dressfinder"><img src="~/images/arrow.png" />Terug naar overzicht</a></div>
         <div class="col-md-3">
             @{
                 @foreach (ProductImage img in hetProduct.images)
@@ -32,16 +32,10 @@
                 }
             }
         </div>
-        <!--<div class="col-md-3">
-            <img src="http://placekitten.com/g/250/250" class="pull-right" />
-            <img src="http://placekitten.com/g/250/250" class="pull-right" />
-            <img src="http://placekitten.com/g/250/250" class="pull-right" />
-        </div>-->
         <div class="col-md-6">
             @{
                 <img src="~/images/productenimages/@hetProduct.images.First().bestandsNaam" class="pull-right" />
             }
-            <!--<img src="http://placekitten.com/g/700/800" class="pull-right" />-->
         </div>
         <div class="col-md-3">
             <h4>@hetProduct.product.merk.merkNaam</h4>
@@ -54,11 +48,11 @@
                 <p>
                     <span>
                         Kenmerken:
-                        @{/*
-foreach (Kenmerkproduct kenmerkproduct in hetProduct.product.kenmerken)
-{
-<a href="#">@kenmerkproduct.kenmerk.naam</a>
-}*/
+                        @{
+                            foreach (Kenmerkproduct kenmerkproduct in hetProduct.product.kenmerken)
+                            {
+                            <a href="#">@kenmerkproduct.kenmerk.naam</a>
+                            }
                         }
                     </span><br />
                 </p>
@@ -70,7 +64,9 @@ foreach (Kenmerkproduct kenmerkproduct in hetProduct.product.kenmerken)
                         Beschikbare kleuren: @{
                             foreach (Kleurproduct kleurproduct in hetProduct.product.kleuren)
                             {
-                                <span>@kleurproduct.kleur.naam</span>
+                                @if (kleurproduct.kleur != null) { 
+                                    <span>@kleurproduct.kleur.naam</span>
+                                }
                             }
                         }
                     </span><br />
@@ -82,27 +78,19 @@ foreach (Kenmerkproduct kenmerkproduct in hetProduct.product.kenmerken)
     </div>
     <div class="row" id="tussenkopje">
         <hr class="col-md-2" />
-        <h4 class="col-md-3 text-uppercase text-center">Bijpassende Sieraden</h4>
+        <h4 class="col-md-3 text-uppercase text-center">Bijpassende Accessoires</h4>
         <hr class="col-md-2" />
     </div>
     <div class="row" id="bijpassend">
         <div class="col-md-12">
-            <div class="col-md-3">
-                <div class="text-center"><img src="http://placekitten.com/g/300/350" /></div>
-                <span>Accessoire</span>
-            </div>
-            <div class="col-md-3">
-                <div class="text-center"><img src="http://placekitten.com/g/300/350" /></div>
-                <span>Accessoire</span>
-            </div>
-            <div class="col-md-3">
-                <div class="text-center"><img src="http://placekitten.com/g/300/350" /></div>
-                <span>Accessoire</span>
-            </div>
-            <div class="col-md-3">
-                <div class="text-center"><img src="http://placekitten.com/g/300/350" /></div>
-                <span>Accessoire</span>
-            </div>
+            @{
+                foreach (Kleurproduct kleurproduct in accessoires) {
+                    <div class="col-md-3">
+                        <div class="text-center"><img src="~/images/productenimages/@kleurproduct.images.First().bestandsNaam" /></div>
+                        <span>@kleurproduct.product.merk.merkNaam</span>
+                    </div>
+                }
+            }
         </div>
         <a href="#">
             <div class="col-md-12">
@@ -117,32 +105,16 @@ foreach (Kenmerkproduct kenmerkproduct in hetProduct.product.kenmerken)
     </div>
     <div class="row" id="alternatieven">
         <div class="col-md-12">
-            @{/*
+            @{
                 @for (int i = 0; i < 4 && i < gerelateerdeProducten.Count; i++)
                 {
                     <div class="col-md-3">
-                        <div class="text-center"><img src="~/images/productenimages/@gerelateerdeProducten[i].afbeeldingen.First().bestandsNaam" /></div>
-                        <span><a href="/home/productpagina/@gerelateerdeProducten[i].id">@gerelateerdeProducten[i].merk.merkNaam</a></span>
+                        <div class="text-center"><img src="~/images/productenimages/@gerelateerdeProducten[i].images.First().bestandsNaam" /></div>
+                        <span><a href="/home/productpagina/@gerelateerdeProducten[i].productId">@gerelateerdeProducten[i].product.merk.merkNaam</a></span>
                     </div>
 
-                }*/
+                }
             }
-            <!--<div class="col-md-3">
-                <div class="text-center"><img src="http://placekitten.com/g/300/400" /></div>
-                <span>Jurk</span>
-            </div>
-            <div class="col-md-3">
-                <div class="text-center"><img src="http://placekitten.com/g/300/400" /></div>
-                <span>Jurk</span>
-            </div>
-            <div class="col-md-3">
-                <div class="text-center"><img src="http://placekitten.com/g/300/400" /></div>
-                <span>Jurk</span>
-            </div>
-            <div class="col-md-3">
-                <div class="text-center"><img src="http://placekitten.com/g/300/400" /></div>
-                <span>Jurk</span>
-            </div>-->
         </div>
     </div>
 </div>

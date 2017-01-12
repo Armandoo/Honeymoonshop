@@ -17,6 +17,42 @@
             @Html.DisplayFor(model => model.artikelnummer)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.kleuren)
+        </dt>
+        <dd>
+            @foreach (var k in Model.kleuren)
+            {
+                <span>@k.kleur.naam &nbsp; &nbsp; &nbsp; </span>
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.kenmerken)
+        </dt>
+        <dd>
+            @foreach (var k in Model.kenmerken)
+                {
+                <span>@k.kenmerk.naam &nbsp; &nbsp; &nbsp; </span>
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.geslacht)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.geslacht)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.categorie)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.categorie.naam)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.merk)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.merk.merkNaam)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.omschrijving)
         </dt>
         <dd>

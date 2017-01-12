@@ -21,13 +21,22 @@ $(document).ready(function () {
 
         $('input:hidden[name=minPrijs]').val( minPrijs);
         $('input:hidden[name=maxPrijs]').val( maxPrijs);
-    });;
+    });
 
     $('select[name=sorteer] option:selected').each(function () {
         
         console.log("a");
     });
 
+    $("#datepicker").datepicker({
+        minDate: +0,
+        language: "nl",
+        prevText: '<span class="glyphicon glyphicon-menu-left"></span>',
+        nextText: '<span class="glyphicon glyphicon-menu-right"></span>',
+        onSelect: function () {
+            $("#dueDate").val($("#datepicker").datepicker({dateFormat : 'dd/mm/yyyy'}).val());
+        }
+    });
 })
 
 /*function toggleImage() {

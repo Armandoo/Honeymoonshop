@@ -1,0 +1,83 @@
+﻿<div class="row">
+    <div class="col-md-12 afsprakenkop">
+        <div id="breadcrumbcontainer">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/home/">Home</a>
+                </li>
+                <li>
+                    <a href="/afspraak/">Afspraak</a>
+                </li>
+                <li>
+                    Pasafspraak maken
+                </li>
+            </ol>
+        </div>
+        <p class="afspraakbannerkop">Trouwjurken</p></br>
+        <p class="text-uppercase afspraakbannertekst">Maak je pas afspraak</p>
+
+        <div class="col-md-11 afspraakform">
+            <div class="col-md-2 afsprakenlinks">
+                <div class="col-md-12 center">
+                    <div class="col-md-5 rond text-center" style="opacity:0.5;">
+
+                        1
+
+                    </div>
+                </div>
+                <div class="col-md-12 center">
+                    <div class="col-md-9 tekstlinksbolletjes text-center">Datum en tijd selecteren</div>
+                </div>
+                <div class="col-md-12 center">
+                    <div class="col-md-5 rond text-center" style="opacity:0.5;">
+
+                        2
+
+                    </div>
+                </div>
+                <div class="col-md-12 center">
+                    <div class="col-md-9 tekstlinksbolletjes text-center">Gegevens invullen</div>
+                </div>
+                <div class="col-md-12 center">
+                    <div class="col-md-5 rond text-center" style="opacity:0.5;">
+
+                        3
+
+                    </div>
+                </div>
+                <div class="col-md-12 center">
+                    <div class="col-md-9 tekstlinksbolletjes text-center">Gegevens controleren</div>
+                </div>
+            </div>
+            <div class="col-md-5 afsprakenlinks">
+                <span class="bold">Stap 1, Datum en tijd selecteren</span>
+                <br /><br />
+                <span>Selecteer eerst een datum en vervolgens een tijdstip dat je wilt komen passen!</span>
+                <br /><br />
+                <span>Openingstijden</span>
+                <table class="bold">
+                    <tr><td>MA</td><td> 12:00-17:30</td></tr>
+                    <tr><td>DI-VR&nbsp;</td><td> 09:30-17:30</td></tr>
+                    <tr><td>ZA</td><td> 09:30-18:00</td></tr>
+                    <tr><td>ZO</td><td> 11:00-17:00</td></tr>
+                </table>
+                <br />
+                <span>*Op alle werkdagen kunnen er ook schoenen worden gepast. Helaas is dit niet mogelijk in het weekend.</span>
+            </div>
+            <div class="col-md-5 afspraakrechts">
+                <div id="datepicker" name="datepicker">
+                    <br />
+                    <div class="kalenderkoptekst">
+                        <form asp-action="Datumdoorgeven" method="post">
+                            <input type="hidden" name="dueDate" id="dueDate" value="" />
+                            <input type="submit" value="VERSTUUR" />
+                        </form>
+                        ♥ Selecteer een datum:
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <img src="http://placehold.it/1400x600" />
+        </div>
