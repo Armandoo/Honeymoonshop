@@ -155,9 +155,8 @@ nav>:last-child{
 	margin-top:249px;
 }
 
-.test{
-	align-content:center;
-}
+
+
 /*#selectbuttons {
 
 
@@ -229,11 +228,13 @@ footer ul.col-md-3, .blogevenement{
 }
 
 .tussenkopje h1{
+    font-family: 'Playball', cursive;
 	color:pink;
 	font-size: 128px;
 }
 
 .tussenkopje h2{
+    font-weight: bold;
 	color:black;
 	margin-top: -30px;
 	margin-bottom: 65px;
@@ -372,6 +373,10 @@ footer ul.col-md-3, .blogevenement{
 
 .spotlight {
     margin-bottom:20px;
+}
+
+.producten{
+    padding:0px;
 }
 
 .producten h3{
@@ -545,7 +550,157 @@ footer ul.col-md-3, .blogevenement{
     border-top: 2px solid rgb(229, 229, 229);
 }
 
-#kleuren{
+.catalogusitems{
+    display:flex;
+    margin:20px;
+    padding:20px 0px;
+}
+
+ .catalogusitem{
+   
+   
+   border: solid 1px transparent;
+}
+
+ .productencollectie{
+     position:relative;
+ }
+
+.catalogusartikelnummer{
+    display:none;
+}
+
+.catalogusitem:hover{
+    /*margin:-52px 0px;*/
+    transform:scale(1,1);
+    z-index:2;
+    box-shadow: 2px 2px 5px #DBDBDC;
+    border: solid 1px black;
+    background-color:white;
+    /*padding:30px 10px;*/
+    padding-bottom:20px;
+    margin-bottom:-40px;
+}
+
+.catalogusitem:hover .catalogusartikelnummer{
+    
+    display:block;
+
+}
+
+
+
+.filter ul{
+    list-style-type:none;
+    padding: 0;
+}
+
+.categorieen li{
+    background-color:#FCE8E7;
+    margin:3px;
+    padding-left:10px;
+    font-weight:bold;
+    font-size:16px;
+}
+
+.filterkeuzes>:first-child li{
+    border-top:3px #D9D9DB;
+    background-color:#FCFCFC;
+    border-bottom:1px #D9D9DB;
+}
+
+.container-collectie-img{
+    padding:0px;
+}
+
+.dressfinder-banner, .container-collectie-img img{
+    max-width:100%;
+}
+
+.filterkeuzes, .categorieen{
+    padding-left:0px;
+}
+
+.categorieen, .filterkeuzes, .filterverfijnen, .filterkeuzes ul, .filterverfijnen li, .filterverfijnen ul {
+    padding:0px;
+    list-style-type:none;
+}
+
+.filterkeuzes input[type="radio"]{
+    margin:5px 5px 10px 10px;
+    height:18px;
+    width:18px;
+    border-radius:5px;
+}
+
+.filterkeuzes div:first-child{
+    border-top:2px solid #D9D9DB;
+    border-bottom:2px solid #D9D9DB;
+    background-color:#F6F6F6;
+}
+
+.filterverfijnen>:first-child{
+    border-top:2px solid #D9D9DB;
+    border-bottom:2px solid #D9D9DB;
+}
+
+ .filterkeuzes div:first-child, .filterverfijnen li{
+     padding:5px 5px 3px 10px;
+ }   
+
+.filterkeuzes>:last-child div{
+    border-top:none;
+    background-color:#FCFCFC;
+    border-bottom:none;
+}
+
+.filterkeuzes>:last-child{
+    border-bottom:2px solid #D9D9DB;
+}
+
+.filterkeuzes img, .filterverfijnen img{
+   
+    max-width:12px;
+}
+
+.filterkeuzes fieldset, .filterverfijnen fieldset{
+    max-height:125px;
+    overflow-y:scroll;
+}
+
+.filterverfijnen {
+    padding:5px;
+
+}
+
+ .head-filter{
+     
+    border-bottom:2px solid #D9D9DB;
+}
+
+
+ .filterverfijnen li, .filterkeuzes li{
+    font-size:16px;
+    
+}
+
+
+ .filterverfijnen img, .filterkeuzes img{
+     margin-right:10px;
+ }
+
+
+
+ .container-dressfinder{
+     display:flex;
+     justify-content:center;
+ }
+
+ .catalogusitem:hover .kleurbolletje{
+     display:block;
+ }
+
+ #kleuren{
     display:flex;
 }
 
@@ -555,11 +710,19 @@ footer ul.col-md-3, .blogevenement{
 	height: 20px;
 	border-radius: 50%;
 	background-color: #FFF;
-    display:flex;
+    display:none;
 }
+
+
+
+ .col-item img{
+     max-width:100%;
+ }
+
 
 #breadcrumbcontainer{
     padding:10px 0px 0px 30px;
+    text-align:left;
 }
 
 .breadcrumb {background: rgba(255, 255, 255, 0); border: 0px solid rgba(255, 255, 255, 1); border-radius: 4px; display: block;}
@@ -571,4 +734,276 @@ footer ul.col-md-3, .blogevenement{
 
 .breadcrumb a{
     text-decoration:underline;
+}
+
+.afsprakenkop{
+    background-color: white;
+    text-align:center;
+}
+
+.afspraken{
+    background-color: white;
+}
+
+.afsprakeninhoud {
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+}
+
+.afsprakeninhoudtekst {
+    background-color: white;
+    text-align: center;
+    margin-top: -75px;
+    margin-left: 25px;
+    font-weight: bold;
+}
+
+.afspraakbannerkop{
+    font-size:160px;
+    font-weight: bold;
+    margin-bottom:-115px;
+	color:#FFE5E8;
+    font-family: 'Playball', cursive;
+    opacity:0.5;
+}
+
+.afspraakbannertekst {
+    margin-top: 45px;
+    font-size: 40px;
+    font-weight: bolder;
+    padding-bottom: 50px;
+}
+
+.afspraaklink {
+    color: black;
+    text-decoration: underline;
+}
+
+.afspraaklinkform {
+    color: white;
+    text-decoration: none;
+}
+
+.afspraakknop {
+    font-size:14px;
+    font-weight:bolder;
+    background-color:#F0597C;
+    padding:15px;
+    color: white;
+}
+
+.afspraaktipsntricks {
+    padding-top: 100px;
+}
+
+.afspraaklijst {
+    list-style-position: outside;
+    list-style-image: url('../images/lijstbolletje.png');
+}
+
+.afspraakrechts {
+    padding-top: 20px;
+    padding-left: 20px;
+    background-color: #F0597C;
+    color: white;
+    padding-bottom: 82px;
+}
+
+.afsprakenlinks{
+    padding-top:10px;
+    background-color: white;
+    padding-bottom: 25px;
+}
+
+.afspraakrechtsdatum {
+    background-color:#F27390;
+    margin-left: 50px;
+}
+
+.afspraakform {
+    box-shadow: 2px 2px 2px 2px #404040;
+    padding-left: 0px;
+    padding-right:0px;
+    margin-left: 65px;
+    margin-bottom: 50px;
+    text-align:left;
+}
+
+.tekstlinksbolletjes {
+    color: hotpink;
+    font-size: 12px;
+    opacity: 0.5;
+    padding-bottom: 88px;
+}
+
+.rond{
+    border-radius:50%;
+    background-color: #F0597C;
+    color: white;
+    width:50px;
+    line-height:50px;
+    opacity: 0.5;
+}
+
+#datepicker{
+  width: auto;
+  height: auto;
+  font-weight:bold;
+  color:white;
+  margin: 5px auto 0;
+  background:#EF597C;
+  padding-bottom:200px;
+  max-height:527px;
+}
+#datepicker table {
+  width: 100%;
+  height: 100%;
+  text-transform: uppercase;
+  font-size:15px;
+}
+ 
+.ui-datepicker-calendar, .ui-datepicker-calendar th{
+    padding-top:20px;
+    text-align:center;
+}
+ 
+.ui-datepicker-header{
+    background:#F27390;
+    width:80%;
+    margin:0 auto;
+    display:flex;
+    padding-bottom:-10px;
+}
+ 
+.ui-datepicker-title{
+    text-align:center;
+    line-height:50px;
+    width:80%;
+    order:2;
+    text-transform: uppercase;
+}    
+ 
+.ui-datepicker-prev{
+    width:10%;
+    order:1;
+    color:white;
+    font-size:30px;
+    line-height:55px;
+}
+ 
+.ui-datepicker-next{
+    width:10%;
+    order:3;
+    text-align:right;
+    color:white;
+    font-size:30px;
+    line-height:55px;
+}
+ 
+.ui-state-default{
+    color:white;
+    padding:5px;
+}
+ 
+.ui-datepicker-calendar td{
+    padding-left:5px;
+    padding-right:5px;
+    padding-bottom:10px;
+}
+ 
+.ui-datepicker-unselectable>.ui-state-default{
+    color:#CC4B67;
+}
+ 
+.ui-state-hover:hover {
+    color:white;
+}
+ 
+.ui-state-active{
+    border-radius:50%;
+    border: 2px solid white;
+    padding:3px;
+}
+ 
+.ui-datepicker-prev-hover:hover, .ui-datepicker-next-hover:hover{
+    color:#F0597C;
+}
+ 
+.kalenderkoptekst{
+    padding-left:20px;
+}
+ 
+.kalenderstap2{
+    position: absolute;
+    bottom:50px;
+    right:60px;
+}
+
+ /*Filterslider*/
+ .slider-handle{
+background-color : white !important;
+border:2px solid #F9C8C3 !important;
+background-image:none !important;
+    opacity: 1 !important;
+}
+
+ .sliderContainer{
+   
+     padding:3px !important;
+ }
+
+ .prijzenContainer{
+       display:flex;        
+ }
+
+.slider-selection{
+	background-color: #F9C8C3 !important;
+    background-image: none !important;
+}
+
+.tooltip{
+    display:none;
+}
+
+.slider-track{
+    border:0;
+}
+
+.sorteermenu{
+    margin:20px;
+}
+/*Einde filterslider*/
+
+/*Paginering*/
+.pagination>li>a, .pagination>li>span{
+	border: 0px;
+	color:black;
+}
+
+.pagination{
+	letter-spacing:1px;
+    font-size:14px;
+}
+/*Einde paginering*/
+
+
+.rb.outer, .rb.inner{
+    width:20px;
+    height:auto;
+    max-width:none;
+    margin:0px 5px 5px 5px;
+}
+
+.rb.outer{
+    display:inline;
+}
+
+.rb.inner{
+    display:none;
+}
+
+.hide{
+    visibility:hidden;
 }

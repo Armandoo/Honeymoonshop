@@ -332,7 +332,6 @@ namespace Honeymoonshop.Controllers
             return RedirectToAction("Index");
         }
 
-
         private bool ProductExists(int id)
         {
             return _context.Producten.Any(e => e.id == id);

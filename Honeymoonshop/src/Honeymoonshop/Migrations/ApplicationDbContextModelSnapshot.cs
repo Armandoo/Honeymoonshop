@@ -16,6 +16,22 @@ namespace Honeymoonshop.Migrations
                 .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Honeymoonshop.Models.Afspraak", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("datum");
+
+                    b.Property<int?>("klantid");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("klantid");
+
+                    b.ToTable("Afspraken");
+                });
+
             modelBuilder.Entity("Honeymoonshop.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id");
@@ -108,6 +124,28 @@ namespace Honeymoonshop.Migrations
                     b.ToTable("Kenmerkproduct");
                 });
 
+            modelBuilder.Entity("Honeymoonshop.Models.Klant", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("email")
+                        .IsRequired();
+
+                    b.Property<string>("naam")
+                        .IsRequired();
+
+                    b.Property<int>("telefoonnummer");
+
+                    b.Property<DateTime>("trouwDatum");
+
+                    b.Property<bool>("wilBrief");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Klanten");
+                });
+
             modelBuilder.Entity("Honeymoonshop.Models.Kleur", b =>
                 {
                     b.Property<int>("id")
@@ -180,6 +218,8 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("Productid");
+
                     b.Property<string>("bestandsNaam");
 
                     b.Property<int?>("kleurproductkleurId");
@@ -187,6 +227,8 @@ namespace Honeymoonshop.Migrations
                     b.Property<int?>("kleurproductproductId");
 
                     b.HasKey("id");
+
+                    b.HasIndex("Productid");
 
                     b.HasIndex("kleurproductkleurId", "kleurproductproductId");
 
@@ -300,6 +342,13 @@ namespace Honeymoonshop.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Honeymoonshop.Models.Afspraak", b =>
+                {
+                    b.HasOne("Honeymoonshop.Models.Klant", "klant")
+                        .WithMany("afspraken")
+                        .HasForeignKey("klantid");
+                });
+
             modelBuilder.Entity("Honeymoonshop.Models.Kenmerkproduct", b =>
                 {
                     b.HasOne("Honeymoonshop.Models.Kenmerk", "kenmerk")
@@ -341,6 +390,10 @@ namespace Honeymoonshop.Migrations
 
             modelBuilder.Entity("Honeymoonshop.Models.ProductImage", b =>
                 {
+                    b.HasOne("Honeymoonshop.Models.Product")
+                        .WithMany("afbeeldingen")
+                        .HasForeignKey("Productid");
+
                     b.HasOne("Honeymoonshop.Models.Kleurproduct", "kleurproduct")
                         .WithMany("images")
                         .HasForeignKey("kleurproductkleurId", "kleurproductproductId");
