@@ -36,11 +36,11 @@
             <span class="col-md-2 text-uppercase pull-right"><strong>T</strong> (010) 4126143</span>
         </header>
 
-        <div class="row text-uppercase" id="navbar">
+        <div class="row text-uppercase @ViewBag.menu" id="navbar">
 
             <h1 class="col-md-5 col-xs-1">Honeymoon Shop</h1>
             <nav class="col-md-7 bold text-center">
-                <a class="col-md-1 active" href="#">
+                <a class="col-md-1 active" asp-action="index">
                     Home
                 </a>
                 <a class="col-md-1" href="#">
@@ -69,7 +69,7 @@
 
         @RenderBody()
         <footer class="row">
-            <div class="col-md-12 text-center bold text-uppercase contact center">
+            <div class="col-md-12 text-center bold text-uppercase contact">
                 <div class="col-md-3">
                     <p class="text-capitalize">Afspraak</p>
                     Maak een<br>pasafspraak
@@ -91,8 +91,12 @@
                 <strong>ZA</strong> 09.30-17.30 <strong>ZO</strong> 11.00-17.00
             </div>
             <div class="col-md-12 text-center" id="footerimg">
-                <img src="http://placekitten.com/g/50/50" alt="wedding img" />
-                <img src="http://placekitten.com/g/50/50" alt="wedding img" />
+                <div class="col-md-6">
+                    <img src="http://placehold.it/50x50" class="img-responsive pull-right" alt="wedding img" />
+                </div>
+                <div class="col-md-6">
+                    <img src="http://placehold.it/50x50" class="img-responsive pull-left" alt="wedding img" />
+                </div>
             </div>
 
             <div class="col-md-12 center">

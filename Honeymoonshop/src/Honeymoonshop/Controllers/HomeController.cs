@@ -22,8 +22,9 @@ namespace Honeymoonshop.Controllers
 
         [HttpGet]
         public IActionResult Dressfinder(FilterCriteria filtercriteria)
-        {  
-            var producten = Context.Producten.Include(x => x.merk).Include(x => x.kenmerken).ThenInclude(x=> x.kenmerk).Include(x=>x.kleuren).ThenInclude(x=>x.kleur).ToList();
+        {
+            ViewBag.menu = "inverted";
+            var producten = Context.Producten.Include(x => x.merk).Include(x => x.kenmerken).ThenInclude(x=> x.kenmerk).Include(x=>x.kleuren).ThenInclude(x=>x.kleur).Include(x => x.afbeeldingen).Where(x => x.geslacht == "Bruid").ToList();
             var categorieen = Context.Category.ToList();
 
             if(filtercriteria.categorieID !=null )
@@ -48,7 +49,7 @@ namespace Honeymoonshop.Controllers
             
             if(filtercriteria.stijl != null)
             {
-                    producten = producten.FindAll(x => x.id == filtercriteria.stijl);
+                    producten = producten.FindAll(x => x.kenmerken.Any(z => z.kenmerk.id == filtercriteria.stijl));
             }
 
             if (filtercriteria.neklijn != null)

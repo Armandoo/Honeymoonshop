@@ -37,6 +37,31 @@ $(document).ready(function () {
             $("#dueDate").val($("#datepicker").datepicker({dateFormat : 'dd/mm/yyyy'}).val());
         }
     });
+
+        var x,y,top,left,down;
+        $(".slide-items").mousedown(function(e){
+            e.preventDefault();
+            down=true;
+            x=e.pageX;
+            y=e.pageY;
+            top=$(this).scrollTop();
+            left=$(this).scrollLeft();
+        });
+
+        $("body").mousemove(function(e){
+            if(down){
+                var newX=e.pageX;
+                var newY=e.pageY;
+
+                console.log(y+", "+newY+", "+top+", "+(top+(newY-y)));
+
+                //$(".slide-container").scrollTop(top-newY+y);
+                $(".slide-container").scrollLeft(left-newX+x);
+            }
+        });
+
+        $("body").mouseup(function(e){down=false;});
+
 })
 
 /*function toggleImage() {

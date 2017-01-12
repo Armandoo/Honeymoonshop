@@ -8,8 +8,8 @@ using Honeymoonshop.Data;
 namespace Honeymoonshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161221131335_filtermergeproductpagina")]
-    partial class filtermergeproductpagina
+    [Migration("20170112181712_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -122,7 +122,7 @@ namespace Honeymoonshop.Migrations
 
                     b.HasIndex("productId");
 
-                    b.ToTable("Kenmerkproduct");
+                    b.ToTable("KenmerkProduct");
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.Klant", b =>
@@ -130,9 +130,11 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("email");
+                    b.Property<string>("email")
+                        .IsRequired();
 
-                    b.Property<string>("naam");
+                    b.Property<string>("naam")
+                        .IsRequired();
 
                     b.Property<int>("telefoonnummer");
 

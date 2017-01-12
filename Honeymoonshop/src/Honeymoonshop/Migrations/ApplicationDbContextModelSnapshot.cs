@@ -121,7 +121,7 @@ namespace Honeymoonshop.Migrations
 
                     b.HasIndex("productId");
 
-                    b.ToTable("Kenmerkproduct");
+                    b.ToTable("KenmerkProduct");
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.Klant", b =>
@@ -129,9 +129,11 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("email");
+                    b.Property<string>("email")
+                        .IsRequired();
 
-                    b.Property<string>("naam");
+                    b.Property<string>("naam")
+                        .IsRequired();
 
                     b.Property<int>("telefoonnummer");
 

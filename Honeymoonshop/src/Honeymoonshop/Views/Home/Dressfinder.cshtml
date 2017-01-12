@@ -1,6 +1,6 @@
 @model Honeymoonshop.Models.FilterViewModels.FilterProduct
 
-<div class="row ">
+<!--<div class="row ">
         <div class="col-md-12 banner">
             <img class="img-responsive" src="http://placehold.it/1400x500" />
             <div class="bannercontent">
@@ -16,11 +16,20 @@
                 </div>
             </div>
         </div>
-</div>
+</div>-->
 
 <form name="filterprijsform" asp-controller="Home" asp-action="Dressfinder" method="get">
-    <div class="row bg-white container-dressfinder">
-        <div class="col-md-2 col-sm-9">
+    <div class="row bg-white ">
+        <div id="breadcrumbcontainer" class="col-md-12">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/home/">Home</a>
+                </li>
+                <li class="active">Dressfinder</li>
+            </ol>
+        </div>
+        <div class="container-dressfinder col-md-12">
+        <div class="col-md-3 col-sm-9 filter-container">
             <h2>Categorieen</h2>
             <ul class="categorieen">
                 @foreach (var cat in Model.categorieen)
@@ -101,8 +110,11 @@
                     <div class="sliderContainer">
                         <input id="slider" type="text" class="span2" value=""
                                data-slider-min="1" data-slider-max="2000" data-slider-step="5"
-                               data-slider-value="[1,2000]" />
-                        <div class="prijzenContainer"><div class="text minprijs">&euro;1</div><div class="text maxprijs">&euro;2000</div></div>
+                               data-slider-value="[0,2000]" />
+                        <div class="prijzenContainer col-md-12">
+                            <div class="col-md-6 prijs">&euro;<span class="minprijs">1</span></div>
+                            <div class="col-md-6 prijs"><span class="maxprijs pull-right">2000</span><span class="pull-right">&euro;</span></div>
+                        </div>
                     </div>
                     <input type="hidden" name="minPrijs" />
                     <input type="hidden" name="maxPrijs" />
@@ -233,18 +245,36 @@
                     @foreach (var product in Model.producten)
             {
                         <div class="col-md-4 col-item catalogusitem img-responsive">
-                            <a href="/productpagina/@product.id">
-                                <img class="collectieitemimg" src="~/images/dressfinderimages/ladybird.png" />
+                            <a asp-route-productId="@product.id" asp-route-kleurId="@product.kleuren[0].kleurId" asp-action="ProductPagina">
+                                @{
+                                    if (product.afbeeldingen.Count > 0)
+                                    {
+                                        <img src="~/images/productenimages/@product.afbeeldingen[0].bestandsNaam" class="img-responsive collectieitemimg"/>
+                                    }
+                                    else
+                                    {
+                                        if (product.geslacht == "bruid")
+                                        {
+                                            <img src="~/images/productenimages/placeholders/placeholderbruid.jpg" class="img-responsive collectieitemimg"/>
+                                        }
+                                        else
+                                        {
+
+                                            <img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="img-responsive collectieitemimg"/>
+                                        }
+                                    }
+
+                                }
                                 <div class="productbeschrijving"></div>
-                                <div>@product.merk.merkNaam</div>
-                                <div>artikel nr. @product.artikelnummer</div>
-                                <div> @product.prijs</div>
+                                <div class="bold">@product.merk.merkNaam</div>
+                                <!--<div> product.prijs</div>-->
+                                <div class="artikelnr">artikel nr. @product.artikelnummer</div>
                             </a>
 
                             <div id="kleuren">
                                 @foreach (Kleurproduct kleurproduct in product.kleuren)
                                 {
-                                    <a href="/home/productpagina/?productid=@product.id&kleurid=@kleurproduct.kleurId"><div class="kleurbolletje" style="background-color:#@kleurproduct.kleur.kleurCode"></div></a>
+                                    <a href="/home/productpagina/?productid=@product.id&kleurid=@kleurproduct.kleurId"><div class="kleurbolletje verberg" style="background-color:#@kleurproduct.kleur.kleurCode"></div></a>
                                 }
 
                             </div>
@@ -254,11 +284,31 @@
 
             }
                 </div>
+            </div>
+        </div>
 
+        <!--        public int? silhouette { get; set; }
+        public int? neklijn { get; set; }
+        public int? gefilterdeKleur { get; set; }
+        public int? categorieID { get; set; }
+        public int? stijl { get; set; }
+        public int? minPrijs { get; set; }
+        public int? maxPrijs { get; set; }
+        public int? merk { get; set; }
+        public string sorteer { get; set; }
+        public int? limiet { get; set; }
+        public int? paginering { get; set; }-->
+
+
+
+    </div>
+
+        <div class="col-md-12">
+            <div class="col-md-8 pull-right">
                 <div class="col-md-6">
                     <span>Aantal tonen: </span>
-                    <select name="limiet" class="pagination pull-left">
-                         
+                    <select name="limiet" class="pagination ">
+
                         <option value="1">
                             1
                         </option>
@@ -297,92 +347,75 @@
                         </option>
 
                         <!--<option value="12">
-                            12
-                        </option>
-                        <option value="24">
-                            24
-                        </option> 
-                        <option value="36">
-                            36
-                        </option> 
-                        <option value="48">
-                            48
-                        </option>
-                            --> 
+                    12
+                </option>
+                <option value="24">
+                    24
+                </option>
+                <option value="36">
+                    36
+                </option>
+                <option value="48">
+                    48
+                </option>
+                    -->
                     </select>
                 </div>
 
                 <div class="col-md-6">
-                    @if(Model.aantalpaginas > 0) { 
-                    <ul class="pagination pull-right">
-                        <li><a asp-route-paginering="1" 
+                    @if (Model.aantalpaginas > 0)
+                {
+                        <ul class="pagination pull-right">
+                            <li>
+                                <a asp-route-paginering="1"
                                    asp-route-categorieid="@Model.criteria.categorieID"
                                    asp-route-neklijn="@Model.criteria.neklijn"
-
                                    asp-route-silhouette="@Model.criteria.silhouette"
                                    asp-route-stijl="@Model.criteria.stijl"
                                    asp-route-gefilterdeKleur="@Model.criteria.gefilterdeKleur"
                                    asp-route-minPrijs="@Model.criteria.minPrijs"
                                    asp-route-maxPrijs="@Model.criteria.maxPrijs"
-
                                    asp-route-merk="@Model.criteria.merk"
                                    asp-route-sorteer="@Model.criteria.sorteer"
-                                   asp-route-limiet="@Model.criteria.limiet">&#9664;</a></li>
-                        @for (int i = 1; i < Model.aantalpaginas+1; i++)
+                                   asp-route-limiet="@Model.criteria.limiet">&#9664;</a>
+                            </li>
+                            @for (int i = 1; i < Model.aantalpaginas + 1; i++)
                         {
-                            <li><a asp-route-paginering="@i" 
-                                   asp-route-categorieid="@Model.criteria.categorieID"
-                                   asp-route-neklijn="@Model.criteria.neklijn"
-
-                                   asp-route-silhouette="@Model.criteria.silhouette"
-                                   asp-route-stijl="@Model.criteria.stijl"
-                                   asp-route-gefilterdeKleur="@Model.criteria.gefilterdeKleur"
-                                   asp-route-minPrijs="@Model.criteria.minPrijs"
-                                   asp-route-maxPrijs="@Model.criteria.maxPrijs"
-
-                                   asp-route-merk="@Model.criteria.merk"
-                                   asp-route-sorteer="@Model.criteria.sorteer"
-                                   asp-route-limiet="@Model.criteria.limiet"
-                                  
-
-                                   >@i</a></li>
+                                <li>
+                                    <a asp-route-paginering="@i"
+                                       asp-route-categorieid="@Model.criteria.categorieID"
+                                       asp-route-neklijn="@Model.criteria.neklijn"
+                                       asp-route-silhouette="@Model.criteria.silhouette"
+                                       asp-route-stijl="@Model.criteria.stijl"
+                                       asp-route-gefilterdeKleur="@Model.criteria.gefilterdeKleur"
+                                       asp-route-minPrijs="@Model.criteria.minPrijs"
+                                       asp-route-maxPrijs="@Model.criteria.maxPrijs"
+                                       asp-route-merk="@Model.criteria.merk"
+                                       asp-route-sorteer="@Model.criteria.sorteer"
+                                       asp-route-limiet="@Model.criteria.limiet">@i</a>
+                                </li>
                         }
-                        
-                        <li><a asp-route-paginering="@Model.aantalpaginas" 
+
+                            <li>
+                                <a asp-route-paginering="@Model.aantalpaginas"
                                    asp-route-categorieid="@Model.criteria.categorieID"
                                    asp-route-neklijn="@Model.criteria.neklijn"
-
                                    asp-route-silhouette="@Model.criteria.silhouette"
                                    asp-route-stijl="@Model.criteria.stijl"
                                    asp-route-gefilterdeKleur="@Model.criteria.gefilterdeKleur"
                                    asp-route-minPrijs="@Model.criteria.minPrijs"
                                    asp-route-maxPrijs="@Model.criteria.maxPrijs"
-
                                    asp-route-merk="@Model.criteria.merk"
                                    asp-route-sorteer="@Model.criteria.sorteer"
-                                   asp-route-limiet="@Model.criteria.limiet">&#9658;</a></li>
-                    </ul>
-                    }
+                                   asp-route-limiet="@Model.criteria.limiet">&#9658;</a>
+                            </li>
+                        </ul>
+                }
                 </div>
             </div>
         </div>
 
-        <!--        public int? silhouette { get; set; }
-        public int? neklijn { get; set; }
-        public int? gefilterdeKleur { get; set; }
-        public int? categorieID { get; set; }
-        public int? stijl { get; set; }
-        public int? minPrijs { get; set; }
-        public int? maxPrijs { get; set; }
-        public int? merk { get; set; }
-        public string sorteer { get; set; }
-        public int? limiet { get; set; }
-        public int? paginering { get; set; }-->
-
-
-
-    </div>
-
+        </div>
 </form>
     <div class="row a">
         <div class="col-md-12 container-collectie-img">
