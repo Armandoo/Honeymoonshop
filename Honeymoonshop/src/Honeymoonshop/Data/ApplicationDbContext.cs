@@ -13,6 +13,7 @@ namespace Honeymoonshop.Data
         public virtual DbSet<Product> Producten { get; set; }
         public virtual DbSet<Kleur> Kleuren { get; set; }
         public virtual DbSet<Kenmerk> Kenmerken { get; set; }
+        public virtual DbSet<Kenmerkproduct> KenmerkProduct { get; set; }
         public virtual DbSet<Merk> Merken { get; set; }
         public virtual DbSet<ProductImage> ProductAfbeeldingen { get; set; }
 

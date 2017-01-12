@@ -1,39 +1,56 @@
-﻿@model Honeymoonshop.Models.Product
-
+﻿
+@{
+    List<Kleurproduct> kleurenMetProduct = ViewData["kleurenMetProduct"] as List<Kleurproduct>;
+}
 
 @{
     ViewData["Title"] = "Images";
 }
 
-<h2>Images</h2>
-
+<h2>Afbeeldingen uploaden</h2>
     <div class="form-horizontal">
-        <h4>Kleur</h4>
+        <h3>Per kleur apart opslaan</h3>
         <hr />
-
+        <div><a href="/products/Edit/@kleurenMetProduct[0].productId">@kleurenMetProduct[0].product.merk.merkNaam, @kleurenMetProduct[0].product.artikelnummer</a></div>
         <div class="form-group">
-            @foreach (var p in Model.kleuren)
+            @foreach (Kleurproduct kleurMetProduct in kleurenMetProduct)
             {
-               <form asp-action="Images" enctype="multipart/form-data" class="dropzone dz-clickable dz-started">
+               <form asp-action="Images" enctype="multipart/form-data">
                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                   <input type="hidden" asp-for="id" />
-                   <input type="hidden" name="kid" value="@p.kleurId"/>
-                    <label>Kleur: @p.kleur.naam</label>
-                    
+
+                    <input type="hidden" asp-for="@kleurMetProduct.productId" />
+                    <input type="hidden" name="kid" value="@kleurMetProduct.kleurId"/>
+                    <label class="text-capitalize">@kleurMetProduct.kleur.naam</label>
+                    @if (kleurMetProduct.images.Count > 0)
+                    {
+                        <div>
+                            @foreach (ProductImage img in kleurMetProduct.images)
+                            {
+                                <img src="~/images/productenimages/@img.bestandsNaam" class="pull-left" style="max-width:100px" />
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                            <div>Er zijn nog geen afbeeldingen voor dit product in deze kleur!</div>
+                     }
                    <div class="form-group">
                        <div class="col-md-offset-2 col-md-10">
-                           <!--<input type="submit" value="Save" class="btn btn-default" /> -->
+                           <input type="file" name="afbeeldingen" multiple class="dz-hidden-input"/>
+                           <input type="submit" value="Save" class="btn btn-default" />
                        </div>
                    </div>
                   </form>
-                <!--<input type="file" name="file" multiple class="dz-hidden-input"/> -->
+
             }
-</div>
+        </div>
+
+
 
     </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Terug naar productenoverzicht</a>
 </div>
 
 @section Scripts {

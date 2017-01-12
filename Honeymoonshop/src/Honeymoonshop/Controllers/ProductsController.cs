@@ -69,8 +69,9 @@ namespace Honeymoonshop.Controllers
         [HttpGet]
         public IActionResult Images(int id)
         {
-            var product =_context.Producten.Include(p => p.kleuren).ThenInclude(x => x.kleur).SingleOrDefault(p => p.id == id);
-            return View(product);
+            List<Kleurproduct> hetProduct = _context.ktKleurProduct.Include(k => k.kleur).Include(x => x.product).ThenInclude(x => x.merk).Include(x => x.product.kleuren).ThenInclude(c => c.kleur).Include(c => c.product.categorie).Include(x => x.images).Include(x => x.product.kenmerken).ThenInclude(x => x.kenmerk).Where(kleurproduct => kleurproduct.productId == id).ToList();
+            ViewData["kleurenMetProduct"] = hetProduct;
+            return View(hetProduct);
         }
 
         [HttpPost]
@@ -102,7 +103,7 @@ namespace Honeymoonshop.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Images", id);
             }
             return View(product);
         }
@@ -144,7 +145,7 @@ namespace Honeymoonshop.Controllers
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Images", new { id = product.id});
             }
 
             return View(new CreateProduct()
@@ -187,7 +188,7 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,artikelnummer,geslacht,categorieId,merkId,omschrijving,prijs")] Product product, string[] kleur, string[] kenmerk)
+        public async Task<IActionResult> Edit(int id, [Bind("id,artikelnummer,geslacht,categorieId,merkId,omschrijving,prijs")] Product product, string[] kleuren, string[] kenmerk)
         {
             if (id != product.id)
             {
@@ -196,24 +197,77 @@ namespace Honeymoonshop.Controllers
 
             if (ModelState.IsValid)
             {
-                // var kt = new List<Kleurproduct>();
-                //foreach(var k in kleur)
-                // {
-                //     var kid = 0;
-                //     Kleurproduct kp = null;
-                //     if(int.TryParse(k, out kid))
-                //     {
-                //         kp = _context.ktKleurProduct.Include(x => x.kleur).Where(x => x.productId == product.id && x.kleur == _context.Kleuren.Where(kl => kl.id == kid).Single()).SingleOrDefault();
-                //         if (kp != null)
-                //         {
-                //             kt.Add(kp);
-                //         }else
-                //         {
-                //             kt.Add(new Kleurproduct() { kleur = _context.Kleuren.Where(x => x.id == kid).SingleOrDefault()});
-                //         }
+                //Kleuren
+                var kleurProducten = new List<Kleurproduct>();
+                List<Kleurproduct> huidigeKleurenVanProduct = _context.ktKleurProduct.Include(x => x.kleur).Where(x => x.productId == id).ToList();
+                List<int> idVanHuidigeKleuren = new List<int>();
+                foreach (Kleurproduct kleur in huidigeKleurenVanProduct)
+                {
+                    idVanHuidigeKleuren.Add(kleur.kleurId);
+                }
+                List<int> kleurenIds = new List<int>();
+                var kleurId = 0;
+                foreach (var kleur in kleuren)
+                {
+                    if (int.TryParse(kleur, out kleurId))
+                        kleurenIds.Add(kleurId);
+                }
 
-                //     }
-                //}
+                IEnumerable<int> overeenkomsten = kleurenIds.Intersect(idVanHuidigeKleuren);//Bepaal de overeenkomsten tussen de aangevinkte kleuren van het formulier en de kleuren die opgeslagen waren in de database
+                //Bestaande kleuren toevoegen aan het object
+                foreach (int overeenkomendId in overeenkomsten)
+                {
+                    //Komt overeen met een kleur van het product
+                    kleurProducten.Add(_context.ktKleurProduct.Include(x => x.kleur).Where(x => x.productId == product.id && x.kleur == _context.Kleuren.Where(kl => kl.id == overeenkomendId).Single()).SingleOrDefault());
+                }
+
+                IEnumerable<int> nieuweKleuren = kleurenIds.Except(idVanHuidigeKleuren);//Bepaal welke van de aangevinkte kleuren nog niet een relatie hadden met een product
+                foreach (int nieuweKleurId in nieuweKleuren)
+                {
+                    //Nieuwe kleuren in de aangevinkte kleuren die nog niet zijn toegewezen aan het product.
+                    kleurProducten.Add(new Kleurproduct() { kleur = _context.Kleuren.Where(x => x.id == nieuweKleurId).SingleOrDefault() });
+                }
+
+                IEnumerable<int> verschillen = idVanHuidigeKleuren.Except(kleurenIds);//Bepaal welke kleuren die een relatie hebben met product niet meer aangevinkt zijn.
+                foreach (int teVerwijderenId in verschillen)
+                {
+                    //Deze kleuren zijn niet aangevinkt.
+                    //Verwijder de relatie met afbeelding
+                    _context.ProductAfbeeldingen.Remove(_context.ProductAfbeeldingen.Where(x => x.kleurproduct.kleurId == teVerwijderenId).FirstOrDefault());
+                    //Verwijder daarna de relatie tussen kleur en product
+                    _context.ktKleurProduct.Remove(_context.ktKleurProduct.Where(kleurproduct => kleurproduct.productId == id && kleurproduct.kleurId == teVerwijderenId).FirstOrDefault());
+                }
+                product.kleuren = kleurProducten;
+                //Kenmerken
+                List<int> kenmerkenIds = new List<int>();
+                foreach (string knmrk in kenmerk)
+                {
+                    int kenmerkId = 0;
+                    if (int.TryParse(knmrk, out kenmerkId))
+                    {
+                        kenmerkenIds.Add(kenmerkId);
+                    }
+                }
+                var kenmerkenVanProduct = _context.KenmerkProduct.Where(x => x.productId == id);
+                List<int> kenmerkenIdsVanProduct = new List<int>();
+                foreach (Kenmerkproduct kp in kenmerkenVanProduct)
+                {
+                    kenmerkenIdsVanProduct.Add(kp.kenmerkId);
+                }
+                var kenmerkenVerschillen = kenmerkenIdsVanProduct.Except(kenmerkenIds);//Bepaalt welke kenmerken wel in product zitten, maar nu niet meer aangevinkt zijn
+                var nieuweKenmerken = kenmerkenIds.Except(kenmerkenIdsVanProduct);//Bepaalt welke kenmerken niet in product zitten, maar wel aangevinkt zijn
+                List<Kenmerkproduct> kenmerkenOmOpTeSlaan = new List<Kenmerkproduct>();//Lijst die wordt gevuld met de kenmerken die worden opgeslagen
+                foreach (int teVerwijderenKenmerk in kenmerkenVerschillen)
+                {
+                    _context.KenmerkProduct.Remove(_context.KenmerkProduct.Where(x => x.kenmerkId == teVerwijderenKenmerk && x.productId == id).First());
+                }
+                _context.SaveChanges();
+                foreach (int toeTeVoegenKenmerken in nieuweKenmerken)
+                {
+                    kenmerkenOmOpTeSlaan.Add(new Kenmerkproduct() { kenmerk = _context.Kenmerken.Where(x => x.id == toeTeVoegenKenmerken).First(),kenmerkId = toeTeVoegenKenmerken, productId = id});
+                }
+                _context.KenmerkProduct.AddRange(kenmerkenOmOpTeSlaan);
+                
                 try
                 {
                     _context.Update(product);
@@ -252,7 +306,7 @@ namespace Honeymoonshop.Controllers
 
             return View(product);
         }
-
+        /*
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -262,7 +316,22 @@ namespace Honeymoonshop.Controllers
             _context.Producten.Remove(product);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
+        }*/
+        // POST: Products/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var product = await _context.Producten.SingleOrDefaultAsync(m => m.id == id);
+            List<ProductImage> teVerwijderenImages = _context.ProductAfbeeldingen.Include(x => x.kleurproduct).ToList().FindAll(x => x.kleurproduct.productId == id);
+            List<Kleurproduct> teVerwijderenKleuren = _context.ktKleurProduct.ToList().FindAll(x => x.productId == id);
+            _context.ProductAfbeeldingen.RemoveRange(teVerwijderenImages);
+            _context.ktKleurProduct.RemoveRange(teVerwijderenKleuren);
+            _context.Producten.Remove(product);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
+
 
         private bool ProductExists(int id)
         {

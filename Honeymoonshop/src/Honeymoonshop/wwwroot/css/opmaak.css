@@ -492,6 +492,10 @@ footer ul.col-md-3, .blogevenement{
     padding-top:20px;
     padding-bottom:100px;
 }
+
+#bijpassend a, #alternatieven a{
+    color:black;
+}
  
 #bijpassend>div>div>div{
     display:flex;
@@ -539,6 +543,19 @@ footer ul.col-md-3, .blogevenement{
 .productcontainer{
     background-color:white;
     border-top: 2px solid rgb(229, 229, 229);
+}
+
+#kleuren{
+    display:flex;
+}
+
+.kleurbolletje {
+	border: 2px solid rgb(229, 229, 229);
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #FFF;
+    display:flex;
 }
 
 #breadcrumbcontainer{

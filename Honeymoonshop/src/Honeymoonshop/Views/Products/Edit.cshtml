@@ -24,8 +24,26 @@
             <div class="col-md-10">
                 @foreach (var item in Model.Kleuren)
                 {
-                    @Html.CheckBox("kleur", (Model.product.kleuren.FindAll(x => x.kleur.id == item.id).ToList().Count > 0), new { value = item.id });
-                    @item.naam
+                    //Dit geeft error met afbeelding...
+                    //@Html.CheckBox("kleur", (Model.product.kleuren.FindAll(x => x.kleur.id == item.id).ToList().Count > 0), new { value = item.id });
+                    //@item.naam
+                }
+
+                @foreach (var k in Model.Kleuren)
+                {
+                    @for (int i = 0; i < Model.product.kleuren.Count; i++)
+                    {
+                        if (Model.product.kleuren[i].kleurId == k.id)
+                        {
+                            <input type="checkbox" name="kleuren" value="@k.id" checked/> @k.naam
+                            break;
+                        }
+                        else if (Model.product.kleuren.Count == i+1)
+                        {
+                            <input type="checkbox" name="kleuren" value="@k.id" /> @k.naam
+                        }
+                    }
+
                 }
 
             </div>
@@ -91,7 +109,7 @@
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Terug naar productenoverzicht</a>
 </div>
 
 @section Scripts {

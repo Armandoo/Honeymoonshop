@@ -1,25 +1,28 @@
 @model IEnumerable<Honeymoonshop.Models.Product>
 
-@{
-    ViewData["Title"] = "Index";
-}
-
-<h2>Index</h2>
+<h2>Producten</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Index" asp-controller="Admin">Naar dashboard</a><br/>
+    <a asp-action="Create">Voeg nieuw product toe</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.artikelnummer)
+                Artikelnr.
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.omschrijving)
+                Merk
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.prijs)
+                Categorie
+            </th>
+            <th>
+                Geslacht
+            </th>
+            <th>
+                Accessoire
             </th>
             <th></th>
         </tr>
@@ -31,16 +34,22 @@
                 @Html.DisplayFor(modelItem => item.artikelnummer)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.omschrijving)
+                @Html.DisplayFor(modelItem => item.merk.merkNaam)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.prijs)
+                @Html.DisplayFor(modelItem => item.categorie.naam)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                @Html.DisplayFor(modelItem => item.geslacht)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.categorie.isAccessoire)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id">Wijzig</a> |
                 <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>  |
-                <a asp-action="Images" asp-route-id="@item.id">Images</a>
+                <a asp-action="Delete" asp-route-id="@item.id">Verwijder</a>  |
+                <a asp-action="Images" asp-route-id="@item.id">Afbeeldingen</a>
             </td>
         </tr>
 }

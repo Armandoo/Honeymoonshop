@@ -1,13 +1,14 @@
 @model IEnumerable<Honeymoonshop.Models.Merk>
-
+<h2>Merken</h2>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Index" asp-controller="Admin">Naar dashboard</a><br />
+    <a asp-action="Create">Nieuw merk toevoegen</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.merkNaam)
+                Merknaam
             </th>
             <th></th>
         </tr>
@@ -19,9 +20,9 @@
                 @Html.DisplayFor(modelItem => item.merkNaam)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Edit" asp-route-id="@item.id">Wijzig</a> |
                 <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.id">Verwijder</a>
             </td>
         </tr>
 }

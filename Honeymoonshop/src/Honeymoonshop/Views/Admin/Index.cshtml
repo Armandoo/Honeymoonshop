@@ -1,8 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Admin";
-}
-
-<div class="row dashboard">
+﻿<div class="row dashboard">
     <h2>Admin dashboard</h2>
     <div class="col-md-12 text-center bold text-uppercase contact center">
         <div class="col-md-3">
@@ -25,11 +21,6 @@
         </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
