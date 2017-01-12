@@ -1,0 +1,83 @@
+﻿@model Honeymoonshop.Models.AfspraakViewModels.Klantafspraak
+<div class="row">
+    <div class="col-md-12 afsprakenkop">
+        <div id="breadcrumbcontainer">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/home/">Home</a>
+                </li>
+                <li>
+                    <a href="/afspraak/">Afspraak</a>
+                </li>
+                <li>
+                    Pasafspraak maken
+                </li>
+            </ol>
+        </div>
+        <p class="afspraakbannerkop">Trouwjurken</p></br>
+        <p class="text-uppercase afspraakbannertekst">Maak je pas afspraak</p>
+
+        <div class="col-md-11 afspraakform">
+            <div class="col-md-2 afsprakenlinks">
+                <div class="col-md-12 center">
+                    <div class="col-md-5 rond text-center" style="opacity:0.5;">
+
+                        1
+
+                    </div>
+                </div>
+                <div class="col-md-12 center">
+                    <div class="col-md-9 tekstlinksbolletjes text-center">Datum en tijd selecteren</div>
+                </div>
+                <div class="col-md-12 center">
+                    <div class="col-md-5 rond text-center" style="opacity:0.5;">
+
+                        2
+
+                    </div>
+                </div>
+                <div class="col-md-12 center">
+                    <div class="col-md-9 tekstlinksbolletjes text-center">Gegevens invullen</div>
+                </div>
+                <div class="col-md-12 center">
+                    <div class="col-md-5 rond text-center" style="opacity:0.5;">
+
+                        3
+
+                    </div>
+                </div>
+                <div class="col-md-12 center">
+                    <div class="col-md-9 tekstlinksbolletjes text-center">Gegevens controleren</div>
+                </div>
+            </div>
+            <div class="col-md-5 afsprakenlinks">
+                <p class="bold" style="font-size: 25px;">Stap 3, Gegevens controleren</p>
+                <p>Controleer alle gegevens voor je pasafspraak bij Honeymoon shop aan Korte Hoogstraat 4, te Rotterdam.</p>
+                <form asp-action="Bevestigafspraak" method="post">
+                    <input type="hidden" name="klant.naam" value="@Model.klant.naam" />
+                    <input type="hidden" name="klant.trouwdatum" value="@Model.klant.trouwDatum" />
+                    <input type="hidden" name="klant.telefoonnummer" value="@Model.klant.telefoonnummer" />
+                    <input type="hidden" name="klant.email" value="@Model.klant.email" />
+                    <input type="hidden" name="klant.wilBrief" value="@Model.klant.wilBrief.ToString()" />
+                    <input type="hidden" name="afspraakdatum" value="@Model.afspraakdatum" />
+                    <input type="submit" class="afspraakknop text-uppercase" value="Afspraak bevestigen" />
+                </form>
+            </div>
+            <div class="col-md-5 afspraakrechts">
+                <p class="bold"><img src="~/images/heart.png" />&nbsp;Gekozen tijd en datum:</p></br>
+                <div class="col-md-10 afspraakrechtsdatum">
+                    <p>@Model.afspraakdatum.Date</p>
+                </div></br></br>
+                <p>Naam: @Model.klant.naam</p>
+                <p>Trouwdatum: @Model.klant.trouwDatum.Date.ToString("dd/MM/yyyy")</p>
+                <p>Telefoon: @Model.klant.telefoonnummer</p>
+                <p>E-Mail: @Model.klant.email</p>
+                </br></br></br></br></br></br></br></br>
+                <a href="#" class="afspraaklinkform"><p><img src="~/images/arrow2.png" />Terug naar stap 2 om gegevens te wijzigen</p></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <img src="http://placehold.it/1400x600" />
+</div>

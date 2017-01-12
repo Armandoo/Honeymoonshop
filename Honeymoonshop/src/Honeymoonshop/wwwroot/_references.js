@@ -1,4 +1,7 @@
 ﻿/// <autosync enabled="true" />
+/// <reference path="js/bootstrap-datepicker.js" />
+/// <reference path="js/bootstrap-slider.js" />
+/// <reference path="js/datepicker-nl.js" />
 /// <reference path="js/dropzone.js" />
 /// <reference path="js/jscolor.js" />
 /// <reference path="js/site.js" />

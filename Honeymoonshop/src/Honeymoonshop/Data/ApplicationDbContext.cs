@@ -19,6 +19,9 @@ namespace Honeymoonshop.Data
 
         public virtual DbSet<Kleurproduct> ktKleurProduct { get; set; }
         public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<Klant> Klanten { get; set; }
+        public virtual DbSet<Afspraak> Afspraken { get; set; }
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

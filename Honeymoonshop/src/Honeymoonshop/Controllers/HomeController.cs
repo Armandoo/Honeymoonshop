@@ -13,6 +13,7 @@ namespace Honeymoonshop.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext Context;
+        
 
         public HomeController(ApplicationDbContext context)
         {
@@ -20,41 +21,82 @@ namespace Honeymoonshop.Controllers
         }
 
         [HttpGet]
-        public IActionResult Dressfinder(FilterProduct filterproduct)
-        {
-            var producten = Context.Producten.Include(x => x.merk).Include(x => x.kenmerken).ThenInclude(x => x.kenmerk).ToList();
+        public IActionResult Dressfinder(FilterCriteria filtercriteria)
+        {  
+            var producten = Context.Producten.Include(x => x.merk).Include(x => x.kenmerken).ThenInclude(x=> x.kenmerk).Include(x=>x.kleuren).ThenInclude(x=>x.kleur).ToList();
             var categorieen = Context.Category.ToList();
 
-            if (filterproduct.categorieID != null)
+            if(filtercriteria.categorieID !=null )
             {
-                producten = producten.FindAll(x => x.categorie.id == filterproduct.categorieID).ToList();
+                producten = producten.FindAll(x => x.categorie.id == filtercriteria.categorieID);
             }
 
-            if (filterproduct.minPrijs != null)
+            if(filtercriteria.minPrijs != null )
             {
-                producten = producten.FindAll(x => x.prijs >= filterproduct.minPrijs).ToList();
+                 producten = producten.FindAll(x => x.prijs >= filtercriteria.minPrijs);
             }
 
-            if (filterproduct.maxPrijs != null)
+            if (filtercriteria.maxPrijs != null)
             {
-                producten = producten.FindAll(x => x.prijs <= filterproduct.maxPrijs).ToList();
+                producten = producten.FindAll(x => x.prijs <= filtercriteria.maxPrijs);
             }
 
-            if (filterproduct.merk != null)
+            if ( filtercriteria.merk != null)
             {
-                producten = producten.FindAll(x => x.merk.id == filterproduct.merk).ToList();
+                    producten = producten.FindAll(x => x.merk.id == filtercriteria.merk);
+            }
+            
+            if(filtercriteria.stijl != null)
+            {
+                    producten = producten.FindAll(x => x.id == filtercriteria.stijl);
             }
 
-            if (filterproduct.stijl != null)
+            if (filtercriteria.neklijn != null)
             {
-                producten = producten.FindAll(x => x.id == filterproduct.stijl).ToList();
+                    producten = producten.FindAll(x => x.kenmerken.Any(z => z.kenmerk.id == filtercriteria.neklijn));
             }
 
+            if (filtercriteria.silhouette != null)
+            {
+                    producten = producten.FindAll(x => x.kenmerken.Any(z => z.kenmerk.id == filtercriteria.silhouette));
+                
+            }
 
-            /* if(filterproduct.maxPrijs != null)
-             {
-                 producten = Context.Producten.Include(x => x.merk).Where(x => x.prijs < filterproduct.minPrijs && x.prijs < filterproduct.maxPrijs).ToList();
-             }*/
+            if (filtercriteria.gefilterdeKleur != null)
+            {
+                    producten = producten.FindAll(x => x.kleuren.Any(z => z.kleur.id == filtercriteria.gefilterdeKleur));
+                
+            }
+
+            if(filtercriteria.sorteer != "")
+            {
+                if (filtercriteria.sorteer == "desc")
+                    producten = producten.OrderByDescending(x => x.prijs).ToList();
+                else
+                    producten = producten.OrderBy(x => x.prijs).ToList();
+            }
+
+            else
+            {
+                producten = producten.OrderBy(x => x.prijs).ToList();
+            }
+
+            /*if (filtercriteria.limiet != null)
+            {
+                producten = producten.Take(filtercriteria.limiet??0);
+            }*/
+           /* if (filtercriteria.paginering != null)
+            {
+                /*if (filtercriteria.paginering.Value != 1)
+                    producten = producten.Take(2).Skip(filtercriteria.paginering.Value).ToList();*/
+                int limiet = filtercriteria.limiet ?? 12;
+
+                var aantalpaginas = Math.Ceiling(Convert.ToDouble(producten.Count() / limiet));
+                int pagina = filtercriteria.paginering ?? 1;
+
+                producten = producten.Skip(pagina*limiet-limiet).Take(limiet).ToList();
+
+            //}
 
 
             var merken = Context.Merken.ToList();
@@ -63,18 +105,70 @@ namespace Honeymoonshop.Controllers
             var stijlen = Context.Kenmerken.ToList().FindAll(x => x.kenmerktype == "Stijl Jurk");
 
             var kleur = Context.Kleuren.ToList();
+            var criteria = new FilterCriteria() {
+                silhouette = filtercriteria.silhouette,
+                stijl = filtercriteria.stijl,
+                neklijn = filtercriteria.neklijn,
+                categorieID = filtercriteria.categorieID,
+                sorteer = filtercriteria.sorteer,
+                limiet = filtercriteria.limiet,
+                paginering = filtercriteria.paginering
+            };
+
             return View(new FilterProduct()
             {
                 producten = producten.ToList(),
                 merken = merken,
-                silhouette = kenmerkSilhouette,
+                silhouettes = kenmerkSilhouette,
                 stijlen = stijlen,
-                neklijn = kenmerkNeklijn,
+                neklijnen = kenmerkNeklijn,
                 kleuren = kleur,
                 categorieen = categorieen,
-                categorieID = filterproduct.categorieID
+                criteria = criteria,
+                aantalpaginas = Convert.ToInt16(aantalpaginas)
             });
         }
+
+        /*[HttpPost]
+        public IActionResult Dressfinder(FilterProduct filterproduct)
+        {
+
+            var producten = Context.Producten.ToList();
+            var categorieen = Context.Category.ToList();
+            //var merken = Context.Merken.ToList();
+            //var kenmerkSilhouette = Context.Kenmerken.ToList().FindAll(x => x.kenmerktype == "Silhouette");
+            //var kenmerkNeklijn = Context.Kenmerken.ToList().FindAll(x => x.kenmerktype == "Neklijn");
+            //var kleur = Context.Kleuren.ToList();
+            return View(producten);
+
+            /*var priceOut = 10000;
+            int.TryParse(filterproduct.priceInputName, out priceOut);
+            var producten = Context.Producten.Include(x => x.merk).ToList().FindAll(x => x.prijs <= priceOut);*/
+
+            //var producten = Context.Producten.Where(x => x.prijs < filterproduct.maxPrijs && x.prijs > filterproduct.minPrijs ).Include(x => x.merk).ToList();
+            //
+            //var categorieen = Context.Category.ToList();
+            /**if (filterproduct.actieveCategorieen != 0)
+            {
+                producten.FindAll(x => x.categorie.id == filterproduct.actieveCategorieen);
+            }*/
+            
+            
+            //var merken = Context.Merken.ToList();
+            //var kenmerkSilhouette = Context.Kenmerken.ToList().FindAll(x => x.kenmerktype == "Silhouette");
+            //var kenmerkNeklijn = Context.Kenmerken.ToList().FindAll(x => x.kenmerktype == "Neklijn");
+            //var kleur = Context.Kleuren.ToList();
+            //return View(new FilterProduct()
+            //{
+            //    producten = producten.ToList(),
+            //    merken = merken,
+            //    silhouette = kenmerkSilhouette,
+            //    neklijn = kenmerkNeklijn,
+            //    kleuren = kleur,
+            //    categorieen = categorieen
+            //});
+      //  }   
+
 
         public IActionResult Index()
         {
@@ -143,7 +237,7 @@ namespace Honeymoonshop.Controllers
             }
             
             ViewData["Product"] = hetProduct;
-            
+            ViewData["Accessoires"] = accessoires;
             return View();
         }
     }
