@@ -1,4 +1,5 @@
 ﻿/// <autosync enabled="true" />
+/// <reference path="js/bootstrap-slider.js" />
 /// <reference path="js/jscolor.js" />
 /// <reference path="js/jscolor.min.js" />
 /// <reference path="js/site.js" />

@@ -18,9 +18,7 @@ a:hover{
 	color:#F15A7B;
 }
 
-.container {
-    width: 1400px;
-}
+
 
 .bold {
     font-weight: bold;
@@ -155,9 +153,10 @@ nav>:last-child{
 	margin-top:249px;
 }
 
-.test{
+/*.test{
 	align-content:center;
-}
+}*/
+
 /*#selectbuttons {
 
 
@@ -550,18 +549,30 @@ footer ul.col-md-3, .blogevenement{
     padding:20px 0px;
 }
 
+ .catalogusitem{
+   
+   
+   border: solid 1px transparent;
+}
+
+ .productencollectie{
+     position:relative;
+ }
+
 .catalogusartikelnummer{
     display:none;
 }
 
 .catalogusitem:hover{
-    margin:-30px 0px;
-    
+    /*margin:-52px 0px;*/
+    transform:scale(1,1);
     z-index:2;
     box-shadow: 2px 2px 5px #DBDBDC;
+    border: solid 1px black;
     background-color:white;
-    padding:30px 10px;
-
+    /*padding:30px 10px;*/
+    padding-bottom:20px;
+    margin-bottom:-40px;
 }
 
 .catalogusitem:hover .catalogusartikelnummer{
@@ -570,10 +581,6 @@ footer ul.col-md-3, .blogevenement{
 
 }
 
-
-.containercollectieitem{
-    position:relative;
-}
 
 
 .filter ul{
@@ -607,7 +614,8 @@ footer ul.col-md-3, .blogevenement{
     padding-left:0px;
 }
 
-.categorieen, .filterkeuzes, .filterverfijnen, .filerkeuzes ul {
+.categorieen, .filterkeuzes, .filterverfijnen, .filterkeuzes ul, .filterverfijnen li, .filterverfijnen ul {
+    padding:0px;
     list-style-type:none;
 }
 
@@ -636,6 +644,11 @@ footer ul.col-md-3, .blogevenement{
 .filterkeuzes>:last-child div{
     border-top:none;
     background-color:#FCFCFC;
+    border-bottom:none;
+}
+
+.filterkeuzes>:last-child{
+    border-bottom:2px solid #D9D9DB;
 }
 
 .filterkeuzes img, .filterverfijnen img{
@@ -644,13 +657,13 @@ footer ul.col-md-3, .blogevenement{
 }
 
 .filterkeuzes fieldset, .filterverfijnen fieldset{
-    height:125px;
+    max-height:125px;
     overflow-y:scroll;
 }
 
 .filterverfijnen {
     padding:5px;
-    border-bottom:2px solid #D9D9DB;
+
 }
 
  .head-filter{
@@ -669,15 +682,36 @@ footer ul.col-md-3, .blogevenement{
      margin-right:10px;
  }
 
+
+
  .container-dressfinder{
      display:flex;
      justify-content:center;
  }
 
+ .catalogusitem:hover .kleurbolletje{
+     display:block;
+ }
+
+ #kleuren{
+    display:flex;
+}
+
+.kleurbolletje {
+	border: 2px solid rgb(229, 229, 229);
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #FFF;
+    display:none;
+}
+
+
+
  .col-item img{
      max-width:100%;
  }
-}
+
 
 #breadcrumbcontainer{
     padding:10px 0px 0px 30px;
@@ -692,4 +726,71 @@ footer ul.col-md-3, .blogevenement{
 
 .breadcrumb a{
     text-decoration:underline;
+}
+
+ /*Filterslider*/
+ .slider-handle{
+background-color : white !important;
+border:2px solid #F9C8C3 !important;
+background-image:none !important;
+    opacity: 1 !important;
+}
+
+ .sliderContainer{
+   
+     padding:3px !important;
+ }
+
+ .prijzenContainer{
+       display:flex;        
+ }
+
+.slider-selection{
+	background-color: #F9C8C3 !important;
+    background-image: none !important;
+}
+
+.tooltip{
+    display:none;
+}
+
+.slider-track{
+    border:0;
+}
+
+.sorteermenu{
+    margin:20px;
+}
+/*Einde filterslider*/
+
+/*Paginering*/
+.pagination>li>a, .pagination>li>span{
+	border: 0px;
+	color:black;
+}
+
+.pagination{
+	letter-spacing:1px;
+    font-size:14px;
+}
+/*Einde paginering*/
+
+
+.rb.outer, .rb.inner{
+    width:20px;
+    height:auto;
+    max-width:none;
+    margin:0px 5px 5px 5px;
+}
+
+.rb.outer{
+    display:inline;
+}
+
+.rb.inner{
+    display:none;
+}
+
+.hide{
+    visibility:hidden;
 }

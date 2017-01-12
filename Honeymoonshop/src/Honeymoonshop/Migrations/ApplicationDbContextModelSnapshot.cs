@@ -180,6 +180,8 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("Productid");
+
                     b.Property<string>("bestandsNaam");
 
                     b.Property<int?>("kleurproductkleurId");
@@ -187,6 +189,8 @@ namespace Honeymoonshop.Migrations
                     b.Property<int?>("kleurproductproductId");
 
                     b.HasKey("id");
+
+                    b.HasIndex("Productid");
 
                     b.HasIndex("kleurproductkleurId", "kleurproductproductId");
 
@@ -341,6 +345,10 @@ namespace Honeymoonshop.Migrations
 
             modelBuilder.Entity("Honeymoonshop.Models.ProductImage", b =>
                 {
+                    b.HasOne("Honeymoonshop.Models.Product")
+                        .WithMany("afbeeldingen")
+                        .HasForeignKey("Productid");
+
                     b.HasOne("Honeymoonshop.Models.Kleurproduct", "kleurproduct")
                         .WithMany("images")
                         .HasForeignKey("kleurproductkleurId", "kleurproductproductId");

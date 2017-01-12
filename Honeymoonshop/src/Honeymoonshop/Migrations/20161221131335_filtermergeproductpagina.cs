@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Honeymoonshop.Migrations
 {
-    public partial class Sjoewie : Migration
+    public partial class filtermergeproductpagina : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -287,6 +287,7 @@ namespace Honeymoonshop.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Productid = table.Column<int>(nullable: true),
                     bestandsNaam = table.Column<string>(nullable: true),
                     kleurproductkleurId = table.Column<int>(nullable: true),
                     kleurproductproductId = table.Column<int>(nullable: true)
@@ -294,6 +295,12 @@ namespace Honeymoonshop.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductAfbeeldingen", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_ProductAfbeeldingen_Producten_Productid",
+                        column: x => x.Productid,
+                        principalTable: "Producten",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ProductAfbeeldingen_ktKleurProduct_kleurproductkleurId_kleurproductproductId",
                         columns: x => new { x.kleurproductkleurId, x.kleurproductproductId },
@@ -342,6 +349,11 @@ namespace Honeymoonshop.Migrations
                 name: "IX_Producten_merkId",
                 table: "Producten",
                 column: "merkId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductAfbeeldingen_Productid",
+                table: "ProductAfbeeldingen",
+                column: "Productid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductAfbeeldingen_kleurproductkleurId_kleurproductproductId",

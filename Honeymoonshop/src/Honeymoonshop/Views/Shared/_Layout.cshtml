@@ -6,14 +6,13 @@
     <title>@ViewData["Title"] - Honeymoon Shop</title>
 
 
-
-
+    
     <link href="https://fonts.googleapis.com/css?family=Playball" rel="stylesheet">
 
 
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/css/opmaak.css" />
+    <link rel="stylesheet" href="~/css/slider.css">
 
 
 
@@ -26,6 +25,7 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/opmaak.css" asp-append-version="true" />
     </environment>
+    <link rel="stylesheet" href="~/css/opmaak.css" />
 </head>
 <body>
     <div class="container">
@@ -135,8 +135,11 @@
     </div>
 
     <environment names="Development">
+
+        
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/bootstrap-slider.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="~/js/jscolor.js" asp-append-version="true"></script>
     </environment>
