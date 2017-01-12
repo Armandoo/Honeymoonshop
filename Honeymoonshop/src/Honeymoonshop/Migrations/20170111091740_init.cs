@@ -68,11 +68,10 @@ namespace Honeymoonshop.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    achternaam = table.Column<string>(nullable: true),
                     email = table.Column<string>(nullable: true),
+                    naam = table.Column<string>(nullable: true),
                     telefoonnummer = table.Column<int>(nullable: false),
                     trouwDatum = table.Column<DateTime>(nullable: false),
-                    voornaam = table.Column<string>(nullable: true),
                     wilBrief = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>

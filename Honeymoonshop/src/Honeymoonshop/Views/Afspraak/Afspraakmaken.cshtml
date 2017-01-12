@@ -1,0 +1,42 @@
+﻿<div class="row bg-white">
+    <div class="col-md-12 text-center home-bannertekst">
+        <hr class="hr-afspraak" />
+        <div class="home-bannerkop afspraak-banner">Trouwjurken</div><br /><br />
+        <span class="text-uppercase">
+            <strong>Maak je pasafspraak</strong>
+        </span>
+    </div>
+</div>
+<div class="row datumtijd-selecteren">
+    <div class="col-md-6 bg-white">
+        <span class="bold">Stap 1, Datum en tijd selecteren</span>
+        <br /><br />
+        <span>Selecteer eerst een datum en vervolgens een tijdstip dat je wilt komen passen!</span>
+        <br /><br />
+        <span>Openingstijden</span>
+        <table class="bold">
+            <tr><td>MA</td><td> 12:00-17:30</td></tr>
+            <tr><td>DI-VR&nbsp;</td><td> 09:30-17:30</td></tr>
+            <tr><td>ZA</td><td> 09:30-18:00</td></tr>
+            <tr><td>ZO</td><td> 11:00-17:00</td></tr>
+        </table>
+        <br />
+        <span>*Op alle werkdagen kunnen er ook schoenen worden gepast. Helaas is dit niet mogelijk in het weekend.</span>
+    </div>
+    <div class="col-md-6 bg-pink">
+        <div id="datepicker" name="datepicker"><br />
+            <div class="kalenderkoptekst">
+                <form asp-action="Datumdoorgeven" method="post">
+                    <input type="hidden" name="dueDate" id="dueDate" value="" />
+                    <input type="submit" value="VERSTUUR" />
+                </form>
+                ♥ selecteer een datum:
+            </div>
+            <br />
+            <div class="kalenderstap2">
+            Selecteer een tijd
+            </div>
+        </div>
+    </div>
+</div>
+    

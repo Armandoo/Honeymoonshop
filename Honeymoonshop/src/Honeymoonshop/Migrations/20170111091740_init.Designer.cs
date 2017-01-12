@@ -8,7 +8,7 @@ using Honeymoonshop.Data;
 namespace Honeymoonshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170109104536_init")]
+    [Migration("20170111091740_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -130,15 +130,13 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("achternaam");
-
                     b.Property<string>("email");
+
+                    b.Property<string>("naam");
 
                     b.Property<int>("telefoonnummer");
 
                     b.Property<DateTime>("trouwDatum");
-
-                    b.Property<string>("voornaam");
 
                     b.Property<bool>("wilBrief");
 

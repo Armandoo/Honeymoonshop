@@ -129,15 +129,13 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("achternaam");
-
                     b.Property<string>("email");
+
+                    b.Property<string>("naam");
 
                     b.Property<int>("telefoonnummer");
 
                     b.Property<DateTime>("trouwDatum");
-
-                    b.Property<string>("voornaam");
 
                     b.Property<bool>("wilBrief");
 

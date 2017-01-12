@@ -229,11 +229,13 @@ footer ul.col-md-3, .blogevenement{
 }
 
 .tussenkopje h1{
+    font-family: 'Playball', cursive;
 	color:pink;
 	font-size: 128px;
 }
 
 .tussenkopje h2{
+    font-weight: bold;
 	color:black;
 	margin-top: -30px;
 	margin-bottom: 65px;
@@ -543,6 +545,7 @@ footer ul.col-md-3, .blogevenement{
 
 #breadcrumbcontainer{
     padding:10px 0px 0px 30px;
+    text-align:left;
 }
 
 .breadcrumb {background: rgba(255, 255, 255, 0); border: 0px solid rgba(255, 255, 255, 1); border-radius: 4px; display: block;}
@@ -556,11 +559,17 @@ footer ul.col-md-3, .blogevenement{
     text-decoration:underline;
 }
 
+.afsprakenkop{
+    background-color: white;
+    text-align:center;
+}
+
 .afspraken{
     background-color: white;
 }
 
 .afsprakeninhoud {
+    text-align: center;
     padding-top: 50px;
     padding-bottom: 50px;
     padding-left: 50px;
@@ -572,4 +581,185 @@ footer ul.col-md-3, .blogevenement{
     margin-top: -75px;
     margin-left: 25px;
     font-weight: bold;
+}
+
+.afspraakbannerkop{
+    font-size:160px;
+    font-weight: bold;
+    margin-bottom:-115px;
+	color:#FFE5E8;
+    font-family: 'Playball', cursive;
+    opacity:0.5;
+}
+
+.afspraakbannertekst {
+    margin-top: 45px;
+    font-size: 40px;
+    font-weight: bolder;
+    padding-bottom: 50px;
+}
+
+.afspraaklink {
+    color: black;
+    text-decoration: underline;
+}
+
+.afspraaklinkform {
+    color: white;
+    text-decoration: none;
+}
+
+.afspraakknop {
+    font-size:14px;
+    font-weight:bolder;
+    background-color:#F0597C;
+    padding:15px;
+    color: white;
+}
+
+.afspraaktipsntricks {
+    padding-top: 100px;
+}
+
+.afspraaklijst {
+    list-style-position: outside;
+    list-style-image: url('../images/lijstbolletje.png');
+}
+
+.afspraakrechts {
+    padding-top: 20px;
+    padding-left: 20px;
+    background-color: #F0597C;
+    color: white;
+    padding-bottom: 82px;
+}
+
+.afsprakenlinks{
+    padding-top:10px;
+    background-color: white;
+    padding-bottom: 25px;
+}
+
+.afspraakrechtsdatum {
+    background-color:#F27390;
+    margin-left: 50px;
+}
+
+.afspraakform {
+    box-shadow: 2px 2px 2px 2px #404040;
+    padding-left: 0px;
+    padding-right:0px;
+    margin-left: 65px;
+    margin-bottom: 50px;
+    text-align:left;
+}
+
+.tekstlinksbolletjes {
+    color: hotpink;
+    font-size: 12px;
+    opacity: 0.5;
+    padding-bottom: 88px;
+}
+
+.rond{
+    border-radius:50%;
+    background-color: #F0597C;
+    color: white;
+    width:50px;
+    line-height:50px;
+    opacity: 0.5;
+}
+
+#datepicker{
+  width: auto;
+  height: auto;
+  font-weight:bold;
+  color:white;
+  margin: 5px auto 0;
+  background:#EF597C;
+  padding-bottom:200px;
+  max-height:527px;
+}
+#datepicker table {
+  width: 100%;
+  height: 100%;
+  text-transform: uppercase;
+  font-size:15px;
+}
+ 
+.ui-datepicker-calendar, .ui-datepicker-calendar th{
+    padding-top:20px;
+    text-align:center;
+}
+ 
+.ui-datepicker-header{
+    background:#F27390;
+    width:80%;
+    margin:0 auto;
+    display:flex;
+    padding-bottom:-10px;
+}
+ 
+.ui-datepicker-title{
+    text-align:center;
+    line-height:50px;
+    width:80%;
+    order:2;
+    text-transform: uppercase;
+}    
+ 
+.ui-datepicker-prev{
+    width:10%;
+    order:1;
+    color:white;
+    font-size:30px;
+    line-height:55px;
+}
+ 
+.ui-datepicker-next{
+    width:10%;
+    order:3;
+    text-align:right;
+    color:white;
+    font-size:30px;
+    line-height:55px;
+}
+ 
+.ui-state-default{
+    color:white;
+    padding:5px;
+}
+ 
+.ui-datepicker-calendar td{
+    padding-left:5px;
+    padding-right:5px;
+    padding-bottom:10px;
+}
+ 
+.ui-datepicker-unselectable>.ui-state-default{
+    color:#CC4B67;
+}
+ 
+.ui-state-hover:hover {
+    color:white;
+}
+ 
+.ui-state-active{
+    border-radius:50%;
+    border: 2px solid white;
+    padding:3px;
+}
+ 
+.ui-datepicker-prev-hover:hover, .ui-datepicker-next-hover:hover{
+    color:#F0597C;
+}
+ 
+.kalenderkoptekst{
+    padding-left:20px;
+}
+ 
+.kalenderstap2{
+    position: absolute;
+    bottom:50px;
+    right:60px;
 }
