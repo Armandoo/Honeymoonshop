@@ -1,7 +1,6 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="js/bootstrap-slider.js" />
 /// <reference path="js/jscolor.js" />
-/// <reference path="js/jscolor.min.js" />
 /// <reference path="js/site.js" />
 /// <reference path="lib/bootstrap/dist/js/bootstrap.js" />
 /// <reference path="lib/jquery/dist/jquery.js" />
