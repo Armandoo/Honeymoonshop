@@ -9,12 +9,12 @@ namespace Honeymoonshop.Models
     {
         public int? silhouette { get; set; }
         public int? neklijn { get; set; }
-        public int? gefilterdeKleur { get; set; }
+        public int[] gefilterdeKleur { get; set; }
         public int? categorieID { get; set; }
-        public int? stijl { get; set; }
+        public int[] kenmerk { get; set; }
         public int? minPrijs { get; set; }
         public int? maxPrijs { get; set; }
-        public int? merk { get; set; }
+        public int[] merk { get; set; }
         public string sorteer { get; set; }
         public int? limiet { get; set; }
         public int? paginering { get; set; }
@@ -58,20 +58,20 @@ namespace Honeymoonshop.Models
         }
         public List<Product> filterOpMerk(List<Product> producten)
         {
-            if (this.merk != null)
+            if (this.merk!= null)
             {
-                producten = producten.FindAll(x => x.merk.id == this.merk);
+                    producten = producten.FindAll(x => merk.Contains(x.merkId));
             }
             return producten;
         }
 
         public List<Product> filterOpKenmerken(List<Product> producten)
         {
-            if (this.stijl != null)
+            if (this.kenmerk != null)
             {
-                producten = producten.FindAll(x => x.kenmerken.Any(z => z.kenmerk.id == this.stijl));
+                producten = producten.FindAll(x => x.kenmerken.Any(z => kenmerk.Contains( z.kenmerk.id )));
             }
-
+            /*
             if (this.neklijn != null)
             {
                 producten = producten.FindAll(x => x.kenmerken.Any(z => z.kenmerk.id == this.neklijn));
@@ -81,7 +81,7 @@ namespace Honeymoonshop.Models
             {
                 producten = producten.FindAll(x => x.kenmerken.Any(z => z.kenmerk.id == this.silhouette));
 
-            }
+            }*/
 
             return producten;
         }
@@ -90,8 +90,8 @@ namespace Honeymoonshop.Models
         {
             if (this.gefilterdeKleur != null)
             {
-                producten = producten.FindAll(x => x.kleuren.Any(z => z.kleur.id == this.gefilterdeKleur));
-                producten.ForEach(pr => pr.kleuren = pr.kleuren.FindAll(x => x.kleurId == this.gefilterdeKleur).ToList());
+                producten = producten.FindAll(x => x.kleuren.Any(z => gefilterdeKleur.Contains(z.kleur.id)));
+                producten.ForEach(pr => pr.kleuren = pr.kleuren.FindAll(x => gefilterdeKleur.Contains(x.kleur.id)).ToList());
 
             }
 

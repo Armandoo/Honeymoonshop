@@ -6,9 +6,7 @@
         <li>
             <a asp-route-paginering="1"
                asp-route-categorieid="@Model.criteria.categorieID"
-               asp-route-neklijn="@Model.criteria.neklijn"
-               asp-route-silhouette="@Model.criteria.silhouette"
-               asp-route-stijl="@Model.criteria.stijl"
+                   asp-route-kenmerk="@Model.criteria.kenmerk"
                asp-route-gefilterdeKleur="@Model.criteria.gefilterdeKleur"
                asp-route-minPrijs="@Model.criteria.minPrijs"
                asp-route-maxPrijs="@Model.criteria.maxPrijs"
@@ -21,9 +19,7 @@
             <li>
                 <a asp-route-paginering="@i"
                    asp-route-categorieid="@Model.criteria.categorieID"
-                   asp-route-neklijn="@Model.criteria.neklijn"
-                   asp-route-silhouette="@Model.criteria.silhouette"
-                   asp-route-stijl="@Model.criteria.stijl"
+                   asp-route-kenmerk="@Model.criteria.kenmerk"
                    asp-route-gefilterdeKleur="@Model.criteria.gefilterdeKleur"
                    asp-route-minPrijs="@Model.criteria.minPrijs"
                    asp-route-maxPrijs="@Model.criteria.maxPrijs"
@@ -36,9 +32,7 @@
         <li>
             <a asp-route-paginering="@Model.aantalpaginas"
                asp-route-categorieid="@Model.criteria.categorieID"
-               asp-route-neklijn="@Model.criteria.neklijn"
-               asp-route-silhouette="@Model.criteria.silhouette"
-               asp-route-stijl="@Model.criteria.stijl"
+               asp-route-stijl="@Model.criteria.kenmerk"
                asp-route-gefilterdeKleur="@Model.criteria.gefilterdeKleur"
                asp-route-minPrijs="@Model.criteria.minPrijs"
                asp-route-maxPrijs="@Model.criteria.maxPrijs"
