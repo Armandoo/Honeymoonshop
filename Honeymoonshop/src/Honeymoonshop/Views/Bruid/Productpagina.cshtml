@@ -85,7 +85,7 @@
                         @{
                             foreach (Kenmerkproduct kenmerkproduct in hetProduct.product.kenmerken)
                             {
-                            <a asp-action="dressfinder" asp-route-stijl="@kenmerkproduct.kenmerk.id">@kenmerkproduct.kenmerk.naam</a>
+                            <a asp-action="dressfinder" asp-route-kenmerk="@kenmerkproduct.kenmerk.id">@kenmerkproduct.kenmerk.naam</a>
                             }
                         }
                     </span><br />

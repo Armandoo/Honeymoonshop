@@ -39,17 +39,20 @@
                 <ul>
                     @foreach (var m in Model.merken)
                     {
-                        <li class="rbfilter">
-                            @Html.RadioButton("merk", m.id, (m.id == Model.criteria.merk))
-                            @m.merkNaam
+                            <li class="rbfilter">
+                                <input type="checkbox" class="filter-checkbox hide" value="@m.id" name="merk" @(Model.criteria.merk != null && Model.criteria.merk.Contains(m.id) ? "checked=\"checked\"" : "" ) />
+                                <img class="rb outer" src="~/images/outer circle.png" />
+                                <img class="rb inner" src="~/images/inner circle.png" />
+                                @m.merkNaam
 
-                            <!--<img class="rb outer" src="~/images/outer circle.png"/>
-                            <img class="rb inner" src="~/images/inner circle.png"/>-->
-                            <!--<input type="radio" name="merk" value="@m.id" class="filterradiobuttons" />
-                            -->
-                        </li>
-                    }
-                </ul>
+                                <!--Html.RadioButton("merk", m.id, (m.id == Model.criteria.merk))
+                                    <img class="rb outer" src="~/images/outer circle.png"/>
+                                <img class="rb inner" src="~/images/inner circle.png"/>-->
+                                <!--<input type="radio" name="merk" value="@m.id" class="filterradiobuttons" />
+                                -->
+                            </li>
+                            }
+</ul>
             </fieldset>
         </li>
 
@@ -65,8 +68,9 @@
                     @foreach (var stijl in Model.stijlen)
                     {
                         <li class="rbfilter">
-                            @Html.RadioButton("stijl", stijl.id, (stijl.id == Model.criteria.stijl))
-
+                            <input type="checkbox" class="filter-checkbox hide" value="@stijl.id" name="kenmerk" @(Model.criteria.kenmerk != null && Model.criteria.kenmerk.Contains(stijl.id) ? "checked=\"checked\"" : "" ) />
+                            <img class="rb outer" src="~/images/outer circle.png" />
+                            <img class="rb inner" src="~/images/inner circle.png" />
                             @stijl.naam
                         </li>
                     }
@@ -110,11 +114,10 @@
                     @foreach (var neklijn in Model.neklijnen)
                     {
                         <li class="rbfilter">
-                            @Html.RadioButton("neklijn", neklijn.id, (neklijn.id == Model.criteria.neklijn))
+                            <input type="checkbox" class="filter-checkbox hide" value="@neklijn.id" name="kenmerk" @(Model.criteria.kenmerk != null && Model.criteria.kenmerk.Contains(neklijn.id) ? "checked=\"checked\"" : "" ) />
+                            <img class="rb outer" src="~/images/outer circle.png" />
+                            <img class="rb inner" src="~/images/inner circle.png" />
                             @neklijn.naam
-                            <!--Html.CheckBox("neklijn", false, new { value = neklijn.id })-->
-                            <!--Html.RadioButton("neklijn", neklijn.id, neklijn.id == Model.criteria.stijl)-->
-
                         </li>
 
                     }
@@ -132,9 +135,10 @@
                     @foreach (var silhouette in Model.silhouettes)
                     {
                         <li class="rbfilter">
-                            @Html.RadioButton("silhouette", silhouette.id, (silhouette.id == Model.criteria.silhouette))
+                            <input type="checkbox" class="filter-checkbox hide" value="@silhouette.id" name="kenmerk" @(Model.criteria.kenmerk != null && Model.criteria.kenmerk.Contains(silhouette.id) ? "checked=\"checked\"" : "" ) />
+                            <img class="rb outer" src="~/images/outer circle.png" />
+                            <img class="rb inner" src="~/images/inner circle.png" />
                             @silhouette.naam
-
                         </li>
 
                     }
@@ -150,8 +154,9 @@
                 <ul>
                     @foreach (var kleur in Model.kleuren)
                     {
-                        <li class="rbfilter">
-                            @Html.RadioButton("gefilterdekleur", kleur.id, (kleur.id == Model.criteria.gefilterdeKleur))
+                        <li class="rbkleur">
+                            <input type="checkbox" class="filter-checkbox hide" value="@kleur.id" name="gefilterdeKleur" @(Model.criteria.gefilterdeKleur != null && Model.criteria.gefilterdeKleur.Contains(kleur.id) ? "checked=\"checked\"" : "" ) />
+                            <span class="kleurbolletje" style="background-color:#@kleur.kleurCode; display:inline-block;"></span>
                             @kleur.naam
                         </li>
                     }

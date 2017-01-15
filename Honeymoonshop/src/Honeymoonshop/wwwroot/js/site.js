@@ -1,11 +1,12 @@
 ﻿
 $(document).ready(function () {
+    initFilterImages()
     toggleMerken();
     toggleStijlen();
     toggleKleuren();
     toggleNeklijnen();
     toggleSilhouettes();
-    //toggleImage();
+    toggleImage();
     slider();
 
     
@@ -64,19 +65,36 @@ $(document).ready(function () {
 
 })
 
-/*function toggleImage() {
-    $(".rbfilter").click(function () {
+function initFilterImages() {
+    $("input:checked.filter-checkbox").parents(".rbfilter").each(function () {
+        $(".rb.outer", this).toggle();
+        $(".rb.inner", this).toggle();
+    })
+    $("input:checked.filter-checkbox").parents(".rbkleur").each(function () {
+        $(this).addClass("bold");
+    })
 
-        
-       
+
+}
+
+function toggleImage() {
+    $(".rbfilter").click(function () {
         $(".rb.outer", this).toggle();
         $(this).children("input").prop("checked", !$(this).children("input").is(':checked'));
- 
-        
         $(".rb.inner", this).toggle();
     
     });
-};*/
+
+    $(".rbkleur").click(function () {
+        $(this).children("input").prop("checked", !$(this).children("input").is(':checked'));
+        if ($(this).hasClass("bold")) {
+            $(this).removeClass("bold");
+        } else {
+            $(this).addClass("bold");
+        }
+
+    });
+};
         /*
         if ($(".rb.inner").show()) {
             $('.merk').prop('checked', true);
