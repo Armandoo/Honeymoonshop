@@ -1,0 +1,68 @@
+@model Honeymoonshop.Models.Catalogus.CatalogusVM
+
+<form name="filterprijsform" asp-controller="bruid" asp-action="Dressfinder" method="get">
+    <div class="row bg-white ">
+        <div id="breadcrumbcontainer" class="col-md-12">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/home/">Home</a>
+                </li>
+                @if (Model.ActieveCategorie != null)
+                {
+                    <li>
+                        <a asp-action="dressfinder" asp-controller="bruid">Dressfinder</a>
+                    </li>
+                    <li class="active">
+                        @Model.ActieveCategorie.naam
+                    </li>
+                }
+                else
+                {
+                    <li class="active">Dressfinder</li>
+                }
+            </ol>
+        </div>
+        <div class="container-dressfinder col-md-12">
+            <div class="col-xs-12 col-md-3 ">
+                @Html.Partial("~/Views/Shared/Catalogus/_FilterLijst.cshtml")
+            </div>
+            <div class="col-xs-12 col-md-9">
+                @Html.Partial("~/Views/Shared/Catalogus/_SoorteerOpties.cshtml")
+
+                <div class="col-md-12 producten ">
+
+                    <div class="col-md-12 productencollectie">
+                        @if(Model.producten.Count == 0)
+                        {
+                            <h5>Geen producten gevonden.</h5>
+
+                        }
+                        @foreach (var product in Model.producten)
+                        {
+                            @Html.Partial("~/Views/Shared/Catalogus/_CatalogusItem.cshtml", product)
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-12">
+            <div class="col-md-9 pull-right catalogus-footer">
+                <div class="col-md-4">
+                    <span class="pull-left"><b>Aantal tonen: </b></span>
+                    <select asp-for="@Model.criteria.limiet" asp-items="@Model.ToonMogelijkheden" name="limiet" class="col-md-3"></select>
+                </div>
+
+                <div class="col-md-8">
+                    @Html.Partial("~/Views/Shared/Catalogus/_PaginaNummering.cshtml")
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row a">
+    <div class="col-md-12 container-collectie-img">
+        <img src="~/images/dressfinder-footer.png">
+    </div>
+</div>

@@ -1,7 +1,7 @@
 ﻿
 body{
 	background-color:#FCE8E7;
-	font-size:20px;
+	font-size:14px;
 }
 
 header{
@@ -13,9 +13,6 @@ a:hover{
 	color:#F0597C;
 	text-decoration:none;
 }
-
-
-
 
 .bold {
     font-weight: bold;
@@ -43,8 +40,8 @@ footer{
 	padding:25px 5px;
 }
 
-footer ul {
-	margin:60px 45px;
+footer ul li {
+    padding-left:30px;
 	font-size:18px;
 	list-style-type: none;
 }
@@ -250,7 +247,7 @@ footer ul.col-md-3, .blogevenement{
 .tussenkopje h2{
     font-weight: bold;
 	color:black;
-	margin-top: -30px;
+	margin-top: -50px;
 	margin-bottom: 65px;
 }
 
@@ -545,11 +542,12 @@ footer ul.col-md-3, .blogevenement{
     justify-content:center;
 }
 /*Knopje*/
-#bijpassend>a>div>span:last-child{
+#bijpassend>a>div>span:last-child, .dressfinder-btn{
     font-size:14px;
     font-weight:bold;
     background-color:#F0597C;
     padding:15px;
+    color:white;
 }
  
 #bijpassend>a>div>span:last-child{
@@ -570,10 +568,9 @@ footer ul.col-md-3, .blogevenement{
     padding:20px 0px;
 }
 
- .catalogusitem{
-   
-   
-   border: solid 1px transparent;
+ .catalogusitem, .catalogusitem div{
+   padding-bottom:5px;
+   line-height:20px
 }
 
  .productencollectie{
@@ -584,16 +581,24 @@ footer ul.col-md-3, .blogevenement{
     display:none;
 }
 
-.catalogusitem:hover{
-    /*margin:-52px 0px;*/
-    transform:scale(1,1);
-    z-index:2;
-    box-shadow: 2px 2px 5px #DBDBDC;
-    /*border: solid 1px black;*/
-    background-color:white;
-    /*padding:30px 10px;*/
-    padding-bottom:20px;
-    margin-bottom:-60px;
+.catalogus-footer{
+    padding:30px 15px 30px 15px;
+    line-height:30px;
+}
+
+.catalogusitem:hover{    
+    transform: scale(1.1);
+    z-index: 2;
+    box-shadow: 0px 0px 5px #DBDBDC;
+    background-color: white;
+    margin-bottom:-50px;
+}
+
+.img-container{
+    width:auto;
+    height:340px;
+    overflow:hidden;
+    box-sizing:border-box;
 }
 
 .producten  a{
@@ -619,9 +624,9 @@ footer ul.col-md-3, .blogevenement{
 .categorieen li{
     background-color:#FCE8E7;
     margin:3px;
-    padding-left:10px;
+    padding:3px 10px;
     font-weight:bold;
-    font-size:16px;
+    font-size:14px;
 }
 
 .filterkeuzes>:first-child li{
@@ -642,25 +647,30 @@ footer ul.col-md-3, .blogevenement{
     padding-left:0px;
 }
 
+.filterkeuzes .rbfilter{
+    
+    line-height: 30px;
+}
+
 .categorieen, .filterkeuzes, .filterverfijnen, .filterkeuzes ul, .filterverfijnen li, .filterverfijnen ul {
     padding:0px;
     list-style-type:none;
 }
 
 .filterkeuzes input[type="radio"]{
-    margin:5px 5px 10px 10px;
+    margin:auto 10px;
     height:18px;
     width:18px;
-    border-radius:5px;
+    vertical-align:middle;
 }
 
-.filterkeuzes div:first-child{
+.filterkeuzes div:first-child, .filter-title{
     border-top:2px solid #D9D9DB;
     border-bottom:2px solid #D9D9DB;
     background-color:#F6F6F6;
 }
 
-.filterverfijnen>:first-child{
+.filterverfijnen>:first-child {
     border-top:2px solid #D9D9DB;
     border-bottom:2px solid #D9D9DB;
 }
@@ -675,6 +685,7 @@ footer ul.col-md-3, .blogevenement{
     border-bottom:none;
 }
 
+
 .filterkeuzes>:last-child{
     border-bottom:2px solid #D9D9DB;
 }
@@ -684,15 +695,11 @@ footer ul.col-md-3, .blogevenement{
     max-width:12px;
 }
 
-.filterkeuzes fieldset, .filterverfijnen fieldset{
+.filterkeuzes fieldset{
     max-height:125px;
     overflow-y:scroll;
 }
 
-.filterverfijnen {
-    padding:5px;
-
-}
 
  .head-filter{
      
@@ -701,7 +708,7 @@ footer ul.col-md-3, .blogevenement{
 
 
  .filterverfijnen li, .filterkeuzes li{
-    font-size:16px;
+    font-size:14px;
     
 }
 
@@ -711,11 +718,6 @@ footer ul.col-md-3, .blogevenement{
  }
 
 
-
- .container-dressfinder{
-     display:flex;
-     justify-content:center;
- }
 
  .catalogusitem:hover .kleurbolletje{
      display:block;
@@ -728,9 +730,13 @@ footer ul.col-md-3, .blogevenement{
  .artikelnr{
      display:none;
  }
+ 
+ .catalogusitem:hover #kleuren, #kleuren{
+     display:flex;
+ }
 
- #kleuren{
-    display:flex;
+ .catalogusitem #kleuren{
+    display:none;
 }
 
 .kleurbolletje {
@@ -1013,7 +1019,15 @@ footer ul.col-md-3, .blogevenement{
 }
 
 .sorteermenu{
-    margin:20px;
+    margin-bottom:20px;
+    font-size:12px;
+    line-height:26px;
+}
+
+.sorteermenu select, .catalogus-footer select{
+    padding: 5px;
+    margin-left:5px;
+    border-color:#DBDBDC;
 }
 /*Einde filterslider*/
 
@@ -1026,6 +1040,7 @@ footer ul.col-md-3, .blogevenement{
 .pagination{
 	letter-spacing:1px;
     font-size:14px;
+    margin:0;
 }
 /*Einde paginering*/
 
@@ -1061,6 +1076,7 @@ footer ul.col-md-3, .blogevenement{
 	height:680px;
 	width:700%;
     position:absolute;
+    font-size:12px;
 	
 }
 
@@ -1073,7 +1089,6 @@ footer ul.col-md-3, .blogevenement{
 	position:relative;
 	display:inline;
 	float:left;
-
 }
 
 .slide-btn{
@@ -1094,4 +1109,49 @@ footer ul.col-md-3, .blogevenement{
 
 .slide-item:hover > .slide-btn{
 	visibility:visible;
+}
+
+.bruidegom .tussenkopje h1{
+    color:#E1EDF2;
+}
+
+.bruidegom #productpagina a, .bruidegom #productpagina>:last-child>div>p>span>a, .bruidegom form a{
+    color:#1A91BE;
+}
+
+.bruidegom #bijpassend>a>div>span:last-child, .bruidegom #productpagina>:last-child>:last-child, .bruidegom .dressfinder-btn  {
+    background-color:#1A91BE;
+}
+
+.bruidegom .container-dressfinder a{
+    color:black;
+}
+
+.bruidegom .categorieen li{
+    background-color:#E1EDF2;
+}
+
+.bruidegom .slider-selection{
+    background-color:#1990BD !important;
+}
+
+.bruidegom .slider-handle {
+    border-color:#1990BD !important;
+}
+
+.dressfinder-btn{
+    margin:0 auto;
+}
+
+nav>:last-child{
+    color:white !important;
+}
+
+.filter-container{
+    font-size:14px;
+}
+
+.filter-container h2{
+    font-size:14px;
+    letter-spacing: 1px;
 }

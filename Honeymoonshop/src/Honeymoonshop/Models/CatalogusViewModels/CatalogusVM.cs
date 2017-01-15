@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Honeymoonshop.Models.FilterViewModels
+namespace Honeymoonshop.Models.Catalogus
 {
-    public class FilterProduct
+    public class CatalogusVM
     {
         
         public List<Merk> merken { get; set; }
@@ -22,12 +22,18 @@ namespace Honeymoonshop.Models.FilterViewModels
         public List<Product> producten { get; set; }
 
         public List<Category> categorieen { get; set; }
+
+        public Category ActieveCategorie { get; set; }
         
 
-        public FilterCriteria criteria { get; set; }
+        public Filter criteria { get; set; }
 
         public int aantalpaginas { get; set; }
-        
+
+        public List<SelectListItem> SoorteerMogelijkheden { get; set; }
+
+        public List<SelectListItem> ToonMogelijkheden { get; set; }
+
         //public int actieveCategorieen { set; get; }
     }
 }

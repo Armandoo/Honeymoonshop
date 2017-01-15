@@ -1,0 +1,50 @@
+﻿@model Honeymoonshop.Models.Catalogus.CatalogusVM
+
+@if (Model.aantalpaginas > 0)
+{
+    <ul class="pagination pull-right">
+        <li>
+            <a asp-route-paginering="1"
+               asp-route-categorieid="@Model.criteria.categorieID"
+               asp-route-neklijn="@Model.criteria.neklijn"
+               asp-route-silhouette="@Model.criteria.silhouette"
+               asp-route-stijl="@Model.criteria.stijl"
+               asp-route-gefilterdeKleur="@Model.criteria.gefilterdeKleur"
+               asp-route-minPrijs="@Model.criteria.minPrijs"
+               asp-route-maxPrijs="@Model.criteria.maxPrijs"
+               asp-route-merk="@Model.criteria.merk"
+               asp-route-sorteer="@Model.criteria.sorteer"
+               asp-route-limiet="@Model.criteria.limiet">&#9664;</a>
+        </li>
+        @for (int i = 1; i < Model.aantalpaginas + 1; i++)
+        {
+            <li>
+                <a asp-route-paginering="@i"
+                   asp-route-categorieid="@Model.criteria.categorieID"
+                   asp-route-neklijn="@Model.criteria.neklijn"
+                   asp-route-silhouette="@Model.criteria.silhouette"
+                   asp-route-stijl="@Model.criteria.stijl"
+                   asp-route-gefilterdeKleur="@Model.criteria.gefilterdeKleur"
+                   asp-route-minPrijs="@Model.criteria.minPrijs"
+                   asp-route-maxPrijs="@Model.criteria.maxPrijs"
+                   asp-route-merk="@Model.criteria.merk"
+                   asp-route-sorteer="@Model.criteria.sorteer"
+                   asp-route-limiet="@Model.criteria.limiet">@i</a>
+            </li>
+        }
+
+        <li>
+            <a asp-route-paginering="@Model.aantalpaginas"
+               asp-route-categorieid="@Model.criteria.categorieID"
+               asp-route-neklijn="@Model.criteria.neklijn"
+               asp-route-silhouette="@Model.criteria.silhouette"
+               asp-route-stijl="@Model.criteria.stijl"
+               asp-route-gefilterdeKleur="@Model.criteria.gefilterdeKleur"
+               asp-route-minPrijs="@Model.criteria.minPrijs"
+               asp-route-maxPrijs="@Model.criteria.maxPrijs"
+               asp-route-merk="@Model.criteria.merk"
+               asp-route-sorteer="@Model.criteria.sorteer"
+               asp-route-limiet="@Model.criteria.limiet">&#9658;</a>
+        </li>
+    </ul>
+}

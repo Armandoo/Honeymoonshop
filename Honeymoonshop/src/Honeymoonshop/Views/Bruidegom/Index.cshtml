@@ -5,8 +5,9 @@
         <img class="img-responsive" src="http://placehold.it/1500x725" />
         <div class="bannercontent ">
             <div class="col-md-12 text-center home-bannertekst">
+                <div class="home-bannerkop">Bruidegom</div></br>
                 <span>
-                    Op zoek naar de perfecte jurk
+                    Op zoek naar de perfecte pak
                 </span>
                 </br>
                 <span class="text-uppercase">
@@ -26,12 +27,12 @@
 <div class="row tussenkopje">
     <div class="col-md-12">
         <h1>Collectie</h1>
-        <h2 class="text-uppercase">de trouwjurk voor je droombruiloft</h2>
+        <h2 class="text-uppercase">de trouwjurk voor je droombruid</h2>
         <div class="col-md-12 slide-container">
             <div class="slide-items">
                 @foreach (Product p in Model)
                 {
-                    <a asp-controller="bruid" asp-action="productpagina" asp-route-productid="@p.id" asp-route-kleurid="@p.kleuren[0].kleurId">
+                    <a asp-controller="bruidegom" asp-action="productpagina" asp-route-productid="@p.id" asp-route-kleurid="@p.kleuren[0].kleurId">
                         <div class="slide-item">@{
                             if (p.afbeeldingen.Count > 0)
                             {
@@ -39,24 +40,19 @@
                             }
                             else
                             {
-                                    <img src="~/images/productenimages/placeholders/placeholderbruid.jpg" class="img-responsive " />
+                                    <img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="img-responsive " />
                                 
                             }
 
                         }
 
-                            <span class="col-md-8 slide-btn text-uppercase text-center bold">bekijk de jurk</span>
+                            <span class="col-md-9 slide-btn text-uppercase text-center">bekijk de jurk</span>
                         </div>
                     </a>
 
 
                 }
             </div>
-        </div>
-        <div class="col-md-12 center">
-            <a class="col-xs-12 col-md-3" asp-action="dressfinder" asp-controller="bruid">
-                <div class="text-uppercase col-md-12 dressfinder-btn">Naar de dressfinder</div>
-            </a>
         </div>
     </div>
 </div>

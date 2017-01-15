@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="~/css/opmaak.css" />
 </head>
 <body>
-    <div class="container">
+    <div class="container @ViewBag.opmaak">
         <header class="row">
             <a href="#" class="col-md-1 text-uppercase bold">website</a>
             <a href="#" class="col-md-1 text-uppercase bold active">webshop</a>
@@ -40,13 +40,13 @@
 
             <h1 class="col-md-5 col-xs-1">Honeymoon Shop</h1>
             <nav class="col-md-7 bold text-center">
-                <a class="col-md-1 active" asp-action="index">
+                <a class="col-md-1 active" asp-action="index" asp-controller="home">
                     Home
                 </a>
-                <a class="col-md-1" href="#">
+                <a class="col-md-1" asp-action="index" asp-controller="bruid">
                     Bruid
                 </a>
-                <a class="col-md-2" href="#">
+                <a class="col-md-2" asp-action="index" asp-controller="bruidegom">
                     Bruidegom
                 </a>
                 <a class="col-md-2" href="#">
@@ -99,8 +99,8 @@
                 </div>
             </div>
 
-            <div class="col-md-12 center">
-                <ul class="col-md-3">
+            <div class="col-md-12">
+                <ul class="col-xs-12  col-md-4">
                     <li class="active text-uppercase bold">winkel</li>
                     <li><a href="#">Over de Honeymoon shop</a></li>
                     <li><a href="#">Servicepunten</a></li>
@@ -112,7 +112,7 @@
                     <li><a href="#">Contact</a></li>
                 </ul>
 
-                <ul class="col-md-3">
+                <ul class="col-xs-12  col-md-4">
                     <li class="active text-uppercase bold">service</li>
                     <li><a href="#">Beoordelingen</a></li>
                     <li><a href="#">Dressfinder</a></li>
@@ -125,7 +125,7 @@
                     <li><a href="#">Beoordelingen</a></li>
                 </ul>
 
-                <ul class="col-md-3">
+                <ul class="col-xs-12 col-md-4">
                     <li class="active text-uppercase bold">acties</li>
                     <li><a href="#">The Grand Wedding Show</a></li>
                     <li><a href="#">Summer Sale</a></li>

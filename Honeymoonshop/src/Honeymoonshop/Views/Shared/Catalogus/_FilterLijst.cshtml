@@ -1,0 +1,162 @@
+@model Honeymoonshop.Models.Catalogus.CatalogusVM
+
+<div class="col-xs-12 col-md-10 pull-right filter-container">
+    <h2 class="text-uppercase bold">Categorieen:</h2>
+    <ul class="categorieen">
+        @foreach (var cat in Model.categorieen)
+        {
+            <li>
+                <a asp-action="dressfinder" asp-controller="bruid" asp-route-categorieID="@cat.id">
+
+                    @cat.naam
+                </a>
+            </li>
+        }
+
+        <li>
+            <a asp-action="dressfinder" asp-controller="bruid">
+                Alle jurken bekijken
+            </a>
+        </li>
+    </ul>
+
+    <input type="hidden" asp-for="criteria.categorieID" />
+
+    <span>
+        <b>Filter op:</b>
+    </span>
+
+    <ul class="filterkeuzes">
+        <li>
+            <a onclick="toggleMerken()">
+                <div>
+                    <span>Merk</span>
+                    <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
+
+                </div>
+            </a>
+            <fieldset class="merken">
+                <ul>
+                    @foreach (var m in Model.merken)
+                    {
+                        <li class="rbfilter">
+                            @Html.RadioButton("merk", m.id, (m.id == Model.criteria.merk))
+                            @m.merkNaam
+
+                            <!--<img class="rb outer" src="~/images/outer circle.png"/>
+                            <img class="rb inner" src="~/images/inner circle.png"/>-->
+                            <!--<input type="radio" name="merk" value="@m.id" class="filterradiobuttons" />
+                            -->
+                        </li>
+                    }
+                </ul>
+            </fieldset>
+        </li>
+
+        <li>
+            <a onclick="toggleStijlen()">
+                <div>
+                    <span>Stijl Jurk</span>
+                    <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
+                </div>
+            </a>
+            <fieldset class="stijlen">
+                <ul>
+                    @foreach (var stijl in Model.stijlen)
+                    {
+                        <li class="rbfilter">
+                            @Html.RadioButton("stijl", stijl.id, (stijl.id == Model.criteria.stijl))
+
+                            @stijl.naam
+                        </li>
+                    }
+                </ul>
+            </fieldset>
+        </li>
+
+
+        <li>
+            <div class="filter-title">
+                Prijs
+            </div>
+            <div class="sliderContainer">
+                <input id="slider" type="text" class="span2" value=""
+                       data-slider-min="1" data-slider-max="2000" data-slider-step="5"
+                       data-slider-value="[0,2000]" />
+                <div class="prijzenContainer col-md-12">
+                    <div class="col-md-6 prijs">&euro;<span class="minprijs">1</span></div>
+                    <div class="col-md-6 prijs"><span class="maxprijs pull-right">2000</span><span class="pull-right">&euro;</span></div>
+                </div>
+            </div>
+            <input type="hidden" name="minPrijs" />
+            <input type="hidden" name="maxPrijs" />
+
+            <input type="submit" />
+        </li>
+
+    </ul>
+    <span>
+        <strong>Filters verfijnen:</strong>
+    </span>
+    <ul class="filterverfijnen">
+
+        <li class="head-filter">
+            <a onclick="toggleNeklijnen()">
+                <span>Neklijn</span>
+                <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
+            </a>
+            <fieldset class="neklijnen">
+                <ul>
+                    @foreach (var neklijn in Model.neklijnen)
+                    {
+                        <li class="rbfilter">
+                            @Html.RadioButton("neklijn", neklijn.id, (neklijn.id == Model.criteria.neklijn))
+                            @neklijn.naam
+                            <!--Html.CheckBox("neklijn", false, new { value = neklijn.id })-->
+                            <!--Html.RadioButton("neklijn", neklijn.id, neklijn.id == Model.criteria.stijl)-->
+
+                        </li>
+
+                    }
+                </ul>
+            </fieldset>
+        </li>
+
+        <li class="head-filter">
+            <a onclick="toggleSilhouettes()">
+                <span>Silhouette</span>
+                <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
+            </a>
+            <fieldset class="silhouettes">
+                <ul>
+                    @foreach (var silhouette in Model.silhouettes)
+                    {
+                        <li class="rbfilter">
+                            @Html.RadioButton("silhouette", silhouette.id, (silhouette.id == Model.criteria.silhouette))
+                            @silhouette.naam
+
+                        </li>
+
+                    }
+                </ul>
+            </fieldset>
+        </li>
+        <li class="head-filter">
+            <a onclick="toggleKleuren()">
+                <span>Kleur</span>
+                <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
+            </a>
+            <fieldset class="kleuren">
+                <ul>
+                    @foreach (var kleur in Model.kleuren)
+                    {
+                        <li class="rbfilter">
+                            @Html.RadioButton("gefilterdekleur", kleur.id, (kleur.id == Model.criteria.gefilterdeKleur))
+                            @kleur.naam
+                        </li>
+                    }
+                </ul>
+            </fieldset>
+        </li>
+    </ul>
+</div>

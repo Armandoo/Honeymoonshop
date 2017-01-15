@@ -1,4 +1,4 @@
-@model Honeymoonshop.Models.FilterViewModels.FilterProduct
+@model Honeymoonshop.Models.Catalogus.CatalogusVM
 
 <!--<div class="row ">
         <div class="col-md-12 banner">
@@ -18,7 +18,7 @@
         </div>
 </div>-->
 
-<form name="filterprijsform" asp-controller="Home" asp-action="Dressfinder" method="get">
+<form name="filterprijsform" asp-controller="bruidegom" asp-action="Dressfinder" method="get">
     <div class="row bg-white ">
         <div id="breadcrumbcontainer" class="col-md-12">
             <ol class="breadcrumb">
@@ -30,19 +30,19 @@
         </div>
         <div class="container-dressfinder col-md-12">
         <div class="col-md-3 col-sm-9 filter-container">
-            <h2>Categorieen</h2>
+            <h2 class="text-uppercase">Categorieën</h2>
             <ul class="categorieen">
                 @foreach (var cat in Model.categorieen)
             {
                     <li>
-                        <a asp-action="dressfinder" asp-controller="home" asp-route-categorieID="@cat.id">
+                        <a asp-action="dressfinder" asp-controller="bruidegom" asp-route-categorieID="@cat.id">
                             @cat.naam
                         </a>
                     </li>
                 }
 
                 <li>
-                    <a asp-action="dressfinder" asp-controller="home">
+                    <a asp-action="dressfinder" asp-controller="bruidegom">
                         Alle jurken bekijken
                     </a>
                 </li>
@@ -274,7 +274,7 @@
                             <div id="kleuren">
                                 @foreach (Kleurproduct kleurproduct in product.kleuren)
                                 {
-                                    <a href="/home/productpagina/?productid=@product.id&kleurid=@kleurproduct.kleurId"><div class="kleurbolletje verberg" style="background-color:#@kleurproduct.kleur.kleurCode"></div></a>
+                                    <a href="/bruidegom/productpagina/?productid=@product.id&kleurid=@kleurproduct.kleurId"><div class="kleurbolletje verberg" style="background-color:#@kleurproduct.kleur.kleurCode"></div></a>
                                 }
 
                             </div>
@@ -419,6 +419,6 @@
 </form>
     <div class="row a">
         <div class="col-md-12 container-collectie-img">
-            <img src="~/images/dressfinder-footer.png">
+            <img src="~/images/dressfinder-bruidegom-footer.png">
         </div>
     </div>

@@ -1,0 +1,40 @@
+
+@model Honeymoonshop.Models.Product
+
+    <div class="col-md-4 col-item catalogusitem">
+        <a asp-route-productId="@Model.id" a asp-route-kleurId="@Model.kleuren[0].kleurId" a asp-action="ProductPagina">
+            <div class="img-container">
+                @{
+                    if (Model.kleuren.Count > 0 && Model.kleuren[0].images.Count > 0)
+                    {
+                        <img src="~/images/productenimages/@Model.kleuren[0].images[0].bestandsNaam" c class="img-responsive collectieitemimg" />
+                    }
+                    else
+                    {
+                        if (Model.geslacht == "bruid")
+                        {
+                            <img src="~/images/productenimages/placeholders/placeholderbruid.jpg" class="img-responsive collectieitemimg" />
+                        }
+                        else
+                        {
+
+                            <img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="img-responsive collectieitemimg" />
+                        }
+                    }
+
+                }
+            </div>
+
+            <div class="bold">@Model.merk.merkNaam</div>
+            <div class="artikelnr">artikel nr. @Model.artikelnummer</div>
+        </a>
+
+        <div id="kleuren">
+            @foreach (Kleurproduct kleurproduct in Model.kleuren)
+            {
+                <a href="/bruid/productpagina/?productid=@Model.id&kleurid=@kleurproduct.kleurId"><div class="kleurbolletje verberg" style="background-color:#@kleurproduct.kleur.kleurCode"></div></a> <span>&nbsp;</span>
+            }
+
+        </div>
+
+    </div>

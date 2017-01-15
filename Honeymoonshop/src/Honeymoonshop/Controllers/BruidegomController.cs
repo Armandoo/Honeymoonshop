@@ -7,25 +7,25 @@ using Honeymoonshop.Data;
 using Microsoft.EntityFrameworkCore;
 using Honeymoonshop.Models.Catalogus;
 using Honeymoonshop.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Honeymoonshop.Controllers
 {
-    public class BruidController : Controller
+    public class Bruidegom : Controller
     {
         private ApplicationDbContext Context;
 
 
-        public BruidController(ApplicationDbContext context)
+        public Bruidegom(ApplicationDbContext context)
         {
             this.Context = context;
         }
         // GET: /<controller>/
         public IActionResult Index()
         {
-            var producten = Context.Producten.Include(x => x.kleuren).Include(x => x.afbeeldingen).Where(x => x.geslacht == "bruid").ToList();
+            ViewBag.opmaak = "bruidegom";
+            var producten = Context.Producten.Include(x => x.kleuren).Include(x => x.afbeeldingen).Where(x => x.geslacht == "bruidegom").ToList();
 
             return View(producten);
         }
@@ -34,12 +34,10 @@ namespace Honeymoonshop.Controllers
         [HttpGet]
         public IActionResult Dressfinder(Filter filtercriteria)
         {
+            ViewBag.opmaak = "bruidegom";
             ViewBag.menu = "inverted";
-            var producten = Context.Producten.Include(x => x.merk).Include(x => x.kenmerken).ThenInclude(x => x.kenmerk).Include(x => x.kleuren).ThenInclude(x => x.kleur).Include(x => x.kleuren).ThenInclude(x=>x.images).Where(x => x.geslacht == "Bruid").ToList();
-            
-            producten.ForEach(x => x.kleuren.Sort((k1, k2)=>k2.images.Count.CompareTo(k1.images.Count)));
+            var producten = Context.Producten.Include(x => x.merk).Include(x => x.kenmerken).ThenInclude(x => x.kenmerk).Include(x => x.kleuren).ThenInclude(x => x.kleur).Include(x => x.afbeeldingen).Where(x => x.geslacht == "bruidegom").ToList();
             var categorieen = Context.Category.ToList();
-            Category actievecat = categorieen.SingleOrDefault(x => x.id == filtercriteria.categorieID);
 
             producten = filtercriteria.filterContent(producten);
 
@@ -58,21 +56,6 @@ namespace Honeymoonshop.Controllers
 
             var kleur = Context.Kleuren.ToList();
             var criteria = filtercriteria;
-            
-
-            var soorteerMogelijkheden = new List<SelectListItem>
-            {
-                new SelectListItem { Text = "Prijs Laag/ Hoog", Value = "asc" },
-                new SelectListItem { Text = "Prijs Hoog/ Laag", Value = "desc" },
-            };
-
-            var toonMogelijkheden = new List<SelectListItem>
-            {
-                new SelectListItem {Text = "12", Value = "12"},
-                new SelectListItem {Text = "24", Value = "24"},
-                new SelectListItem {Text = "36", Value = "36"},
-                new SelectListItem {Text = "48", Value = "48"}
-            };
 
             return View(new CatalogusVM()
             {
@@ -84,10 +67,7 @@ namespace Honeymoonshop.Controllers
                 kleuren = kleur,
                 categorieen = categorieen,
                 criteria = criteria,
-                aantalpaginas = Convert.ToInt16(aantalpaginas),
-                SoorteerMogelijkheden = soorteerMogelijkheden,
-                ToonMogelijkheden = toonMogelijkheden,
-                ActieveCategorie = actievecat
+                aantalpaginas = Convert.ToInt16(aantalpaginas)
             });
         }
 
@@ -96,6 +76,7 @@ namespace Honeymoonshop.Controllers
         [HttpGet]
         public IActionResult ProductPagina(int productId, int kleurId, int merk)
         {
+            ViewBag.opmaak = "bruidegom";
             //Rewritten na images met kleur zijn gekoppeld
             var hetProduct = Context.ktKleurProduct.Include(k => k.kleur).Include(x => x.product).ThenInclude(x => x.merk).Include(x => x.product.kleuren).ThenInclude(c => c.kleur).Include(c => c.product.categorie).Include(x => x.images).Include(x => x.product.kenmerken).ThenInclude(x => x.kenmerk).FirstOrDefault(kleurproduct => kleurproduct.productId == productId && kleurproduct.kleurId == kleurId);
             if (hetProduct == null)
