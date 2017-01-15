@@ -6,7 +6,6 @@ using Honeymoonshop.Data;
 using Honeymoonshop.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Honeymoonshop.Models.FilterViewModels;
 
 namespace Honeymoonshop.Controllers
 {

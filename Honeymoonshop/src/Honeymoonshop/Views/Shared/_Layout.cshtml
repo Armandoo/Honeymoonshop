@@ -8,7 +8,7 @@
 
     
     <link href="https://fonts.googleapis.com/css?family=Playball" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet">
 
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -38,8 +38,8 @@
 
         <div class="row text-uppercase @ViewBag.menu" id="navbar">
 
-            <h1 class="col-md-5 col-xs-1">Honeymoon Shop</h1>
-            <nav class="col-md-7 bold text-center">
+           <!--  <h1 class="col-md-5 col-xs-1">Honeymoon Shop</h1>
+           <nav class="col-md-7 bold text-center">
                 <a class="col-md-1 active" asp-action="index" asp-controller="home">
                     Home
                 </a>
@@ -61,8 +61,38 @@
                 <a class="col-md-3" href="#">
                     Afspraak maken
                 </a>
-            </nav>
+            </nav>-->
+            
+            <nav class="navbar navbar-default" role="navigation">
+                
 
+                
+                <div class="col-md-5 navbar-header">
+                    <button type="button" class="navbar-toggle"
+                            data-toggle="collapse" data-target="#example-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="#">Honeymoon Shop</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="example-navbar-collapse">
+
+                    <ul class="col-md-7 nav navbar-nav">
+                        <li><a class="actief" href="/home">Home</a></li>
+                        <li><a class="" href="/bruid" >Bruid</a></li>
+                        <li><a class="" href="/bruidegom" >Bruidegom</a></li>
+                        <li><a class="" href="#">De Winkel</a></li>
+                        <li><a class="" href="#">Blog</a></li>
+                        <li><a class="" href="#">Contact</a></li>
+                        <li><a class="" href="#">Afspraak maken</a></li>
+                    </ul>
+                </div>
+                  
+            </nav>
 
 
         </div>
@@ -99,7 +129,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="footerurls col-md-12">
                 <ul class="col-xs-12  col-md-4">
                     <li class="active text-uppercase bold">winkel</li>
                     <li><a href="#">Over de Honeymoon shop</a></li>

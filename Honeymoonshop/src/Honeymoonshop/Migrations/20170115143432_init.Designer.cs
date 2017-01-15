@@ -8,7 +8,7 @@ using Honeymoonshop.Data;
 namespace Honeymoonshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170112181712_init")]
+    [Migration("20170115143432_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

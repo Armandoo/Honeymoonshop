@@ -6,6 +6,7 @@ $(document).ready(function () {
     toggleNeklijnen();
     toggleSilhouettes();
     //toggleImage();
+    toggleActievePagina();
     slider();
 
     
@@ -88,6 +89,18 @@ $(document).ready(function () {
         }
 */        
  
+
+function toggleActievePagina(){
+$('.navbar-nav a').click(function () {
+    
+    $(".navbar-nav li a").removeClass("actief");
+    $(this).addClass('actief');
+    
+        alert("a");
+        
+        
+    });
+}
 
 function toggleMerken() {
     $(".merken").toggle();

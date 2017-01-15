@@ -86,17 +86,51 @@ nav>a{
 }
 
 
-nav>:last-child{
+ul.nav>:last-child{
 	background-color:#F0597C;
 }
 
+.navbar-nav{
+    margin-top:8px;
+}
+
+.navbar-nav > li > a{
+    padding:10px 10px;
+
+}
+
+.navbar-nav li:last-child{
+    margin-left:12px;
+}
 
 .banner{
-    margin-top:-80px;
+    margin-top:-90px;
     z-index:-1;
     padding:0px;
     display:flex;
     justify-content:center;
+}
+
+@media screen and (max-width:1200px){
+    .banner{
+        margin-top:-140px;
+    }
+
+    .navbar-toggle{
+        float:left;
+    }
+
+    .navbar-brand{
+        font-size:34px !important;
+    }
+}
+
+
+
+@media screen and (max-width:767px){
+    .navbar-nav{
+       height:400px;
+    }
 }
 
 .home-bannerkop, .about-bannerkop{
@@ -157,9 +191,37 @@ nav>:last-child{
 	
 }
 
+.navbar-default{
+    background-color:transparent;
+    border:none;
+    color:white;
+    
+}
 
-.active{
-	color:#F15A7B;
+.navbar-header{
+    font-family:'droid serif';
+}
+
+.navbar-brand{
+        font-size: 38px;
+        color:white;
+}
+
+.navbar-default .navbar-nav > li > a{
+    font-family:calibri;
+}
+
+.navbar-default .navbar-nav > li > a:active{
+    color:#F0597C;
+}
+
+.navbar-nav{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.actief{
+	color:#F15A7B !important;
 }
 
 .header{
@@ -224,9 +286,10 @@ footer ul.col-md-3, .blogevenement{
 	padding-bottom:20px;
 }
 
+/*
  .blogheader p{
 	font-size:100px;
-}
+}*/
 
 
 
@@ -238,17 +301,21 @@ footer ul.col-md-3, .blogevenement{
 	padding-bottom:50px;
 }
 
-.tussenkopje h1{
+.tussenkopje h1,  .blogheader p{
     font-family: 'Playball', cursive;
-	color:pink;
-	font-size: 128px;
+	color:#FFE5E8;
+	font-size: 134px;
 }
 
-.tussenkopje h2{
+.tussenkopje h2, .blogheader h2{
     font-weight: bold;
-	color:black;
-	margin-top: -50px;
+	color:#333333;
+	margin-top: -60px;
 	margin-bottom: 65px;
+    font-family: 'Francois One', sans-serif;
+    font-size:38px;
+    line-height:33px;
+    letter-spacing:2px;
 }
 
 .inhoudtussenkopjelinks {
@@ -1062,6 +1129,11 @@ footer ul.col-md-3, .blogevenement{
 
 .hide{
     visibility:hidden;
+}
+
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a{
+    color:white;
 }
 
 
