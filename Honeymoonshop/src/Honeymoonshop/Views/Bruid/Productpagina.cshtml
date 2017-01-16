@@ -10,25 +10,25 @@
     }
 </script>
 <div class="productcontainer row">
-    <div id="productpagina" class="row">
+    <div id="productpagina" class="col-md-12">
         <div id="breadcrumbcontainer">
             <ol class="breadcrumb">
                 <li>
                     <a href="/home/">Home</a>
                 </li>
                 <li>
-                    <a href="#" class="text-capitalize">@hetProduct.product.geslacht</a>
+                    <a asp-action="dressfinder" class="text-capitalize">@hetProduct.product.geslacht</a>
                 </li>
                 <li>
-                    <a href="/home/dressfinder">Dressfinder</a>
+                    <a href="/bruid/dressfinder">Dressfinder</a>
                 </li>
                 <li>
-                    <a href="#">@hetProduct.product.categorie.naam</a>
+                    <a asp-action="dressfinder" asp-route-categorieID="@hetProduct.product.categorie.id">@hetProduct.product.categorie.naam</a>
                 </li>
                 <li class="active">@hetProduct.product.merk.merkNaam, @hetProduct.product.artikelnummer</li>
             </ol>
         </div>
-        <div id="col-md-12"><a href="/home/dressfinder"><img src="~/images/arrow.png" />Terug naar overzicht</a></div>
+        <div id="col-md-12"><a href="/bruid/dressfinder"><img src="~/images/arrow.png" />Terug naar overzicht</a></div>
         <div class="col-md-3">
             @{
                 if (hetProduct.images.Count > 0)
@@ -40,9 +40,9 @@
                 }
                 else
                 {
-                    if (hetProduct.product.geslacht == "Bruid")
+                    if (hetProduct.product.geslacht == "bruid")
                     {
-                        <img src="~/images/productenimages/placeholders/placeholderbruid.jpeg" class="pull-right" />
+                        <img src="~/images/productenimages/placeholders/placeholderbruid.jpg" class="pull-right" />
                     }
                     else
                     {
@@ -60,9 +60,9 @@
                 }
                 else
                 {
-                    if (hetProduct.product.geslacht == "Bruid")
+                    if (hetProduct.product.geslacht == "bruid")
                     {
-                        <img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="pull-right" />
+                        <img src="~/images/productenimages/placeholders/placeholderbruid.jpg" class="pull-right" />
                     }
                     else
                     {
@@ -77,7 +77,7 @@
             <p>@hetProduct.product.omschrijving</p>
             <div>
                 <p>
-                    <span>Merk: <a href="#">@hetProduct.product.merk.merkNaam</a></span><br />
+                    <span>Merk: <a asp-action="dressfinder" asp-route-merk="@hetProduct.product.merk.id">@hetProduct.product.merk.merkNaam</a></span><br />
                 </p>
                 <p>
                     <span>
@@ -85,7 +85,7 @@
                         @{
                             foreach (Kenmerkproduct kenmerkproduct in hetProduct.product.kenmerken)
                             {
-                            <a href="#">@kenmerkproduct.kenmerk.naam</a>
+                            <a asp-action="dressfinder" asp-route-kenmerk="@kenmerkproduct.kenmerk.id">@kenmerkproduct.kenmerk.naam</a>
                             }
                         }
                     </span><br />
@@ -100,7 +100,7 @@
                             {
                                 @if (kleurproduct.kleur != null)
                                 {
-                                    <a href="/home/productpagina/?productid=@hetProduct.product.id&kleurid=@kleurproduct.kleurId"><div class="kleurbolletje" style="background-color:#@kleurproduct.kleur.kleurCode"></div></a>
+                                    <a href="/bruid/productpagina/?productid=@hetProduct.product.id&kleurid=@kleurproduct.kleurId"><div class="kleurbolletje" style="background-color:#@kleurproduct.kleur.kleurCode"></div></a>
                                 }
                             }
                         }
@@ -111,12 +111,12 @@
             <a href="#" class="text-uppercase">Pasafspraak maken</a>
         </div>
     </div>
-    <div class="row" id="tussenkopje">
-        <hr class="col-md-2" />
-        <h4 class="col-md-3 text-uppercase text-center">Bijpassende Accessoires</h4>
-        <hr class="col-md-2" />
+    <div class="col-md-12" id="tussenkopje">
+        <hr class="col-md-4" />
+        <h4 class="col-md-4 text-uppercase text-center bold">Bijpassende Accessoires</h4>
+        <hr class="col-md-4" />
     </div>
-    <div class="row" id="bijpassend">
+    <div class="col-md-12" id="bijpassend">
         <div class="col-md-12">
             @{
                 if (accessoires.Count > 0)
@@ -142,12 +142,12 @@
             </div>
         </a>
     </div>
-    <div class="row" id="tussenkopje">
+    <div class="col-md-12" id="tussenkopje">
         <hr class="col-md-3" />
-        <h4 class="col-md-4 text-uppercase text-center">Of zijn deze @hetProduct.product.categorie.naam meer iets voor jou?</h4>
+        <h4 class="col-md-6 text-uppercase text-center bold">Of zijn deze @hetProduct.product.categorie.naam meer iets voor jou?</h4>
         <hr class="col-md-3" />
     </div>
-    <div class="row" id="alternatieven">
+    <div class="col-md-12" id="alternatieven">
         <div class="col-md-12">
             @{
                 @if (gerelateerdeProducten.Count > 0)
@@ -157,22 +157,22 @@
                         if (gerelateerdeProducten.Count > 0 && gerelateerdeProducten[i].images.Count > 0)
                         {
                         <div class="col-md-3">
-                            <div class="text-center"><a href="/home/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId"><img src="~/images/productenimages/@gerelateerdeProducten[i].images.First().bestandsNaam" /></a></div>
-                            <span><a href="/home/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId">@gerelateerdeProducten[i].product.merk.merkNaam</a></span>
+                            <div class="text-center"><a href="/bruid/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId"><img src="~/images/productenimages/@gerelateerdeProducten[i].images.First().bestandsNaam" /></a></div>
+                            <span><a href="/bruid/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId">@gerelateerdeProducten[i].product.merk.merkNaam</a></span>
                         </div>
                         }
                         else
                         {
                             <div class="col-md-3">
-                                @if (hetProduct.product.geslacht == "Bruid")
+                                @if (hetProduct.product.geslacht == "bruid")
                                 {
-                                    <div class="text-center"><a href="/home/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId"><img src="~/images/productenimages/placeholders/placeholderbruid.jpg" /></a></div>
+                                    <div class="text-center"><a href="/bruid/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId"><img src="~/images/productenimages/placeholders/placeholderbruid.jpg" /></a></div>
                                 }
                                 else
                                 {
-                                    <div class="text-center"><a href="/home/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId"><img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" /></a></div>
+                                    <div class="text-center"><a href="/bruid/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId"><img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" /></a></div>
                                 }
-                                <span><a href="/home/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId">@gerelateerdeProducten[i].product.merk.merkNaam</a></span>
+                                <span><a href="/bruid/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId">@gerelateerdeProducten[i].product.merk.merkNaam</a></span>
                             </div>
                         }
                     }

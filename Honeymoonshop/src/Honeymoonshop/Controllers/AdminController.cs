@@ -9,7 +9,6 @@ using Honeymoonshop.Data;
 
 namespace Honeymoonshop.Controllers
 {
-    [Authorize]
     public class AdminController : Controller
     {
         private ApplicationDbContext Context;

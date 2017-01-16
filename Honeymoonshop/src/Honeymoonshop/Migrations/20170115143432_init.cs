@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Honeymoonshop.Migrations
 {
-    public partial class stewieisturk : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -271,7 +271,7 @@ namespace Honeymoonshop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Kenmerkproduct",
+                name: "KenmerkProduct",
                 columns: table => new
                 {
                     kenmerkId = table.Column<int>(nullable: false),
@@ -279,15 +279,15 @@ namespace Honeymoonshop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Kenmerkproduct", x => new { x.kenmerkId, x.productId });
+                    table.PrimaryKey("PK_KenmerkProduct", x => new { x.kenmerkId, x.productId });
                     table.ForeignKey(
-                        name: "FK_Kenmerkproduct_Kenmerken_kenmerkId",
+                        name: "FK_KenmerkProduct_Kenmerken_kenmerkId",
                         column: x => x.kenmerkId,
                         principalTable: "Kenmerken",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Kenmerkproduct_Producten_productId",
+                        name: "FK_KenmerkProduct_Producten_productId",
                         column: x => x.productId,
                         principalTable: "Producten",
                         principalColumn: "id",
@@ -363,13 +363,13 @@ namespace Honeymoonshop.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Kenmerkproduct_kenmerkId",
-                table: "Kenmerkproduct",
+                name: "IX_KenmerkProduct_kenmerkId",
+                table: "KenmerkProduct",
                 column: "kenmerkId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Kenmerkproduct_productId",
-                table: "Kenmerkproduct",
+                name: "IX_KenmerkProduct_productId",
+                table: "KenmerkProduct",
                 column: "productId");
 
             migrationBuilder.CreateIndex(
@@ -439,7 +439,7 @@ namespace Honeymoonshop.Migrations
                 name: "Afspraken");
 
             migrationBuilder.DropTable(
-                name: "Kenmerkproduct");
+                name: "KenmerkProduct");
 
             migrationBuilder.DropTable(
                 name: "ProductAfbeeldingen");

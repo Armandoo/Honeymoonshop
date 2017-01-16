@@ -1,7 +1,7 @@
 ﻿
 body{
 	background-color:#FCE8E7;
-	font-size:20px;
+	font-size:14px;
 }
 
 header{
@@ -12,14 +12,6 @@ header{
 a:hover{
 	color:#F0597C;
 	text-decoration:none;
-}
-
-.active{
-	color:#F15A7B;
-}
-
-.container {
-    width: 1400px;
 }
 
 .bold {
@@ -48,8 +40,8 @@ footer{
 	padding:25px 5px;
 }
 
-footer ul {
-	margin:60px 45px;
+footer ul li {
+    padding-left:30px;
 	font-size:18px;
 	list-style-type: none;
 }
@@ -80,17 +72,65 @@ nav>a{
 	color:white;
 }
 
-nav>:last-child{
-	background-color:#F0597C;
+.inverted{
+    background-color:white;
+    color:black;
+}
+
+.inverted nav>a, .inverted h1{
+    color:black;
+}
+
+.inverted  nav>a.active{
+	color:#F15A7B;
 }
 
 
+ul.nav>:last-child{
+	background-color:#F0597C;
+}
+
+.navbar-nav{
+    margin-top:8px;
+}
+
+.navbar-nav > li > a{
+    padding:10px 10px;
+
+}
+
+.navbar-nav li:last-child{
+    margin-left:12px;
+}
+
 .banner{
-    margin-top:-80px;
+    margin-top:-90px;
     z-index:-1;
     padding:0px;
     display:flex;
     justify-content:center;
+}
+
+@media screen and (max-width:1200px){
+    .banner{
+        margin-top:-140px;
+    }
+
+    .navbar-toggle{
+        float:left;
+    }
+
+    .navbar-brand{
+        font-size:34px !important;
+    }
+}
+
+
+
+@media screen and (max-width:767px){
+    .navbar-nav{
+       height:400px;
+    }
 }
 
 .home-bannerkop, .about-bannerkop{
@@ -149,6 +189,39 @@ nav>:last-child{
 #navbar home.buttongroup{
 	margin-top:145px;
 	
+}
+
+.navbar-default{
+    background-color:transparent;
+    border:none;
+    color:white;
+    
+}
+
+.navbar-header{
+    font-family:'droid serif';
+}
+
+.navbar-brand{
+        font-size: 38px;
+        color:white;
+}
+
+.navbar-default .navbar-nav > li > a{
+    font-family:calibri;
+}
+
+.navbar-default .navbar-nav > li > a:active{
+    color:#F0597C;
+}
+
+.navbar-nav{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.actief{
+	color:#F15A7B !important;
 }
 
 .header{
@@ -213,9 +286,10 @@ footer ul.col-md-3, .blogevenement{
 	padding-bottom:20px;
 }
 
+/*
  .blogheader p{
 	font-size:100px;
-}
+}*/
 
 
 
@@ -227,17 +301,21 @@ footer ul.col-md-3, .blogevenement{
 	padding-bottom:50px;
 }
 
-.tussenkopje h1{
+.tussenkopje h1,  .blogheader p{
     font-family: 'Playball', cursive;
-	color:pink;
-	font-size: 128px;
+	color:#FFE5E8;
+	font-size: 134px;
 }
 
-.tussenkopje h2{
+.tussenkopje h2, .blogheader h2{
     font-weight: bold;
-	color:black;
-	margin-top: -30px;
+	color:#333333;
+	margin-top: -60px;
 	margin-bottom: 65px;
+    font-family: 'Francois One', sans-serif;
+    font-size:38px;
+    line-height:33px;
+    letter-spacing:2px;
 }
 
 .inhoudtussenkopjelinks {
@@ -267,7 +345,7 @@ footer ul.col-md-3, .blogevenement{
 	height:250px;
 	background-color: white;
 	margin-top: -250px;
-	margin-left: 300px;
+	margin-left: 40%;
 	padding: 25px;
 	box-shadow: 5px 5px 5px #404040;
 }
@@ -531,11 +609,12 @@ footer ul.col-md-3, .blogevenement{
     justify-content:center;
 }
 /*Knopje*/
-#bijpassend>a>div>span:last-child{
+#bijpassend>a>div>span:last-child, .dressfinder-btn{
     font-size:14px;
     font-weight:bold;
     background-color:#F0597C;
     padding:15px;
+    color:white;
 }
  
 #bijpassend>a>div>span:last-child{
@@ -556,10 +635,9 @@ footer ul.col-md-3, .blogevenement{
     padding:20px 0px;
 }
 
- .catalogusitem{
-   
-   
-   border: solid 1px transparent;
+ .catalogusitem, .catalogusitem div{
+   padding-bottom:5px;
+   line-height:20px
 }
 
  .productencollectie{
@@ -570,16 +648,28 @@ footer ul.col-md-3, .blogevenement{
     display:none;
 }
 
-.catalogusitem:hover{
-    /*margin:-52px 0px;*/
-    transform:scale(1,1);
-    z-index:2;
-    box-shadow: 2px 2px 5px #DBDBDC;
-    border: solid 1px black;
-    background-color:white;
-    /*padding:30px 10px;*/
-    padding-bottom:20px;
-    margin-bottom:-40px;
+.catalogus-footer{
+    padding:30px 15px 30px 15px;
+    line-height:30px;
+}
+
+.catalogusitem:hover{    
+    transform: scale(1.1);
+    z-index: 2;
+    box-shadow: 0px 0px 5px #DBDBDC;
+    background-color: white;
+    margin-bottom:-50px;
+}
+
+.img-container{
+    width:auto;
+    height:340px;
+    overflow:hidden;
+    box-sizing:border-box;
+}
+
+.producten  a{
+    color:black;
 }
 
 .catalogusitem:hover .catalogusartikelnummer{
@@ -588,7 +678,10 @@ footer ul.col-md-3, .blogevenement{
 
 }
 
+.filter-container a{
+    color:black;
 
+}
 
 .filter ul{
     list-style-type:none;
@@ -598,9 +691,9 @@ footer ul.col-md-3, .blogevenement{
 .categorieen li{
     background-color:#FCE8E7;
     margin:3px;
-    padding-left:10px;
+    padding:3px 10px;
     font-weight:bold;
-    font-size:16px;
+    font-size:14px;
 }
 
 .filterkeuzes>:first-child li{
@@ -621,25 +714,30 @@ footer ul.col-md-3, .blogevenement{
     padding-left:0px;
 }
 
+.filterkeuzes .rbfilter{
+    
+    line-height: 30px;
+}
+
 .categorieen, .filterkeuzes, .filterverfijnen, .filterkeuzes ul, .filterverfijnen li, .filterverfijnen ul {
     padding:0px;
     list-style-type:none;
 }
 
 .filterkeuzes input[type="radio"]{
-    margin:5px 5px 10px 10px;
+    margin:auto 10px;
     height:18px;
     width:18px;
-    border-radius:5px;
+    vertical-align:middle;
 }
 
-.filterkeuzes div:first-child{
+.filterkeuzes div:first-child, .filter-title{
     border-top:2px solid #D9D9DB;
     border-bottom:2px solid #D9D9DB;
     background-color:#F6F6F6;
 }
 
-.filterverfijnen>:first-child{
+.filterverfijnen>:first-child {
     border-top:2px solid #D9D9DB;
     border-bottom:2px solid #D9D9DB;
 }
@@ -654,6 +752,7 @@ footer ul.col-md-3, .blogevenement{
     border-bottom:none;
 }
 
+
 .filterkeuzes>:last-child{
     border-bottom:2px solid #D9D9DB;
 }
@@ -663,15 +762,11 @@ footer ul.col-md-3, .blogevenement{
     max-width:12px;
 }
 
-.filterkeuzes fieldset, .filterverfijnen fieldset{
+.filterkeuzes fieldset{
     max-height:125px;
     overflow-y:scroll;
 }
 
-.filterverfijnen {
-    padding:5px;
-
-}
 
  .head-filter{
      
@@ -680,7 +775,7 @@ footer ul.col-md-3, .blogevenement{
 
 
  .filterverfijnen li, .filterkeuzes li{
-    font-size:16px;
+    font-size:14px;
     
 }
 
@@ -691,17 +786,24 @@ footer ul.col-md-3, .blogevenement{
 
 
 
- .container-dressfinder{
-     display:flex;
-     justify-content:center;
- }
-
  .catalogusitem:hover .kleurbolletje{
      display:block;
  }
 
- #kleuren{
-    display:flex;
+ .catalogusitem:hover .artikelnr{
+     display:block;
+ }
+
+ .artikelnr{
+     display:none;
+ }
+ 
+ .catalogusitem:hover #kleuren, #kleuren{
+     display:flex;
+ }
+
+ .catalogusitem #kleuren{
+    display:none;
 }
 
 .kleurbolletje {
@@ -710,9 +812,11 @@ footer ul.col-md-3, .blogevenement{
 	height: 20px;
 	border-radius: 50%;
 	background-color: #FFF;
-    display:none;
 }
 
+.kleurbolletje.verberg{
+    display:none;
+}
 
 
  .col-item img{
@@ -943,15 +1047,25 @@ footer ul.col-md-3, .blogevenement{
 
  /*Filterslider*/
  .slider-handle{
-background-color : white !important;
-border:2px solid #F9C8C3 !important;
-background-image:none !important;
+    background-color : white !important;
+    border:2px solid #F9C8C3 !important;
+    background-image:none !important;
     opacity: 1 !important;
 }
+
+ .slider{
+     width:90% !important;
+     margin: 0 auto;
+     display:block;
+ }
 
  .sliderContainer{
    
      padding:3px !important;
+ }
+
+ .prijs{
+     padding:0 !important;
  }
 
  .prijzenContainer{
@@ -972,7 +1086,15 @@ background-image:none !important;
 }
 
 .sorteermenu{
-    margin:20px;
+    margin-bottom:20px;
+    font-size:12px;
+    line-height:26px;
+}
+
+.sorteermenu select, .catalogus-footer select{
+    padding: 5px;
+    margin-left:5px;
+    border-color:#DBDBDC;
 }
 /*Einde filterslider*/
 
@@ -985,6 +1107,7 @@ background-image:none !important;
 .pagination{
 	letter-spacing:1px;
     font-size:14px;
+    margin:0;
 }
 /*Einde paginering*/
 
@@ -1006,4 +1129,101 @@ background-image:none !important;
 
 .hide{
     visibility:hidden;
+}
+
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a{
+    color:white;
+}
+
+
+.slide-container{
+	position:relative;
+	height:680px;
+	overflow:hidden;
+}
+
+.slide-items{
+	overflow:hidden;
+	height:680px;
+	width:700%;
+    position:absolute;
+    font-size:12px;
+	
+}
+
+.slide-items, .slide-item{
+	padding: 0;
+}
+
+.slide-item{
+	margin:0 10px;
+	position:relative;
+	display:inline;
+	float:left;
+}
+
+.slide-btn{
+	position:absolute;
+	left: 12%;
+    top: 50%;
+	font-weight:bold;
+	background-color: white;
+	padding: 10px;
+	color:black;
+	visibility:hidden;
+}
+
+.slide-container:hover,.slide-items:hover, .slide-container a:hover{
+
+	cursor:move;
+}
+
+.slide-item:hover > .slide-btn{
+	visibility:visible;
+}
+
+.bruidegom .tussenkopje h1{
+    color:#E1EDF2;
+}
+
+.bruidegom #productpagina a, .bruidegom #productpagina>:last-child>div>p>span>a, .bruidegom form a{
+    color:#1A91BE;
+}
+
+.bruidegom #bijpassend>a>div>span:last-child, .bruidegom #productpagina>:last-child>:last-child, .bruidegom .dressfinder-btn  {
+    background-color:#1A91BE;
+}
+
+.bruidegom .container-dressfinder a{
+    color:black;
+}
+
+.bruidegom .categorieen li{
+    background-color:#E1EDF2;
+}
+
+.bruidegom .slider-selection{
+    background-color:#1990BD !important;
+}
+
+.bruidegom .slider-handle {
+    border-color:#1990BD !important;
+}
+
+.dressfinder-btn{
+    margin:0 auto;
+}
+
+nav>:last-child{
+    color:white !important;
+}
+
+.filter-container{
+    font-size:14px;
+}
+
+.filter-container h2{
+    font-size:14px;
+    letter-spacing: 1px;
 }

@@ -121,7 +121,29 @@ namespace Honeymoonshop.Migrations
 
                     b.HasIndex("productId");
 
-                    b.ToTable("Kenmerkproduct");
+                    b.ToTable("KenmerkProduct");
+                });
+
+            modelBuilder.Entity("Honeymoonshop.Models.Klant", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("email")
+                        .IsRequired();
+
+                    b.Property<string>("naam")
+                        .IsRequired();
+
+                    b.Property<int>("telefoonnummer");
+
+                    b.Property<DateTime>("trouwDatum");
+
+                    b.Property<bool>("wilBrief");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Klanten");
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.Klant", b =>
