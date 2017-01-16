@@ -6,7 +6,7 @@
         @foreach (var cat in Model.categorieen)
         {
             <li>
-                <a asp-action="dressfinder" asp-controller="bruid" asp-route-categorieID="@cat.id">
+                <a asp-action="dressfinder"  asp-route-categorieID="@cat.id">
 
                     @cat.naam
                 </a>
@@ -14,8 +14,8 @@
         }
 
         <li>
-            <a asp-action="dressfinder" asp-controller="bruid">
-                Alle jurken bekijken
+            <a asp-action="dressfinder" >
+                @ViewBag.defaultCategorie
             </a>
         </li>
     </ul>
@@ -31,7 +31,7 @@
             <a onclick="toggleMerken()">
                 <div>
                     <span>Merk</span>
-                    <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
+                    <div class="mx-auto pull-right"><img class="triangle" src="~/images/triangle.png" /></div>
 
                 </div>
             </a>
@@ -60,7 +60,7 @@
             <a onclick="toggleStijlen()">
                 <div>
                     <span>Stijl Jurk</span>
-                    <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
+                    <div class="mx-auto pull-right"><img class="triangle" src="~/images/triangle.png" /></div>
                 </div>
             </a>
             <fieldset class="stijlen">
@@ -107,7 +107,7 @@
         <li class="head-filter">
             <a onclick="toggleNeklijnen()">
                 <span>Neklijn</span>
-                <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
+                <div class="mx-auto pull-right"><img class="triangle" src="~/images/triangle.png" /></div>
             </a>
             <fieldset class="neklijnen">
                 <ul>
@@ -128,7 +128,7 @@
         <li class="head-filter">
             <a onclick="toggleSilhouettes()">
                 <span>Silhouette</span>
-                <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
+                <div class="mx-auto pull-right"><img class="triangle" src="~/images/triangle.png" /></div>
             </a>
             <fieldset class="silhouettes">
                 <ul>
@@ -148,7 +148,7 @@
         <li class="head-filter">
             <a onclick="toggleKleuren()">
                 <span>Kleur</span>
-                <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
+                <div class="mx-auto pull-right"><img class="triangle" src="~/images/triangle.png" /></div>
             </a>
             <fieldset class="kleuren">
                 <ul>

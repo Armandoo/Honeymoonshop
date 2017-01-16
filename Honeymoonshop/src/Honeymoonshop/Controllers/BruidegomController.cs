@@ -7,6 +7,7 @@ using Honeymoonshop.Data;
 using Microsoft.EntityFrameworkCore;
 using Honeymoonshop.Models.Catalogus;
 using Honeymoonshop.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,9 +25,10 @@ namespace Honeymoonshop.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
+            ViewBag.menu = "inverted";
             ViewBag.opmaak = "bruidegom";
-            var producten = Context.Producten.Include(x => x.kleuren).Include(x => x.afbeeldingen).Where(x => x.geslacht == "bruidegom").ToList();
-
+            var producten = Context.Producten.Include(x => x.kleuren).Include(x => x.kleuren).ThenInclude(x => x.images).Where(x => x.geslacht == "bruidegom").ToList();
+            producten.ForEach(x => x.kleuren.Sort((k1, k2) => k2.images.Count.CompareTo(k1.images.Count)));
             return View(producten);
         }
 
@@ -34,10 +36,12 @@ namespace Honeymoonshop.Controllers
         [HttpGet]
         public IActionResult Dressfinder(Filter filtercriteria)
         {
-            ViewBag.opmaak = "bruidegom";
-            ViewBag.menu = "inverted";
-            var producten = Context.Producten.Include(x => x.merk).Include(x => x.kenmerken).ThenInclude(x => x.kenmerk).Include(x => x.kleuren).ThenInclude(x => x.kleur).Include(x => x.afbeeldingen).Where(x => x.geslacht == "bruidegom").ToList();
+            ViewBag.opmaak = "bruidegom"; ViewBag.menu = "inverted";
+            var producten = Context.Producten.Include(x => x.merk).Include(x => x.kenmerken).ThenInclude(x => x.kenmerk).Include(x => x.kleuren).ThenInclude(x => x.kleur).Include(x => x.kleuren).ThenInclude(x => x.images).Where(x => x.geslacht == "bruidegom").ToList();
+
+            producten.ForEach(x => x.kleuren.Sort((k1, k2) => k2.images.Count.CompareTo(k1.images.Count)));
             var categorieen = Context.Category.ToList();
+            Category actievecat = categorieen.SingleOrDefault(x => x.id == filtercriteria.categorieID);
 
             producten = filtercriteria.filterContent(producten);
 
@@ -57,6 +61,22 @@ namespace Honeymoonshop.Controllers
             var kleur = Context.Kleuren.ToList();
             var criteria = filtercriteria;
 
+
+
+            var soorteerMogelijkheden = new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Prijs Laag/ Hoog", Value = "asc", Selected = (criteria.sorteer == "asc") },
+                new SelectListItem { Text = "Prijs Hoog/ Laag", Value = "desc", Selected = (criteria.sorteer == "desc") },
+            };
+
+            var toonMogelijkheden = new List<SelectListItem>
+            {
+                new SelectListItem {Text = "12", Value = "12", Selected = (criteria.limiet == 12)},
+                new SelectListItem {Text = "24", Value = "24", Selected = (criteria.limiet == 24)},
+                new SelectListItem {Text = "36", Value = "36", Selected = (criteria.limiet == 36)},
+                new SelectListItem {Text = "48", Value = "48", Selected = (criteria.limiet == 48)}
+            };
+
             return View(new CatalogusVM()
             {
                 producten = producten.ToList(),
@@ -67,10 +87,12 @@ namespace Honeymoonshop.Controllers
                 kleuren = kleur,
                 categorieen = categorieen,
                 criteria = criteria,
-                aantalpaginas = Convert.ToInt16(aantalpaginas)
+                aantalpaginas = (int)aantalpaginas,
+                SoorteerMogelijkheden = soorteerMogelijkheden,
+                ToonMogelijkheden = toonMogelijkheden,
+                ActieveCategorie = actievecat
             });
         }
-
 
 
         [HttpGet]

@@ -6,8 +6,8 @@ $(document).ready(function () {
     toggleKleuren();
     toggleNeklijnen();
     toggleSilhouettes();
-    //toggleImage();
-    toggleActievePagina();
+    toggleImage();
+    //toggleActievePagina();
     slider();
 
     
@@ -114,7 +114,6 @@ $('.navbar-nav a').click(function () {
     $(".navbar-nav li a").removeClass("actief");
     $(this).addClass('actief');
     
-        alert("a");
         
         
     });

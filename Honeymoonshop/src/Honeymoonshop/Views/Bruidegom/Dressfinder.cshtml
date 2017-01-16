@@ -1,424 +1,72 @@
 @model Honeymoonshop.Models.Catalogus.CatalogusVM
 
-<!--<div class="row ">
-        <div class="col-md-12 banner">
-            <img class="img-responsive" src="http://placehold.it/1400x500" />
-            <div class="bannercontent">
-                <div class="col-md-12 text-center about-bannertekst">
-                    <div class="about-bannerkop">Dressfinder</div></br>
-                    <span class="about-tweedekoptekst">
-                        Op zoek naar de perfecte jurk
-                    </span>
-                    </br>
-                    <span class="text-uppercase about-derdekoptekst">
-                        <strong>Van begin tot eind kunnen wij je helpen</strong>
-                    </span>
-                </div>
-            </div>
-        </div>
-</div>-->
+@{ 
+    ViewBag.defaultCategorie = "Alle pakken bekijken";
+}
 
-<form name="filterprijsform" asp-controller="bruidegom" asp-action="Dressfinder" method="get">
+<form name="filterprijsform" asp-controller="bruid" asp-action="Dressfinder" method="get">
     <div class="row bg-white ">
         <div id="breadcrumbcontainer" class="col-md-12">
             <ol class="breadcrumb">
                 <li>
                     <a href="/home/">Home</a>
                 </li>
-                <li class="active">Dressfinder</li>
+                @if (Model.ActieveCategorie != null)
+                {
+                    <li>
+                        <a asp-action="dressfinder" asp-controller="bruid">Dressfinder</a>
+                    </li>
+                    <li class="active">
+                        @Model.ActieveCategorie.naam
+                    </li>
+                }
+                else
+                {
+                    <li class="active">Dressfinder</li>
+                }
             </ol>
         </div>
         <div class="container-dressfinder col-md-12">
-        <div class="col-md-3 col-sm-9 filter-container">
-            <h2 class="text-uppercase">Categorieën</h2>
-            <ul class="categorieen">
-                @foreach (var cat in Model.categorieen)
-            {
-                    <li>
-                        <a asp-action="dressfinder" asp-controller="bruidegom" asp-route-categorieID="@cat.id">
-                            @cat.naam
-                        </a>
-                    </li>
-                }
-
-                <li>
-                    <a asp-action="dressfinder" asp-controller="bruidegom">
-                        Alle jurken bekijken
-                    </a>
-                </li>
-            </ul>
-
-            <input type="hidden" asp-for="criteria.categorieID" />
-
-            <span>
-                <b>Filter op:</b>
-            </span>
-
-            <ul class="filterkeuzes">
-                <li>
-                    <a onclick="toggleMerken()">
-                        <div>
-                            <span>Merk</span>
-                            <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
-
-                        </div>
-                    </a>
-                    <fieldset class="merken">
-                        <ul>
-                            @foreach (var m in Model.merken)
-                            {
-                                <li  class="rbfilter" >
-                                    <input name="merk" value="@m.id" type="radio" class=""/>
-      
-                                    <!--<img class="rb outer" src="~/images/outer circle.png"/>
-                                    <img class="rb inner" src="~/images/inner circle.png"/>-->
-
-                                    @m.merkNaam
-                                    <!--<input type="radio" name="merk" value="@m.id" class="filterradiobuttons" />
-                                    -->
-                                </li>
-                            }
-                        </ul>
-                    </fieldset>
-                </li>
-
-                <li>
-                    <a onclick="toggleStijlen()">
-                        <div>
-                            <span>Stijl Jurk</span>
-                            <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
-                        </div>
-                    </a>
-                    <fieldset class="stijlen">
-                        <ul>
-                            @foreach (var stijl in Model.stijlen)
-                            {
-                                <li>
-
-                                    <input name="stijl" value="@stijl.id" type="radio" class="" />
-
-                                   
-                                    
-                                    @stijl.naam
-                                </li>
-                            }
-                        </ul>
-                    </fieldset>
-                </li>
-                <li>
-                    Prijs
-                    <div class="sliderContainer">
-                        <input id="slider" type="text" class="span2" value=""
-                               data-slider-min="1" data-slider-max="2000" data-slider-step="5"
-                               data-slider-value="[0,2000]" />
-                        <div class="prijzenContainer col-md-12">
-                            <div class="col-md-6 prijs">&euro;<span class="minprijs">1</span></div>
-                            <div class="col-md-6 prijs"><span class="maxprijs pull-right">2000</span><span class="pull-right">&euro;</span></div>
-                        </div>
-                    </div>
-                    <input type="hidden" name="minPrijs" />
-                    <input type="hidden" name="maxPrijs" />
-
-                    <input type="submit" />
-                    <!--<span>Min Prijs</span>
-                    <input type="range" name="minprijs" id="minprijs" value="" min="1" max="1000"
-                           oninput="priceOutputId.value = priceInputId.value">
-
-                    <output name="priceOutputMinPrijs" id="priceOutputMinPrijs"></output>
-
-                    <span>Max Prijs</span>
-                    <input type="range" name="maxprijs" id="maxprijs" value="" min="1001" max="2000"
-                           oninput="priceOutputId.value = priceInputId.value">
-                    <output name="priceOutputMaxPrijs" id="priceOutputMaxPrijs"></output>
-
-                    -->
-
-                </li>
-
-            </ul>
-            <span>
-                <strong>Filters verfijnen:</strong>
-            </span>
-            <ul class="filterverfijnen">
-
-                <li class="head-filter">
-                    <a onclick="toggleNeklijnen()">
-                        <span>Neklijn</span>
-                        <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
-                    </a>
-                    <fieldset class="neklijnen">
-                        <ul>
-                            @foreach (var neklijn in Model.neklijnen)
-                            {
-                                <li>
-                                    <input name="neklijn" value="@neklijn.id" type="radio" class="" />
-                                    <!--Html.CheckBox("neklijn", false, new { value = neklijn.id })-->
-                                    <!--Html.RadioButton("neklijn", neklijn.id, neklijn.id == Model.criteria.stijl)-->
-                                   
-                                    @neklijn.naam
-                                </li>
-
-                            }
-                        </ul>
-                    </fieldset>
-                </li>
-
-                <li class="head-filter">
-                    <a onclick="toggleSilhouettes()">
-                        <span>Silhouette</span>
-                        <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
-                    </a>
-                    <fieldset class="silhouettes">
-                        <ul>
-                            @foreach (var silhouette in Model.silhouettes)
-                            {
-                                <li>
-                                    <input name="silhouette" value="@silhouette.id" type="radio" class="" />
-                                    <!--Html.RadioButton("silhouette", silhouette.id, silhouette.id == Model.criteria.silhouette)-->
-                                   
-                                    @silhouette.naam
-
-                                </li>
-
-                            }
-                        </ul>
-                    </fieldset>
-                </li>
-                <li class="head-filter">
-                    <a onclick="toggleKleuren()">
-                        <span>Kleur</span>
-                        <div class="mx-auto pull-right"><img src="~/images/triangle.png" /></div>
-                    </a>
-                    <fieldset class="kleuren">
-                        <ul>
-                            @foreach (var kleur in Model.kleuren)
-                            {
-                                <li>
-                                    <input name="gefilterdekleur" value="@kleur.id" type="radio" class="" />
-                                    <!--Html.RadioButton("gefilterdekleur", kleur.id, kleur.id == Model.criteria.gefilterdeKleur)-->
-                                    
-                                    @kleur.naam
-                                </li>
-                            }
-                        </ul>
-                    </fieldset>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-8 col-sm-9">
-            <!--if (Model.criteria.isEmpty())
-            {
-                <div class="col-md-12 spotlight">
-                    <img class="dressfinder-banner img-responsive" src="~/images/dressfinder-banner.png" />
-
-                    <a href="#"><div class="col-md-4 col-item"><img src="~/images/dressfinderimages/ladybird.png" /></div></a>
-                    <a href="#"><div class="col-md-4 col-item"><img src="~/images/dressfinderimages/treschic.png" /></div></a>
-                    <a href="#"><div class="col-md-4 col-item"><img src="~/images/dressfinderimages/enzoani.png" /></div></a>
-
-                </div>
-                <div class="col-md-11 catalogusitems">
-                    <hr class="col-md-3 collectielijn" />
-                    <h4 class="col-md-3 text-uppercase text-center bold">@Model.categorieen.First().naam</h4>
-
-                    <hr class="col-md-3 collectielijn" />
-                </div>
-            }
-            else
-            {-->
-                <div class="sorteermenu text-right">
-                    Sorteer op: <select name="sorteer">
-                        <option value="asc">
-                            Prijs Laag/ Hoog
-                           
-                        </option>
-                        <option value="desc">
-                            Prijs Hoog/ Laag
-                        </option>
-                    </select>
-                </div>
-            <!--}-->
-
-
-            <div class="col-md-12 producten ">
-                
-                <div class="col-md-12 productencollectie">
-                    @foreach (var product in Model.producten)
-            {
-                        <div class="col-md-4 col-item catalogusitem img-responsive">
-                            <a asp-route-productId="@product.id" asp-route-kleurId="@product.kleuren[0].kleurId" asp-action="ProductPagina">
-                                @{
-                                    if (product.afbeeldingen.Count > 0)
-                                    {
-                                        <img src="~/images/productenimages/@product.afbeeldingen[0].bestandsNaam" class="img-responsive collectieitemimg"/>
-                                    }
-                                    else
-                                    {
-                                        if (product.geslacht == "bruid")
-                                        {
-                                            <img src="~/images/productenimages/placeholders/placeholderbruid.jpg" class="img-responsive collectieitemimg"/>
-                                        }
-                                        else
-                                        {
-
-                                            <img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="img-responsive collectieitemimg"/>
-                                        }
-                                    }
-
-                                }
-                                <div class="productbeschrijving"></div>
-                                <div class="bold">@product.merk.merkNaam</div>
-                                <!--<div> product.prijs</div>-->
-                                <div class="artikelnr">artikel nr. @product.artikelnummer</div>
-                            </a>
-
-                            <div id="kleuren">
-                                @foreach (Kleurproduct kleurproduct in product.kleuren)
-                                {
-                                    <a href="/bruidegom/productpagina/?productid=@product.id&kleurid=@kleurproduct.kleurId"><div class="kleurbolletje verberg" style="background-color:#@kleurproduct.kleur.kleurCode"></div></a>
-                                }
-
-                            </div>
-
-                        </div>
-
-
-            }
-                </div>
+            <div class="col-xs-12 col-md-3 ">
+                @Html.Partial("~/Views/Shared/Catalogus/_FilterLijst.cshtml")
             </div>
-        </div>
+            <div class="col-xs-12 col-md-9">
+                @Html.Partial("~/Views/Shared/Catalogus/_SoorteerOpties.cshtml")
 
-        <!--        public int? silhouette { get; set; }
-        public int? neklijn { get; set; }
-        public int? gefilterdeKleur { get; set; }
-        public int? categorieID { get; set; }
-        public int? stijl { get; set; }
-        public int? minPrijs { get; set; }
-        public int? maxPrijs { get; set; }
-        public int? merk { get; set; }
-        public string sorteer { get; set; }
-        public int? limiet { get; set; }
-        public int? paginering { get; set; }-->
+                <div class="col-md-12 producten ">
 
-
-
-    </div>
-
-        <div class="col-md-12">
-            <div class="col-md-8 pull-right">
-                <div class="col-md-6">
-                    <span>Aantal tonen: </span>
-                    <select name="limiet" class="pagination ">
-
-                        <option value="1">
-                            1
-                        </option>
-                        <option value="2">
-                            2
-                        </option>
-                        <option value="3">
-                            3
-                        </option>
-                        <option value="4">
-                            4
-                        </option>
-                        <option value="5">
-                            5
-                        </option>
-                        <option value="6">
-                            6
-                        </option>
-                        <option value="7">
-                            7
-                        </option>
-                        <option value="8">
-                            8
-                        </option>
-                        <option value="9">
-                            9
-                        </option>
-                        <option value="10">
-                            10
-                        </option>
-                        <option value="11">
-                            11
-                        </option>
-                        <option value="12">
-                            12
-                        </option>
-
-                        <!--<option value="12">
-                    12
-                </option>
-                <option value="24">
-                    24
-                </option>
-                <option value="36">
-                    36
-                </option>
-                <option value="48">
-                    48
-                </option>
-                    -->
-                    </select>
-                </div>
-
-                <div class="col-md-6">
-                    @if (Model.aantalpaginas > 0)
-                {
-                        <ul class="pagination pull-right">
-                            <li>
-                                <a asp-route-paginering="1"
-                                   asp-route-categorieid="@Model.criteria.categorieID"
-                                   asp-route-neklijn="@Model.criteria.neklijn"
-                                   asp-route-silhouette="@Model.criteria.silhouette"
-                                   asp-route-stijl="@Model.criteria.stijl"
-                                   asp-route-gefilterdeKleur="@Model.criteria.gefilterdeKleur"
-                                   asp-route-minPrijs="@Model.criteria.minPrijs"
-                                   asp-route-maxPrijs="@Model.criteria.maxPrijs"
-                                   asp-route-merk="@Model.criteria.merk"
-                                   asp-route-sorteer="@Model.criteria.sorteer"
-                                   asp-route-limiet="@Model.criteria.limiet">&#9664;</a>
-                            </li>
-                            @for (int i = 1; i < Model.aantalpaginas + 1; i++)
+                    <div class="col-md-12 productencollectie">
+                        @if (Model.producten.Count() == 0)
                         {
-                                <li>
-                                    <a asp-route-paginering="@i"
-                                       asp-route-categorieid="@Model.criteria.categorieID"
-                                       asp-route-neklijn="@Model.criteria.neklijn"
-                                       asp-route-silhouette="@Model.criteria.silhouette"
-                                       asp-route-stijl="@Model.criteria.stijl"
-                                       asp-route-gefilterdeKleur="@Model.criteria.gefilterdeKleur"
-                                       asp-route-minPrijs="@Model.criteria.minPrijs"
-                                       asp-route-maxPrijs="@Model.criteria.maxPrijs"
-                                       asp-route-merk="@Model.criteria.merk"
-                                       asp-route-sorteer="@Model.criteria.sorteer"
-                                       asp-route-limiet="@Model.criteria.limiet">@i</a>
-                                </li>
-                        }
+                            <h5>Geen producten gevonden.</h5>
 
-                            <li>
-                                <a asp-route-paginering="@Model.aantalpaginas"
-                                   asp-route-categorieid="@Model.criteria.categorieID"
-                                   asp-route-neklijn="@Model.criteria.neklijn"
-                                   asp-route-silhouette="@Model.criteria.silhouette"
-                                   asp-route-stijl="@Model.criteria.stijl"
-                                   asp-route-gefilterdeKleur="@Model.criteria.gefilterdeKleur"
-                                   asp-route-minPrijs="@Model.criteria.minPrijs"
-                                   asp-route-maxPrijs="@Model.criteria.maxPrijs"
-                                   asp-route-merk="@Model.criteria.merk"
-                                   asp-route-sorteer="@Model.criteria.sorteer"
-                                   asp-route-limiet="@Model.criteria.limiet">&#9658;</a>
-                            </li>
-                        </ul>
-                }
+                        }
+                        @foreach (var product in Model.producten)
+                        {
+                            @Html.Partial("~/Views/Shared/Catalogus/_CatalogusItem.cshtml", product)
+
+                        }
+                    </div>
                 </div>
             </div>
         </div>
 
-        </div>
-</form>
-    <div class="row a">
-        <div class="col-md-12 container-collectie-img">
-            <img src="~/images/dressfinder-bruidegom-footer.png">
+        <div class="col-xs-12 col-md-12">
+            <div class="col-md-9 pull-right catalogus-footer">
+                <div class="col-md-4">
+                    <span class="pull-left"><b>Aantal tonen: </b></span>
+                    <select asp-for="@Model.criteria.limiet" asp-items="@Model.ToonMogelijkheden" name="limiet" class="col-md-3"></select>
+                </div>
+
+                <div class="col-md-8">
+                    @Html.Partial("~/Views/Shared/Catalogus/_PaginaNummering.cshtml")
+                </div>
+            </div>
         </div>
     </div>
+</form>
+<div class="row a">
+    <div class="col-md-12 container-collectie-img">
+        <img src="~/images/dressfinder-footer.png">
+    </div>
+</div>

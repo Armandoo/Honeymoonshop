@@ -32,10 +32,10 @@
                 @foreach (Product p in Model)
                 {
                     <a asp-controller="bruid" asp-action="productpagina" asp-route-productid="@p.id" asp-route-kleurid="@p.kleuren[0].kleurId">
-                        <div class="slide-item">@{
-                            if (p.afbeeldingen.Count > 0)
+                        <div class="slide-item" style="width:236px; height:446px">@{
+                            if (p.kleuren.Count > 0 && p.kleuren[0].images.Count > 0)
                             {
-                                <img src="~/images/productenimages/@p.afbeeldingen[0].bestandsNaam" class="img-responsive " />
+                                <img src="~/images/productenimages/@p.kleuren[0].images[0].bestandsNaam" class="img-responsive " />
                             }
                             else
                             {

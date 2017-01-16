@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace Honeymoonshop.Models
 {
@@ -91,8 +93,7 @@ namespace Honeymoonshop.Models
             if (this.gefilterdeKleur != null)
             {
                 producten = producten.FindAll(x => x.kleuren.Any(z => gefilterdeKleur.Contains(z.kleur.id)));
-                producten.ForEach(pr => pr.kleuren = pr.kleuren.FindAll(x => gefilterdeKleur.Contains(x.kleur.id)).ToList());
-
+               
             }
 
             return producten;
@@ -109,6 +110,17 @@ namespace Honeymoonshop.Models
                 producten = producten.OrderBy(x => x.prijs).ToList();
             }
             return producten;
+        }
+        
+
+        public string getUrlString([FromUri] int[] merk)
+        {
+            string url = "";
+            if(this.merk != null)
+            {
+                url += "merk=" + merk[0];
+            }
+            return url;
         }
     }
 }

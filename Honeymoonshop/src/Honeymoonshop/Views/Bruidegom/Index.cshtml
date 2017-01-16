@@ -34,14 +34,14 @@
                 {
                     <a asp-controller="bruidegom" asp-action="productpagina" asp-route-productid="@p.id" asp-route-kleurid="@p.kleuren[0].kleurId">
                         <div class="slide-item">@{
-                            if (p.afbeeldingen.Count > 0)
+                            if (p.kleuren.Count > 0 && p.kleuren[0].images.Count > 0)
                             {
-                                <img src="~/images/productenimages/@p.afbeeldingen[0].bestandsNaam" class="img-responsive " />
+                                <img src="~/images/productenimages/@p.kleuren[0].images[0].bestandsNaam" class="img-responsive " />
                             }
                             else
                             {
-                                    <img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="img-responsive " />
-                                
+                                <img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="img-responsive " />
+
                             }
 
                         }
@@ -53,6 +53,12 @@
 
                 }
             </div>
+        </div>
+
+        <div class="col-md-12 center">
+            <a class="col-xs-12 col-md-3" asp-action="dressfinder" asp-controller="bruidegom">
+                <div class="text-uppercase col-md-12 dressfinder-btn">Naar de dressfinder</div>
+            </a>
         </div>
     </div>
 </div>
