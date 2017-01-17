@@ -14,7 +14,30 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/slider.css">
 
+    <environment names="Development">
 
+
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="~/js/bootstrap-slider.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/jscolor.js" asp-append-version="true"></script>
+        <script src="~/js/dropzone.js" asp-append-version="true"></script>
+        <script src="~/js/datepicker-nl.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
 
     <environment names="Development">
 
@@ -32,8 +55,8 @@
         <header class="row">
             <a href="#" class="col-md-1 text-uppercase bold">website</a>
             <a href="#" class="col-md-1 text-uppercase bold active">webshop</a>
-            <span class="glyphicon glyphicon-search col-md-1 pull-right" aria-hidden="true"></span>
-            <span class="col-md-2 text-uppercase pull-right"><strong>T</strong> (010) 4126143</span>
+            <span class="col-xs-12 glyphicon glyphicon-search col-md-1 pull-right" aria-hidden="true"></span>
+            <span class="col-xs-12 col-md-2 text-uppercase pull-right"><strong>T</strong> (010) 4126143</span>
         </header>
 
         <div class="row text-uppercase @ViewBag.menu" id="navbar">
@@ -63,7 +86,7 @@
                 </a>
             </nav>-->
             
-            <nav class="navbar navbar-default" role="navigation">
+            <nav class="navbar navbar-default @ViewBag.menu" role="navigation">
                 
 
                 
@@ -99,16 +122,16 @@
 
         @RenderBody()
         <footer class="row">
-            <div class="col-md-12 text-center bold text-uppercase contact">
-                <div class="col-md-3">
+            <div class="col-md-12 text-center bold text-uppercase footerblokken">
+                <div class="col-xs-12 col-md-3">
                     <p class="text-capitalize">Afspraak</p>
                     Maak een<br>pasafspraak
                 </div>
-                <div class="col-md-3">
+                <div class="col-xs-12 col-md-3">
                     <p class="text-capitalize">Social</p>
                     volg ons
                 </div>
-                <div class="col-md-3">
+                <div class="col-xs-12 col-md-3">
                     <p class="text-capitalize">Reviews</p>
                     bekijk onze reviews
                 </div>
@@ -168,30 +191,7 @@
         </footer>
     </div>
 
-    <environment names="Development">
-
-        
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="~/js/bootstrap-slider.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="~/js/jscolor.js" asp-append-version="true"></script>
-        <script src="~/js/dropzone.js" asp-append-version="true"></script>
-        <script src="~/js/datepicker-nl.js" asp-append-version="true"></script>
-    </environment>
-    <environment names="Staging,Production">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+    
 
     @RenderSection("scripts", required: false)
 </body>

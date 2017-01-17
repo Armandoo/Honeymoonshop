@@ -25,7 +25,9 @@ namespace Honeymoonshop.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            var producten = Context.Producten.Include(x => x.kleuren).Include(x => x.afbeeldingen).Where(x => x.geslacht == "bruid").ToList();
+            var producten = Context.Producten.Include(x => x.kleuren).Include(x => x.kleuren).ThenInclude(x => x.images).Where(x => x.geslacht == "bruid").ToList();
+
+            producten.ForEach(x => x.kleuren.Sort((k1, k2) => k2.images.Count.CompareTo(k1.images.Count)));
 
             return View(producten);
         }
@@ -59,19 +61,20 @@ namespace Honeymoonshop.Controllers
             var kleur = Context.Kleuren.ToList();
             var criteria = filtercriteria;
             
+            
 
             var soorteerMogelijkheden = new List<SelectListItem>
             {
-                new SelectListItem { Text = "Prijs Laag/ Hoog", Value = "asc" },
-                new SelectListItem { Text = "Prijs Hoog/ Laag", Value = "desc" },
+                new SelectListItem { Text = "Prijs Laag/ Hoog", Value = "asc", Selected = (criteria.sorteer == "asc") },
+                new SelectListItem { Text = "Prijs Hoog/ Laag", Value = "desc", Selected = (criteria.sorteer == "desc") },
             };
 
             var toonMogelijkheden = new List<SelectListItem>
             {
-                new SelectListItem {Text = "12", Value = "12"},
-                new SelectListItem {Text = "24", Value = "24"},
-                new SelectListItem {Text = "36", Value = "36"},
-                new SelectListItem {Text = "48", Value = "48"}
+                new SelectListItem {Text = "12", Value = "12", Selected = (criteria.limiet == 12)},
+                new SelectListItem {Text = "24", Value = "24", Selected = (criteria.limiet == 24)},
+                new SelectListItem {Text = "36", Value = "36", Selected = (criteria.limiet == 36)},
+                new SelectListItem {Text = "48", Value = "48", Selected = (criteria.limiet == 48)}
             };
 
             return View(new CatalogusVM()
@@ -84,7 +87,7 @@ namespace Honeymoonshop.Controllers
                 kleuren = kleur,
                 categorieen = categorieen,
                 criteria = criteria,
-                aantalpaginas = Convert.ToInt16(aantalpaginas),
+                aantalpaginas = (int)aantalpaginas,
                 SoorteerMogelijkheden = soorteerMogelijkheden,
                 ToonMogelijkheden = toonMogelijkheden,
                 ActieveCategorie = actievecat
@@ -96,6 +99,7 @@ namespace Honeymoonshop.Controllers
         [HttpGet]
         public IActionResult ProductPagina(int productId, int kleurId, int merk)
         {
+            ViewBag.menu = "inverted";
             //Rewritten na images met kleur zijn gekoppeld
             var hetProduct = Context.ktKleurProduct.Include(k => k.kleur).Include(x => x.product).ThenInclude(x => x.merk).Include(x => x.product.kleuren).ThenInclude(c => c.kleur).Include(c => c.product.categorie).Include(x => x.images).Include(x => x.product.kenmerken).ThenInclude(x => x.kenmerk).FirstOrDefault(kleurproduct => kleurproduct.productId == productId && kleurproduct.kleurId == kleurId);
             if (hetProduct == null)
@@ -119,7 +123,7 @@ namespace Honeymoonshop.Controllers
             var accessoires = new List<Kleurproduct>();
             try
             {
-                accessoires = Context.ktKleurProduct.Include(x => x.product).ThenInclude(x => x.merk).Include(x => x.images).Take(4).Where(kleurproduct => kleurproduct.kleurId == hetProduct.kleurId && kleurproduct.product.categorie.isAccessoire == true).ToList();
+                accessoires = Context.ktKleurProduct.Include(x => x.product).ThenInclude(x => x.merk).Include(x => x.images).Where(kleurproduct => kleurproduct.kleurId == hetProduct.kleurId && kleurproduct.product.categorie.isAccessoire == true).Take(4).ToList();
             }
             catch (Exception e)
             {

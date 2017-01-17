@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Honeymoonshop.Models;
 using Honeymoonshop.Data;
 using Honeymoonshop.Models.AfspraakViewModels;
+using System.Net.Mail;
+using System.Net;
+using Honeymoonshop.Models.Utils;
 
 namespace Honeymoonshop.Controllers
 {
@@ -25,7 +28,14 @@ namespace Honeymoonshop.Controllers
 
         public IActionResult Afspraakmaken()
         {
-            return View();
+            /*
+                Vind datums waar er geen afspraken gemaakt kunnen worden / lijst met datums
+             */
+
+            DateTime[] datums = _context.Afspraken.GroupBy(x => x.datum.Date).Where(x => x.Count() > 2).Select(x => x.Key).ToArray();
+            
+            
+            return View(datums); // geef lijst mee aan view
         }
 
         public IActionResult Bevestiging()
@@ -40,7 +50,21 @@ namespace Honeymoonshop.Controllers
 
         [HttpPost]
         public IActionResult Afspraakmaken3(Klantafspraak klantafspraak) {
+            if (!ModelState.IsValid) {
+                return RedirectToAction("Afspraakmaken2", klantafspraak);
+            }
             return View(klantafspraak);
+        }
+
+        [HttpPost]
+        public IActionResult GetTijden(string date) {
+            var datum = Convert.ToDateTime(date);
+            var afspraken = _context.Afspraken.Where(x => x.datum.Date == datum).Select(x => x.datum.Hour).ToList();
+            List<Tijd> regel = new List<Tijd>();
+            regel.Add(new Tijd() { tijd = "09:30", isBeschikbaar = !afspraken.Contains(9) , isChecked = !afspraken.Contains(9) && !regel.Select(x => x.isBeschikbaar).Contains(true)});
+            regel.Add(new Tijd() { tijd = "12:30", isBeschikbaar = !afspraken.Contains(12), isChecked = !afspraken.Contains(12) && !regel.Select(x => x.isBeschikbaar).Contains(true) });
+            regel.Add(new Tijd() { tijd = "15:00", isBeschikbaar = !afspraken.Contains(15), isChecked = !afspraken.Contains(15) && !regel.Select(x => x.isBeschikbaar).Contains(true) });
+            return new ObjectResult(regel);
         }
 
 
@@ -52,14 +76,27 @@ namespace Honeymoonshop.Controllers
             afspraak.datum = klantafspraak.afspraakdatum;
             _context.Afspraken.Add(afspraak);
             _context.SaveChanges();
-            return RedirectToAction("Bevestiging");
+
+            EmailSender sender = new EmailSender();
+            sender.sendEmail(klantafspraak);
+
+
+                return RedirectToAction("Bevestiging");
         }
 
         [HttpPost]
-        public IActionResult Datumdoorgeven(string dueDate)
+        public IActionResult Datumdoorgeven(string dueDate, string tijdstip)
         {
+            if (!ModelState.IsValid)
+            {
+                return NotFound();
+            }
+
             var klantafspraak = new Klantafspraak();
+            DateTime dt2 = Convert.ToDateTime(tijdstip);
             DateTime dt = Convert.ToDateTime(dueDate);
+            TimeSpan ts = new TimeSpan(dt2.Hour, dt2.Minute, dt2.Second);
+            dt = dt.Date + ts;
             klantafspraak.afspraakdatum = dt;
 
             return RedirectToAction("Afspraakmaken2", klantafspraak);

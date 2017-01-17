@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>Edit</h2>
@@ -31,19 +32,14 @@
 
                 @foreach (var k in Model.Kleuren)
                 {
-                    @for (int i = 0; i < Model.product.kleuren.Count; i++)
+                    if (Model.product.kleuren.Select(x => x.kleurId).Contains(k.id))
                     {
-                        if (Model.product.kleuren[i].kleurId == k.id)
-                        {
-                            <input type="checkbox" name="kleuren" value="@k.id" checked/> @k.naam
-                            break;
-                        }
-                        else if (Model.product.kleuren.Count == i+1)
-                        {
-                            <input type="checkbox" name="kleuren" value="@k.id" /> @k.naam
-                        }
+                        <input type="checkbox" name="kleuren" value="@k.id" checked/> @k.naam
                     }
-
+                    else
+                    {
+                        <input type="checkbox" name="kleuren" value="@k.id" /> @k.naam
+                    }
                 }
 
             </div>
