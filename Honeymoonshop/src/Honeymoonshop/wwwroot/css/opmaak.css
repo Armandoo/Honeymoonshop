@@ -72,18 +72,7 @@ nav>a{
 	color:white;
 }
 
-.inverted{
-    background-color:white;
-    color:black;
-}
 
-.inverted nav>a, .inverted h1{
-    color:black;
-}
-
-.inverted  nav>a.active{
-	color:#F15A7B;
-}
 
 
 ul.nav>:last-child{
@@ -1261,4 +1250,25 @@ nav>:last-child{
 .filter-container h2{
     font-size:14px;
     letter-spacing: 1px;
+}
+
+.inverted{
+    background-color:white;
+    color:#5e5e5e;
+}
+
+.inverted .navbar-default .navbar-brand, .inverted .navbar-default .navbar-nav > li > a{
+    color:#5e5e5e;
+}
+
+.inverted .navbar-default .navbar-nav > li:last-child > a{
+    color:white;
+}
+
+.inverted a.active{
+	color:#F15A7B;
+}
+
+.bruidegom .dressfinder-btn{
+    background:#1A91BE;
 }

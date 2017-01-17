@@ -32,7 +32,7 @@
         <div id="kleuren">
             @foreach (Kleurproduct kleurproduct in Model.kleuren)
             {
-                <a href="/bruid/productpagina/?productid=@Model.id&kleurid=@kleurproduct.kleurId"><div class="kleurbolletje verberg" style="background-color:#@kleurproduct.kleur.kleurCode"></div></a> <span>&nbsp;</span>
+                <a asp-action="productpagina" asp-route-kleurid="@kleurproduct.kleurId" asp-route-productid="@Model.id"><div class="kleurbolletje verberg" style="background-color:#@kleurproduct.kleur.kleurCode"></div></a> <span>&nbsp;</span>
             }
 
         </div>

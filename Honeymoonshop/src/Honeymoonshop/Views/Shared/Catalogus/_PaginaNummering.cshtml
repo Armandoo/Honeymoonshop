@@ -4,41 +4,21 @@
 {
     <ul class="pagination pull-right">
         <li>
-            <a asp-route-paginering="1"
-               asp-route-categorieid="@Model.criteria.categorieID"
-                   asp-route-kenmerk="@Model.criteria.kenmerk"
-               asp-route-gefilterdeKleur="@Model.criteria.gefilterdeKleur"
-               asp-route-minPrijs="@Model.criteria.minPrijs"
-               asp-route-maxPrijs="@Model.criteria.maxPrijs"
-               asp-route-merk="@Model.criteria.merk"
-               asp-route-sorteer="@Model.criteria.sorteer"
-               asp-route-limiet="@Model.criteria.limiet">&#9664;</a>
+            @Html.ActionLink("◀", "dressfinder", new { merk = Model.criteria.merk, paginering = 1, categorieid = @Model.criteria.categorieID, minPrijs = @Model.criteria.minPrijs, maxPrijs = @Model.criteria.maxPrijs, sorteer = @Model.criteria.sorteer, limiet = @Model.criteria.limiet, kenmerk = Model.criteria.kenmerk, gefilterdekleur = Model.criteria.gefilterdeKleur })
+
+
         </li>
         @for (int i = 1; i < Model.aantalpaginas + 1; i++)
         {
             <li>
-                <a asp-route-paginering="@i"
-                   asp-route-categorieid="@Model.criteria.categorieID"
-                   asp-route-kenmerk="@Model.criteria.kenmerk"
-                   asp-route-gefilterdeKleur="@Model.criteria.gefilterdeKleur"
-                   asp-route-minPrijs="@Model.criteria.minPrijs"
-                   asp-route-maxPrijs="@Model.criteria.maxPrijs"
-                   asp-route-merk="@Model.criteria.merk"
-                   asp-route-sorteer="@Model.criteria.sorteer"
-                   asp-route-limiet="@Model.criteria.limiet">@i</a>
+                
+
+                @Html.ActionLink(""+i, "dressfinder", new { merk = Model.criteria.merk, paginering = i, categorieid = @Model.criteria.categorieID, minPrijs = @Model.criteria.minPrijs, maxPrijs = @Model.criteria.maxPrijs, sorteer = @Model.criteria.sorteer, limiet = @Model.criteria.limiet, kenmerk = Model.criteria.kenmerk, gefilterdekleur = Model.criteria.gefilterdeKleur })
             </li>
         }
 
         <li>
-            <a asp-route-paginering="@Model.aantalpaginas"
-               asp-route-categorieid="@Model.criteria.categorieID"
-               asp-route-stijl="@Model.criteria.kenmerk"
-               asp-route-gefilterdeKleur="@Model.criteria.gefilterdeKleur"
-               asp-route-minPrijs="@Model.criteria.minPrijs"
-               asp-route-maxPrijs="@Model.criteria.maxPrijs"
-               asp-route-merk="@Model.criteria.merk"
-               asp-route-sorteer="@Model.criteria.sorteer"
-               asp-route-limiet="@Model.criteria.limiet">&#9658;</a>
+            @Html.ActionLink("►", "dressfinder", new { merk = Model.criteria.merk, paginering = Model.aantalpaginas, categorieid=@Model.criteria.categorieID, minPrijs = @Model.criteria.minPrijs, maxPrijs = @Model.criteria.maxPrijs, sorteer = @Model.criteria.sorteer, limiet = @Model.criteria.limiet, kenmerk = Model.criteria.kenmerk, gefilterdekleur = Model.criteria.gefilterdeKleur })
         </li>
     </ul>
 }

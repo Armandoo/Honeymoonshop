@@ -1,5 +1,9 @@
 @model Honeymoonshop.Models.Catalogus.CatalogusVM
 
+@{ 
+    ViewBag.defaultCategorie = "Alle jurken bekijken";
+}
+
 <form name="filterprijsform" asp-controller="bruid" asp-action="Dressfinder" method="get">
     <div class="row bg-white ">
         <div id="breadcrumbcontainer" class="col-md-12">
