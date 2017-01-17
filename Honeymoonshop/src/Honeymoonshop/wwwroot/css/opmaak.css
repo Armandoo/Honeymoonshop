@@ -113,33 +113,41 @@ ul.nav>:last-child{
 }
 
 
-@media screen and (max-width:767px) {
-    .navbar-nav{
-       height:400px;
-    }
-}
+
 
 @media screen and (max-width:460px){
     .navbar-brand{
        font-size:22px !important;
     }
 
+    .afspraakbannerkop{
+        font-size:30px !important;
+    }
+
     .home-bannerkop{
-        font-size:60px !important;
+        font-size:58px !important;
+    }
+
+    .slide-container{
+        display:none;
     }
 }
 
-.home-bannerkop, .about-bannerkop{
+.home-bannerkop, .about-bannerkop, .bruid-bannerkop{
     font-size:130px;
-    margin-top:70px;
+    margin-top:120px;
 	color:white;
     font-family: 'Playball', cursive;
     opacity:0.5;
 }
 
-.home-bannertekst{
-    padding-bottom:50px;
+.footerblokken p{
+     font-family: 'Playball', cursive;
 }
+
+/*.home-bannertekst{
+    padding-bottom:50px;
+}*/
 
 .bannercontent, .about-bannercontent{
     /*position:absolute;
@@ -147,22 +155,27 @@ ul.nav>:last-child{
     padding-bottom:20px;
 }
 
-
-
-.bannercontent:nth-child(2){
+.bannercontent:nth-child(2), .home-banner-kopje, .bruid-banner-kopje{
     font-size:28px;
 	color:white;
 }
 
-.bannercontent span:last-child{
+.bannercontent span:last-child, .home-banner-kopje-twee, .bruid-banner-kopje-twee{
     font-size:36px;
 	color:white;
 }
 
+
+.home-banner-kopje, .home-banner-kopje-twee, .bruid-banner-kopje, .bruid-banner-kopje-twee {
+    margin-top:-70px;
+    margin-bottom:60px;
+}
+
 .home-buttongroup {
 	font-size: 15px;
-	
 }
+
+
 
 .home-buttongroup a{
 	padding-top: 15px;
@@ -378,14 +391,20 @@ footer ul.col-md-3, .blogevenement{
    .omschrijvingafbeelding, .koptekstomschrijving h1, .getalafbeeldingen, .banner{
        margin:0px;
    }
+
    .footerblokken div{
         margin:20px 0px;
     }
 
-   .home-bannerkop{
+   .home-bannerkop, .tussenkopje h1, .bruid-bannerkop{
        font-size:75px;
-       margin:0px;
+       margin:0px 0px 50px 0px;
    }
+
+   
+    .afspraakbannerkop{
+        font-size:78px !important;
+    }
 }
 
 
@@ -954,7 +973,6 @@ footer ul.col-md-3, .blogevenement{
     box-shadow: 2px 2px 2px 2px #404040;
     padding-left: 0px;
     padding-right:0px;
-    margin-left: 65px;
     margin-bottom: 50px;
     text-align:left;
 }
@@ -1203,37 +1221,11 @@ footer ul.col-md-3, .blogevenement{
 	cursor:move;
 }
 
-.slide-item:hover > .slide-btn{
+.slide-item:hover .slide-btn{
 	visibility:visible;
 }
 
-.bruidegom .tussenkopje h1{
-    color:#E1EDF2;
-}
 
-.bruidegom #productpagina a, .bruidegom #productpagina>:last-child>div>p>span>a, .bruidegom form a{
-    color:#1A91BE;
-}
-
-.bruidegom #bijpassend>a>div>span:last-child, .bruidegom #productpagina>:last-child>:last-child, .bruidegom .dressfinder-btn  {
-    background-color:#1A91BE;
-}
-
-.bruidegom .container-dressfinder a{
-    color:black;
-}
-
-.bruidegom .categorieen li{
-    background-color:#E1EDF2;
-}
-
-.bruidegom .slider-selection{
-    background-color:#1990BD !important;
-}
-
-.bruidegom .slider-handle {
-    border-color:#1990BD !important;
-}
 
 .dressfinder-btn{
     margin:0 auto;
@@ -1272,3 +1264,80 @@ nav>:last-child{
 .bruidegom .dressfinder-btn{
     background:#1A91BE;
 }
+
+.bruidegom .tussenkopje h1{
+    color:#E1EDF2;
+}
+
+.bruidegom #productpagina a, .bruidegom #productpagina>:last-child>div>p>span>a, .bruidegom form a{
+    color:#1A91BE;
+}
+
+.bruidegom #bijpassend>a>div>span:last-child, .bruidegom #productpagina>:last-child>:last-child, .bruidegom .dressfinder-btn  {
+    background-color:#1A91BE;
+}
+
+.bruidegom .container-dressfinder a{
+    color:black;
+}
+
+.bruidegom .categorieen li{
+    background-color:#E1EDF2;
+}
+
+.bruidegom .slider-selection{
+    background-color:#1990BD !important;
+}
+
+.bruidegom .slider-handle {
+    border-color:#1990BD !important;
+}
+
+/*Afspraak maken*/
+
+.selecttime{
+    position: absolute;
+    bottom:50px;
+    right:60px;
+    background-color:#EF597C;
+    border:0;
+}
+
+.selectdate{
+    position: absolute;
+    bottom:50px;
+    right:60px;
+    background-color:#EF597C;
+    border:0;
+}
+
+.kalenderstap2{
+    background-color:#EF597C;
+    border:0;
+    color:white;
+    height:50px;
+    bottom: -50px;
+    left: 0px;
+}
+
+#tijdkiezen{
+    height:634px;
+}
+
+.tijdstipbuttons{
+    padding-top:20px;
+}
+
+#datumtekst {
+    text-align: center;
+}
+
+ .inactivecircle{
+    background-color:grey;
+    opacity:0.2;
+}
+
+.grijs{
+    color:grey;
+}
+/*Einde afspraak maken*/

@@ -1,65 +1,41 @@
 @model List<Honeymoonshop.Models.Product>
 
 <div class="row ">
-    <div class="col-md-12 banner">
-        <img class="img-responsive" src="http://placehold.it/1500x725" />
+    <div class="col-md-12 banner" style="background-image:url(http://placehold.it/1500x725); background-size:contain;">
+
         <div class="bannercontent ">
-            <div class="col-md-12 text-center home-bannertekst">
-                <div class="home-bannerkop">Bruidegom</div></br>
-                <span>
-                    Op zoek naar de perfecte pak
+            <div class="col-md-12 text-center bannertekst">
+                <span class="col-xs-12 col-md-12 text-center bruid-bannerkop">Bruidegom</span>
+
+                <span class="col-xs-12 bruid-banner-kopje">
+                    Op zoek naar de perfecte trouwpak
                 </span>
                 </br>
-                <span class="text-uppercase">
+                <span class="col-xs-12 bruid-banner-kopje-twee text-uppercase">
                     <strong>van begin tot eind kunnen wij je helpen</strong>
                 </span>
             </div>
-
-            
         </div>
-
     </div>
-
-
 </div>
 
 
 <div class="row tussenkopje">
     <div class="col-md-12">
         <h1>Collectie</h1>
-        <h2 class="text-uppercase">de trouwjurk voor je droombruid</h2>
-        <div class="col-md-12 slide-container">
-            <div class="slide-items">
-                @foreach (Product p in Model)
-                {
-                    <a asp-controller="bruidegom" asp-action="productpagina" asp-route-productid="@p.id" asp-route-kleurid="@p.kleuren[0].kleurId">
-                        <div class="slide-item">@{
-                            if (p.kleuren.Count > 0 && p.kleuren[0].images.Count > 0)
-                            {
-                                <img src="~/images/productenimages/@p.kleuren[0].images[0].bestandsNaam" class="img-responsive " />
-                            }
-                            else
-                            {
-                                <img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="img-responsive " />
-
-                            }
-
-                        }
-
-                            <span class="col-md-9 slide-btn text-uppercase text-center">bekijk de jurk</span>
-                        </div>
-                    </a>
-
-
-                }
-            </div>
-        </div>
+        <h2 class="text-uppercase">het trouwpak voor je droombruiloft</h2>
+        @Html.Partial("~/Views/Shared/Catalogus/_Carousel.cshtml")
 
         <div class="col-md-12 center">
-            <a class="col-xs-12 col-md-3" asp-action="dressfinder" asp-controller="bruidegom">
+            <a class="col-xs-12 col-md-3" asp-action="dressfinder">
                 <div class="text-uppercase col-md-12 dressfinder-btn">Naar de dressfinder</div>
             </a>
         </div>
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-12 container-collectie-img">
+        <img src="~/images/dressfinder-bruidegom-footer.png">
+    </div>
+</div>

@@ -1,4 +1,5 @@
-﻿<div class="row">
+﻿@model DateTime[]
+<div class="row">
     <div class="col-md-12 afsprakenkop">
         <div id="breadcrumbcontainer">
             <ol class="breadcrumb">
@@ -15,69 +16,117 @@
         </div>
         <p class="afspraakbannerkop">Trouwjurken</p></br>
         <p class="text-uppercase afspraakbannertekst">Maak je pas afspraak</p>
+        <form asp-action="Datumdoorgeven" method="post">
+            <div class="col-md-12 afspraakform">
+                <div class="col-md-2 afsprakenlinks">
+                    <div class="col-md-12 center">
+                        <div class="col-md-5 rond text-center" style="opacity:1;">
 
-        <div class="col-md-11 afspraakform">
-            <div class="col-md-2 afsprakenlinks">
-                <div class="col-md-12 center">
-                    <div class="col-md-5 rond text-center" style="opacity:0.5;">
+                            1
 
-                        1
+                        </div>
+                    </div>
+                    <div class="col-md-12 center">
+                        <div class="col-md-9 tekstlinksbolletjes text-center bold" style="opacity:1;">Datum en tijd selecteren</div>
+                    </div>
+                    <div class="col-md-12 center">
+                        <div class="col-md-5 rond text-center inactivecircle">
 
+                            2
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 center">
+                        <div class="col-md-9 tekstlinksbolletjes text-center grijs">Gegevens invullen</div>
+                    </div>
+                    <div class="col-md-12 center">
+                        <div class="col-md-5 rond text-center inactivecircle">
+
+                            3
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 center">
+                        <div class="col-md-9 tekstlinksbolletjes text-center grijs">Gegevens controleren</div>
                     </div>
                 </div>
-                <div class="col-md-12 center">
-                    <div class="col-md-9 tekstlinksbolletjes text-center">Datum en tijd selecteren</div>
-                </div>
-                <div class="col-md-12 center">
-                    <div class="col-md-5 rond text-center" style="opacity:0.5;">
-
-                        2
-
-                    </div>
-                </div>
-                <div class="col-md-12 center">
-                    <div class="col-md-9 tekstlinksbolletjes text-center">Gegevens invullen</div>
-                </div>
-                <div class="col-md-12 center">
-                    <div class="col-md-5 rond text-center" style="opacity:0.5;">
-
-                        3
-
-                    </div>
-                </div>
-                <div class="col-md-12 center">
-                    <div class="col-md-9 tekstlinksbolletjes text-center">Gegevens controleren</div>
-                </div>
-            </div>
-            <div class="col-md-5 afsprakenlinks">
-                <span class="bold">Stap 1, Datum en tijd selecteren</span>
-                <br /><br />
-                <span>Selecteer eerst een datum en vervolgens een tijdstip dat je wilt komen passen!</span>
-                <br /><br />
-                <span>Openingstijden</span>
-                <table class="bold">
-                    <tr><td>MA</td><td> 12:00-17:30</td></tr>
-                    <tr><td>DI-VR&nbsp;</td><td> 09:30-17:30</td></tr>
-                    <tr><td>ZA</td><td> 09:30-18:00</td></tr>
-                    <tr><td>ZO</td><td> 11:00-17:00</td></tr>
-                </table>
-                <br />
-                <span>*Op alle werkdagen kunnen er ook schoenen worden gepast. Helaas is dit niet mogelijk in het weekend.</span>
-            </div>
-            <div class="col-md-5 afspraakrechts">
-                <div id="datepicker" name="datepicker">
+                <div class="col-md-5 afsprakenlinks">
+                    <span class="bold">Stap 1, Datum en tijd selecteren</span>
+                    <br /><br />
+                    <span>Selecteer eerst een datum en vervolgens een tijdstip dat je wilt komen passen!</span>
+                    <br /><br />
+                    <span>Openingstijden</span>
+                    <table class="bold">
+                        <tr><td>MA</td><td> 12:00-17:30</td></tr>
+                        <tr><td>DI-VR&nbsp;</td><td> 09:30-17:30</td></tr>
+                        <tr><td>ZA</td><td> 09:30-18:00</td></tr>
+                        <tr><td>ZO</td><td> 11:00-17:00</td></tr>
+                    </table>
                     <br />
-                    <div class="kalenderkoptekst">
-                        <form asp-action="Datumdoorgeven" method="post">
+
+                    <span>*Op alle werkdagen kunnen er ook schoenen worden gepast. Helaas is dit niet mogelijk in het weekend.</span>
+                    <input class="kalenderstap2 bold" type="submit" value="NAAR STAP 2" hidden />
+                </div>
+
+                <div id="datumkiezen" class="col-md-5 afspraakrechts">
+                    <div id="datepicker" name="datepicker">
+                        <br />
+                        <div class="kalenderkoptekst">
                             <input type="hidden" name="dueDate" id="dueDate" value="" />
-                            <input type="submit" value="VERSTUUR" />
-                        </form>
-                        ♥ Selecteer een datum:
+                            <input class="selecttime" type="button" value="Selecteer een tijd --->" onclick="getDate()" />
+                            ♥ Selecteer een datum:
+                        </div>
+                        <br />
                     </div>
-                    <br />
+                </div>
+                <div id="tijdkiezen" class="col-md-5 afspraakrechts" hidden>
+                    <div>
+                        <br />
+                        <div class="kalenderkoptekst">
+                            <input type="hidden" name="dueTime" id="dueTime" value="" />
+                            <input class="selectdate" type="button" value="terug naar datum selecteren" onclick="selectDate()" />
+                            ♥ Selecteer een tijdstip:
+                        </div>
+                        <br />
+                        <div class="col-md-10 afspraakrechtsdatum">
+                            <p id="datumtekst"></p>
+                        </div>
+                        <div class="col-md-12 tijdstipbuttons">
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
         <div class="row">
             <img class="img-responsive" src="http://placehold.it/1400x600" />
         </div>
+        <script>
+            var disableDates = [@Model.Count()];
+            $(document).ready(function () {
+                @for (int i = 0; i < Model.Count(); i++) {
+                     @:disableDates[@i] = "@Model[i].ToString("dd-MM-yyyy")";
+                                    
+            }
+
+            
+                $("#datepicker").datepicker({
+                    minDate: +0,
+                    language: "nl",
+                    prevText: '<span class="glyphicon glyphicon-menu-left"></span>',
+                    nextText: '<span class="glyphicon glyphicon-menu-right"></span>',
+                    beforeShowDay: DisableSpecificDates,
+                    onSelect: function () {
+                        $("#dueDate").val($("#datepicker").datepicker({ dateFormat: 'dd/mm/yyyy' }).val());
+                    }
+                });
+            })
+
+            function DisableSpecificDates(date) {
+                var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+
+                return [disableDates.indexOf(string) === -1];
+            }
+
+
+
+        </script>

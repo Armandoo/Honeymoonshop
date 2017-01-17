@@ -1,0 +1,35 @@
+﻿@model List<Honeymoonshop.Models.Product>
+<div class="col-md-12 slide-container">
+    <div class="slide-items">
+        @foreach (Product p in Model)
+        {
+
+            <div class="slide-item" style="width:236px; height:446px">
+                @{
+                    if (p.kleuren.Count > 0 && p.kleuren[0].images.Count > 0)
+                    {
+                        <img src="~/images/productenimages/@p.kleuren[0].images[0].bestandsNaam" class="img-responsive " />
+                    }
+                    else
+                    {
+                        if (p.geslacht == "bruid")
+                        {
+                            <img src="~/images/productenimages/placeholders/placeholderbruid.jpg" class="img-responsive " />
+                        }
+
+                        else
+                        {
+                            <img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="img-responsive " />
+                        }
+
+                    }
+
+                }
+
+                <a asp-action="productpagina" asp-route-productid="@p.id" asp-route-kleurid="@p.kleuren[0].kleurId">
+                    <span class="col-md-8 slide-btn text-uppercase text-center bold">bekijk de jurk</span>
+                </a>
+            </div>
+        }
+    </div>
+</div>

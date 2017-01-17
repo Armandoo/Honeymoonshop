@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Honeymoon Shop</title>
+
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Playball" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/slider.css">
+
+
+
+    <environment names="Development">
+
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/opmaak.css" asp-append-version="true" />
+    </environment>
+    <link rel="stylesheet" href="~/css/opmaak.css" />
+</head>
+<body>
+    <div class="container @ViewBag.opmaak">
+        <header class="row">
+            <a href="#" class="col-md-1 text-uppercase bold">website</a>
+            <a href="#" class="col-md-1 text-uppercase bold active">webshop</a>
+            <span class="col-xs-12 glyphicon glyphicon-search col-md-1 pull-right" aria-hidden="true"></span>
+            <span class="col-xs-12 col-md-2 text-uppercase pull-right"><strong>T</strong> (010) 4126143</span>
+        </header>
+
+        <div class="row text-uppercase @ViewBag.menu" id="navbar">
+
+           <!--  <h1 class="col-md-5 col-xs-1">Honeymoon Shop</h1>
+           <nav class="col-md-7 bold text-center">
+                <a class="col-md-1 active" asp-action="index" asp-controller="home">
+                    Home
+                </a>
+                <a class="col-md-1" asp-action="index" asp-controller="bruid">
+                    Bruid
+                </a>
+                <a class="col-md-2" asp-action="index" asp-controller="bruidegom">
+                    Bruidegom
+                </a>
+                <a class="col-md-2" href="#">
+                    De Winkel
+                </a>
+                <a class="col-md-1" href="#">
+                    Blog
+                </a>
+                <a class="col-md-2" href="#">
+                    Contact
+                </a>
+                <a class="col-md-3" href="#">
+                    Afspraak maken
+                </a>
+            </nav>-->
+            
+            <nav class="navbar navbar-default @ViewBag.menu" role="navigation">
+                
+
+                
+                <div class="col-md-5 navbar-header">
+                    <button type="button" class="navbar-toggle"
+                            data-toggle="collapse" data-target="#example-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="#">Honeymoon Shop</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="example-navbar-collapse">
+
+                    <ul class="col-md-7 nav navbar-nav">
+                        <li><a class="actief" href="/home">Home</a></li>
+                        <li><a class="" href="/bruid" >Bruid</a></li>
+                        <li><a class="" href="/bruidegom" >Bruidegom</a></li>
+                        <li><a class="" href="#">De Winkel</a></li>
+                        <li><a class="" href="#">Blog</a></li>
+                        <li><a class="" href="#">Contact</a></li>
+                        <li><a class="" href="#">Afspraak maken</a></li>
+                    </ul>
+                </div>
+                  
+            </nav>
+
+
+        </div>
+
+        @RenderBody()
+        
+    </div>
+
+    <environment names="Development">
+
+        
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="~/js/bootstrap-slider.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/jscolor.js" asp-append-version="true"></script>
+        <script src="~/js/dropzone.js" asp-append-version="true"></script>
+        <script src="~/js/datepicker-nl.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -10,8 +10,6 @@ $(document).ready(function () {
     //toggleActievePagina();
     slider();
 
-    
-
     $("#slider").slider().on('slideStop', function (ev) {
 
 
@@ -30,16 +28,8 @@ $(document).ready(function () {
         console.log("a");
     });
 
-    $("#datepicker").datepicker({
-        minDate: +0,
-        language: "nl",
-        prevText: '<span class="glyphicon glyphicon-menu-left"></span>',
-        nextText: '<span class="glyphicon glyphicon-menu-right"></span>',
-        onSelect: function () {
-            $("#dueDate").val($("#datepicker").datepicker({dateFormat : 'dd/mm/yyyy'}).val());
-        }
-    });
-
+ 
+        /*Carousel sleep actie*/
         var x,y,top,left,down;
         $(".slide-items").mousedown(function(e){
             e.preventDefault();
@@ -62,7 +52,33 @@ $(document).ready(function () {
             }
         });
 
-        $("body").mouseup(function(e){down=false;});
+        $("body").mouseup(function (e) { down = false; });
+
+
+
+    /*Ajax onclick afspraak*/
+        $(".selecttime").click(function () {
+            $(".tijdstipbuttons").children().remove();
+            $(".tijdstipbuttons").text("");
+
+            $.ajax({
+                method: "POST",
+                datatype: "JSON",
+                url: "/afspraak/GetTijden",
+                data: jQuery.param({ date: $("#dueDate").val() })
+            })
+            .done(function (msg) {
+                for (var i = 0; i < msg.length; i++) {
+                    var tijd = msg[i];
+                    var disabled = "";
+                    var checked = "";
+                    if (!tijd.isBeschikbaar) { disabled = " disabled='disabled'"; }
+                    if (tijd.isChecked) { checked = " checked='checked'"; }
+                    $(".tijdstipbuttons").append('<input type="radio" name="tijdstip" id="tijdstip" class="tijdstip" value="' + tijd.tijd + ':00" ' + disabled + checked + ' >' + tijd.tijd + '<br>');
+
+                }
+            })
+        })
 
 })
 
@@ -96,16 +112,7 @@ function toggleImage() {
 
     });
 };
-        /*
-        if ($(".rb.inner").show()) {
-            $('.merk').prop('checked', true);
-        }
-
-        else {
-            $(".rb.inner", this).toggle();
-            $('.merk').prop('unchecked', false);
-        }
-*/        
+        
  
 
 function toggleActievePagina(){
@@ -144,10 +151,16 @@ function slider() {
 };
 
 
-/*document.filterprijsform.minprijs.oninput = function () {
-    document.filterprijsform.priceOutputMinPrijs.value = document.filterprijsform.minprijs.value;
+
+function getDate() {
+    $("#datumtekst").text(document.getElementById("dueDate").value);
+    $("#datumkiezen").hide();
+    $(".kalenderstap2").show();
+    $("#tijdkiezen").show();
 }
 
-document.filterprijsform.maxprijs.oninput = function () {
-    document.filterprijsform.priceOutputMaxPrijs.value = document.filterprijsform.maxprijs.value;
-}*/
+function selectDate() {
+    $("#datumkiezen").show()
+    $(".kalenderstap2").hide();;
+    $("#tijdkiezen").hide();
+}

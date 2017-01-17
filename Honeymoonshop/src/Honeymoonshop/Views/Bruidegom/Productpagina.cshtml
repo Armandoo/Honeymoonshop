@@ -9,15 +9,15 @@
         document.getElementById("mainImage").src = geklikteAfbeelding;
     }
 </script>
-<div class="productcontainer row">
-    <div id="productpagina" class="row">
+<div class="productcontainer">
+    <div id="productinformatie" class="row">
         <div id="breadcrumbcontainer">
             <ol class="breadcrumb">
                 <li>
                     <a href="/home/">Home</a>
                 </li>
                 <li>
-                    <a asp-action="dressfinder" class="text-capitalize">@hetProduct.product.geslacht</a>
+                    <a href="/bruidegom/" class="text-capitalize">@hetProduct.product.geslacht</a>
                 </li>
                 <li>
                     <a href="/bruidegom/dressfinder">Dressfinder</a>
@@ -29,49 +29,7 @@
             </ol>
         </div>
         <div id="col-md-12"><a href="/bruidegom/dressfinder"><img src="~/images/arrow.png" />Terug naar overzicht</a></div>
-        <div class="col-md-3">
-            @{
-                if (hetProduct.images.Count > 0)
-                {
-                    @foreach (ProductImage img in hetProduct.images)
-                    {
-                        <img src="~/images/productenimages/@img.bestandsNaam" class="pull-right" onclick="vergrootImage(this.src)" />
-                    }
-                }
-                else
-                {
-                    if (hetProduct.product.geslacht == "bruid")
-                    {
-                        <img src="~/images/productenimages/placeholders/placeholderbruid.jpg" class="pull-right" />
-                    }
-                    else
-                    {
-
-                        <img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="pull-right" />
-                    }
-                }
-
-            }
-        </div>
-        <div class="col-md-6">
-            @{
-                if (hetProduct.images.Count > 0) { 
-                    <img src="~/images/productenimages/@hetProduct.images.First().bestandsNaam" class="pull-right" id="mainImage" />
-                }
-                else
-                {
-                    if (hetProduct.product.geslacht == "bruid")
-                    {
-                        <img src="~/images/productenimages/placeholders/placeholderbruid.jpg" class="pull-right" />
-                    }
-                    else
-                    {
-                        <img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="pull-right" />
-                    }
-                }
-            }
-        </div>
-        <div class="col-md-3">
+        <div class="col-md-3 pull-right">
             <h4>@hetProduct.product.merk.merkNaam</h4>
             <p>artikel nr. @hetProduct.product.artikelnummer</p>
             <p>@hetProduct.product.omschrijving</p>
@@ -85,7 +43,7 @@
                         @{
                             foreach (Kenmerkproduct kenmerkproduct in hetProduct.product.kenmerken)
                             {
-                            <a asp-action="dressfinder" asp-route-stijl="@kenmerkproduct.kenmerk.id">@kenmerkproduct.kenmerk.naam</a>
+                                <a asp-action="dressfinder" asp-route-kenmerk="@kenmerkproduct.kenmerk.id">@kenmerkproduct.kenmerk.naam</a>
                             }
                         }
                     </span><br />
@@ -106,84 +64,116 @@
                         }
                     </div><br />
                 </p>
-                <p>Kom deze jurk passen!</p>
+                <p>Kom dit product passen!</p>
             </div>
-            <a href="#" class="text-uppercase">Pasafspraak maken</a>
+            <a href="/Afspraak/Afspraakmaken" class="text-uppercase">Pasafspraak maken</a>
         </div>
-    </div>
-    <div class="row" id="tussenkopje">
-        <hr class="col-md-2" />
-        <h4 class="col-md-3 text-uppercase text-center">Bijpassende Accessoires</h4>
-        <hr class="col-md-2" />
-    </div>
-    <div class="row" id="bijpassend">
-        <div class="col-md-12">
+        <div class="col-xs-3 col-md-3 pull-left">
             @{
-                if (accessoires.Count > 0)
+                if (hetProduct.images.Count > 0)
                 {
-                    foreach (Kleurproduct kleurproduct in accessoires)
+                    @foreach (ProductImage img in hetProduct.images)
                     {
-                        <div class="col-md-3">
-                            <div class="text-center"><img src="~/images/productenimages/@kleurproduct.images.First().bestandsNaam" /></div>
-                            <span>@kleurproduct.product.merk.merkNaam</span>
-                        </div>
+                        <img src="~/images/productenimages/@img.bestandsNaam" class="img-responsive" onclick="vergrootImage(this.src)" />
                     }
                 }
                 else
                 {
-                    <div class="text-center">Er zijn geen bijpassende accessoires gevonden voor dit product of deze kleur.</div>
+                    <img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="pull-right img-responsive" />
+                }
 
+            }
+        </div>
+        <div class="col-xs-9 col-md-6">
+            @{
+                if (hetProduct.images.Count > 0)
+                {
+                    <img src="~/images/productenimages/@hetProduct.images.First().bestandsNaam" class="pull-right img-responsive" id="mainImage" />
+                }
+                else
+                {
+                    <img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="pull-right img-responsive" />
                 }
             }
         </div>
-        <a href="#">
-            <div class="col-md-12">
-                <span class="text-uppercase">Bezoek de webshop</span>
-            </div>
-        </a>
     </div>
-    <div class="row" id="tussenkopje">
-        <hr class="col-md-3" />
-        <h4 class="col-md-4 text-uppercase text-center">Of zijn deze @hetProduct.product.categorie.naam meer iets voor jou?</h4>
-        <hr class="col-md-3" />
-    </div>
-    <div class="row" id="alternatieven">
-        <div class="col-md-12">
-            @{
-                @if (gerelateerdeProducten.Count > 0)
-                {
-                    @for (int i = 0; i < 4 && i < gerelateerdeProducten.Count; i++)
+    <div class="row">
+        <div class="col-md-12" id="tussenkopje">
+            <hr class="col-xs-4 col-md-4" />
+            <h4 class="col-xs-4 col-md-4 text-uppercase text-center bold">Bijpassende Accessoires</h4>
+            <hr class="col-xs-4 col-md-4" />
+        </div>
+        <div class="col-md-12" id="bijpassend">
+            <div>
+                @{
+                    if (accessoires.Count > 0)
                     {
-                        if (gerelateerdeProducten.Count > 0 && gerelateerdeProducten[i].images.Count > 0)
+                        foreach (Kleurproduct kleurproduct in accessoires)
                         {
-                        <div class="col-md-3">
-                            <div class="text-center"><a href="/bruid/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId"><img src="~/images/productenimages/@gerelateerdeProducten[i].images.First().bestandsNaam" /></a></div>
-                            <span><a href="/bruidegom/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId">@gerelateerdeProducten[i].product.merk.merkNaam</a></span>
-                        </div>
-                        }
-                        else
-                        {
-                            <div class="col-md-3">
-                                @if (hetProduct.product.geslacht == "bruid")
+                            <div class="col-xs-3 col-md-3 pull-left">
+                                @if (kleurproduct.images.Count > 0)
                                 {
-                                    <div class="text-center"><a href="/bruidegom/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId"><img src="~/images/productenimages/placeholders/placeholderbruid.jpg" /></a></div>
+                                    <div class="text-center"><img src="~/images/productenimages/@kleurproduct.images.First().bestandsNaam" class="img-responsive" /></div>
                                 }
                                 else
                                 {
-                                    <div class="text-center"><a href="/bruidegom/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId"><img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" /></a></div>
+                                    <div class="text-center"><img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="img-responsive" /></div>
                                 }
-                                <span><a href="/bruid/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId">@gerelateerdeProducten[i].product.merk.merkNaam</a></span>
+                                <span>@kleurproduct.product.merk.merkNaam</span>
                             </div>
                         }
                     }
+                    else
+                    {
+                        <div class="text-center">Er zijn geen bijpassende accessoires gevonden voor dit product of deze kleur.</div>
+                    }
                 }
-                else
-                {
-                    <div class="text-center" >
-                        Er zijn geen gerelateerde producten gevonden voor dit product of deze kleur.
-                    </div>
+            </div>
+            <a href="/bruidegom/dressfinder/">
+                <div class="col-md-12">
+                    <span class="text-uppercase">Bezoek de webshop</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" id="tussenkopje">
+            <hr class="col-xs-3 col-md-3" />
+            <h4 class="col-xs-6 col-md-6 text-uppercase text-center bold">Of zijn deze @hetProduct.product.categorie.naam meer iets voor jou?</h4>
+            <hr class="col-xs-3 col-md-3" />
+        </div>
+
+        <div class="col-md-12" id="alternatieven">
+            <div class="col-md-12">
+                @{
+                    @if (gerelateerdeProducten.Count > 0)
+                    {
+                        @for (int i = 0; i < 4 && i < gerelateerdeProducten.Count; i++)
+                        {
+                            if (gerelateerdeProducten.Count > 0 && gerelateerdeProducten[i].images.Count > 0)
+                            {
+                                <div class="col-xs-12 col-md-3">
+                                    <div class="text-center"><a href="/bruidegom/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId"><img src="~/images/productenimages/@gerelateerdeProducten[i].images.First().bestandsNaam" class="img-responsive" /></a></div>
+                                    <div class="col-xs-12 col-md-12"><a href="/bruidegom/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId">@gerelateerdeProducten[i].product.merk.merkNaam</a></div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-xs-12 col-md-3">
+                                    <div class="text-center"><a href="/bruidegom/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId"><img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="img-responsive" /></a></div>
+                                    <div class="col-xs-12 col-md-12"><a href="/bruidegom/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId">@gerelateerdeProducten[i].product.merk.merkNaam</a></div>
+                                </div>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <div class="text-center">
+                            Er zijn geen gerelateerde producten gevonden voor dit product of deze kleur.
+                        </div>
+                    }
                 }
-            }
+            </div>
         </div>
     </div>
 </div>
