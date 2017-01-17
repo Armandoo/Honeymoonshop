@@ -31,7 +31,7 @@ footer{
 	font-size:14px;
 }
 
-.contact .col-md-3{
+.footerblokken div{
 	background-color:#F0597C;
 	margin:60px 45px;
 	font-size:18px;
@@ -51,7 +51,7 @@ footer ul a{
 	text-decoration:none;
 }
 
-footer .contact p, .blog>p{
+footer .footerblokken p, .blog>p{
 	color: #F7ADBE;
 	font-size:60px;
 	margin-bottom:-35px;
@@ -105,37 +105,44 @@ ul.nav>:last-child{
 
 .banner{
     margin-top:-90px;
-    z-index:-1;
+    
     padding:0px;
-    display:flex;
-    justify-content:center;
+    height:500px;
+    /*display:flex;
+        z-index:-1;
+    justify-content:center;*/
 }
 
-@media screen and (max-width:1200px){
-    .banner{
-        margin-top:-140px;
-    }
-
-    .navbar-toggle{
+.navbar-toggle{
         float:left;
     }
 
+@media screen and (max-width:1200px){
     .navbar-brand{
         font-size:34px !important;
     }
 }
 
 
-
-@media screen and (max-width:767px){
+@media screen and (max-width:767px) {
     .navbar-nav{
        height:400px;
     }
 }
 
+@media screen and (max-width:460px){
+    .navbar-brand{
+       font-size:22px !important;
+    }
+
+    .home-bannerkop{
+        font-size:60px !important;
+    }
+}
+
 .home-bannerkop, .about-bannerkop{
     font-size:130px;
-    margin-bottom:-115px;
+    margin-top:70px;
 	color:white;
     font-family: 'Playball', cursive;
     opacity:0.5;
@@ -146,8 +153,8 @@ ul.nav>:last-child{
 }
 
 .bannercontent, .about-bannercontent{
-    position:absolute;
-    align-self:center;
+    /*position:absolute;
+    align-self:center;*/
     padding-bottom:20px;
 }
 
@@ -195,7 +202,7 @@ ul.nav>:last-child{
     background-color:transparent;
     border:none;
     color:white;
-    
+    z-index:1;
 }
 
 .navbar-header{
@@ -348,6 +355,7 @@ footer ul.col-md-3, .blogevenement{
 	margin-left: 40%;
 	padding: 25px;
 	box-shadow: 5px 5px 5px #404040;
+    max-width:100%;
 }
 
 .koptekstomschrijving h1{
@@ -365,15 +373,42 @@ footer ul.col-md-3, .blogevenement{
 	height: 50px;
 	border-radius: 50%;
 	background-color: #F0597C;
-	margin-bottom: 25px;
-	margin-left: 50px;
-	margin-right: -250px;
+    margin-left: 50px;
+	/*margin-bottom: 25px;
+	
+	margin-right: -250px;*/
 }
 
 .getalafbeeldingen p {
 	color: white;
 	font-size: 25pt;
 	font-weight: bold;
+}
+
+@media screen and (max-width:992px){
+   .omschrijvingafbeelding, .koptekstomschrijving h1, .getalafbeeldingen, .banner{
+       margin:0px;
+   }
+   .footerblokken div{
+        margin:20px 0px;
+    }
+
+   .home-bannerkop{
+       font-size:75px;
+       margin:0px;
+   }
+}
+
+
+@media screen and (max-width:1200px) {
+    .footerblokken div{
+        margin:20px 0px;
+        width:100%;
+    }
+
+    .navbar-nav{
+        font-size:13px;
+    }
 }
 
 .lijstknoppen {

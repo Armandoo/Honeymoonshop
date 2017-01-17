@@ -6,6 +6,7 @@ using Honeymoonshop.Data;
 using Honeymoonshop.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Honeymoonshop.Models.FilterViewModels;
 
 namespace Honeymoonshop.Controllers
 {
@@ -21,8 +22,8 @@ namespace Honeymoonshop.Controllers
 
         [HttpGet]
         public IActionResult Dressfinder(FilterCriteria filtercriteria)
-        {  
-            var producten = Context.Producten.Include(x => x.merk).Include(x => x.kenmerken).ThenInclude(x=> x.kenmerk).Include(x=>x.kleuren).ThenInclude(x=>x.kleur).ToList();
+        {
+            var producten = Context.Producten.Include(x => x.merk).Include(x => x.kenmerken).ThenInclude(x => x.kenmerk).Include(x => x.kleuren).ThenInclude(x => x.kleur).ToList();
             var categorieen = Context.Category.ToList();
             //var merken = Context.Merken.ToList();
             //var kenmerkSilhouette = Context.Kenmerken.ToList().FindAll(x => x.kenmerktype == "Silhouette");
@@ -41,8 +42,8 @@ namespace Honeymoonshop.Controllers
             {
                 producten.FindAll(x => x.categorie.id == filterproduct.actieveCategorieen);
             }*/
-            
-            
+
+
             //var merken = Context.Merken.ToList();
             //var kenmerkSilhouette = Context.Kenmerken.ToList().FindAll(x => x.kenmerktype == "Silhouette");
             //var kenmerkNeklijn = Context.Kenmerken.ToList().FindAll(x => x.kenmerktype == "Neklijn");
@@ -56,8 +57,8 @@ namespace Honeymoonshop.Controllers
             //    kleuren = kleur,
             //    categorieen = categorieen
             //});
-      //  }   
-
+            //  }   
+        }
 
         /*[HttpPost]
         public IActionResult Dressfinder(FilterProduct filterproduct)

@@ -1,10 +1,10 @@
 ﻿
 <div class="row ">
-    <div class="col-md-12 banner">
-        <img class="img-responsive" src="http://placehold.it/1400x500" />
+    <div class="col-md-12 banner" style="background-image: url(http://placehold.it/1400x500)" >
+        <img class="img-responsive"  />
         <div class="bannercontent ">
             <div class="col-md-12 text-center home-bannertekst">
-                <div class="home-bannerkop">Bruidswinkel</div></br>
+                <div class="col-xs-12 home-bannerkop">Bruidswinkel</div></br>
                 <span>
                     Al bijna 50 jaar de grootste bruidzaak van Nederland.
                 </span>
@@ -16,10 +16,10 @@
 
             <div class="col-md-12 text-uppercase home-buttongroup text-center">
                 <div class="col-xs-12 col-md-6">
-                    <a class="col-xs-12 col-md-5 pull-right" asp-action="index" asp-controller="bruid"><strong>Bruid</strong></a>
+                    <a class="col-xs-12 col-md-5 pull-right" asp-action="index" asp-controller="bruid" ><strong>Bruid</strong></a>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <a class="col-xs-12 col-md-5" href="#"><strong>Bruidegom</strong></a>
+                    <a class="col-xs-12 col-md-5" asp-action="index" asp-controller="bruidegom"><strong>Bruidegom</strong></a>
                 </div>
             </div>
 
@@ -34,57 +34,66 @@
 <div class="clearfix"></div>
 
 <div class="row tussenkopje">
-    <div class="col-md-12">
+    
         <h1>One stop shop</h1>
         <h2 class="text-uppercase">Een jurk of pak kopen?</br></h2><h2 class="text-uppercase">Zo werkt het...</h2> 
-        <div class="col-md-7 inhoudtussenkopjelinks">
-            <img class="img-responsive" src="http://placehold.it/785x500" />
-            <div class="col-md-2 getalafbeelding">
-                <p>1</p>
+        <div class="col-md-12">
+
+
+            <div class="col-xs-12 col-md-5 inhoudtussenkopjerechts pull-right">
+                <ul class="lijstknoppen">
+                    <li class="col-xs-12 col-sm-6 col-md-12">
+
+                        <div class="getalafbeeldingen pull-left">
+                            <p>1</p>
+                        </div>
+                        <div class="lijsttekst">De winkel</div>
+
+                    </li>
+                    <li class="col-xs-12 col-sm-6 col-md-12">
+                        <div class="getalafbeeldingen pull-left">
+                            <p>2</p>
+                        </div>
+                        <div class="lijsttekst">Onze specialisten</div>
+                    </li>
+
+                    <li class="col-xs-12 col-sm-6 col-md-12">
+                        <div class="getalafbeeldingen pull-left">
+                            <p>3</p>
+                        </div>
+                        <div class="lijsttekst">Naai-atelier</div>
+                    </li>
+                    
+                    <li class="col-xs-12 col-sm-6 col-md-12">
+                        <div class="col-xs-6 getalafbeeldingen">
+                            <p>4</p>
+
+                        </div>
+                        <div class="lijsttekst">Servicepunten</div>
+                    </li>
+                </ul>
             </div>
-            <div class="col-md-3 koptekstomschrijving">
-                <h1>Bekijk video!</h1>
+            <div class="col-xs-12 col-md-7 inhoudtussenkopjelinks pull-left">
+                <img class="img-responsive" src="http://placehold.it/785x500" />
+                <div class="col-xs-2 col-md-2 getalafbeelding">
+                    <p>1</p>
+                </div>
+                <div class="col-xs-12 col-md-2 koptekstomschrijving">
+                    <h1 class="col-xs-12 col-md-2">Bekijk video!</h1>
+                </div>
+                <div class="col-xs-12 col-md-2 omschrijvingafbeelding">
+                    <p>Hoe vind je de perfecte outfit? Onze specialisten nemen echt de tijd voor je en helpen je met elke stap. Oneindig jurken/pakken passen? Geen probleem! Er kunnen zoveel mensen mee als jij wilt.</p>
+                </div>
             </div>
-            <div class="col-md-2 omschrijvingafbeelding">
-                <p>Hoe vind je de perfecte outfit? Onze specialisten nemen echt de tijd voor je en helpen je met elke stap. Oneindig jurken/pakken passen? Geen probleem! Er kunnen zoveel mensen mee als jij wilt.</p>
-            </div>
+
         </div>
-
-        <div class="col-md-5 inhoudtussenkopjerechts ">
-            <ul class="lijstknoppen">
-
-                <div class="col-md-5 getalafbeeldingen">
-                    <li>
-                        <p>1</p>
-                    </li>
-                </div>
-                <div class="lijsttekst">De winkel</div>
-
-                <div class="col-md-5 getalafbeeldingen">
-                    <li>
-                        <p>2</p>
-                    </li>
-                </div>
-                <div class="lijsttekst">Onze specialisten</div>
-                <div class="col-md-5 getalafbeeldingen">
-                    <li>
-                        <p>3</p>
-                    </li>
-                </div>
-                <div class="lijsttekst">Naai-atelier</div>
-                <div class="col-md-5 getalafbeeldingen">
-                    <li>
-                        <p>4</p>
-                    </li>
-                </div>
-                <div class="lijsttekst">Servicepunten</div>
-        </div>
+        
     </div>
-</div>
+
 
 <div class="row blog">
     <div class="col-md-12 text-uppercase text-center center">
-        <div class="blog col-md-12 blogheader">
+        <div class="blog col-xs-12 col-md-12 blogheader">
             <p class="text-capitalize blogtitel">Blog</p>
             <h2 class="text-uppercase">Blijf op de hoogte over</h2><h2>de bruidswereld</h2>
 </div>
@@ -140,8 +149,9 @@
 </div>
 
 
-<div class="row weddingimg">
-    <div class="col-md-12 text-center bold text-uppercase center">
-        <img class="img-responsive" src="http://placehold.it/1400x625" alt="wedding img">
+
+<div class="row">
+    <div class="col-md-12 container-collectie-img">
+        <img class="img-responsive" src="~/images/dressfinder-footer.png" alt="wedding img">
     </div>
 </div>
