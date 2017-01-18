@@ -37,7 +37,9 @@ namespace Honeymoonshop.Controllers
         public IActionResult Dressfinder(Filter filtercriteria)
         {
             ViewBag.menu = "inverted";
-            var producten = Context.Producten.Include(x => x.merk).Include(x => x.kenmerken).ThenInclude(x => x.kenmerk).Include(x => x.kleuren).ThenInclude(x => x.kleur).Include(x => x.kleuren).ThenInclude(x=>x.images).Where(x => x.geslacht == "Bruid").ToList();
+            int maxPrijs = Context.Producten.Where(p => p.geslacht == "Bruid").Max(p => p.prijs);
+            ViewBag.maxPrijs = maxPrijs;
+            var producten = Context.Producten.Include(x => x.merk).Include(x => x.kenmerken).ThenInclude(x => x.kenmerk).Include(x => x.kleuren).ThenInclude(x => x.kleur).Include(x => x.kleuren).ThenInclude(x=>x.images).Where(x => x.geslacht == "Bruid" && x.prijs <= maxPrijs).ToList();
             
             producten.ForEach(x => x.kleuren.Sort((k1, k2)=>k2.images.Count.CompareTo(k1.images.Count)));
             var categorieen = Context.Category.ToList();
