@@ -85,11 +85,11 @@
             </div>
             <div class="sliderContainer">
                 <input id="slider" type="text" class="span2" value=""
-                       data-slider-min="1" data-slider-max="@ViewBag.maxPrijs" data-slider-step="5"
-                       data-slider-value="[0,@ViewBag.maxPrijs]" />
+                       data-slider-min="1" data-slider-max="@ViewBag.hoogstePrijs" data-slider-step="5"
+                       data-slider-value="[@ViewBag.geselecteerdeMinPrijs,@ViewBag.geselecteerdeMaxPrijs]" />
                 <div class="prijzenContainer col-md-12">
-                    <div class="col-xs-9 col-md-6 prijs">&euro;<span class="minprijs">1</span></div>
-                    <div class="col-xs-3 col-md-6 prijs"><span class="maxprijs pull-right">@ViewBag.maxPrijs</span><span class="pull-right">&euro;</span></div>
+                    <div class="col-xs-9 col-md-6 prijs">&euro;<span class="minprijs">@ViewBag.geselecteerdeMinPrijs</span></div>
+                    <div class="col-xs-3 col-md-6 prijs"><span class="maxprijs pull-right">@ViewBag.geselecteerdeMaxPrijs</span><span class="pull-right">&euro;</span></div>
                 </div>
             </div>
             <input type="hidden" name="minPrijs" />
