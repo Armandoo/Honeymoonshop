@@ -106,32 +106,6 @@ ul.nav>:last-child{
         float:left;
     }
 
-@media screen and (max-width:1200px){
-    .navbar-brand{
-        font-size:34px !important;
-    }
-}
-
-
-
-
-@media screen and (max-width:460px){
-    .navbar-brand{
-       font-size:22px !important;
-    }
-
-    .afspraakbannerkop{
-        font-size:30px !important;
-    }
-
-    .home-bannerkop{
-        font-size:58px !important;
-    }
-
-    .slide-container{
-        display:none;
-    }
-}
 
 .home-bannerkop, .about-bannerkop, .bruid-bannerkop{
     font-size:130px;
@@ -214,6 +188,12 @@ ul.nav>:last-child{
 .navbar-brand{
         font-size: 38px;
         color:white;
+}
+
+.registeredmark{
+    font-size:8px;
+    position:relative;
+    top:-18px;
 }
 
 .navbar-default .navbar-nav > li > a{
@@ -387,37 +367,6 @@ footer ul.col-md-3, .blogevenement{
 	font-weight: bold;
 }
 
-@media screen and (max-width:992px){
-   .omschrijvingafbeelding, .koptekstomschrijving h1, .getalafbeeldingen, .banner{
-       margin:0px;
-   }
-
-   .footerblokken div{
-        margin:20px 0px;
-    }
-
-   .home-bannerkop, .tussenkopje h1, .bruid-bannerkop{
-       font-size:75px;
-       margin:0px 0px 50px 0px;
-   }
-
-   
-    .afspraakbannerkop{
-        font-size:78px !important;
-    }
-}
-
-
-@media screen and (max-width:1200px) {
-    .footerblokken div{
-        margin:20px 0px;
-        width:100%;
-    }
-
-    .navbar-nav{
-        font-size:13px;
-    }
-}
 
 .lijstknoppen {
 	list-style-type: none;
@@ -665,31 +614,7 @@ border-top: 3px solid rgb(229, 229, 229);
     max-height: 400px;
 }
 
-@media screen and (max-width: 990px){
-    #bijpassend>div>span, #alternatieven>div{
-        text-align:center;
-    }
 
-    #bijpassend>a>div{
-        clear:both;
-    }
-
-    #bijpassend>div>div>div{
-        max-height:200px;
-    }
-
-    #bijpassend>div>div>div img{
-        max-height:190px;
-    }
-
-    #alternatieven>div>div>div:first-child>a{
-        height:inherit;
-    }
-    #alternatieven>div>div>div:last-child{
-        margin-bottom:25px;
-        font-size:30px;
-    }
-}
  
 #bijpassend>a>div:last-child, #alternatieven>a>div:last-child{
     margin:30px 0px 60px 0px;
@@ -1337,6 +1262,10 @@ nav>:last-child{
     border-color:#1990BD !important;
 }
 
+#productinformatie > :nth-child(2) a{
+    color:rgb(132, 132, 132);
+}
+
 /*Afspraak maken*/
 
 .selecttime{
@@ -1385,3 +1314,89 @@ nav>:last-child{
     color:grey;
 }
 /*Einde afspraak maken*/
+
+/*Specifieke afmetingen*/
+@media screen and (max-width:1200px) {
+
+    .navbar-brand{
+        font-size:34px;
+    }
+
+    .footerblokken div{
+        margin:20px 0px;
+        width:100%;
+    }
+
+    .navbar-nav{
+        font-size:13px;
+    }
+}
+
+
+
+@media screen and (max-width: 990px){
+     .omschrijvingafbeelding, .koptekstomschrijving h1, .getalafbeeldingen, .banner{
+       margin:0px;
+   }
+
+   .footerblokken div{
+        margin:20px 0px;
+    }
+
+   .home-bannerkop, .tussenkopje h1, .bruid-bannerkop{
+       font-size:75px;
+       margin:0px 0px 50px 0px;
+   }
+
+   
+    .afspraakbannerkop{
+        font-size:78px !important;
+    }
+
+    #bijpassend>div>span, #alternatieven>div{
+        text-align:center;
+    }
+
+    #bijpassend>a>div{
+        clear:both;
+    }
+
+    #bijpassend>div>div>div{
+        max-height:200px;
+    }
+
+    #bijpassend>div>div>div img{
+        max-height:190px;
+    }
+
+    #alternatieven>div>div>div:first-child>a{
+        height:inherit;
+    }
+    #alternatieven>div>div>div:last-child{
+        margin-bottom:25px;
+        font-size:30px;
+    }
+}
+
+@media screen and (max-width:460px){
+    .navbar-brand{
+       font-size:22px ;
+    }
+
+    .afspraakbannerkop{
+        font-size:30px ;
+    }
+
+    .home-bannerkop{
+        font-size:58px;
+    }
+
+    .slide-container{
+        display:none;
+    }
+
+    .registeredmark{
+        top:-7px;
+    }
+}
+/*Einde specifieke afmetingen*/

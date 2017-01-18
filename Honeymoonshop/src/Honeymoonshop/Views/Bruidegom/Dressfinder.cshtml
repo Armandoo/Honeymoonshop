@@ -4,7 +4,7 @@
     ViewBag.defaultCategorie = "Alle pakken bekijken";
 }
 
-<form name="filterprijsform" asp-controller="bruid" asp-action="Dressfinder" method="get">
+<form name="filterprijsform"  asp-action="Dressfinder" method="get">
     <div class="row bg-white ">
         <div id="breadcrumbcontainer" class="col-md-12">
             <ol class="breadcrumb">
@@ -14,7 +14,7 @@
                 @if (Model.ActieveCategorie != null)
                 {
                     <li>
-                        <a asp-action="dressfinder" asp-controller="bruid">Dressfinder</a>
+                        <a asp-action="dressfinder" >Dressfinder</a>
                     </li>
                     <li class="active">
                         @Model.ActieveCategorie.naam

@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Honeymoonshop.Models;
 using Honeymoonshop.Data;
 using Honeymoonshop.Models.AfspraakViewModels;
-using System.Net.Mail;
-using System.Net;
 using Honeymoonshop.Models.Utils;
 
 namespace Honeymoonshop.Controllers
@@ -28,6 +26,7 @@ namespace Honeymoonshop.Controllers
 
         public IActionResult Afspraakmaken()
         {
+            ViewBag.menu = "inverted";
             /*
                 Vind datums waar er geen afspraken gemaakt kunnen worden / lijst met datums
              */
@@ -45,11 +44,13 @@ namespace Honeymoonshop.Controllers
 
         public IActionResult Afspraakmaken2(Klantafspraak klantafspraak)
         {
+            ViewBag.menu = "inverted";
             return View(klantafspraak);
         }
 
         [HttpPost]
         public IActionResult Afspraakmaken3(Klantafspraak klantafspraak) {
+            ViewBag.menu = "inverted";
             if (!ModelState.IsValid) {
                 return RedirectToAction("Afspraakmaken2", klantafspraak);
             }
@@ -70,6 +71,7 @@ namespace Honeymoonshop.Controllers
 
         [HttpPost]
         public IActionResult Bevestigafspraak(Klantafspraak klantafspraak) {
+           
             _context.Klanten.Add(klantafspraak.klant);
             Afspraak afspraak = new Afspraak();
             afspraak.klant = klantafspraak.klant;
@@ -87,6 +89,7 @@ namespace Honeymoonshop.Controllers
         [HttpPost]
         public IActionResult Datumdoorgeven(string dueDate, string tijdstip)
         {
+
             if (!ModelState.IsValid)
             {
                 return NotFound();

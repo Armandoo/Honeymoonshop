@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Mail;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Honeymoonshop.Models.Utils
@@ -11,13 +11,13 @@ namespace Honeymoonshop.Models.Utils
     public class EmailSender
     {
         public void sendEmail(Klantafspraak klantafspraak) {
-            var fromAddress = new MailAddress("honingmaantest@gmail.com", "Honingmaanwinkel");
+            /*var fromAddress = new MailAddress("honingmaantest@gmail.com", "Honingmaanwinkel");
             var toAddress = new MailAddress(klantafspraak.klant.email, klantafspraak.klant.naam);
             const string fromPassword = "bladblazer123";
             const string subject = "Pasafspraak bevestiging";
             string body = "Beste " + klantafspraak.klant.naam + " uw pasafspraak is bevestigd op de volgende datum en tijd: " + klantafspraak.afspraakdatum;
 
-            var smtp = new SmtpClient()
+            var smtp = new HttpClient()
             {
                 Host = "smtp.gmail.com",
                 Port = 587,
@@ -33,7 +33,7 @@ namespace Honeymoonshop.Models.Utils
                 Body = body
             })
 
-                smtp.Send(message);
+                smtp.Send(message);*/
         }
     }
 }
