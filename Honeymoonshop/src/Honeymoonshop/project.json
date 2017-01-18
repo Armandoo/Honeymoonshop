@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet-Honeymoonshop-748ceb3a-7232-486c-a72a-66e340e29e7e",
 
   "dependencies": {
@@ -6,6 +6,7 @@
       "version": "1.0.1",
       "type": "platform"
     },
+    "MailKit": "1.10.1",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
