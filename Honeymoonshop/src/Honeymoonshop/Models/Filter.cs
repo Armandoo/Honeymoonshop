@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
-using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace Honeymoonshop.Models
 {
@@ -111,16 +108,6 @@ namespace Honeymoonshop.Models
             }
             return producten;
         }
-        
 
-        public string getUrlString([FromUri] int[] merk)
-        {
-            string url = "";
-            if(this.Merk != null)
-            {
-                url += "Merk=" + merk[0];
-            }
-            return url;
-        }
     }
 }

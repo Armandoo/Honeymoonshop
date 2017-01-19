@@ -36,8 +36,17 @@ namespace Honeymoonshop.Controllers
         [HttpGet]
         public IActionResult Dressfinder(Filter filtercriteria)
         {
-            ViewBag.opmaak = "bruidegom"; ViewBag.menu = "inverted";
-            var producten = Context.Producten.Include(x => x.Merk).Include(x => x.Kenmerken).ThenInclude(x => x.Kenmerk).Include(x => x.Kleuren).ThenInclude(x => x.Kleur).Include(x => x.Kleuren).ThenInclude(x => x.Images).Where(x => x.Geslacht == "bruidegom").ToList();
+            ViewBag.opmaak = "bruidegom";
+            ViewBag.menu = "inverted";
+            //Bepaal de hoogste prijs voor de seletie
+            int hoogstePrijs = Context.Producten.Where(p => p.geslacht == "Bruidegom").Max(p => p.prijs);
+            //Controleer of er een minimale en/of maximale prijs is ingesteld om op te filteren.
+            int geselecteerdeMinPrijs = filtercriteria.minPrijs ?? 0;
+            int geselecteerdeMaxPrijs = filtercriteria.maxPrijs ?? hoogstePrijs;
+            ViewBag.hoogstePrijs = hoogstePrijs;
+            ViewBag.geselecteerdeMaxPrijs = geselecteerdeMaxPrijs;
+            ViewBag.geselecteerdeMinPrijs = geselecteerdeMinPrijs;
+            var producten = Context.Producten.Include(x => x.merk).Include(x => x.kenmerken).ThenInclude(x => x.kenmerk).Include(x => x.kleuren).ThenInclude(x => x.kleur).Include(x => x.kleuren).ThenInclude(x => x.images).Where(x => x.geslacht == "bruidegom" && x.prijs <= geselecteerdeMaxPrijs).ToList();
 
             producten.ForEach(x => x.Kleuren.Sort((k1, k2) => k2.Images.Count.CompareTo(k1.Images.Count)));
             var categorieen = Context.Category.ToList();
@@ -138,8 +147,5 @@ namespace Honeymoonshop.Controllers
             ViewData["Accessoires"] = accessoires;
             return View();
         }
-
     }
-
-
 }

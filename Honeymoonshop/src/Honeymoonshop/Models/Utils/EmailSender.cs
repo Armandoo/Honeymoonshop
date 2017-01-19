@@ -1,39 +1,29 @@
 ﻿using Honeymoonshop.Models.AfspraakViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Threading.Tasks;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
 
 namespace Honeymoonshop.Models.Utils
 {
     public class EmailSender
     {
         public void sendEmail(Klantafspraak klantafspraak) {
-            var fromAddress = new MailAddress("honingmaantest@gmail.com", "Honingmaanwinkel");
-            var toAddress = new MailAddress(klantafspraak.Klant.Email, klantafspraak.Klant.Naam);
-            const string fromPassword = "bladblazer123";
-            const string subject = "Pasafspraak bevestiging";
-            string body = "Beste " + klantafspraak.Klant.Naam + " uw pasafspraak is bevestigd op de volgende Datum en Tijd: " + klantafspraak.Afspraakdatum;
-
-            var smtp = new SmtpClient()
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Honeymoonshop", "honingmaantest@gmail.com"));
+            message.To.Add(new MailboxAddress(klantafspraak.klant.naam, klantafspraak.klant.email));
+            message.Subject = "Bevestiging pasafspraak";
+            message.Body = new TextPart("plain")
             {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                Text = "Beste " + klantafspraak.klant.naam + " uw pasafspraak is aangemaakt op de volgende datum en tijd: " + klantafspraak.afspraakdatum
             };
 
-            using (var message = new MailMessage(fromAddress.Address, toAddress.Address)
-            {
-                Subject = subject,
-                Body = body
-            })
-
-                smtp.Send(message);
+            using (var client = new SmtpClient()) {
+                client.Connect("smtp.gmail.com", 587, false);
+                client.AuthenticationMechanisms.Remove("XOAUTH2");
+                client.Authenticate("honingmaantest@gmail.com", "bladblazer123");
+                client.Send(message);
+                client.Disconnect(true);
+            }
         }
     }
 }
