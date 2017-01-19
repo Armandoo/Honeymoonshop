@@ -120,9 +120,6 @@ $('.navbar-nav a').click(function () {
     
     $(".navbar-nav li a").removeClass("actief");
     $(this).addClass('actief');
-    
-        
-        
     });
 }
 
@@ -147,8 +144,8 @@ function toggleSilhouettes() {
 }
 
 function slider() {
-    $("#slider").slider({});
-};
+    $("#slider").slider();
+}
 
 
 
@@ -161,7 +158,7 @@ function getDate() {
 
 function selectDate() {
     $("#datumkiezen").show()
-    $(".kalenderstap2").hide();;
+    $(".kalenderstap2").hide();
     $("#tijdkiezen").hide();
 }
 

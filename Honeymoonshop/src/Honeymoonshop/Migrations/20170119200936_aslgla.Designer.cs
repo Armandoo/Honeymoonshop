@@ -8,8 +8,8 @@ using Honeymoonshop.Data;
 namespace Honeymoonshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170118140624_pizza123")]
-    partial class pizza123
+    [Migration("20170119200936_aslgla")]
+    partial class aslgla
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,6 +25,8 @@ namespace Honeymoonshop.Migrations
                     b.Property<DateTime>("Datum");
 
                     b.Property<int?>("KlantId");
+
+                    b.Property<string>("Type");
 
                     b.HasKey("Id");
 

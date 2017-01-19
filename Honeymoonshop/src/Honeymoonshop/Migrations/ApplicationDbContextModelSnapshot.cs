@@ -18,18 +18,18 @@ namespace Honeymoonshop.Migrations
 
             modelBuilder.Entity("Honeymoonshop.Models.Afspraak", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("datum");
+                    b.Property<DateTime>("Datum");
 
-                    b.Property<int?>("klantid");
+                    b.Property<int?>("KlantId");
 
-                    b.Property<string>("type");
+                    b.Property<string>("Type");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("klantid");
+                    b.HasIndex("KlantId");
 
                     b.ToTable("Afspraken");
                 });
@@ -85,154 +85,161 @@ namespace Honeymoonshop.Migrations
 
             modelBuilder.Entity("Honeymoonshop.Models.Category", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("isAccessoire");
+                    b.Property<bool>("IsAccessoire");
 
-                    b.Property<string>("naam");
+                    b.Property<string>("Naam")
+                        .IsRequired();
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Category");
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.Kenmerk", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("kenmerktype");
+                    b.Property<string>("KenmerkType");
 
-                    b.Property<string>("naam");
+                    b.Property<string>("Naam")
+                        .IsRequired();
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Kenmerken");
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.Kenmerkproduct", b =>
                 {
-                    b.Property<int>("kenmerkId");
+                    b.Property<int>("KenmerkId");
 
-                    b.Property<int>("productId");
+                    b.Property<int>("ProductId");
 
-                    b.HasKey("kenmerkId", "productId");
+                    b.HasKey("KenmerkId", "ProductId");
 
-                    b.HasIndex("kenmerkId");
+                    b.HasIndex("KenmerkId");
 
-                    b.HasIndex("productId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("KenmerkProduct");
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.Klant", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("email")
+                    b.Property<string>("Email")
                         .IsRequired();
 
-                    b.Property<string>("naam")
+                    b.Property<string>("Naam")
                         .IsRequired();
 
-                    b.Property<string>("telefoonnummer");
+                    b.Property<string>("Telefoonnummer");
 
-                    b.Property<DateTime>("trouwDatum");
+                    b.Property<DateTime>("TrouwDatum");
 
-                    b.Property<bool>("wilBrief");
+                    b.Property<bool>("WilBrief");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Klanten");
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.Kleur", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("kleurCode");
+                    b.Property<string>("KleurCode");
 
-                    b.Property<string>("naam");
+                    b.Property<string>("Naam")
+                        .IsRequired();
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Kleuren");
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.Kleurproduct", b =>
                 {
-                    b.Property<int>("kleurId");
+                    b.Property<int>("KleurId");
 
-                    b.Property<int>("productId");
+                    b.Property<int>("ProductId");
 
-                    b.HasKey("kleurId", "productId");
+                    b.HasKey("KleurId", "ProductId");
 
-                    b.HasIndex("kleurId");
+                    b.HasIndex("KleurId");
 
-                    b.HasIndex("productId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("ktKleurProduct");
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.Merk", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("merkNaam");
+                    b.Property<string>("MerkNaam")
+                        .IsRequired();
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Merken");
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.Product", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("artikelnummer");
+                    b.Property<string>("Artikelnummer")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 5);
 
-                    b.Property<int>("categorieId");
+                    b.Property<int>("CategorieId");
 
-                    b.Property<string>("geslacht");
+                    b.Property<string>("Geslacht");
 
-                    b.Property<int>("merkId");
+                    b.Property<int>("MerkId");
 
-                    b.Property<string>("omschrijving");
+                    b.Property<string>("Omschrijving")
+                        .IsRequired();
 
-                    b.Property<int>("prijs");
+                    b.Property<int>("Prijs");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("categorieId");
+                    b.HasIndex("CategorieId");
 
-                    b.HasIndex("merkId");
+                    b.HasIndex("MerkId");
 
                     b.ToTable("Producten");
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.ProductImage", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("Productid");
+                    b.Property<string>("BestandsNaam");
 
-                    b.Property<string>("bestandsNaam");
+                    b.Property<int?>("KleurproductKleurId");
 
-                    b.Property<int?>("kleurproductkleurId");
+                    b.Property<int?>("KleurproductProductId");
 
-                    b.Property<int?>("kleurproductproductId");
+                    b.Property<int?>("ProductId");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("Productid");
+                    b.HasIndex("ProductId");
 
-                    b.HasIndex("kleurproductkleurId", "kleurproductproductId");
+                    b.HasIndex("KleurproductKleurId", "KleurproductProductId");
 
                     b.ToTable("ProductAfbeeldingen");
                 });
@@ -346,59 +353,59 @@ namespace Honeymoonshop.Migrations
 
             modelBuilder.Entity("Honeymoonshop.Models.Afspraak", b =>
                 {
-                    b.HasOne("Honeymoonshop.Models.Klant", "klant")
-                        .WithMany("afspraken")
-                        .HasForeignKey("klantid");
+                    b.HasOne("Honeymoonshop.Models.Klant", "Klant")
+                        .WithMany("Afspraken")
+                        .HasForeignKey("KlantId");
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.Kenmerkproduct", b =>
                 {
-                    b.HasOne("Honeymoonshop.Models.Kenmerk", "kenmerk")
-                        .WithMany("producten")
-                        .HasForeignKey("kenmerkId")
+                    b.HasOne("Honeymoonshop.Models.Kenmerk", "Kenmerk")
+                        .WithMany("Producten")
+                        .HasForeignKey("KenmerkId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Honeymoonshop.Models.Product", "product")
-                        .WithMany("kenmerken")
-                        .HasForeignKey("productId")
+                    b.HasOne("Honeymoonshop.Models.Product", "Product")
+                        .WithMany("Kenmerken")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.Kleurproduct", b =>
                 {
-                    b.HasOne("Honeymoonshop.Models.Kleur", "kleur")
-                        .WithMany("producten")
-                        .HasForeignKey("kleurId")
+                    b.HasOne("Honeymoonshop.Models.Kleur", "Kleur")
+                        .WithMany("Producten")
+                        .HasForeignKey("KleurId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Honeymoonshop.Models.Product", "product")
-                        .WithMany("kleuren")
-                        .HasForeignKey("productId")
+                    b.HasOne("Honeymoonshop.Models.Product", "Product")
+                        .WithMany("Kleuren")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.Product", b =>
                 {
-                    b.HasOne("Honeymoonshop.Models.Category", "categorie")
+                    b.HasOne("Honeymoonshop.Models.Category", "Categorie")
                         .WithMany()
-                        .HasForeignKey("categorieId")
+                        .HasForeignKey("CategorieId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Honeymoonshop.Models.Merk", "merk")
-                        .WithMany("producten")
-                        .HasForeignKey("merkId")
+                    b.HasOne("Honeymoonshop.Models.Merk", "Merk")
+                        .WithMany("Producten")
+                        .HasForeignKey("MerkId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Honeymoonshop.Models.ProductImage", b =>
                 {
                     b.HasOne("Honeymoonshop.Models.Product")
-                        .WithMany("afbeeldingen")
-                        .HasForeignKey("Productid");
+                        .WithMany("Afbeeldingen")
+                        .HasForeignKey("ProductId");
 
-                    b.HasOne("Honeymoonshop.Models.Kleurproduct", "kleurproduct")
-                        .WithMany("images")
-                        .HasForeignKey("kleurproductkleurId", "kleurproductproductId");
+                    b.HasOne("Honeymoonshop.Models.Kleurproduct", "Kleurproduct")
+                        .WithMany("Images")
+                        .HasForeignKey("KleurproductKleurId", "KleurproductProductId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

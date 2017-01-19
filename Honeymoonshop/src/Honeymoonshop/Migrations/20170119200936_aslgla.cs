@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Honeymoonshop.Migrations
 {
-    public partial class @new : Migration
+    public partial class aslgla : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -38,72 +38,72 @@ namespace Honeymoonshop.Migrations
                 name: "Category",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    isAccessoire = table.Column<bool>(nullable: false),
-                    naam = table.Column<string>(nullable: true)
+                    IsAccessoire = table.Column<bool>(nullable: false),
+                    Naam = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.id);
+                    table.PrimaryKey("PK_Category", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Kenmerken",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    kenmerktype = table.Column<string>(nullable: true),
-                    naam = table.Column<string>(nullable: true)
+                    KenmerkType = table.Column<string>(nullable: true),
+                    Naam = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Kenmerken", x => x.id);
+                    table.PrimaryKey("PK_Kenmerken", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Klanten",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    email = table.Column<string>(nullable: false),
-                    naam = table.Column<string>(nullable: false),
-                    telefoonnummer = table.Column<string>(nullable: true),
-                    trouwDatum = table.Column<DateTime>(nullable: false),
-                    wilBrief = table.Column<bool>(nullable: false)
+                    Email = table.Column<string>(nullable: false),
+                    Naam = table.Column<string>(nullable: false),
+                    Telefoonnummer = table.Column<string>(nullable: true),
+                    TrouwDatum = table.Column<DateTime>(nullable: false),
+                    WilBrief = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Klanten", x => x.id);
+                    table.PrimaryKey("PK_Klanten", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Kleuren",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    kleurCode = table.Column<string>(nullable: true),
-                    naam = table.Column<string>(nullable: true)
+                    KleurCode = table.Column<string>(nullable: true),
+                    Naam = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Kleuren", x => x.id);
+                    table.PrimaryKey("PK_Kleuren", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Merken",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    merkNaam = table.Column<string>(nullable: true)
+                    MerkNaam = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Merken", x => x.id);
+                    table.PrimaryKey("PK_Merken", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -179,20 +179,20 @@ namespace Honeymoonshop.Migrations
                 name: "Afspraken",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    datum = table.Column<DateTime>(nullable: false),
-                    klantid = table.Column<int>(nullable: true),
-                    type = table.Column<string>(nullable: true)
+                    Datum = table.Column<DateTime>(nullable: false),
+                    KlantId = table.Column<int>(nullable: true),
+                    Type = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Afspraken", x => x.id);
+                    table.PrimaryKey("PK_Afspraken", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Afspraken_Klanten_klantid",
-                        column: x => x.klantid,
+                        name: "FK_Afspraken_Klanten_KlantId",
+                        column: x => x.KlantId,
                         principalTable: "Klanten",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -200,29 +200,29 @@ namespace Honeymoonshop.Migrations
                 name: "Producten",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    artikelnummer = table.Column<int>(nullable: false),
-                    categorieId = table.Column<int>(nullable: false),
-                    geslacht = table.Column<string>(nullable: true),
-                    merkId = table.Column<int>(nullable: false),
-                    omschrijving = table.Column<string>(nullable: true),
-                    prijs = table.Column<int>(nullable: false)
+                    Artikelnummer = table.Column<string>(maxLength: 5, nullable: false),
+                    CategorieId = table.Column<int>(nullable: false),
+                    Geslacht = table.Column<string>(nullable: true),
+                    MerkId = table.Column<int>(nullable: false),
+                    Omschrijving = table.Column<string>(nullable: false),
+                    Prijs = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Producten", x => x.id);
+                    table.PrimaryKey("PK_Producten", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Producten_Category_categorieId",
-                        column: x => x.categorieId,
+                        name: "FK_Producten_Category_CategorieId",
+                        column: x => x.CategorieId,
                         principalTable: "Category",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Producten_Merken_merkId",
-                        column: x => x.merkId,
+                        name: "FK_Producten_Merken_MerkId",
+                        column: x => x.MerkId,
                         principalTable: "Merken",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -275,23 +275,23 @@ namespace Honeymoonshop.Migrations
                 name: "KenmerkProduct",
                 columns: table => new
                 {
-                    kenmerkId = table.Column<int>(nullable: false),
-                    productId = table.Column<int>(nullable: false)
+                    KenmerkId = table.Column<int>(nullable: false),
+                    ProductId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_KenmerkProduct", x => new { x.kenmerkId, x.productId });
+                    table.PrimaryKey("PK_KenmerkProduct", x => new { x.KenmerkId, x.ProductId });
                     table.ForeignKey(
-                        name: "FK_KenmerkProduct_Kenmerken_kenmerkId",
-                        column: x => x.kenmerkId,
+                        name: "FK_KenmerkProduct_Kenmerken_KenmerkId",
+                        column: x => x.KenmerkId,
                         principalTable: "Kenmerken",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_KenmerkProduct_Producten_productId",
-                        column: x => x.productId,
+                        name: "FK_KenmerkProduct_Producten_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Producten",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -299,23 +299,23 @@ namespace Honeymoonshop.Migrations
                 name: "ktKleurProduct",
                 columns: table => new
                 {
-                    kleurId = table.Column<int>(nullable: false),
-                    productId = table.Column<int>(nullable: false)
+                    KleurId = table.Column<int>(nullable: false),
+                    ProductId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ktKleurProduct", x => new { x.kleurId, x.productId });
+                    table.PrimaryKey("PK_ktKleurProduct", x => new { x.KleurId, x.ProductId });
                     table.ForeignKey(
-                        name: "FK_ktKleurProduct_Kleuren_kleurId",
-                        column: x => x.kleurId,
+                        name: "FK_ktKleurProduct_Kleuren_KleurId",
+                        column: x => x.KleurId,
                         principalTable: "Kleuren",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ktKleurProduct_Producten_productId",
-                        column: x => x.productId,
+                        name: "FK_ktKleurProduct_Producten_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Producten",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -323,34 +323,34 @@ namespace Honeymoonshop.Migrations
                 name: "ProductAfbeeldingen",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Productid = table.Column<int>(nullable: true),
-                    bestandsNaam = table.Column<string>(nullable: true),
-                    kleurproductkleurId = table.Column<int>(nullable: true),
-                    kleurproductproductId = table.Column<int>(nullable: true)
+                    BestandsNaam = table.Column<string>(nullable: true),
+                    KleurproductKleurId = table.Column<int>(nullable: true),
+                    KleurproductProductId = table.Column<int>(nullable: true),
+                    ProductId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductAfbeeldingen", x => x.id);
+                    table.PrimaryKey("PK_ProductAfbeeldingen", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductAfbeeldingen_Producten_Productid",
-                        column: x => x.Productid,
+                        name: "FK_ProductAfbeeldingen_Producten_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Producten",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ProductAfbeeldingen_ktKleurProduct_kleurproductkleurId_kleurproductproductId",
-                        columns: x => new { x.kleurproductkleurId, x.kleurproductproductId },
+                        name: "FK_ProductAfbeeldingen_ktKleurProduct_KleurproductKleurId_KleurproductProductId",
+                        columns: x => new { x.KleurproductKleurId, x.KleurproductProductId },
                         principalTable: "ktKleurProduct",
-                        principalColumns: new[] { "kleurId", "productId" },
+                        principalColumns: new[] { "KleurId", "ProductId" },
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Afspraken_klantid",
+                name: "IX_Afspraken_KlantId",
                 table: "Afspraken",
-                column: "klantid");
+                column: "KlantId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
@@ -364,44 +364,44 @@ namespace Honeymoonshop.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_KenmerkProduct_kenmerkId",
+                name: "IX_KenmerkProduct_KenmerkId",
                 table: "KenmerkProduct",
-                column: "kenmerkId");
+                column: "KenmerkId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_KenmerkProduct_productId",
+                name: "IX_KenmerkProduct_ProductId",
                 table: "KenmerkProduct",
-                column: "productId");
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ktKleurProduct_kleurId",
+                name: "IX_ktKleurProduct_KleurId",
                 table: "ktKleurProduct",
-                column: "kleurId");
+                column: "KleurId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ktKleurProduct_productId",
+                name: "IX_ktKleurProduct_ProductId",
                 table: "ktKleurProduct",
-                column: "productId");
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Producten_categorieId",
+                name: "IX_Producten_CategorieId",
                 table: "Producten",
-                column: "categorieId");
+                column: "CategorieId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Producten_merkId",
+                name: "IX_Producten_MerkId",
                 table: "Producten",
-                column: "merkId");
+                column: "MerkId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductAfbeeldingen_Productid",
+                name: "IX_ProductAfbeeldingen_ProductId",
                 table: "ProductAfbeeldingen",
-                column: "Productid");
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductAfbeeldingen_kleurproductkleurId_kleurproductproductId",
+                name: "IX_ProductAfbeeldingen_KleurproductKleurId_KleurproductProductId",
                 table: "ProductAfbeeldingen",
-                columns: new[] { "kleurproductkleurId", "kleurproductproductId" });
+                columns: new[] { "KleurproductKleurId", "KleurproductProductId" });
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
