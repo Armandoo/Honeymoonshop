@@ -1,5 +1,5 @@
 @model Honeymoonshop.Models.Product
-@if (Model.kleuren.Count > 0)
+@if (Model.Kleuren.Count > 0)
 {
     <div class="col-md-4 col-item catalogusitem">
         <a asp-route-productId="@Model.Id" a asp-route-kleurId="@Model.Kleuren[0].KleurId" a asp-action="ProductPagina">

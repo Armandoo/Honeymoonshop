@@ -137,11 +137,11 @@ namespace Honeymoonshop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var kleur = await _context.Kleuren.SingleOrDefaultAsync(m => m.id == id);
+            var kleur = await _context.Kleuren.SingleOrDefaultAsync(m => m.Id == id);
             //verwijder eerst de afbeeldingen die gekoppeld zijn aan deze kleur
-            _context.ProductAfbeeldingen.RemoveRange(_context.ProductAfbeeldingen.Where(x => x.kleurproduct.kleurId == id).ToList());
+            _context.ProductAfbeeldingen.RemoveRange(_context.ProductAfbeeldingen.Where(x => x.Kleurproduct.KleurId == id).ToList());
             //Verwijder daarna de relatie tussen de kleur en de producten die bij deze kleur horen.
-            _context.ktKleurProduct.RemoveRange(_context.ktKleurProduct.Where(x => x.kleurId == id ).ToList());
+            _context.ktKleurProduct.RemoveRange(_context.ktKleurProduct.Where(x => x.KleurId == id ).ToList());
             //Verwijder daarna de kleur
             _context.Kleuren.Remove(kleur);
             await _context.SaveChangesAsync();

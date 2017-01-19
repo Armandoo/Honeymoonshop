@@ -89,12 +89,12 @@ namespace Honeymoonshop.Models
         {
             if (this.Gefilterdekleur != null)
             {
-                producten.ForEach(x =>x.Kleuren = x.Kleuren.OrderByDescending(z => gefilterdeKleur.Contains(z.kleurId)).ToList());
+                producten.ForEach(x =>x.Kleuren = x.Kleuren.OrderByDescending(z => Gefilterdekleur.Contains(z.KleurId)).ToList());
             }
             else
             {
 
-                producten.ForEach(x => x.Kleuren.Sort((k1, k2) => k2.images.Count.CompareTo(k1.images.Count)));
+                producten.ForEach(x => x.Kleuren.Sort((k1, k2) => k2.Images.Count.CompareTo(k1.Images.Count)));
             }
 
             return producten;

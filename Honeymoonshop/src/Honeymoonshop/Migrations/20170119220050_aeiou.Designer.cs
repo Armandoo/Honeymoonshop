@@ -8,8 +8,8 @@ using Honeymoonshop.Data;
 namespace Honeymoonshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170119200936_aslgla")]
-    partial class aslgla
+    [Migration("20170119220050_aeiou")]
+    partial class aeiou
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

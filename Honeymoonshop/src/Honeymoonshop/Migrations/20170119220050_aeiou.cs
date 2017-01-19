@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Honeymoonshop.Migrations
 {
-    public partial class aslgla : Migration
+    public partial class aeiou : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

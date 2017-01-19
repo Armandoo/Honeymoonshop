@@ -149,8 +149,8 @@ namespace Honeymoonshop.Controllers
             
             return View(new CreateProduct()
             {
-                Categorieen = new SelectList(_context.Category, "id", "Naam", product.CategorieId),
-                Merken = new SelectList(_context.Merken, "id", "MerkNaam", product.MerkId),
+                Categorieen = new SelectList(_context.Category, "Id", "Naam", product.CategorieId),
+                Merken = new SelectList(_context.Merken, "Id", "MerkNaam", product.MerkId),
                 Kenmerken = _context.Kenmerken.ToList(),
                 Kleuren = _context.Kleuren.ToList(),
                 Product = product
@@ -232,7 +232,7 @@ namespace Honeymoonshop.Controllers
                 {
                     //Deze kleuren zijn niet aangevinkt.
                     //Verwijder de relatie met afbeelding
-                    _context.ProductAfbeeldingen.Remove(_context.ProductAfbeeldingen.Where(x => x.kleurproduct.KleurId == teVerwijderenId && x.kleurproduct.ProductId == id).FirstOrDefault());
+                    _context.ProductAfbeeldingen.Remove(_context.ProductAfbeeldingen.Where(x => x.Kleurproduct.KleurId == teVerwijderenId && x.Kleurproduct.ProductId == id).FirstOrDefault());
                     //Verwijder daarna de relatie tussen kleur en product
                     _context.ktKleurProduct.Remove(_context.ktKleurProduct.Where(kleurproduct => kleurproduct.ProductId == id && kleurproduct.KleurId == teVerwijderenId).FirstOrDefault());
                 }
