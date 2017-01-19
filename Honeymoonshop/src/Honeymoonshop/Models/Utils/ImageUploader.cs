@@ -33,7 +33,7 @@ namespace Honeymoonshop.Models.Utils
         {
             if (file != null)
             {
-                var upload = Path.Combine("", "wwwroot/images/productenimages");
+                var upload = Path.Combine("", "wwwroot/Images/productenimages");
                
                 if (Path.GetExtension(file.FileName).ToLower() == ".jpg"
                 || Path.GetExtension(file.FileName).ToLower() == ".png"
@@ -42,7 +42,7 @@ namespace Honeymoonshop.Models.Utils
 
                 UploadFile(file, upload);   //TODO check of file geupload is
                 T o = new T();
-                o.GetType().GetProperty("bestandsNaam").SetValue(o, file.FileName);
+                o.GetType().GetProperty("BestandsNaam").SetValue(o, file.FileName);
                 return o;
                 }  
             }

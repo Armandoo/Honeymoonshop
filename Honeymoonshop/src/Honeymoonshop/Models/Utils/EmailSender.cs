@@ -12,10 +12,10 @@ namespace Honeymoonshop.Models.Utils
     {
         public void sendEmail(Klantafspraak klantafspraak) {
             var fromAddress = new MailAddress("honingmaantest@gmail.com", "Honingmaanwinkel");
-            var toAddress = new MailAddress(klantafspraak.klant.email, klantafspraak.klant.naam);
+            var toAddress = new MailAddress(klantafspraak.Klant.Email, klantafspraak.Klant.Naam);
             const string fromPassword = "bladblazer123";
             const string subject = "Pasafspraak bevestiging";
-            string body = "Beste " + klantafspraak.klant.naam + " uw pasafspraak is bevestigd op de volgende datum en tijd: " + klantafspraak.afspraakdatum;
+            string body = "Beste " + klantafspraak.Klant.Naam + " uw pasafspraak is bevestigd op de volgende Datum en Tijd: " + klantafspraak.Afspraakdatum;
 
             var smtp = new SmtpClient()
             {

@@ -8,8 +8,8 @@ using Honeymoonshop.Data;
 namespace Honeymoonshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170115143432_init")]
-    partial class init
+    [Migration("20170118111502_pizza")]
+    partial class pizza
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,7 +89,8 @@ namespace Honeymoonshop.Migrations
 
                     b.Property<bool>("IsAccessoire");
 
-                    b.Property<string>("Naam");
+                    b.Property<string>("Naam")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -103,7 +104,8 @@ namespace Honeymoonshop.Migrations
 
                     b.Property<string>("KenmerkType");
 
-                    b.Property<string>("Naam");
+                    b.Property<string>("Naam")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -136,29 +138,7 @@ namespace Honeymoonshop.Migrations
                     b.Property<string>("Naam")
                         .IsRequired();
 
-                    b.Property<int>("Telefoonnummer");
-
-                    b.Property<DateTime>("TrouwDatum");
-
-                    b.Property<bool>("WilBrief");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Klanten");
-                });
-
-            modelBuilder.Entity("Honeymoonshop.Models.Klant", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email")
-                        .IsRequired();
-
-                    b.Property<string>("Naam")
-                        .IsRequired();
-
-                    b.Property<int>("Telefoonnummer");
+                    b.Property<string>("Telefoonnummer");
 
                     b.Property<DateTime>("TrouwDatum");
 
@@ -176,7 +156,8 @@ namespace Honeymoonshop.Migrations
 
                     b.Property<string>("KleurCode");
 
-                    b.Property<string>("Naam");
+                    b.Property<string>("Naam")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -203,7 +184,8 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("MerkNaam");
+                    b.Property<string>("MerkNaam")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -215,7 +197,9 @@ namespace Honeymoonshop.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Artikelnummer");
+                    b.Property<string>("Artikelnummer")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 5);
 
                     b.Property<int>("CategorieId");
 

@@ -17,7 +17,7 @@
                         <a asp-action="dressfinder" asp-controller="bruid">Dressfinder</a>
                     </li>
                     <li class="active">
-                        @Model.ActieveCategorie.naam
+                        @Model.ActieveCategorie.Naam
                     </li>
                 }
                 else
@@ -36,12 +36,12 @@
                 <div class="col-md-12 producten ">
 
                     <div class="col-md-12 productencollectie">
-                        @if (Model.producten.Count() == 0)
+                        @if (Model.Producten.Count() == 0)
                         {
                             <h5>Geen producten gevonden.</h5>
 
                         }
-                        @foreach (var product in Model.producten)
+                        @foreach (var product in Model.Producten)
                         {
                             @Html.Partial("~/Views/Shared/Catalogus/_CatalogusItem.cshtml", product)
 
@@ -55,7 +55,7 @@
             <div class="col-md-9 pull-right catalogus-footer">
                 <div class="col-md-4">
                     <span class="pull-left"><b>Aantal tonen: </b></span>
-                    <select asp-for="@Model.criteria.limiet" asp-items="@Model.ToonMogelijkheden" name="limiet" class="col-md-3"></select>
+                    <select asp-for="@Model.Criteria.Limiet" asp-items="@Model.ToonMogelijkheden" name="Limiet" class="col-md-3"></select>
                 </div>
 
                 <div class="col-md-8">

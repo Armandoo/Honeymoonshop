@@ -191,7 +191,7 @@ namespace Honeymoonshop.Migrations
                         name: "FK_Afspraken_Klanten_klantid",
                         column: x => x.klantid,
                         principalTable: "Klanten",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -215,13 +215,13 @@ namespace Honeymoonshop.Migrations
                         name: "FK_Producten_Category_categorieId",
                         column: x => x.categorieId,
                         principalTable: "Category",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Producten_Merken_merkId",
                         column: x => x.merkId,
                         principalTable: "Merken",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -284,13 +284,13 @@ namespace Honeymoonshop.Migrations
                         name: "FK_KenmerkProduct_Kenmerken_kenmerkId",
                         column: x => x.kenmerkId,
                         principalTable: "Kenmerken",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_KenmerkProduct_Producten_productId",
                         column: x => x.productId,
                         principalTable: "Producten",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -308,13 +308,13 @@ namespace Honeymoonshop.Migrations
                         name: "FK_ktKleurProduct_Kleuren_kleurId",
                         column: x => x.kleurId,
                         principalTable: "Kleuren",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ktKleurProduct_Producten_productId",
                         column: x => x.productId,
                         principalTable: "Producten",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -336,13 +336,13 @@ namespace Honeymoonshop.Migrations
                         name: "FK_ProductAfbeeldingen_Producten_Productid",
                         column: x => x.Productid,
                         principalTable: "Producten",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ProductAfbeeldingen_ktKleurProduct_kleurproductkleurId_kleurproductproductId",
                         columns: x => new { x.kleurproductkleurId, x.kleurproductproductId },
                         principalTable: "ktKleurProduct",
-                        principalColumns: new[] { "kleurId", "productId" },
+                        principalColumns: new[] { "KleurId", "ProductId" },
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -365,32 +365,32 @@ namespace Honeymoonshop.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_KenmerkProduct_kenmerkId",
                 table: "KenmerkProduct",
-                column: "kenmerkId");
+                column: "KenmerkId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_KenmerkProduct_productId",
                 table: "KenmerkProduct",
-                column: "productId");
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ktKleurProduct_kleurId",
                 table: "ktKleurProduct",
-                column: "kleurId");
+                column: "KleurId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ktKleurProduct_productId",
                 table: "ktKleurProduct",
-                column: "productId");
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Producten_categorieId",
                 table: "Producten",
-                column: "categorieId");
+                column: "CategorieId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Producten_merkId",
                 table: "Producten",
-                column: "merkId");
+                column: "MerkId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductAfbeeldingen_Productid",

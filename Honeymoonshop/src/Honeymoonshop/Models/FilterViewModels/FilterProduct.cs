@@ -9,24 +9,24 @@ namespace Honeymoonshop.Models.FilterViewModels
     public class FilterProduct
     {
         
-        public List<Merk> merken { get; set; }
+        public List<Merk> Merken { get; set; }
 
         
-        public List<Kenmerk> stijlen { get; set; }
+        public List<Kenmerk> Stijlen { get; set; }
 
-        public List<Kenmerk> neklijnen { get; set; }
-        public List<Kenmerk> silhouettes { get; set; }
+        public List<Kenmerk> Neklijnen { get; set; }
+        public List<Kenmerk> Silhouettes { get; set; }
   
-        public List<Kleur> kleuren { get; set; }
+        public List<Kleur> Kleuren { get; set; }
         
-        public List<Product> producten { get; set; }
+        public List<Product> Producten { get; set; }
 
-        public List<Category> categorieen { get; set; }
+        public List<Category> Categorieen { get; set; }
         
 
-        public FilterCriteria criteria { get; set; }
+        public Filter Criteria { get; set; }
 
-        public int aantalpaginas { get; set; }
+        public int Aantalpaginas { get; set; }
         
         //public int actieveCategorieen { set; get; }
     }

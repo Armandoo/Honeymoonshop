@@ -2,16 +2,16 @@
 @model Honeymoonshop.Models.Product
 
     <div class="col-md-4 col-item catalogusitem">
-        <a asp-route-productId="@Model.id" a asp-route-kleurId="@Model.kleuren[0].kleurId" a asp-action="ProductPagina">
+        <a asp-route-productId="@Model.Id" a asp-route-kleurId="@Model.Kleuren[0].KleurId" a asp-action="ProductPagina">
             <div class="img-container">
                 @{
-                    if (Model.kleuren.Count > 0 && Model.kleuren[0].images.Count > 0)
+                    if (Model.Kleuren.Count > 0 && Model.Kleuren[0].Images.Count > 0)
                     {
-                        <img src="~/images/productenimages/@Model.kleuren[0].images[0].bestandsNaam" c class="img-responsive collectieitemimg" />
+                        <img src="~/images/productenimages/@Model.Kleuren[0].Images[0].BestandsNaam" c class="img-responsive collectieitemimg" />
                     }
                     else
                     {
-                        if (Model.geslacht == "bruid")
+                        if (Model.Geslacht == "bruid")
                         {
                             <img src="~/images/productenimages/placeholders/placeholderbruid.jpg" class="img-responsive collectieitemimg" />
                         }
@@ -25,14 +25,14 @@
                 }
             </div>
 
-            <div class="bold">@Model.merk.merkNaam</div>
-            <div class="artikelnr">artikel nr. @Model.artikelnummer</div>
+            <div class="bold">@Model.Merk.MerkNaam</div>
+            <div class="artikelnr">artikel nr. @Model.Artikelnummer</div>
         </a>
 
         <div id="kleuren">
-            @foreach (Kleurproduct kleurproduct in Model.kleuren)
+            @foreach (Kleurproduct kleurproduct in Model.Kleuren)
             {
-                <a asp-action="productpagina" asp-route-kleurid="@kleurproduct.kleurId" asp-route-productid="@Model.id"><div class="kleurbolletje verberg" style="background-color:#@kleurproduct.kleur.kleurCode"></div></a> <span>&nbsp;</span>
+                <a asp-action="productpagina" asp-route-kleurid="@kleurproduct.KleurId" asp-route-productid="@Model.Id"><div class="kleurbolletje verberg" style="background-color:#@kleurproduct.Kleur.KleurCode"></div></a> <span>&nbsp;</span>
             }
 
         </div>

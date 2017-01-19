@@ -9,6 +9,7 @@ $(document).ready(function () {
     toggleImage();
     //toggleActievePagina();
     slider();
+    button1active();
 
     $("#slider").slider().on('slideStop', function (ev) {
 
@@ -28,7 +29,6 @@ $(document).ready(function () {
         console.log("a");
     });
 
- 
         /*Carousel sleep actie*/
         var x,y,top,left,down;
         $(".slide-items").mousedown(function(e){
@@ -164,3 +164,36 @@ function selectDate() {
     $(".kalenderstap2").hide();;
     $("#tijdkiezen").hide();
 }
+
+/*homepage 1 t/m 4 buttons*/
+function button1active() {
+    $(".button1").css("background-color", "#F0597C").css("border-color", "#F0597C");
+    $(".button2, .button3, .button4").css("background-color", "grey").css("border-color", "grey");
+    $("#nummerafbeelding").text(1);
+    $("#dewinkel").show();
+    $("#onzespecialisten, #naaiatelier, #servicepunten").hide();
+};
+
+function button2active() {
+    $(".button2").css("background-color", "#F0597C").css("border-color", "#F0597C");
+    $(".button1, .button3, .button4").css("background-color", "grey").css("border-color", "grey");
+    $("#nummerafbeelding").text(2);
+    $("#onzespecialisten").show();
+    $("#dewinkel, #naaiatelier, #servicepunten").hide();
+};
+
+function button3active() {
+    $(".button3").css("background-color", "#F0597C").css("border-color", "#F0597C");
+    $(".button1, .button2, .button4").css("background-color", "grey").css("border-color", "grey");
+    $("#nummerafbeelding").text(3);
+    $("#naaiatelier").show();
+    $("#onzespecialisten, #dewinkel, #servicepunten").hide();
+};
+
+function button4active() {
+    $(".button4").css("background-color", "#F0597C").css("border-color", "#F0597C");
+    $(".button1, .button2, .button3").css("background-color", "grey").css("border-color", "grey");
+    $("#nummerafbeelding").text(4);
+    $("#servicepunten").show();
+    $("#onzespecialisten, #naaiatelier, #dewinkel").hide();    
+};

@@ -17,48 +17,48 @@
                     <a href="/home/">Home</a>
                 </li>
                 <li>
-                    <a href="/bruid/" class="text-capitalize">@hetProduct.product.geslacht</a>
+                    <a href="/bruid/" class="text-capitalize">@hetProduct.Product.Geslacht</a>
                 </li>
                 <li>
                     <a href="/bruid/dressfinder">Dressfinder</a>
                 </li>
                 <li>
-                    <a asp-action="dressfinder" asp-route-categorieID="@hetProduct.product.categorie.id">@hetProduct.product.categorie.naam</a>
+                    <a asp-action="dressfinder" asp-route-categorieID="@hetProduct.Product.Categorie.Id">@hetProduct.Product.Categorie.Naam</a>
                 </li>
-                <li class="active">@hetProduct.product.merk.merkNaam, @hetProduct.product.artikelnummer</li>
+                <li class="active">@hetProduct.Product.Merk.MerkNaam, @hetProduct.Product.Artikelnummer</li>
             </ol>
         </div>
         <div id="col-md-12"><a href="/bruid/dressfinder"><img src="~/images/arrow.png" />Terug naar overzicht</a></div>
         <div class="col-md-3 pull-right">
-            <h4>@hetProduct.product.merk.merkNaam</h4>
-            <p>artikel nr. @hetProduct.product.artikelnummer</p>
-            <p>@hetProduct.product.omschrijving</p>
+            <h4>@hetProduct.Product.Merk.MerkNaam</h4>
+            <p>artikel nr. @hetProduct.Product.Artikelnummer</p>
+            <p>@hetProduct.Product.Omschrijving</p>
             <div>
                 <p>
-                    <span>Merk: <a asp-action="dressfinder" asp-route-merk="@hetProduct.product.merk.id">@hetProduct.product.merk.merkNaam</a></span><br />
+                    <span>Merk: <a asp-action="dressfinder" asp-route-merk="@hetProduct.Product.Merk.Id">@hetProduct.Product.Merk.MerkNaam</a></span><br />
                 </p>
                 <p>
                     <span>
                         Kenmerken:
                         @{
-                            foreach (Kenmerkproduct kenmerkproduct in hetProduct.product.kenmerken)
+                            foreach (Kenmerkproduct kenmerkproduct in hetProduct.Product.Kenmerken)
                             {
-                                <a asp-action="dressfinder" asp-route-kenmerk="@kenmerkproduct.kenmerk.id">@kenmerkproduct.kenmerk.naam</a>
+                                <a asp-action="dressfinder" asp-route-kenmerk="@kenmerkproduct.Kenmerk.Id">@kenmerkproduct.Kenmerk.Naam</a>
                             }
                         }
                     </span><br />
                 </p>
                 <p>
-                    <span>Prijsindicatie: €@hetProduct.product.prijs</span><br />
+                    <span>Prijsindicatie: €@hetProduct.Product.Prijs</span><br />
                 </p>
                 <p>
                     <div id="kleuren">
                         Beschikbare kleuren: @{
-                            foreach (Kleurproduct kleurproduct in hetProduct.product.kleuren)
+                            foreach (Kleurproduct kleurproduct in hetProduct.Product.Kleuren)
                             {
-                                @if (kleurproduct.kleur != null)
+                                @if (kleurproduct.Kleur != null)
                                 {
-                                    <a href="/bruid/productpagina/?productid=@hetProduct.product.id&kleurid=@kleurproduct.kleurId"><div class="kleurbolletje" style="background-color:#@kleurproduct.kleur.kleurCode"></div></a>
+                                    <a href="/bruid/productpagina/?productid=@hetProduct.Product.Id&kleurId=@kleurproduct.KleurId"><div class="kleurbolletje" style="background-color:#@kleurproduct.Kleur.KleurCode"></div></a>
                                 }
                             }
                         }
@@ -70,11 +70,11 @@
         </div>
         <div class="col-xs-3 col-md-3 pull-left">
             @{
-                if (hetProduct.images.Count > 0)
+                if (hetProduct.Images.Count > 0)
                 {
-                    @foreach (ProductImage img in hetProduct.images)
+                    @foreach (ProductImage img in hetProduct.Images)
                     {
-                        <img src="~/images/productenimages/@img.bestandsNaam" class="pull-right img-responsive" onclick="vergrootImage(this.src)" />
+                        <img src="~/images/productenimages/@img.BestandsNaam" class="pull-right img-responsive" onclick="vergrootImage(this.src)" />
                     }
                 }
                 else
@@ -86,9 +86,9 @@
         </div>
         <div class="col-xs-9 col-md-6">
             @{
-                if (hetProduct.images.Count > 0)
+                if (hetProduct.Images.Count > 0)
                 {
-                    <img src="~/images/productenimages/@hetProduct.images.First().bestandsNaam" class="pull-right img-responsive" id="mainImage" />
+                    <img src="~/images/productenimages/@hetProduct.Images.First().BestandsNaam" class="pull-right img-responsive" id="mainImage" />
                 }
                 else
                 {
@@ -112,15 +112,15 @@
                         foreach (Kleurproduct kleurproduct in accessoires)
                         {
                             <div class="col-xs-3 col-md-3 pull-left">
-                                @if (kleurproduct.images.Count > 0)
+                                @if (kleurproduct.Images.Count > 0)
                                 {
-                                    <div class="text-center"><img src="~/images/productenimages/@kleurproduct.images.First().bestandsNaam" class="img-responsive" /></div>
+                                    <div class="text-center"><img src="~/images/productenimages/@kleurproduct.Images.First().BestandsNaam" class="img-responsive" /></div>
                                 }
                                 else
                                 {
                                     <div class="text-center"><img src="~/images/productenimages/placeholders/placeholderbruid.jpg" class="img-responsive" /></div>
                                 }
-                                <span>@kleurproduct.product.merk.merkNaam</span>
+                                <span>@kleurproduct.Product.Merk.MerkNaam</span>
                             </div>
                         }
                     }
@@ -140,7 +140,7 @@
     <div class="row">
         <div class="col-md-12" id="tussenkopje">
             <hr class="col-xs-3 col-md-3" />
-            <h4 class="col-xs-6 col-md-6 text-uppercase text-center bold">Of zijn deze @hetProduct.product.categorie.naam meer iets voor jou?</h4>
+            <h4 class="col-xs-6 col-md-6 text-uppercase text-center bold">Of zijn deze @hetProduct.Product.Categorie.Naam meer iets voor jou?</h4>
             <hr class="col-xs-3 col-md-3" />
         </div>
 
@@ -151,18 +151,18 @@
                     {
                         @for (int i = 0; i < 4 && i < gerelateerdeProducten.Count; i++)
                         {
-                            if (gerelateerdeProducten.Count > 0 && gerelateerdeProducten[i].images.Count > 0)
+                            if (gerelateerdeProducten.Count > 0 && gerelateerdeProducten[i].Images.Count > 0)
                             {
                                 <div class="col-xs-12 col-md-3">
-                                    <div class="text-center"><a href="/bruid/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId"><img src="~/images/productenimages/@gerelateerdeProducten[i].images.First().bestandsNaam" class="img-responsive" /></a></div>
-                                    <div class="col-xs-12 col-md-12"><a href="/bruid/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId">@gerelateerdeProducten[i].product.merk.merkNaam</a></div>
+                                    <div class="text-center"><a href="/bruid/productpagina/?productid=@gerelateerdeProducten[i].ProductId&kleurid=@hetProduct.KleurId"><img src="~/images/productenimages/@gerelateerdeProducten[i].Images.First().BestandsNaam" class="img-responsive" /></a></div>
+                                    <div class="col-xs-12 col-md-12"><a href="/bruid/productpagina/?productid=@gerelateerdeProducten[i].ProductId&kleurid=@hetProduct.KleurId">@gerelateerdeProducten[i].Product.Merk.MerkNaam</a></div>
                                 </div>
                             }
                             else
                             {
                                 <div class="col-xs-12 col-md-3">
-                                    <div class="text-center"><a href="/bruid/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId"><img src="~/images/productenimages/placeholders/placeholderbruid.jpg" class="img-responsive" /></a></div>
-                                    <div class="col-xs-12 col-md-12"><a href="/bruid/productpagina/?productid=@gerelateerdeProducten[i].productId&kleurid=@hetProduct.kleurId">@gerelateerdeProducten[i].product.merk.merkNaam</a></div>
+                                    <div class="text-center"><a href="/bruid/productpagina/?productid=@gerelateerdeProducten[i].ProductId&kleurid=@hetProduct.KleurId"><img src="~/images/productenimages/placeholders/placeholderbruid.jpg" class="img-responsive" /></a></div>
+                                    <div class="col-xs-12 col-md-12"><a href="/bruid/productpagina/?productid=@gerelateerdeProducten[i].ProductId&kleurid=@hetProduct.KleurId">@gerelateerdeProducten[i].Product.Merk.MerkNaam</a></div>
                                 </div>
                             }
                         }

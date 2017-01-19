@@ -26,7 +26,7 @@ namespace Honeymoonshop.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Producten.Include(p => p.categorie).Include(p => p.merk);
+            var applicationDbContext = _context.Producten.Include(p => p.Categorie).Include(p => p.Merk);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -38,11 +38,11 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Producten.Include(x => x.merk)
-                .Include(x => x.categorie)
-                .Include(x => x.kenmerken).ThenInclude(x => x.kenmerk)
-                .Include(x => x.kleuren).ThenInclude(x => x.kleur)
-                .SingleOrDefaultAsync(m => m.id == id);
+            var product = await _context.Producten.Include(x => x.Merk)
+                .Include(x => x.Categorie)
+                .Include(x => x.Kenmerken).ThenInclude(x => x.Kenmerk)
+                .Include(x => x.Kleuren).ThenInclude(x => x.Kleur)
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
                 return NotFound();
@@ -55,11 +55,11 @@ namespace Honeymoonshop.Controllers
         public IActionResult Create()
         {
             return View(new CreateProduct() {
-                Categorieen = new SelectList(_context.Category, "id", "naam"),
-                Merken = new SelectList(_context.Merken, "id", "merkNaam"),
+                Categorieen = new SelectList(_context.Category, "Id", "Naam"),
+                Merken = new SelectList(_context.Merken, "Id", "MerkNaam"),
                 Kenmerken =  _context.Kenmerken.ToList(),
                 Kleuren = _context.Kleuren.ToList(),
-                product = new Product()
+                Product = new Product()
 
                 
 
@@ -69,7 +69,7 @@ namespace Honeymoonshop.Controllers
         [HttpGet]
         public IActionResult Images(int id)
         {
-            List<Kleurproduct> hetProduct = _context.ktKleurProduct.Include(k => k.kleur).Include(x => x.product).ThenInclude(x => x.merk).Include(x => x.product.kleuren).ThenInclude(c => c.kleur).Include(c => c.product.categorie).Include(x => x.images).Include(x => x.product.kenmerken).ThenInclude(x => x.kenmerk).Where(kleurproduct => kleurproduct.productId == id).ToList();
+            List<Kleurproduct> hetProduct = _context.ktKleurProduct.Include(k => k.Kleur).Include(x => x.Product).ThenInclude(x => x.Merk).Include(x => x.Product.Kleuren).ThenInclude(c => c.Kleur).Include(c => c.Product.Categorie).Include(x => x.Images).Include(x => x.Product.Kenmerken).ThenInclude(x => x.Kenmerk).Where(kleurproduct => kleurproduct.ProductId == id).ToList();
             ViewData["kleurenMetProduct"] = hetProduct;
             return View(hetProduct);
         }
@@ -77,14 +77,14 @@ namespace Honeymoonshop.Controllers
         [HttpPost]
         public async Task<IActionResult> Images(int id, int kid,  IFormFile[] afbeeldingen)
         {
-            var product = _context.Producten.Include(p => p.kleuren).ThenInclude(l => l.kleur).Include(f => f.kleuren).SingleOrDefault(p => p.id == id);
-            var kleur = _context.Kleuren.SingleOrDefault(k => k.id == kid);
+            var product = _context.Producten.Include(p => p.Kleuren).ThenInclude(l => l.Kleur).Include(f => f.Kleuren).SingleOrDefault(p => p.Id == id);
+            var kleur = _context.Kleuren.SingleOrDefault(k => k.Id == kid);
 
             var x = FileUploader<ProductImage>.UploadImages(afbeeldingen);
 
-            var kp = _context.ktKleurProduct.ToList().Find(f => f.kleur == kleur && f.productId == product.id);
-            kp.images = x;
-            product.kleuren.Add(kp);
+            var kp = _context.ktKleurProduct.ToList().Find(f => f.Kleur == kleur && f.ProductId == product.Id);
+            kp.Images = x;
+            product.Kleuren.Add(kp);
             if (ModelState.IsValid)
             {
                 try
@@ -94,7 +94,7 @@ namespace Honeymoonshop.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.id))
+                    if (!ProductExists(product.Id))
                     {
                         return NotFound();
                     }
@@ -115,46 +115,47 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,artikelnummer,geslacht,categorieId,merkId,omschrijving,prijs")] Product product, string[] kleur, string[] kenmerk)
+        public async Task<IActionResult> Create([Bind("Id,Artikelnummer,Geslacht,CategorieId,MerkId,Omschrijving,Prijs")] Product product, string[] kleur, string[] kenmerk)
         {
             if (kleur != null)
             {
-                product.kleuren = new List<Kleurproduct>();
+                product.Kleuren = new List<Kleurproduct>();
                 foreach (var k in kleur)
                 {
                     var kleurId = 0;
                     int.TryParse(k, out kleurId);
-                    product.kleuren.Add(new Kleurproduct() { kleur = _context.Kleuren.ToList().Find(x => x.id == kleurId) });
+                    product.Kleuren.Add(new Kleurproduct() { Kleur = _context.Kleuren.ToList().Find(x => x.Id == kleurId) });
                 }
             }
 
             if (kenmerk != null)
             {
-                product.kenmerken = new List<Kenmerkproduct>();
+                product.Kenmerken = new List<Kenmerkproduct>();
                 foreach (var k in kenmerk)
                 {
                     var kenmerkId = 0;
                     int.TryParse(k, out kenmerkId);
-                    product.kenmerken.Add(new Kenmerkproduct() { kenmerk = _context.Kenmerken.ToList().Find(x => x.id == kenmerkId) });
+                    product.Kenmerken.Add(new Kenmerkproduct() { Kenmerk = _context.Kenmerken.ToList().Find(x => x.Id == kenmerkId) });
 
                 }
             }
+
 
 
             if (ModelState.IsValid)
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Images", new { id = product.id});
+                return RedirectToAction("Images", new { id = product.Id });
             }
 
             return View(new CreateProduct()
             {
-                Categorieen = new SelectList(_context.Category, "id", "naam", product.categorie),
-                Merken = new SelectList(_context.Merken, "id", "merkNaam", product.merk.id),
+                Categorieen = new SelectList(_context.Category, "Id", "Naam", product.Categorie),
+                Merken = new SelectList(_context.Merken, "Id", "MerkNaam", product.Merk),
                 Kenmerken = _context.Kenmerken.ToList(),
                 Kleuren = _context.Kleuren.ToList(),
-                product = product
+                Product = product
 
             });
         }
@@ -167,19 +168,19 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var product = _context.Producten.Include(x => x.kleuren).ThenInclude(x => x.kleur)
-                           .Include(x => x.kenmerken).ThenInclude(x => x.kenmerk).SingleOrDefault(x => x.id == id);
+            var product = _context.Producten.Include(x => x.Kleuren).ThenInclude(x => x.Kleur)
+                           .Include(x => x.Kenmerken).ThenInclude(x => x.Kenmerk).SingleOrDefault(x => x.Id == id);
             if (product == null)
             {
                 return NotFound();
             }
             return View(new CreateProduct()
             {
-                Categorieen = new SelectList(_context.Category, "id", "naam"),
-                Merken = new SelectList(_context.Merken, "id", "merkNaam"),
+                Categorieen = new SelectList(_context.Category, "Id", "Naam"),
+                Merken = new SelectList(_context.Merken, "Id", "MerkNaam"),
                 Kenmerken = _context.Kenmerken.ToList(),
                 Kleuren = _context.Kleuren.ToList(),
-                product = product
+                Product = product
             });
         }
 
@@ -188,9 +189,9 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,artikelnummer,geslacht,categorieId,merkId,omschrijving,prijs")] Product product, string[] kleuren, string[] kenmerk)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Artikelnummer,Geslacht,CategorieId,MerkId,Omschrijving,Prijs")] Product product, string[] kleuren, string[] kenmerk)
         {
-            if (id != product.id)
+            if (id != product.Id)
             {
                 return NotFound();
             }
@@ -199,11 +200,11 @@ namespace Honeymoonshop.Controllers
             {
                 //Kleuren
                 var kleurProducten = new List<Kleurproduct>();
-                List<Kleurproduct> huidigeKleurenVanProduct = _context.ktKleurProduct.Include(x => x.kleur).Where(x => x.productId == id).ToList();
+                List<Kleurproduct> huidigeKleurenVanProduct = _context.ktKleurProduct.Include(x => x.Kleur).Where(x => x.ProductId == id).ToList();
                 List<int> idVanHuidigeKleuren = new List<int>();
                 foreach (Kleurproduct kleur in huidigeKleurenVanProduct)
                 {
-                    idVanHuidigeKleuren.Add(kleur.kleurId);
+                    idVanHuidigeKleuren.Add(kleur.KleurId);
                 }
                 List<int> kleurenIds = new List<int>();
                 var kleurId = 0;
@@ -218,14 +219,14 @@ namespace Honeymoonshop.Controllers
                 foreach (int overeenkomendId in overeenkomsten)
                 {
                     //Komt overeen met een kleur van het product
-                    kleurProducten.Add(_context.ktKleurProduct.Include(x => x.kleur).Where(x => x.productId == product.id && x.kleur == _context.Kleuren.Where(kl => kl.id == overeenkomendId).Single()).SingleOrDefault());
+                    kleurProducten.Add(_context.ktKleurProduct.Include(x => x.Kleur).Where(x => x.ProductId == product.Id && x.Kleur == _context.Kleuren.Where(kl => kl.Id == overeenkomendId).Single()).SingleOrDefault());
                 }
 
                 IEnumerable<int> nieuweKleuren = kleurenIds.Except(idVanHuidigeKleuren);//Bepaal welke van de aangevinkte kleuren nog niet een relatie hadden met een product
                 foreach (int nieuweKleurId in nieuweKleuren)
                 {
                     //Nieuwe kleuren in de aangevinkte kleuren die nog niet zijn toegewezen aan het product.
-                    kleurProducten.Add(new Kleurproduct() { kleur = _context.Kleuren.Where(x => x.id == nieuweKleurId).SingleOrDefault() });
+                    kleurProducten.Add(new Kleurproduct() { Kleur = _context.Kleuren.Where(x => x.Id == nieuweKleurId).SingleOrDefault() });
                 }
 
                 IEnumerable<int> verschillen = idVanHuidigeKleuren.Except(kleurenIds);//Bepaal welke kleuren die een relatie hebben met product niet meer aangevinkt zijn.
@@ -233,11 +234,11 @@ namespace Honeymoonshop.Controllers
                 {
                     //Deze kleuren zijn niet aangevinkt.
                     //Verwijder de relatie met afbeelding
-                    _context.ProductAfbeeldingen.Remove(_context.ProductAfbeeldingen.Where(x => x.kleurproduct.kleurId == teVerwijderenId).FirstOrDefault());
+                    _context.ProductAfbeeldingen.Remove(_context.ProductAfbeeldingen.Where(x => x.Kleurproduct.KleurId == teVerwijderenId).FirstOrDefault());
                     //Verwijder daarna de relatie tussen kleur en product
-                    _context.ktKleurProduct.Remove(_context.ktKleurProduct.Where(kleurproduct => kleurproduct.productId == id && kleurproduct.kleurId == teVerwijderenId).FirstOrDefault());
+                    _context.ktKleurProduct.Remove(_context.ktKleurProduct.Where(kleurproduct => kleurproduct.ProductId == id && kleurproduct.KleurId == teVerwijderenId).FirstOrDefault());
                 }
-                product.kleuren = kleurProducten;
+                product.Kleuren = kleurProducten;
                 //Kenmerken
                 List<int> kenmerkenIds = new List<int>();
                 foreach (string knmrk in kenmerk)
@@ -248,23 +249,23 @@ namespace Honeymoonshop.Controllers
                         kenmerkenIds.Add(kenmerkId);
                     }
                 }
-                var kenmerkenVanProduct = _context.KenmerkProduct.Where(x => x.productId == id);
+                var kenmerkenVanProduct = _context.KenmerkProduct.Where(x => x.ProductId == id);
                 List<int> kenmerkenIdsVanProduct = new List<int>();
                 foreach (Kenmerkproduct kp in kenmerkenVanProduct)
                 {
-                    kenmerkenIdsVanProduct.Add(kp.kenmerkId);
+                    kenmerkenIdsVanProduct.Add(kp.KenmerkId);
                 }
                 var kenmerkenVerschillen = kenmerkenIdsVanProduct.Except(kenmerkenIds);//Bepaalt welke kenmerken wel in product zitten, maar nu niet meer aangevinkt zijn
                 var nieuweKenmerken = kenmerkenIds.Except(kenmerkenIdsVanProduct);//Bepaalt welke kenmerken niet in product zitten, maar wel aangevinkt zijn
                 List<Kenmerkproduct> kenmerkenOmOpTeSlaan = new List<Kenmerkproduct>();//Lijst die wordt gevuld met de kenmerken die worden opgeslagen
                 foreach (int teVerwijderenKenmerk in kenmerkenVerschillen)
                 {
-                    _context.KenmerkProduct.Remove(_context.KenmerkProduct.Where(x => x.kenmerkId == teVerwijderenKenmerk && x.productId == id).First());
+                    _context.KenmerkProduct.Remove(_context.KenmerkProduct.Where(x => x.KenmerkId == teVerwijderenKenmerk && x.ProductId == id).First());
                 }
                 _context.SaveChanges();
                 foreach (int toeTeVoegenKenmerken in nieuweKenmerken)
                 {
-                    kenmerkenOmOpTeSlaan.Add(new Kenmerkproduct() { kenmerk = _context.Kenmerken.Where(x => x.id == toeTeVoegenKenmerken).First(),kenmerkId = toeTeVoegenKenmerken, productId = id});
+                    kenmerkenOmOpTeSlaan.Add(new Kenmerkproduct() { Kenmerk = _context.Kenmerken.Where(x => x.Id == toeTeVoegenKenmerken).First(),KenmerkId = toeTeVoegenKenmerken, ProductId = id});
                 }
                 _context.KenmerkProduct.AddRange(kenmerkenOmOpTeSlaan);
                 
@@ -275,7 +276,7 @@ namespace Honeymoonshop.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.id))
+                    if (!ProductExists(product.Id))
                     {
                         return NotFound();
                     }
@@ -287,7 +288,14 @@ namespace Honeymoonshop.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(product);
+            return View(new CreateProduct()
+            {
+                Categorieen = new SelectList(_context.Category, "Id", "Naam", product.CategorieId),
+                Merken = new SelectList(_context.Merken, "Id", "MerkNaam", product.MerkId),
+                Kenmerken = _context.Kenmerken.ToList(),
+                Kleuren = _context.Kleuren.ToList(),
+                Product = product
+            });
         }
 
         // GET: Products/Delete/5
@@ -298,7 +306,7 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Producten.SingleOrDefaultAsync(m => m.id == id);
+            var product = await _context.Producten.SingleOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
                 return NotFound();
@@ -322,9 +330,9 @@ namespace Honeymoonshop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.Producten.SingleOrDefaultAsync(m => m.id == id);
-            List<ProductImage> teVerwijderenImages = _context.ProductAfbeeldingen.Include(x => x.kleurproduct).ToList().FindAll(x => x.kleurproduct.productId == id);
-            List<Kleurproduct> teVerwijderenKleuren = _context.ktKleurProduct.ToList().FindAll(x => x.productId == id);
+            var product = await _context.Producten.SingleOrDefaultAsync(m => m.Id == id);
+            List<ProductImage> teVerwijderenImages = _context.ProductAfbeeldingen.Include(x => x.Kleurproduct).ToList().FindAll(x => x.Kleurproduct.ProductId == id);
+            List<Kleurproduct> teVerwijderenKleuren = _context.ktKleurProduct.ToList().FindAll(x => x.ProductId == id);
             _context.ProductAfbeeldingen.RemoveRange(teVerwijderenImages);
             _context.ktKleurProduct.RemoveRange(teVerwijderenKleuren);
             _context.Producten.Remove(product);
@@ -334,7 +342,7 @@ namespace Honeymoonshop.Controllers
 
         private bool ProductExists(int id)
         {
-            return _context.Producten.Any(e => e.id == id);
+            return _context.Producten.Any(e => e.Id == id);
         }
     }
 }
