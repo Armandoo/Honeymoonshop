@@ -12,12 +12,12 @@
         <h4>Product</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="product.id" />
+        <input type="hidden" asp-for="Product.Id" />
         <div class="form-group">
-            <label asp-for="product.artikelnummer" class="col-md-2 control-label"></label>
+            <label asp-for="Product.Artikelnummer" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="product.artikelnummer" class="form-control" />
-                <span asp-validation-for="product.artikelnummer" class="text-danger" />
+                <input asp-for="Product.Artikelnummer" class="form-control" />
+                <span asp-validation-for="Product.Artikelnummer" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
@@ -32,13 +32,13 @@
 
                 @foreach (var k in Model.Kleuren)
                 {
-                    if (Model.product.kleuren.Select(x => x.kleurId).Contains(k.id))
+                    if (Model.Product.Kleuren.Select(x => x.KleurId).Contains(k.Id))
                     {
-                        <input type="checkbox" name="kleuren" value="@k.id" checked/> @k.naam
+                        <input type="checkbox" name="kleuren" value="@k.Id" checked/> @k.Naam
                     }
                     else
                     {
-                        <input type="checkbox" name="kleuren" value="@k.id" /> @k.naam
+                        <input type="checkbox" name="kleuren" value="@k.Id" /> @k.Naam
                     }
                 }
 
@@ -49,15 +49,15 @@
             <div class="col-md-10">
                 @foreach (var item in Model.Kenmerken)
                 {
-                    @Html.CheckBox("kenmerk", (Model.product.kenmerken.FindAll(x => x.kenmerk.id == item.id).ToList().Count > 0), new { value = item.id });
-                    @item.naam
+                    @Html.CheckBox("kenmerk", (Model.Product.Kenmerken.FindAll(x => x.Kenmerk.Id == item.Id).ToList().Count > 0), new { value = item.Id });
+                    @item.Naam
                 }
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="product.geslacht" class="col-md-2 control-label"></label>
+            <label asp-for="Product.Geslacht" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select input asp-for="product.geslacht">
+                <select input asp-for="Product.Geslacht">
                     <option value="bruid">Bruid</option>
                     <option value="bruidegom">Bruidegom</option>
                     <option value="geen">Geen</option>
@@ -65,35 +65,35 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="product.categorieId" class="control-label col-md-2"></label>
+            <label asp-for="Product.CategorieId" class="control-label col-md-2"></label>
             <div class="col-md-10">
                 <div class="col-md-12">
-                    <select asp-for="product.categorieId" class="form-control col-md-12" asp-items="Model.Categorieen"></select>
+                    <select asp-for="Product.CategorieId" class="form-control col-md-12" asp-items="Model.Categorieen"></select>
                 </div>
-                <span asp-validation-for="product.categorieId" class="text-danger" />
+                <span asp-validation-for="Product.CategorieId" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="product.merkId" class="control-label col-md-2"></label>
+            <label asp-for="Product.MerkId" class="control-label col-md-2"></label>
             <div class="col-md-10">
                 <div class="col-md-12">
-                    <select asp-for="product.merkId" class="form-control col-md-12" asp-items="Model.Merken"></select>
+                    <select asp-for="Product.MerkId" class="form-control col-md-12" asp-items="Model.Merken"></select>
                 </div>
-                <span asp-validation-for="product.merkId" class="text-danger" />
+                <span asp-validation-for="Product.MerkId" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="product.omschrijving" class="col-md-2 control-label"></label>
+            <label asp-for="Product.Omschrijving" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="product.omschrijving" class="form-control" />
-                <span asp-validation-for="product.omschrijving" class="text-danger" />
+                <input asp-for="Product.Omschrijving" class="form-control" />
+                <span asp-validation-for="Product.Omschrijving" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="product.prijs" class="col-md-2 control-label"></label>
+            <label asp-for="Product.Prijs" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="product.prijs" class="form-control" />
-                <span asp-validation-for="product.prijs" class="text-danger" />
+                <input asp-for="Product.Prijs" class="form-control" />
+                <span asp-validation-for="Product.Prijs" class="text-danger" />
             </div>
         </div>
         <div class="form-group">

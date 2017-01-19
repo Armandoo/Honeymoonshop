@@ -5,18 +5,18 @@
         <h4>Category</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="id" />
+        <input type="hidden" asp-for="Id" />
         <div class="form-group">
-            <label asp-for="naam" class="col-md-2 control-label"></label>
+            <label asp-for="Naam" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="naam" class="form-control" />
-                <span asp-validation-for="naam" class="text-danger" />
+                <input asp-for="Naam" class="form-control" />
+                <span asp-validation-for="Naam" class="text-danger" />
             </div>
         </div>
         <div class="col-md-10 isAccessoire">
             <label>Is Accessoire?</label>
-            <input type="radio" name="isAccessoire" value="true" asp-for="isAccessoire"> Ja
-            <input type="radio" name="isAccessoire" value="false" asp-for="isAccessoire"> Nee
+            <input type="radio" name="isAccessoire" value="true" asp-for="IsAccessoire"> Ja
+            <input type="radio" name="isAccessoire" value="false" asp-for="IsAccessoire"> Nee
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -29,3 +29,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

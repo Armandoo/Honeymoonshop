@@ -55,25 +55,25 @@
                 <p class="bold" style="font-size: 25px;">Stap 3, Gegevens controleren</p>
                 <p>Controleer alle gegevens voor je pasafspraak bij Honeymoon shop aan Korte Hoogstraat 4, te Rotterdam.</p>
                 <form asp-action="Bevestigafspraak" method="post">
-                    <input type="hidden" name="klant.naam" value="@Model.klant.naam" />
-                    <input type="hidden" name="klant.trouwdatum" value="@Model.klant.trouwDatum" />
-                    <input type="hidden" name="klant.telefoonnummer" value="@Model.klant.telefoonnummer" />
-                    <input type="hidden" name="klant.email" value="@Model.klant.email" />
-                    <input type="hidden" name="klant.wilBrief" value="@Model.klant.wilBrief.ToString()" />
-                    <input type="hidden" name="afspraakdatum" value="@Model.afspraakdatum" />
-                    <input type="hidden" name="type" id="type" value="@Model.type" />
+                    <input type="hidden" name="Klant.Naam" value="@Model.Klant.Naam" />
+                    <input type="hidden" name="Klant.TrouwDatum" value="@Model.Klant.TrouwDatum" />
+                    <input type="hidden" name="Klant.Telefoonnummer" value="@Model.Klant.Telefoonnummer" />
+                    <input type="hidden" name="Klant.Email" value="@Model.Klant.Email" />
+                    <input type="hidden" name="Klant.WilBrief" value="@Model.Klant.WilBrief.ToString()" />
+                    <input type="hidden" name="Afspraakdatum" value="@Model.Afspraakdatum" />
+                    <input type="hidden" name="Type" id="Type" value="@Model.Type"
                     <input type="submit" class="afspraakknop text-uppercase" value="Afspraak bevestigen" />
                 </form>
             </div>
             <div class="col-md-5 afspraakrechts">
                 <p class="bold"><img class="img-responsive" src="~/images/heart.png" />&nbsp;Gekozen tijd en datum:</p></br>
                 <div class="col-md-10 afspraakrechtsdatum">
-                    <p>@Model.afspraakdatum.ToString("g")</p>
+                    <p>@Model.Afspraakdatum.ToString("g")</p>
                 </div></br></br>
-                <p>Naam: @Model.klant.naam</p>
-                <p>Trouwdatum: @Model.klant.trouwDatum.Date.ToString("dd/MM/yyyy")</p>
-                <p>Telefoon: @Model.klant.telefoonnummer</p>
-                <p>E-Mail: @Model.klant.email</p>
+                <p>Naam: @Model.Klant.Naam</p>
+                <p>Trouwdatum: @Model.Klant.TrouwDatum.Date.ToString("dd/MM/yyyy")</p>
+                <p>Telefoon: @Model.Klant.Telefoonnummer</p>
+                <p>E-Mail: @Model.Klant.Email</p>
                 </br></br></br></br></br></br></br></br>
                 <a href="afspraakmaken2" class="afspraaklinkform"><p><img class="img-responsive" src="~/images/arrow2.png" />Terug naar stap 2 om gegevens te wijzigen</p></a>
             </div>

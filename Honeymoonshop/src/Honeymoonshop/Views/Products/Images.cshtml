@@ -12,22 +12,22 @@
     <div class="form-horizontal">
         <h3>Per kleur apart opslaan</h3>
         <hr />
-        <div><a href="/products/Edit/@kleurenMetProduct[0].productId">@kleurenMetProduct[0].product.merk.merkNaam, @kleurenMetProduct[0].product.artikelnummer</a></div>
+        <div><a href="/products/Edit/@kleurenMetProduct[0].ProductId">@kleurenMetProduct[0].Product.Merk.MerkNaam, @kleurenMetProduct[0].Product.Artikelnummer</a></div>
         <div class="form-group">
             @foreach (Kleurproduct kleurMetProduct in kleurenMetProduct)
             {
                <form asp-action="Images" enctype="multipart/form-data">
                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                    <input type="hidden" asp-for="@kleurMetProduct.productId" />
-                    <input type="hidden" name="kid" value="@kleurMetProduct.kleurId"/>
-                    <label class="text-capitalize">@kleurMetProduct.kleur.naam</label>
-                    @if (kleurMetProduct.images.Count > 0)
+                    <input type="hidden" asp-for="@kleurMetProduct.ProductId" />
+                    <input type="hidden" name="kid" value="@kleurMetProduct.KleurId"/>
+                    <label class="text-capitalize">@kleurMetProduct.Kleur.Naam</label>
+                    @if (kleurMetProduct.Images.Count > 0)
                     {
                         <div>
-                            @foreach (ProductImage img in kleurMetProduct.images)
+                            @foreach (ProductImage img in kleurMetProduct.Images)
                             {
-                                <img src="~/images/productenimages/@img.bestandsNaam" class="pull-left" style="max-width:100px" />
+                                <img src="~/images/productenimages/@img.BestandsNaam" class="pull-left" style="max-width:100px" />
                             }
                         </div>
                     }

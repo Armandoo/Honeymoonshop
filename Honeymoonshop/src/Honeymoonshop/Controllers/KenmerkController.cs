@@ -33,7 +33,7 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var kenmerk = await _context.Kenmerken.SingleOrDefaultAsync(m => m.id == id);
+            var kenmerk = await _context.Kenmerken.SingleOrDefaultAsync(m => m.Id == id);
             if (kenmerk == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,naam,kenmerktype")] Kenmerk kenmerk)
+        public async Task<IActionResult> Create([Bind("Id,Naam,KenmerkType")] Kenmerk kenmerk)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var kenmerk = await _context.Kenmerken.SingleOrDefaultAsync(m => m.id == id);
+            var kenmerk = await _context.Kenmerken.SingleOrDefaultAsync(m => m.Id == id);
             if (kenmerk == null)
             {
                 return NotFound();
@@ -85,9 +85,9 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,naam,kenmerktype")] Kenmerk kenmerk)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,KenmerkType")] Kenmerk kenmerk)
         {
-            if (id != kenmerk.id)
+            if (id != kenmerk.Id)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace Honeymoonshop.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!KenmerkExists(kenmerk.id))
+                    if (!KenmerkExists(kenmerk.Id))
                     {
                         return NotFound();
                     }
@@ -123,7 +123,7 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var kenmerk = await _context.Kenmerken.SingleOrDefaultAsync(m => m.id == id);
+            var kenmerk = await _context.Kenmerken.SingleOrDefaultAsync(m => m.Id == id);
             if (kenmerk == null)
             {
                 return NotFound();
@@ -137,7 +137,7 @@ namespace Honeymoonshop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var kenmerk = await _context.Kenmerken.SingleOrDefaultAsync(m => m.id == id);
+            var kenmerk = await _context.Kenmerken.SingleOrDefaultAsync(m => m.Id == id);
             _context.Kenmerken.Remove(kenmerk);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -145,7 +145,7 @@ namespace Honeymoonshop.Controllers
 
         private bool KenmerkExists(int id)
         {
-            return _context.Kenmerken.Any(e => e.id == id);
+            return _context.Kenmerken.Any(e => e.Id == id);
         }
     }
 }

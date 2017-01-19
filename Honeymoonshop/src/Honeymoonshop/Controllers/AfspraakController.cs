@@ -32,7 +32,7 @@ namespace Honeymoonshop.Controllers
              */
             ViewBag.type = typeafspraak;
 
-            DateTime[] datums = _context.Afspraken.GroupBy(x => x.datum.Date).Where(x => x.Count() > 2).Select(x => x.Key).ToArray();
+            DateTime[] datums = _context.Afspraken.GroupBy(x => x.Datum.Date).Where(x => x.Count() > 2).Select(x => x.Key).ToArray();
             
             return View(datums); // geef lijst mee aan view
         }
@@ -58,25 +58,24 @@ namespace Honeymoonshop.Controllers
             return View(klantafspraak);
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult GetTijden(string date) {
             var datum = Convert.ToDateTime(date);
-            var afspraken = _context.Afspraken.Where(x => x.datum.Date == datum).Select(x => x.datum.Hour).ToList();
-            List<Tijd> regel = new List<Tijd>();
-            regel.Add(new Tijd() { tijd = "09:30", isBeschikbaar = !afspraken.Contains(9) , isChecked = !afspraken.Contains(9) && !regel.Select(x => x.isBeschikbaar).Contains(true)});
-            regel.Add(new Tijd() { tijd = "12:30", isBeschikbaar = !afspraken.Contains(12), isChecked = !afspraken.Contains(12) && !regel.Select(x => x.isBeschikbaar).Contains(true) });
-            regel.Add(new Tijd() { tijd = "15:00", isBeschikbaar = !afspraken.Contains(15), isChecked = !afspraken.Contains(15) && !regel.Select(x => x.isBeschikbaar).Contains(true) });
+            var afspraken = _context.Afspraken.Where(x => x.Datum.Date == datum).Select(x => x.Datum.Hour).ToList();
+            List<Afspraaktijd> regel = new List<Afspraaktijd>();
+            regel.Add(new Afspraaktijd() { Tijd = "09:30", IsBeschikbaar = !afspraken.Contains(9) , IsChecked = !afspraken.Contains(9) && !regel.Select(x => x.IsBeschikbaar).Contains(true)});
+            regel.Add(new Afspraaktijd() { Tijd = "12:30", IsBeschikbaar = !afspraken.Contains(12), IsChecked = !afspraken.Contains(12) && !regel.Select(x => x.IsBeschikbaar).Contains(true) });
+            regel.Add(new Afspraaktijd() { Tijd = "15:00", IsBeschikbaar = !afspraken.Contains(15), IsChecked = !afspraken.Contains(15) && !regel.Select(x => x.IsBeschikbaar).Contains(true) });
             return new ObjectResult(regel);
         }
 
 
         [HttpPost]
         public IActionResult Bevestigafspraak(Klantafspraak klantafspraak) {
-           
-            _context.Klanten.Add(klantafspraak.klant);
+            _context.Klanten.Add(klantafspraak.Klant);
             Afspraak afspraak = new Afspraak();
-            afspraak.klant = klantafspraak.klant;
-            afspraak.datum = klantafspraak.afspraakdatum;
+            afspraak.Klant = klantafspraak.Klant;
+            afspraak.Datum = klantafspraak.Afspraakdatum;
             afspraak.type = klantafspraak.type;
             _context.Afspraken.Add(afspraak);
             _context.SaveChanges();
@@ -91,7 +90,6 @@ namespace Honeymoonshop.Controllers
         [HttpPost]
         public IActionResult Datumdoorgeven(string dueDate, string tijdstip, string typeafspraak)
         {
-
             if (!ModelState.IsValid)
             {
                 return NotFound();
@@ -102,7 +100,7 @@ namespace Honeymoonshop.Controllers
             DateTime dt = Convert.ToDateTime(dueDate);
             TimeSpan ts = new TimeSpan(dt2.Hour, dt2.Minute, dt2.Second);
             dt = dt.Date + ts;
-            klantafspraak.afspraakdatum = dt;
+            klantafspraak.Afspraakdatum = dt;
             klantafspraak.type = typeafspraak;
 
             return RedirectToAction("Afspraakmaken2", klantafspraak);
