@@ -1,6 +1,6 @@
-
 @model Honeymoonshop.Models.Product
-
+@if (Model.kleuren.Count > 0)
+{
     <div class="col-md-4 col-item catalogusitem">
         <a asp-route-productId="@Model.id" a asp-route-kleurId="@Model.kleuren[0].kleurId" a asp-action="ProductPagina">
             <div class="img-container">
@@ -24,17 +24,14 @@
 
                 }
             </div>
-
             <div class="bold">@Model.merk.merkNaam</div>
             <div class="artikelnr">artikel nr. @Model.artikelnummer</div>
         </a>
-
         <div id="kleuren">
             @foreach (Kleurproduct kleurproduct in Model.kleuren)
             {
                 <a asp-action="productpagina" asp-route-kleurid="@kleurproduct.kleurId" asp-route-productid="@Model.id"><div class="kleurbolletje verberg" style="background-color:#@kleurproduct.kleur.kleurCode"></div></a> <span>&nbsp;</span>
             }
-
         </div>
-
     </div>
+}

@@ -47,7 +47,6 @@ namespace Honeymoonshop.Controllers
             ViewBag.geselecteerdeMinPrijs = geselecteerdeMinPrijs;
             var producten = Context.Producten.Include(x => x.merk).Include(x => x.kenmerken).ThenInclude(x => x.kenmerk).Include(x => x.kleuren).ThenInclude(x => x.kleur).Include(x => x.kleuren).ThenInclude(x=>x.images).Where(x => x.geslacht == "Bruid" && x.prijs <= geselecteerdeMaxPrijs).ToList();
             
-            producten.ForEach(x => x.kleuren.Sort((k1, k2)=>k2.images.Count.CompareTo(k1.images.Count)));
             var categorieen = Context.Category.ToList();
             Category actievecat = categorieen.SingleOrDefault(x => x.id == filtercriteria.categorieID);
 

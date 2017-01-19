@@ -3,7 +3,8 @@
     <div class="slide-items">
         @foreach (Product p in Model)
         {
-
+            if (p.kleuren.Count > 0)
+            {
             <div class="slide-item" style="width:236px; height:446px">
                 @{
                     if (p.kleuren.Count > 0 && p.kleuren[0].images.Count > 0)
@@ -30,6 +31,7 @@
                     <span class="col-md-8 slide-btn text-uppercase text-center bold">bekijk de jurk</span>
                 </a>
             </div>
+            }
         }
     </div>
 </div>

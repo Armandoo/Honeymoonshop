@@ -140,18 +140,17 @@ namespace Honeymoonshop.Controllers
                 }
             }
 
-
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && kleur.Length > 0 && kenmerk.Length > 0)
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Images", new { id = product.id});
             }
-
+            
             return View(new CreateProduct()
             {
-                Categorieen = new SelectList(_context.Category, "id", "naam", product.categorie),
-                Merken = new SelectList(_context.Merken, "id", "merkNaam", product.merk.id),
+                Categorieen = new SelectList(_context.Category, "id", "naam", product.categorieId),
+                Merken = new SelectList(_context.Merken, "id", "merkNaam", product.merkId),
                 Kenmerken = _context.Kenmerken.ToList(),
                 Kleuren = _context.Kleuren.ToList(),
                 product = product
@@ -233,7 +232,7 @@ namespace Honeymoonshop.Controllers
                 {
                     //Deze kleuren zijn niet aangevinkt.
                     //Verwijder de relatie met afbeelding
-                    _context.ProductAfbeeldingen.Remove(_context.ProductAfbeeldingen.Where(x => x.kleurproduct.kleurId == teVerwijderenId).FirstOrDefault());
+                    _context.ProductAfbeeldingen.Remove(_context.ProductAfbeeldingen.Where(x => x.kleurproduct.kleurId == teVerwijderenId && x.kleurproduct.productId == id).FirstOrDefault());
                     //Verwijder daarna de relatie tussen kleur en product
                     _context.ktKleurProduct.Remove(_context.ktKleurProduct.Where(kleurproduct => kleurproduct.productId == id && kleurproduct.kleurId == teVerwijderenId).FirstOrDefault());
                 }
