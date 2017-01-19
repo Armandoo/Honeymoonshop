@@ -51,7 +51,7 @@ namespace Honeymoonshop.Controllers
         [HttpPost]
         public IActionResult Afspraakmaken3(Klantafspraak klantafspraak) {
             ViewBag.menu = "inverted";
-            ViewBag.type = klantafspraak.type;
+            ViewBag.type = klantafspraak.Type;
             if (!ModelState.IsValid) {
                 return RedirectToAction("Afspraakmaken2", klantafspraak);
             }
@@ -76,7 +76,7 @@ namespace Honeymoonshop.Controllers
             Afspraak afspraak = new Afspraak();
             afspraak.Klant = klantafspraak.Klant;
             afspraak.Datum = klantafspraak.Afspraakdatum;
-            afspraak.type = klantafspraak.type;
+            afspraak.Type  = klantafspraak.Type;
             _context.Afspraken.Add(afspraak);
             _context.SaveChanges();
 
@@ -101,7 +101,7 @@ namespace Honeymoonshop.Controllers
             TimeSpan ts = new TimeSpan(dt2.Hour, dt2.Minute, dt2.Second);
             dt = dt.Date + ts;
             klantafspraak.Afspraakdatum = dt;
-            klantafspraak.type = typeafspraak;
+            klantafspraak.Type = typeafspraak;
 
             return RedirectToAction("Afspraakmaken2", klantafspraak);
         }

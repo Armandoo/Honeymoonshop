@@ -62,7 +62,7 @@ $(document).ready(function () {
             $(".tijdstipbuttons").text("");
 
             $.ajax({
-                method: "GET",
+                method: "POST",
                 datatype: "JSON",
                 url: "/afspraak/GetTijden",
                 data: jQuery.param({ date: $("#dueDate").val() })                
