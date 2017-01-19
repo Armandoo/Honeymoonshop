@@ -1,5 +1,4 @@
 ﻿@model Honeymoonshop.Models.AfspraakViewModels.Klantafspraak
-
 <div class="row">
    <div class="col-md-12 afsprakenkop">
        <div id="breadcrumbcontainer">
@@ -57,41 +56,42 @@
                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                    <p>
                        <label class="bold">Voor- en achternaam*</label><br />
-                       <input asp-for="klant.naam" class="col-xs-12" size="30" />
-                       <span asp-validation-for="klant.naam" class="text-danger" />
+                       <input asp-for="Klant.Naam" class="col-xs-12" size="30" />
+                       <span asp-validation-for="Klant.Naam" class="text-danger" />
                    </p>
                    <p>
                        <label class="bold">Trouwdatum*</label><br />
-                       <input asp-for="klant.trouwDatum" class="col-xs-12" type="date" id="datum" />
-                       <span asp-validation-for="klant.trouwDatum" class="text-danger" />
+                       <input asp-for="Klant.TrouwDatum" class="col-xs-12" type="date" id="datum" />
+                       <span asp-validation-for="Klant.TrouwDatum" class="text-danger" />
                    </p>
                    <p>
                        <label class="bold">Telefoonnummer</label><br />
-                       <input asp-for="klant.telefoonnummer" class="col-xs-12" size="30" />
-                       <span asp-validation-for="klant.telefoonnummer" class="text-danger" />
+                       <input asp-for="Klant.Telefoonnummer" class="col-xs-12" size="30" />
+                       <span asp-validation-for="Klant.Telefoonnummer" class="text-danger" />
                    </p>
                    <p>
                        <label class="bold">E-mailadres*</label><br />
-                       <input asp-for="klant.email" class="col-xs-12" name="klant.email" size="30" />
-                       <span asp-validation-for="klant.email" class="text-danger"></span>
+                       <input asp-for="Klant.Email" class="col-xs-12" name="Klant.Email" size="30" />
+                       <span asp-validation-for="Klant.Email" class="text-danger"></span>
                    </p>
                    <p>
                        <label class="bold">Herhaal E-mailadres*</label><br />
-                       <input asp-for="klant.herhaalEmail" class="col-xs-12" name="klant.herhaalEmail" size="30" />
-                       <span asp-validation-for="klant.herhaalEmail" class="text-danger"></span>
+                       <input asp-for="Klant.HerhaalEmail" class="col-xs-12" name="Klant.HerhaalEmail" size="30" />
+                       <span asp-validation-for="Klant.HerhaalEmail" class="text-danger"></span>
                    </p>
                    <p>
-                       <input type="checkbox" value="true" name="klant.wilBrief" />
+                       <input type="checkbox" value="true" name="Klant.WilBrief" />
                        <label style="font-size:10px;font-weight:normal;">Ja, ik wil me graag aanmelden voor de inspirerende nieuwsbrief van de Honeymoon Shop</label>
                    </p>
-                   <input type="hidden" name="afspraakdatum" value="@Model.afspraakdatum" />
+                   <input type="hidden" name="Afspraakdatum" value="@Model.Afspraakdatum" />
+                   <input type="hidden" name="Type" id="Type" value="@Model.Type" />
                    <input type="submit" class="afspraakknop" value="Naar stap 3" /></br>
                </form>
            </div>
            <div class="col-md-5 afspraakrechts">
                <p class="bold"><img class="img-responsive" src="~/images/heart.png" />&nbsp;Gekozen tijd en datum:</p></br>
                <div class="col-md-10 afspraakrechtsdatum">
-                   <p>@Model.afspraakdatum.ToString("g")</p>
+                   <p>@Model.Afspraakdatum.ToString("g")</p>
                </div></br></br>
                <p>Vul je persoonlijke gegevens in om de pasafspraak compleet te maken.</p></br></br></br></br></br></br></br></br>
                <a href="#" class="afspraaklinkform"><p><img class="img-responsive" src="~/images/arrow2.png" />Terug naar stap 1 om datum te wijzigen</p></a>

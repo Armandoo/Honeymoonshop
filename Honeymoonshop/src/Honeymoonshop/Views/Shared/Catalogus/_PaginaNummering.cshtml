@@ -1,24 +1,24 @@
 ﻿@model Honeymoonshop.Models.Catalogus.CatalogusVM
 
-@if (Model.aantalpaginas > 0)
+@if (Model.Aantalpaginas > 0)
 {
     <ul class="pagination pull-right">
         <li>
-            @Html.ActionLink("◀", "dressfinder", new { merk = Model.criteria.merk, paginering = 1, categorieid = @Model.criteria.categorieID, minPrijs = @Model.criteria.minPrijs, maxPrijs = @Model.criteria.maxPrijs, sorteer = @Model.criteria.sorteer, limiet = @Model.criteria.limiet, kenmerk = Model.criteria.kenmerk, gefilterdekleur = Model.criteria.gefilterdeKleur })
+            @Html.ActionLink("◀", "dressfinder", new { Merk = Model.Criteria.Merk, paginering = 1, categorieid = @Model.Criteria.CategorieId, MinPrijs = @Model.Criteria.MinPrijs, MaxPrijs = @Model.Criteria.MaxPrijs, Sorteer = @Model.Criteria.Sorteer, Limiet = @Model.Criteria.Limiet, Kenmerk = Model.Criteria.Kenmerk, Gefilterdekleur = Model.Criteria.Gefilterdekleur })
 
 
         </li>
-        @for (int i = 1; i < Model.aantalpaginas + 1; i++)
+        @for (int i = 1; i < Model.Aantalpaginas + 1; i++)
         {
             <li>
                 
 
-                @Html.ActionLink(""+i, "dressfinder", new { merk = Model.criteria.merk, paginering = i, categorieid = @Model.criteria.categorieID, minPrijs = @Model.criteria.minPrijs, maxPrijs = @Model.criteria.maxPrijs, sorteer = @Model.criteria.sorteer, limiet = @Model.criteria.limiet, kenmerk = Model.criteria.kenmerk, gefilterdekleur = Model.criteria.gefilterdeKleur })
+                @Html.ActionLink(""+i, "dressfinder", new { Merk = Model.Criteria.Merk, paginering = i, categorieid = @Model.Criteria.CategorieId, MinPrijs = @Model.Criteria.MinPrijs, MaxPrijs = @Model.Criteria.MaxPrijs, Sorteer = @Model.Criteria.Sorteer, Limiet = @Model.Criteria.Limiet, Kenmerk = Model.Criteria.Kenmerk, Gefilterdekleur = Model.Criteria.Gefilterdekleur })
             </li>
         }
 
         <li>
-            @Html.ActionLink("►", "dressfinder", new { merk = Model.criteria.merk, paginering = Model.aantalpaginas, categorieid=@Model.criteria.categorieID, minPrijs = @Model.criteria.minPrijs, maxPrijs = @Model.criteria.maxPrijs, sorteer = @Model.criteria.sorteer, limiet = @Model.criteria.limiet, kenmerk = Model.criteria.kenmerk, gefilterdekleur = Model.criteria.gefilterdeKleur })
+            @Html.ActionLink("►", "dressfinder", new { Merk = Model.Criteria.Merk, paginering = Model.Aantalpaginas, categorieid=@Model.Criteria.CategorieId, MinPrijs = @Model.Criteria.MinPrijs, MaxPrijs = @Model.Criteria.MaxPrijs, Sorteer = @Model.Criteria.Sorteer, Limiet = @Model.Criteria.Limiet, Kenmerk = Model.Criteria.Kenmerk, Gefilterdekleur = Model.Criteria.Gefilterdekleur })
         </li>
     </ul>
 }

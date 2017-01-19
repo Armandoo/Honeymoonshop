@@ -9,8 +9,8 @@ namespace Honeymoonshop.Models
     public class Attribute
     {
         [Key]
-        public int kenmerkid { get; set; }
-        public string soort { get; set; }
-        public string omschrijving { get; set; }
+        public int Kenmerkid { get; set; }
+        public string Soort { get; set; }
+        public string Omschrijving { get; set; }
     }
 }

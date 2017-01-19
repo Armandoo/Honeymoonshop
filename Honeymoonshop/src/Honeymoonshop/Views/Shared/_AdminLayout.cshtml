@@ -25,6 +25,14 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/opmaak.css" asp-append-version="true" />
     </environment>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/js/bootstrap-slider.js"></script>
+    
+    <script src="~/js/jscolor.js" asp-append-version="true"></script>
+    <script src="~/js/dropzone.js" asp-append-version="true"></script>
+    <script src="~/js/datepicker-nl.js" asp-append-version="true"></script>
+    
     <link rel="stylesheet" href="~/css/opmaak.css" />
 </head>
 <body>
@@ -106,13 +114,7 @@
         
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="~/js/bootstrap-slider.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="~/js/jscolor.js" asp-append-version="true"></script>
-        <script src="~/js/dropzone.js" asp-append-version="true"></script>
-        <script src="~/js/datepicker-nl.js" asp-append-version="true"></script>
+        
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -123,7 +125,7 @@
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
         </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
+        
     </environment>
 
     @RenderSection("scripts", required: false)

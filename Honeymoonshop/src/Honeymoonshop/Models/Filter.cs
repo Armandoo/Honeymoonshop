@@ -6,17 +6,17 @@ namespace Honeymoonshop.Models
 {
     public class Filter
     {
-        public int? silhouette { get; set; }
-        public int? neklijn { get; set; }
-        public int[] gefilterdeKleur { get; set; }
-        public int? categorieID { get; set; }
-        public int[] kenmerk { get; set; }
-        public int? minPrijs { get; set; }
-        public int? maxPrijs { get; set; }
-        public int[] merk { get; set; }
-        public string sorteer { get; set; }
-        public int? limiet { get; set; }
-        public int? paginering { get; set; }
+        public int? Silhouette { get; set; }
+        public int? Neklijn { get; set; }
+        public int[] Gefilterdekleur { get; set; }
+        public int? CategorieId { get; set; }
+        public int[] Kenmerk { get; set; }
+        public int? MinPrijs { get; set; }
+        public int? MaxPrijs { get; set; }
+        public int[] Merk { get; set; }
+        public string Sorteer { get; set; }
+        public int? Limiet { get; set; }
+        public int? Paginering { get; set; }
         
 
         public List<Product> filterContent(List<Product> p)
@@ -35,40 +35,40 @@ namespace Honeymoonshop.Models
 
         public List<Product> filterOpCategorie(List<Product> producten)
         {
-            if (this.categorieID != null)
+            if (this.CategorieId != null)
             {
-                producten = producten.FindAll(x => x.categorie.id == this.categorieID);
+                producten = producten.FindAll(x => x.Categorie.Id == this.CategorieId);
             }
             return producten;
         }
         public List<Product> filterOpPrijs(List<Product> producten)
         {
-            if (this.minPrijs != null)
+            if (this.MinPrijs != null)
             {
-                producten = producten.FindAll(x => x.prijs >= this.minPrijs);
+                producten = producten.FindAll(x => x.Prijs >= this.MinPrijs);
             }
 
 
-            if (this.maxPrijs != null)
+            if (this.MaxPrijs != null)
             {
-                producten = producten.FindAll(x => x.prijs <= this.maxPrijs);
+                producten = producten.FindAll(x => x.Prijs <= this.MaxPrijs);
             }
             return producten;
         }
         public List<Product> filterOpMerk(List<Product> producten)
         {
-            if (this.merk!= null)
+            if (this.Merk!= null)
             {
-                    producten = producten.FindAll(x => merk.Contains(x.merkId));
+                    producten = producten.FindAll(x => Merk.Contains(x.MerkId));
             }
             return producten;
         }
 
         public List<Product> filterOpKenmerken(List<Product> producten)
         {
-            if (this.kenmerk != null)
+            if (this.Kenmerk != null)
             {
-                producten = producten.FindAll(x => x.kenmerken.Any(z => kenmerk.Contains( z.kenmerk.id )));
+                producten = producten.FindAll(x => x.Kenmerken.Any(z => Kenmerk.Contains( z.Kenmerk.Id )));
             }
             /*
             if (this.neklijn != null)
@@ -87,14 +87,14 @@ namespace Honeymoonshop.Models
 
         public List<Product> filterOpKleur(List<Product> producten)
         {
-            if (this.gefilterdeKleur != null)
+            if (this.Gefilterdekleur != null)
             {
-                producten.ForEach(x =>x.kleuren = x.kleuren.OrderByDescending(z => gefilterdeKleur.Contains(z.kleurId)).ToList());
+                producten.ForEach(x =>x.Kleuren = x.Kleuren.OrderByDescending(z => gefilterdeKleur.Contains(z.kleurId)).ToList());
             }
             else
             {
 
-                producten.ForEach(x => x.kleuren.Sort((k1, k2) => k2.images.Count.CompareTo(k1.images.Count)));
+                producten.ForEach(x => x.Kleuren.Sort((k1, k2) => k2.images.Count.CompareTo(k1.images.Count)));
             }
 
             return producten;
@@ -102,13 +102,13 @@ namespace Honeymoonshop.Models
 
         public List<Product> soorteer(List<Product> producten)
         {
-            if (this.sorteer == "desc")
+            if (this.Sorteer == "desc")
             {
-                producten = producten.OrderByDescending(x => x.prijs).ToList();
+                producten = producten.OrderByDescending(x => x.Prijs).ToList();
             }
             else
             {
-                producten = producten.OrderBy(x => x.prijs).ToList();
+                producten = producten.OrderBy(x => x.Prijs).ToList();
             }
             return producten;
         }

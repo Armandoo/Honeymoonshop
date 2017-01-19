@@ -10,12 +10,21 @@ namespace Honeymoonshop.Models.Utils
         public void sendEmail(Klantafspraak klantafspraak) {
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("Honeymoonshop", "honingmaantest@gmail.com"));
-            message.To.Add(new MailboxAddress(klantafspraak.klant.naam, klantafspraak.klant.email));
+            message.To.Add(new MailboxAddress(klantafspraak.Klant.Naam, klantafspraak.Klant.Email));
             message.Subject = "Bevestiging pasafspraak";
-            message.Body = new TextPart("plain")
+            if (klantafspraak.Type == "afspeld")
             {
-                Text = "Beste " + klantafspraak.klant.naam + " uw pasafspraak is aangemaakt op de volgende datum en tijd: " + klantafspraak.afspraakdatum
-            };
+                message.Body = new TextPart("plain")
+                {
+                    Text = "Beste " + klantafspraak.Klant.Naam + " uw afspeldafspraak is aangemaakt op de volgende datum en tijd: " + klantafspraak.Afspraakdatum
+                };
+            }
+            else {
+                message.Body = new TextPart("plain")
+                {
+                    Text = "Beste " + klantafspraak.Klant.Naam + " uw pasafspraak is aangemaakt op de volgende datum en tijd: " + klantafspraak.Afspraakdatum
+                };
+            }
 
             using (var client = new SmtpClient()) {
                 client.Connect("smtp.gmail.com", 587, false);

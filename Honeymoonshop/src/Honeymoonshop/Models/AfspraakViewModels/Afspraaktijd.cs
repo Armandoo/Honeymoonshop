@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace Honeymoonshop.Models.AfspraakViewModels
 {
-    public class Tijd
+    public class Afspraaktijd
     {
-        public string tijd { get; set; }
-        public bool isBeschikbaar { get; set; }
+        public string Tijd { get; set; }
+        public bool IsBeschikbaar { get; set; }
 
-        public bool isChecked { get; set; }
+        public bool IsChecked { get; set; }
 
     }
 }

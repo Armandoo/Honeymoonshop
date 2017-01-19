@@ -10,12 +10,12 @@ namespace Honeymoonshop.Models
     public class Kleurproduct
     {
 
-        public int productId { get; set; }
-        public Product product { get; set; }
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
 
-        public int kleurId { get; set; }
-        public Kleur kleur { get; set; }
+        public int KleurId { get; set; }
+        public Kleur Kleur { get; set; }
 
-        public List<ProductImage> images { get; set; }
+        public List<ProductImage> Images { get; set; }
     }
 }

@@ -868,6 +868,10 @@ border-top: 3px solid rgb(229, 229, 229);
     padding-left: 50px;
 }
 
+    .afsprakeninhoud a {
+    color: black;
+    }
+
 .afsprakeninhoudtekst {
     background-color: white;
     text-align: center;

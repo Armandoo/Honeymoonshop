@@ -7,13 +7,13 @@
             {
             <div class="slide-item" style="width:236px; height:446px">
                 @{
-                    if (p.kleuren.Count > 0 && p.kleuren[0].images.Count > 0)
+                    if (p.Kleuren.Count > 0 && p.Kleuren[0].Images.Count > 0)
                     {
-                        <img src="~/images/productenimages/@p.kleuren[0].images[0].bestandsNaam" class="img-responsive " />
+                        <img src="~/images/productenimages/@p.Kleuren[0].Images[0].BestandsNaam" class="img-responsive " />
                     }
                     else
                     {
-                        if (p.geslacht == "bruid")
+                        if (p.Geslacht == "bruid")
                         {
                             <img src="~/images/productenimages/placeholders/placeholderbruid.jpg" class="img-responsive " />
                         }
@@ -27,7 +27,7 @@
 
                 }
 
-                <a asp-action="productpagina" asp-route-productid="@p.id" asp-route-kleurid="@p.kleuren[0].kleurId">
+                <a asp-action="productpagina" asp-route-productid="@p.Id" asp-route-kleurid="@p.Kleuren[0].KleurId">
                     <span class="col-md-8 slide-btn text-uppercase text-center bold">bekijk de jurk</span>
                 </a>
             </div>

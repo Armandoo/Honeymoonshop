@@ -11,17 +11,24 @@ namespace Honeymoonshop.Models
     public class Product
     {
 
-        public int id { get; set; }
-        public int artikelnummer { get; set; }
-        public int prijs { get; set; }
-        public int merkId { get; set; }
-        public virtual Merk merk { get; set; }
-        public int categorieId { get; set; }
-        public String geslacht { get; set; }
-        public Category categorie { get; set; }
-        public virtual List<Kleurproduct> kleuren { get; set; }
-        public virtual List<Kenmerkproduct> kenmerken { get; set; }
-        public string omschrijving { get; set; }
-        public List<ProductImage> afbeeldingen { get; internal set; }
+        public int Id { get; set; }
+        [Required(ErrorMessage = "Artikelnummer moet 5 tekens zijn")]
+        [MinLength(5, ErrorMessage ="Artikelnummer moet 5 tekens zijn")]
+        [MaxLength(5, ErrorMessage ="Artikelnummer moet 5 tekens zijn")]
+        [RegularExpression(@"^\$?\d+(\.(\d{2}))?$", ErrorMessage ="Alleen getallen pls")]
+        public string Artikelnummer { get; set; }
+        [Required(ErrorMessage ="Vul een prijs in")]
+        [Range(1, 10000, ErrorMessage ="Prijs moet tussen 1 en 10.000 zijn")]
+        public int Prijs { get; set; }
+        public int MerkId { get; set; }
+        public virtual Merk Merk { get; set; }
+        public int CategorieId { get; set; }
+        public String Geslacht { get; set; }
+        public Category Categorie { get; set; }
+        public virtual List<Kleurproduct> Kleuren { get; set; }
+        public virtual List<Kenmerkproduct> Kenmerken { get; set; }
+        [Required(ErrorMessage ="Vul een Omschrijving in")]
+        public string Omschrijving { get; set; }
+        public List<ProductImage> Afbeeldingen { get; internal set; }
     }
 }
