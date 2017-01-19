@@ -690,6 +690,12 @@ border-top: 3px solid rgb(229, 229, 229);
 
 }
 
+.triangle{
+    display:none;
+}
+
+
+
 .filter-container a{
     color:black;
 

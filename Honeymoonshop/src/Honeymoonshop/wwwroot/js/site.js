@@ -20,6 +20,8 @@ $(document).ready(function () {
         $(".minprijs").text(minPrijs);
         $(".maxprijs").text(maxPrijs);
 
+
+
         $('input:hidden[name=minPrijs]').val( minPrijs);
         $('input:hidden[name=maxPrijs]').val( maxPrijs);
     });
@@ -82,6 +84,8 @@ $(document).ready(function () {
 
 })
 
+
+
 function initFilterImages() {
     $("input:checked.filter-checkbox").parents(".rbfilter").each(function () {
         $(".rb.outer", this).toggle();
@@ -110,6 +114,31 @@ function toggleImage() {
             $(this).addClass("bold");
         }
 
+    });
+
+    $(".merkfilter").click(function () {
+        $(".triangle", this).toggle();
+        $(".triangle-opposite", this).toggle();
+    });
+
+    $(".stijlfilter").click(function () {
+        $(".triangle", this).toggle();
+        $(".triangle-opposite", this).toggle();
+    });
+
+    $(".neklijnfilter").click(function () {
+        $(".triangle", this).toggle();
+        $(".triangle-opposite", this).toggle();
+    });
+
+    $(".silhouettefilter").click(function () {
+        $(".triangle", this).toggle();
+        $(".triangle-opposite", this).toggle();
+    });
+
+    $(".kleurfilter").click(function () {
+        $(".triangle", this).toggle();
+        $(".triangle-opposite", this).toggle();
     });
 };
         
