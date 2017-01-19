@@ -10,5 +10,6 @@ namespace Honeymoonshop.Models
         public int id { get; set; }
         public Klant klant { get; set; }
         public DateTime datum { get; set; }
+        public string type { get; set; }
     }
 }

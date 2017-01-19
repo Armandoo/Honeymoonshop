@@ -24,15 +24,15 @@ namespace Honeymoonshop.Controllers
             return View();
         }
 
-        public IActionResult Afspraakmaken()
+        public IActionResult Afspraakmaken(string typeafspraak)
         {
             ViewBag.menu = "inverted";
             /*
                 Vind datums waar er geen afspraken gemaakt kunnen worden / lijst met datums
              */
+            ViewBag.type = typeafspraak;
 
             DateTime[] datums = _context.Afspraken.GroupBy(x => x.datum.Date).Where(x => x.Count() > 2).Select(x => x.Key).ToArray();
-            
             
             return View(datums); // geef lijst mee aan view
         }
@@ -51,13 +51,14 @@ namespace Honeymoonshop.Controllers
         [HttpPost]
         public IActionResult Afspraakmaken3(Klantafspraak klantafspraak) {
             ViewBag.menu = "inverted";
+            ViewBag.type = klantafspraak.type;
             if (!ModelState.IsValid) {
                 return RedirectToAction("Afspraakmaken2", klantafspraak);
             }
             return View(klantafspraak);
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult GetTijden(string date) {
             var datum = Convert.ToDateTime(date);
             var afspraken = _context.Afspraken.Where(x => x.datum.Date == datum).Select(x => x.datum.Hour).ToList();
@@ -76,6 +77,7 @@ namespace Honeymoonshop.Controllers
             Afspraak afspraak = new Afspraak();
             afspraak.klant = klantafspraak.klant;
             afspraak.datum = klantafspraak.afspraakdatum;
+            afspraak.type = klantafspraak.type;
             _context.Afspraken.Add(afspraak);
             _context.SaveChanges();
 
@@ -87,7 +89,7 @@ namespace Honeymoonshop.Controllers
         }
 
         [HttpPost]
-        public IActionResult Datumdoorgeven(string dueDate, string tijdstip)
+        public IActionResult Datumdoorgeven(string dueDate, string tijdstip, string typeafspraak)
         {
 
             if (!ModelState.IsValid)
@@ -101,6 +103,7 @@ namespace Honeymoonshop.Controllers
             TimeSpan ts = new TimeSpan(dt2.Hour, dt2.Minute, dt2.Second);
             dt = dt.Date + ts;
             klantafspraak.afspraakdatum = dt;
+            klantafspraak.type = typeafspraak;
 
             return RedirectToAction("Afspraakmaken2", klantafspraak);
         }

@@ -62,10 +62,10 @@ $(document).ready(function () {
             $(".tijdstipbuttons").text("");
 
             $.ajax({
-                method: "POST",
+                method: "GET",
                 datatype: "JSON",
                 url: "/afspraak/GetTijden",
-                data: jQuery.param({ date: $("#dueDate").val() })
+                data: jQuery.param({ date: $("#dueDate").val() })                
             })
             .done(function (msg) {
                 for (var i = 0; i < msg.length; i++) {

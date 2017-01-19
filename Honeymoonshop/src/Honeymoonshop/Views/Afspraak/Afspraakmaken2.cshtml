@@ -1,5 +1,4 @@
 ﻿@model Honeymoonshop.Models.AfspraakViewModels.Klantafspraak
-
 <div class="row">
    <div class="col-md-12 afsprakenkop">
        <div id="breadcrumbcontainer">
@@ -85,6 +84,7 @@
                        <label style="font-size:10px;font-weight:normal;">Ja, ik wil me graag aanmelden voor de inspirerende nieuwsbrief van de Honeymoon Shop</label>
                    </p>
                    <input type="hidden" name="afspraakdatum" value="@Model.afspraakdatum" />
+                   <input type="hidden" name="type" id="type" value="@Model.type" />
                    <input type="submit" class="afspraakknop" value="Naar stap 3" /></br>
                </form>
            </div>
