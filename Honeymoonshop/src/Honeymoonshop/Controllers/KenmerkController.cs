@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Honeymoonshop.Data;
 using Honeymoonshop.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Honeymoonshop.Controllers
 {
+    [Authorize]
     public class KenmerkController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,20 +22,20 @@ namespace Honeymoonshop.Controllers
         }
 
         // GET: Kenmerk
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Kenmerken.ToListAsync());
+            return View(_context.Kenmerken.ToList());
         }
 
         // GET: Kenmerk/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var kenmerk = await _context.Kenmerken.SingleOrDefaultAsync(m => m.Id == id);
+            var kenmerk = _context.Kenmerken.SingleOrDefault(m => m.Id == id);
             if (kenmerk == null)
             {
                 return NotFound();
@@ -53,26 +55,26 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam,KenmerkType")] Kenmerk kenmerk)
+        public IActionResult Create([Bind("Id,Naam,KenmerkType")] Kenmerk kenmerk)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(kenmerk);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(kenmerk);
         }
 
         // GET: Kenmerk/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var kenmerk = await _context.Kenmerken.SingleOrDefaultAsync(m => m.Id == id);
+            var kenmerk = _context.Kenmerken.SingleOrDefault(m => m.Id == id);
             if (kenmerk == null)
             {
                 return NotFound();
@@ -85,7 +87,7 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,KenmerkType")] Kenmerk kenmerk)
+        public IActionResult Edit(int id, [Bind("Id,Naam,KenmerkType")] Kenmerk kenmerk)
         {
             if (id != kenmerk.Id)
             {
@@ -97,7 +99,7 @@ namespace Honeymoonshop.Controllers
                 try
                 {
                     _context.Update(kenmerk);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -116,14 +118,14 @@ namespace Honeymoonshop.Controllers
         }
 
         // GET: Kenmerk/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var kenmerk = await _context.Kenmerken.SingleOrDefaultAsync(m => m.Id == id);
+            var kenmerk = _context.Kenmerken.SingleOrDefault(m => m.Id == id);
             if (kenmerk == null)
             {
                 return NotFound();
@@ -135,16 +137,16 @@ namespace Honeymoonshop.Controllers
         // POST: Kenmerk/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var kenmerk = await _context.Kenmerken.SingleOrDefaultAsync(m => m.Id == id);
+            var kenmerk = _context.Kenmerken.SingleOrDefault(m => m.Id == id);
             _context.Kenmerken.Remove(kenmerk);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         private bool KenmerkExists(int id)
-        {
+        {   
             return _context.Kenmerken.Any(e => e.Id == id);
         }
     }

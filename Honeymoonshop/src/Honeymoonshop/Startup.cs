@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Honeymoonshop.Data;
 using Honeymoonshop.Models;
 using Honeymoonshop.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Honeymoonshop
 {
@@ -47,7 +48,11 @@ namespace Honeymoonshop
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.SslPort = 44336;
+                options.Filters.Add(new RequireHttpsAttribute());
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -71,11 +76,20 @@ namespace Honeymoonshop
                 app.UseExceptionHandler("/Home/Error");
             }
 
+
+
             app.UseStaticFiles();
 
             app.UseIdentity();
 
+
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
+
+            app.UseGoogleAuthentication(new GoogleOptions()
+            {
+                ClientId = Configuration["Authentication:Google:ClientId"],
+                ClientSecret = Configuration["Authentication:Google:ClientSecret"]
+            });
 
             app.UseMvc(routes =>
             {
