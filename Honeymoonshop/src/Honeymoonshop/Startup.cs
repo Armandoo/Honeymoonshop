@@ -87,8 +87,8 @@ namespace Honeymoonshop
 
             app.UseGoogleAuthentication(new GoogleOptions()
             {
-                ClientId = Configuration["Authentication:Google:ClientId"],
-                ClientSecret = Configuration["Authentication:Google:ClientSecret"]
+                ClientId = Configuration["Google:ClientID"],
+                ClientSecret = Configuration["Google:ClientSecret"]
             });
 
             app.UseMvc(routes =>
