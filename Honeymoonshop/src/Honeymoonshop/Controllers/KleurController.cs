@@ -14,7 +14,7 @@ namespace Honeymoonshop.Controllers
     [Authorize]
     public class KleurController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private ApplicationDbContext _context;
 
         public KleurController(ApplicationDbContext context)
         {

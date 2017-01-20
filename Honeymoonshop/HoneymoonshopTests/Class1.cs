@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HoneymoonshopTest
+namespace HoneymoonshopTests
 {
-    public class Program
+    public class Class1
     {
-        public static void Main(string[] args)
+        public Class1()
         {
-
         }
     }
 }
