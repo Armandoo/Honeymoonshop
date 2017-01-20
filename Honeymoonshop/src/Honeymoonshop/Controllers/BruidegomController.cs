@@ -61,15 +61,13 @@ namespace Honeymoonshop.Controllers
 
             int limiet = filtercriteria.Limiet ?? 12;
 
-            var aantalpaginas = Math.Ceiling(Convert.ToDouble(producten.Count() / limiet));
+            var aantalpaginas = Math.Ceiling((double)producten.Count() / (double)limiet);
             int pagina = filtercriteria.Paginering ?? 1;
 
             producten = producten.Skip(pagina * limiet - limiet).Take(limiet).ToList();
 
             var kleur = Context.Kleuren.ToList();
             var criteria = filtercriteria;
-
-
 
             var soorteerMogelijkheden = new List<SelectListItem>
             {

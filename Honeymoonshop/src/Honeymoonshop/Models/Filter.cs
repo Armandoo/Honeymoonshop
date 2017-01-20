@@ -87,16 +87,17 @@ namespace Honeymoonshop.Models
 
         public List<Product> filterOpKleur(List<Product> producten)
         {
+            //Controleer of er is gefilterd op een kleur
             if (this.Gefilterdekleur != null)
             {
-                producten.ForEach(x =>x.Kleuren = x.Kleuren.OrderByDescending(z => Gefilterdekleur.Contains(z.KleurId)).ToList());
+                producten = producten.FindAll(x => x.Kleuren.Any(z => Gefilterdekleur.Contains(z.Kleur.Id)));//Pakt alleen alle producten met de gefilterde kleur
+                producten.ForEach(x =>x.Kleuren = x.Kleuren.OrderByDescending(z => Gefilterdekleur.Contains(z.KleurId)).ToList());//Stopt ze in de juiste volgorde zodat de juiste kleur image wordt gepakt.
             }
             else
             {
-
+                //Er is niet op kleur gefilterd. Sorteer op basis van images
                 producten.ForEach(x => x.Kleuren.Sort((k1, k2) => k2.Images.Count.CompareTo(k1.Images.Count)));
             }
-
             return producten;
         }
 

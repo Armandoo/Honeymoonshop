@@ -23,13 +23,6 @@
         <div class="form-group">
             <label class="col-md-2 control-label"> Kleuren</label>
             <div class="col-md-10">
-                @foreach (var item in Model.Kleuren)
-                {
-                    //Dit geeft error met afbeelding...
-                    //@Html.CheckBox("kleur", (Model.product.kleuren.FindAll(x => x.kleur.id == item.id).ToList().Count > 0), new { value = item.id });
-                    //@item.naam
-                }
-
                 @foreach (var k in Model.Kleuren)
                 {
                     if (Model.Product.Kleuren.Select(x => x.KleurId).Contains(k.Id))
@@ -47,10 +40,16 @@
         <div class="form-group">
             <label class="col-md-2 control-label"> Kenmerken</label>
             <div class="col-md-10">
-                @foreach (var item in Model.Kenmerken)
+                @foreach (var knmrk in Model.Kenmerken)
                 {
-                    @Html.CheckBox("kenmerk", (Model.Product.Kenmerken.FindAll(x => x.Kenmerk.Id == item.Id).ToList().Count > 0), new { value = item.Id });
-                    @item.Naam
+                    if (Model.Product.Kleuren.Select(x => x.KleurId).Contains(knmrk.Id))
+                    {
+                        <input type="checkbox" name="kenmerken" value="@knmrk.Id" checked /> @knmrk.Naam
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="kenmerken" value="@knmrk.Id" /> @knmrk.Naam
+                    }
                 }
             </div>
         </div>

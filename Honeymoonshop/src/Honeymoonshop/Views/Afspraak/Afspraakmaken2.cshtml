@@ -1,103 +1,113 @@
 ﻿@model Honeymoonshop.Models.AfspraakViewModels.Klantafspraak
 <div class="row">
-   <div class="col-md-12 afsprakenkop">
-       <div id="breadcrumbcontainer">
-           <ol class="breadcrumb">
-               <li>
-                   <a href="/home/">Home</a>
-               </li>
-               <li>
-                   <a href="/afspraak/">Afspraak</a>
-               </li>
-               <li>
-                   Pasafspraak maken
-               </li>
-           </ol>
+    <div class="col-md-12 afsprakenkop">
+        <div id="breadcrumbcontainer">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/home/">Home</a>
+                </li>
+                <li>
+                    <a href="/afspraak/">Afspraak</a>
+                </li>
+                <li>
+                    Pasafspraak maken
+                </li>
+            </ol>
+        </div>
+        <p class="afspraakbannerkop">Trouwjurken</p>
+        <p class="text-uppercase afspraakbannertekst">Maak je pas afspraak</p>
+
+    </div>
+       <div class="col-xs-12 col-md-12 afspraakform">
+           <div class="col-xs-11 col-md-11">
+               <div class="col-xs-2 col-md-2 afsprakenlinks">
+                   <div class="col-xs-12 col-md-12 center">
+                       <div class="col-xs-12 col-md-5 rond text-center inactivecircle">
+
+                           1
+
+                       </div>
+                   </div>
+                   <div class="col-xs-12 col-md-12 afspraakstreepjes">|</div>
+                   <div class="col-xs-12 col-md-12 center">
+                       <div class="col-md-9 tekstlinksbolletjes text-center grijs">Datum en tijd selecteren</div>
+                   </div>
+                   <div class="col-xs-12 col-md-12 center">
+                       <div class="col-xs-12 col-md-5 rond text-center" style="opacity:1;">
+
+                           2
+
+                       </div>
+                   </div>
+                   <div class="col-xs-12 col-md-12 center">
+                       <div class="col-md-9 tekstlinksbolletjes text-center" style="opacity:1;">Gegevens invullen</div>
+                   </div>
+                   <div class="col-xs-12 col-md-12 afspraakstreepjes">|</div>
+                   <div class="col-xs-12 col-md-12 afspraakstreepjes">|</div>
+                   <div class="col-xs-12 col-md-12 afspraakstreepjes">|</div>
+                   <div class="col-xs-12 col-md-12 afspraakstreepjes">|</div>
+                   <div class="col-xs-12 col-md-12 afspraakstreepjes">|</div>
+                   <div class="col-xs-12 col-md-12 afspraakstreepjes">|</div>
+
+                   <div class="col-xs-12 col-md-12 center">
+                       <div class="col-xs-12 col-md-5 rond text-center inactivecircle">
+
+                           3
+
+                       </div>
+                   </div>
+                   <div class="col-md-12 center">
+                       <div class="col-md-9 tekstlinksbolletjes text-center grijs">Gegevens controleren</div>
+                   </div>
+               </div>
+               <div class="col-xs-5 col-md-5 afsprakenlinks">
+                   <p class="bold" style="font-size: 25px;">Stap 2, Gegevens invullen</p>
+                   <form asp-controller="Afspraak" asp-action="Afspraakmaken3" method="post">
+                       <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                       <p>
+                           <label class="bold">Voor- en achternaam*</label><br />
+                           <input asp-for="Klant.Naam" class="col-xs-12" size="30" />
+                           <span asp-validation-for="Klant.Naam" class="text-danger" />
+                       </p>
+                       <p>
+                           <label class="bold">Trouwdatum*</label><br />
+                           <input asp-for="Klant.TrouwDatum" class="col-xs-12" type="date" id="datum" />
+                           <span asp-validation-for="Klant.TrouwDatum" class="text-danger" />
+                       </p>
+                       <p>
+                           <label class="bold">Telefoonnummer</label><br />
+                           <input asp-for="Klant.Telefoonnummer" class="col-xs-12" size="30" />
+                           <span asp-validation-for="Klant.Telefoonnummer" class="text-danger" />
+                       </p>
+                       <p>
+                           <label class="bold">E-mailadres*</label><br />
+                           <input asp-for="Klant.Email" class="col-xs-12" name="Klant.Email" size="30" />
+                           <span asp-validation-for="Klant.Email" class="text-danger"></span>
+                       </p>
+                       <p>
+                           <label class="bold">Herhaal E-mailadres*</label><br />
+                           <input asp-for="Klant.HerhaalEmail" class="col-xs-12" name="Klant.HerhaalEmail" size="30" />
+                           <span asp-validation-for="Klant.HerhaalEmail" class="text-danger"></span>
+                       </p>
+                       <p>
+                           <input type="checkbox" value="true" name="Klant.WilBrief" />
+                           <label style="font-size:10px;font-weight:normal;">Ja, ik wil me graag aanmelden voor de inspirerende nieuwsbrief van de Honeymoon Shop</label>
+                       </p>
+                       <input type="hidden" name="Afspraakdatum" value="@Model.Afspraakdatum" />
+                       <input type="hidden" name="Type" id="Type" value="@Model.Type" />
+                       <input type="submit" class="afspraakknop" value="Naar stap 3" /></br>
+                   </form>
+               </div>
+               <div class="col-xs-5 col-md-5 afspraakrechts">
+                   <p class="bold"><img class="img-responsive" src="~/images/heart.png" />&nbsp;Gekozen tijd en datum:</p></br>
+                   <div class="col-md-10 afspraakrechtsdatum">
+                       <p>@Model.Afspraakdatum.ToString("g")</p>
+                   </div></br></br>
+                   <p>Vul je persoonlijke gegevens in om de pasafspraak compleet te maken.</p></br></br></br></br></br></br></br></br>
+                   <a href="/afspraak/afspraakmaken/?Type=@ViewBag.type" class="afspraaklinkform"><p><img class="img-responsive" src="~/images/arrow2.png" />Terug naar stap 1 om datum te wijzigen</p></a>
+               </div>
+           </div>
        </div>
-       <p class="afspraakbannerkop">Trouwjurken</p></br>
-       <p class="text-uppercase afspraakbannertekst">Maak je pas afspraak</p>
-
-       <div class="col-md-12 afspraakform">
-           <div class="col-md-2 afsprakenlinks">
-               <div class="col-md-12 center">
-                   <div class="col-md-5 rond text-center inactivecircle">
-
-                       1
-
-                   </div>
-               </div>
-               <div class="col-md-12 center">
-                   <div class="col-md-9 tekstlinksbolletjes text-center grijs">Datum en tijd selecteren</div>
-               </div>
-               <div class="col-md-12 center">
-                   <div class="col-md-5 rond text-center" style="opacity:1;">
-
-                       2
-
-                   </div>
-               </div>
-               <div class="col-md-12 center">
-                   <div class="col-md-9 tekstlinksbolletjes text-center" style="opacity:1;">Gegevens invullen</div>
-               </div>
-               <div class="col-md-12 center">
-                   <div class="col-md-5 rond text-center inactivecircle">
-
-                       3
-
-                   </div>
-               </div>
-               <div class="col-md-12 center">
-                   <div class="col-md-9 tekstlinksbolletjes text-center grijs">Gegevens controleren</div>
-               </div>
-           </div>
-           <div class="col-md-5 afsprakenlinks">
-               <p class="bold" style="font-size: 25px;">Stap 2, Gegevens invullen</p>
-               <form asp-controller="Afspraak" asp-action="Afspraakmaken3" method="post">
-                   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                   <p>
-                       <label class="bold">Voor- en achternaam*</label><br />
-                       <input asp-for="Klant.Naam" class="col-xs-12" size="30" />
-                       <span asp-validation-for="Klant.Naam" class="text-danger" />
-                   </p>
-                   <p>
-                       <label class="bold">Trouwdatum*</label><br />
-                       <input asp-for="Klant.TrouwDatum" class="col-xs-12" type="date" id="datum" />
-                       <span asp-validation-for="Klant.TrouwDatum" class="text-danger" />
-                   </p>
-                   <p>
-                       <label class="bold">Telefoonnummer</label><br />
-                       <input asp-for="Klant.Telefoonnummer" class="col-xs-12" size="30" />
-                       <span asp-validation-for="Klant.Telefoonnummer" class="text-danger" />
-                   </p>
-                   <p>
-                       <label class="bold">E-mailadres*</label><br />
-                       <input asp-for="Klant.Email" class="col-xs-12" name="Klant.Email" size="30" />
-                       <span asp-validation-for="Klant.Email" class="text-danger"></span>
-                   </p>
-                   <p>
-                       <label class="bold">Herhaal E-mailadres*</label><br />
-                       <input asp-for="Klant.HerhaalEmail" class="col-xs-12" name="Klant.HerhaalEmail" size="30" />
-                       <span asp-validation-for="Klant.HerhaalEmail" class="text-danger"></span>
-                   </p>
-                   <p>
-                       <input type="checkbox" value="true" name="Klant.WilBrief" />
-                       <label style="font-size:10px;font-weight:normal;">Ja, ik wil me graag aanmelden voor de inspirerende nieuwsbrief van de Honeymoon Shop</label>
-                   </p>
-                   <input type="hidden" name="Afspraakdatum" value="@Model.Afspraakdatum" />
-                   <input type="hidden" name="Type" id="Type" value="@Model.Type" />
-                   <input type="submit" class="afspraakknop" value="Naar stap 3" /></br>
-               </form>
-           </div>
-           <div class="col-md-5 afspraakrechts">
-               <p class="bold"><img class="img-responsive" src="~/images/heart.png" />&nbsp;Gekozen tijd en datum:</p></br>
-               <div class="col-md-10 afspraakrechtsdatum">
-                   <p>@Model.Afspraakdatum.ToString("g")</p>
-               </div></br></br>
-               <p>Vul je persoonlijke gegevens in om de pasafspraak compleet te maken.</p></br></br></br></br></br></br></br></br>
-               <a href="#" class="afspraaklinkform"><p><img class="img-responsive" src="~/images/arrow2.png" />Terug naar stap 1 om datum te wijzigen</p></a>
-           </div>
-       </div>
-   </div>
 </div>
 <div class="row">
     <img class="img-responsive" src="http://placehold.it/1400x600" />

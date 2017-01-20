@@ -45,6 +45,7 @@ namespace Honeymoonshop.Controllers
         public IActionResult Afspraakmaken2(Klantafspraak klantafspraak)
         {
             ViewBag.menu = "inverted";
+            ViewBag.type = klantafspraak.Type;
             return View(klantafspraak);
         }
 

@@ -935,6 +935,7 @@ border-top: 3px solid rgb(229, 229, 229);
     background-color: #F0597C;
     color: white;
     padding-bottom: 82px;
+    max-height:100%;
 }
 
 .afsprakenlinks{
@@ -949,6 +950,12 @@ border-top: 3px solid rgb(229, 229, 229);
 }
 
 .afspraakform {
+    background-color:white;
+    display:flex;
+    justify-content:center;
+}
+
+.afspraakform>:first-child{
     box-shadow: 2px 2px 2px 2px #404040;
     padding-left: 0px;
     padding-right:0px;
@@ -960,7 +967,12 @@ border-top: 3px solid rgb(229, 229, 229);
     color: hotpink;
     font-size: 12px;
     opacity: 0.5;
-    padding-bottom: 88px;
+}
+
+.afspraakstreepjes{
+    color:grey;
+    opacity:0.5;
+    text-align:center;
 }
 
 .rond{
@@ -1304,7 +1316,7 @@ nav>:last-child{
 }
 
 #tijdkiezen{
-    height:634px;
+    height:100%;
 }
 
 .tijdstipbuttons{
@@ -1385,6 +1397,15 @@ nav>:last-child{
     #alternatieven>div>div>div:last-child{
         margin-bottom:25px;
         font-size:30px;
+    }
+
+    #tijdkiezen{
+        height:300px;
+        font-weight:bold;
+    } 
+
+    .selectdate{
+        right:6px;
     }
 }
 

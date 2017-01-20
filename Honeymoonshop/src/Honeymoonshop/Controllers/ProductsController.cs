@@ -187,14 +187,15 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Artikelnummer,Geslacht,CategorieId,MerkId,Omschrijving,Prijs")] Product product, string[] kleuren, string[] kenmerk)
+        public IActionResult Edit(int id, [Bind("Id,Artikelnummer,Geslacht,CategorieId,MerkId,Omschrijving,Prijs")] Product product, string[] kleuren, string[] kenmerken)
         {
             if (id != product.Id)
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+            
+            //Als de modelstate valid is, er WEL kleuren en kenmerken zijn aangevinkt, dan mag er worden opgeslagen. Anders niet.
+            if (ModelState.IsValid && kleuren.Length > 0 && kenmerken.Length > 0)
             {
                 //Kleuren
                 var kleurProducten = new List<Kleurproduct>();
@@ -239,7 +240,7 @@ namespace Honeymoonshop.Controllers
                 product.Kleuren = kleurProducten;
                 //Kenmerken
                 List<int> kenmerkenIds = new List<int>();
-                foreach (string knmrk in kenmerk)
+                foreach (string knmrk in kenmerken)
                 {
                     int kenmerkId = 0;
                     if (int.TryParse(knmrk, out kenmerkId))
@@ -270,7 +271,7 @@ namespace Honeymoonshop.Controllers
                 try
                 {
                     _context.Update(product);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -285,15 +286,7 @@ namespace Honeymoonshop.Controllers
                 }
                 return RedirectToAction("Index");
             }
-
-            return View(new CreateProduct()
-            {
-                Categorieen = new SelectList(_context.Category, "Id", "Naam", product.CategorieId),
-                Merken = new SelectList(_context.Merken, "Id", "MerkNaam", product.MerkId),
-                Kenmerken = _context.Kenmerken.ToList(),
-                Kleuren = _context.Kleuren.ToList(),
-                Product = product
-            });
+            return RedirectToAction("Edit", id);
         }
 
         // GET: Products/Delete/5
