@@ -124,7 +124,7 @@ namespace HoneymoonshopTests.Tests
             int? kleurId = null;
 
             var result = c.Edit(kleurId);
-            
+
             //check of de goede actionResult gereturned worden
             var actionResult = Assert.IsType<NotFoundResult>(result);
 
@@ -176,10 +176,10 @@ namespace HoneymoonshopTests.Tests
             mockDbContext.Setup(x => x.Kleuren).Returns(mockDbSetKleur.Object);
 
             KleurController c = new KleurController(mockDbContext.Object);
-            
+
             //kleur editen met goede id
             int? kleurId = 5;
-            
+
             var result = c.Edit(kleurId);
 
             //check of de goede actionResult gereturned worden
@@ -249,12 +249,12 @@ namespace HoneymoonshopTests.Tests
             Assert.Equal(null, actionResult.ViewName);
 
             //check model
-            var viewModel =  (Kleur)actionResult.Model;
+            var viewModel = (Kleur)actionResult.Model;
             Assert.Equal(1, viewModel.Id);
             Assert.Equal("Rood", viewModel.Naam);
             Assert.Equal("", viewModel.KleurCode);
 
-            
+
         }
 
 
@@ -320,16 +320,15 @@ namespace HoneymoonshopTests.Tests
 
             //check model state
             Assert.True(c.ModelState.IsValid);
-            
+
 
             //check of de action naar de goede action redirect
             var actionResult = Assert.IsType<RedirectToActionResult>(result);
         }
 
         [Fact]
-        public void DeleteKleur()
+        public void DeleteKleurViewInKleurenControllerWithoutParam()
         {
-
             //init context en controller
             var mockDbContext = new Mock<ApplicationDbContext>();
 
@@ -339,25 +338,151 @@ namespace HoneymoonshopTests.Tests
 
             KleurController c = new KleurController(mockDbContext.Object);
 
-            // kleur edit params
-            var id = 1;
-            Kleur kleur = new Kleur()
-            {
-                Id = 1,
-                Naam = "Rood",
-                KleurCode = "#FFFFFF"
-            };
 
-            var result = c.Edit(id, kleur);
+            //kleur editen zonder id
+            int? kleurId = null;
 
-            //check model state
-            Assert.True(c.ModelState.IsValid);
+            var result = c.Delete(kleurId);
 
+            //check of de goede actionResult gereturned worden
+            var actionResult = Assert.IsType<NotFoundResult>(result);
 
-            //check of de action naar de goede action redirect
-            var actionResult = Assert.IsType<RedirectToActionResult>(result);
         }
 
+
+        [Fact]
+        public void DeleteKleurViewInKleurenControllerWithRightParams()
+        {
+            //init context en controller
+            var mockDbContext = new Mock<ApplicationDbContext>();
+
+            var mockDbSetKleur = initTestData();
+
+            mockDbContext.Setup(x => x.Kleuren).Returns(mockDbSetKleur.Object);
+
+            KleurController c = new KleurController(mockDbContext.Object);
+
+
+            //kleur editen met goede id
+            int? kleurId = 1;
+
+            var result = c.Delete(kleurId);
+
+            //check of de goede actionResult gereturned worden
+            var actionResult = Assert.IsType<ViewResult>(result);
+            Assert.Equal(null, actionResult.ViewName);
+
+            //View Model checken
+            var model = actionResult.Model;
+            var viewModel = Assert.IsType<Kleur>(model);
+
+
+            //check of de goede kleur uit de database is gehaald
+            Assert.Equal(1, viewModel.Id);
+            Assert.Equal("Wit", viewModel.Naam);
+            Assert.Equal("#FFFFFF", viewModel.KleurCode);
+
+        }
+
+        [Fact]
+        public void DeleteKleurViewInKleurenControllerWithWrongParams()
+        {
+            //init context en controller
+            var mockDbContext = new Mock<ApplicationDbContext>();
+
+            var mockDbSetKleur = initTestData();
+
+            mockDbContext.Setup(x => x.Kleuren).Returns(mockDbSetKleur.Object);
+
+            KleurController c = new KleurController(mockDbContext.Object);
+
+            //kleur editen met goede id
+            int? kleurId = 5;
+
+            var result = c.Delete(kleurId);
+
+            //check of de goede actionResult gereturned worden
+            var actionResult = Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public void DetailsKleurViewInKleurenControllerWithoutParam()
+        {
+            //init context en controller
+            var mockDbContext = new Mock<ApplicationDbContext>();
+
+            var mockDbSetKleur = initTestData();
+
+            mockDbContext.Setup(x => x.Kleuren).Returns(mockDbSetKleur.Object);
+
+            KleurController c = new KleurController(mockDbContext.Object);
+
+
+            //kleur editen zonder id
+            int? kleurId = null;
+
+            var result = c.Details(kleurId);
+
+            //check of de goede actionResult gereturned worden
+            var actionResult = Assert.IsType<NotFoundResult>(result);
+
+        }
+
+
+        [Fact]
+        public void DetailsKleurViewInKleurenControllerWithRightParams()
+        {
+            //init context en controller
+            var mockDbContext = new Mock<ApplicationDbContext>();
+
+            var mockDbSetKleur = initTestData();
+
+            mockDbContext.Setup(x => x.Kleuren).Returns(mockDbSetKleur.Object);
+
+            KleurController c = new KleurController(mockDbContext.Object);
+
+
+            //kleur editen met goede id
+            int? kleurId = 1;
+
+            var result = c.Details(kleurId);
+
+            //check of de goede actionResult gereturned worden
+            var actionResult = Assert.IsType<ViewResult>(result);
+            Assert.Equal(null, actionResult.ViewName);
+
+            //View Model checken
+            var model = actionResult.Model;
+            var viewModel = Assert.IsType<Kleur>(model);
+
+
+            //check of de goede kleur uit de database is gehaald
+            Assert.Equal(1, viewModel.Id);
+            Assert.Equal("Wit", viewModel.Naam);
+            Assert.Equal("#FFFFFF", viewModel.KleurCode);
+
+        }
+
+        [Fact]
+        public void DetailsKleurViewInKleurenControllerWithWrongParams()
+        {
+            //init context en controller
+            var mockDbContext = new Mock<ApplicationDbContext>();
+
+            var mockDbSetKleur = initTestData();
+
+            mockDbContext.Setup(x => x.Kleuren).Returns(mockDbSetKleur.Object);
+
+            KleurController c = new KleurController(mockDbContext.Object);
+
+            //kleur editen met goede id
+            int? kleurId = 5;
+
+            var result = c.Details(kleurId);
+
+            //check of de goede actionResult gereturned worden
+            var actionResult = Assert.IsType<NotFoundResult>(result);
+        }
 
 
         private Mock<DbSet<Kleur>> initTestData()
@@ -380,5 +505,7 @@ namespace HoneymoonshopTests.Tests
 
             return mockDbSetKleur;
         }
+
+
     }
 }
