@@ -7,7 +7,8 @@ namespace Honeymoonshop.Models.AfspraakViewModels
 {
     public class Klantafspraak
     {
-        public Klant klant { get; set; }
-        public DateTime afspraakdatum { get; set; }
+        public Klant Klant { get; set; }
+        public DateTime Afspraakdatum { get; set; }
+        public string Type { get; set; }
     }
 }

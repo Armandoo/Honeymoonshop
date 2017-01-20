@@ -7,11 +7,11 @@ namespace Honeymoonshop.Models
 {
     public class Kenmerkproduct
     {
-        public int kenmerkId { get; set; }
-        public Kenmerk kenmerk { get; set; }
+        public int KenmerkId { get; set; }
+        public Kenmerk Kenmerk { get; set; }
 
-        public int productId { get; set; }
-        public Product product { get; set; }
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
 
     }
 }

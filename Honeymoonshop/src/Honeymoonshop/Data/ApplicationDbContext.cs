@@ -38,15 +38,15 @@ namespace Honeymoonshop.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
-            builder.Entity<Kleurproduct>().HasKey(kp => new { kp.kleurId, kp.productId});
-            builder.Entity<Kleurproduct>().HasOne(k => k.product).WithMany(p => p.kleuren).HasForeignKey(k => k.productId);
-            builder.Entity<Kleurproduct>().HasOne(k => k.kleur).WithMany(p => p.producten).HasForeignKey(k => k.kleurId);
+            builder.Entity<Kleurproduct>().HasKey(kp => new { kp.KleurId, kp.ProductId});
+            builder.Entity<Kleurproduct>().HasOne(k => k.Product).WithMany(p => p.Kleuren).HasForeignKey(k => k.ProductId);
+            builder.Entity<Kleurproduct>().HasOne(k => k.Kleur).WithMany(p => p.Producten).HasForeignKey(k => k.KleurId);
 
-            builder.Entity<Kenmerkproduct>().HasKey(k => new { k.kenmerkId, k.productId });
-            builder.Entity<Kenmerkproduct>().HasOne(k => k.product).WithMany(p => p.kenmerken).HasForeignKey(k => k.productId);
-            builder.Entity<Kenmerkproduct>().HasOne(k => k.kenmerk).WithMany(p => p.producten).HasForeignKey(k => k.kenmerkId);
+            builder.Entity<Kenmerkproduct>().HasKey(k => new { k.KenmerkId, k.ProductId });
+            builder.Entity<Kenmerkproduct>().HasOne(k => k.Product).WithMany(p => p.Kenmerken).HasForeignKey(k => k.ProductId);
+            builder.Entity<Kenmerkproduct>().HasOne(k => k.Kenmerk).WithMany(p => p.Producten).HasForeignKey(k => k.KenmerkId);
 
-            builder.Entity<Kleurproduct>().HasMany(x => x.images).WithOne(x => x.kleurproduct);
+            builder.Entity<Kleurproduct>().HasMany(x => x.Images).WithOne(x => x.Kleurproduct);
            
 
         }

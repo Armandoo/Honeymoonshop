@@ -690,6 +690,12 @@ border-top: 3px solid rgb(229, 229, 229);
 
 }
 
+.triangle{
+    display:none;
+}
+
+
+
 .filter-container a{
     color:black;
 
@@ -867,6 +873,10 @@ border-top: 3px solid rgb(229, 229, 229);
     padding-bottom: 50px;
     padding-left: 50px;
 }
+
+    .afsprakeninhoud a {
+    color: black;
+    }
 
 .afsprakeninhoudtekst {
     background-color: white;

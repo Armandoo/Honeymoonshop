@@ -3,12 +3,12 @@
 <div class="col-xs-12 col-md-10 pull-right filter-container">
     <h2 class="text-uppercase bold">Categorieen:</h2>
     <ul class="categorieen">
-        @foreach (var cat in Model.categorieen)
+        @foreach (var cat in Model.Categorieen)
         {
             <li>
-                <a asp-action="dressfinder"  asp-route-categorieID="@cat.id">
+                <a asp-action="dressfinder"  asp-route-categorieID="@cat.Id">
 
-                    @cat.naam
+                    @cat.Naam
                 </a>
             </li>
         }
@@ -20,7 +20,7 @@
         </li>
     </ul>
 
-    <input type="hidden" asp-for="criteria.categorieID" />
+    <input type="hidden" asp-for="Criteria.CategorieId" />
 
     <span>
         <b>Filter op:</b>
@@ -29,26 +29,26 @@
     <ul class="filterkeuzes">
         <li>
             <a onclick="toggleMerken()">
-                <div>
+                <div class="merkfilter">
                     <span>Merk</span>
-                    <div class="mx-auto pull-right"><img class="triangle" src="~/images/triangle.png" /></div>
+                    <div class="mx-auto pull-right"><img class="triangle-opposite" src="~/images/triangle-opposite.png" /><img class="triangle" src="~/images/triangle.png" /></div>
 
                 </div>
             </a>
             <fieldset class="merken">
                 <ul>
-                    @foreach (var m in Model.merken)
+                    @foreach (var m in Model.Merken)
                     {
                             <li class="rbfilter">
-                                <input type="checkbox" class="filter-checkbox hide" value="@m.id" name="merk" @(Model.criteria.merk != null && Model.criteria.merk.Contains(m.id) ? "checked=\"checked\"" : "" ) />
+                                <input type="checkbox" class="filter-checkbox hide" value="@m.Id" name="Merk" @(Model.Criteria.Merk != null && Model.Criteria.Merk.Contains(m.Id) ? "checked=\"checked\"" : "" ) />
                                 <img class="rb outer" src="~/images/outer circle.png" />
                                 <img class="rb inner" src="~/images/inner circle.png" />
-                                @m.merkNaam
+                                @m.MerkNaam
 
                                 <!--Html.RadioButton("merk", m.id, (m.id == Model.criteria.merk))
                                     <img class="rb outer" src="~/images/outer circle.png"/>
                                 <img class="rb inner" src="~/images/inner circle.png"/>-->
-                                <!--<input type="radio" name="merk" value="@m.id" class="filterradiobuttons" />
+                                <!--<input type="radio" name="merk" value="@m.Id" class="filterradiobuttons" />
                                 -->
                             </li>
                             }
@@ -58,20 +58,20 @@
 
         <li>
             <a onclick="toggleStijlen()">
-                <div>
+                <div class="stijlfilter">
                     <span>Stijl Jurk</span>
-                    <div class="mx-auto pull-right"><img class="triangle" src="~/images/triangle.png" /></div>
+                    <div class="mx-auto pull-right"><img class="triangle-opposite" src="~/images/triangle-opposite.png" /><img class="triangle" src="~/images/triangle.png" /></div>
                 </div>
             </a>
             <fieldset class="stijlen">
                 <ul>
-                    @foreach (var stijl in Model.stijlen)
+                    @foreach (var stijl in Model.Stijlen)
                     {
                         <li class="rbfilter">
-                            <input type="checkbox" class="filter-checkbox hide" value="@stijl.id" name="kenmerk" @(Model.criteria.kenmerk != null && Model.criteria.kenmerk.Contains(stijl.id) ? "checked=\"checked\"" : "" ) />
+                            <input type="checkbox" class="filter-checkbox hide" value="@stijl.Id" name="kenmerk" @(Model.Criteria.Kenmerk != null && Model.Criteria.Kenmerk.Contains(stijl.Id) ? "checked=\"checked\"" : "" ) />
                             <img class="rb outer" src="~/images/outer circle.png" />
                             <img class="rb inner" src="~/images/inner circle.png" />
-                            @stijl.naam
+                            @stijl.Naam
                         </li>
                     }
                 </ul>
@@ -85,11 +85,11 @@
             </div>
             <div class="sliderContainer">
                 <input id="slider" type="text" class="span2" value=""
-                       data-slider-min="1" data-slider-max="2000" data-slider-step="5"
-                       data-slider-value="[0,2000]" />
+                       data-slider-min="1" data-slider-max="@ViewBag.hoogstePrijs" data-slider-step="1"
+                       data-slider-value="[@ViewBag.geselecteerdeMinPrijs,@ViewBag.geselecteerdeMaxPrijs]" />
                 <div class="prijzenContainer col-md-12">
-                    <div class="col-xs-9 col-md-6 prijs">&euro;<span class="minprijs">1</span></div>
-                    <div class="col-xs-3 col-md-6 prijs"><span class="maxprijs pull-right">2000</span><span class="pull-right">&euro;</span></div>
+                    <div class="col-xs-9 col-md-6 prijs">&euro;<span class="minprijs">@ViewBag.geselecteerdeMinPrijs</span></div>
+                    <div class="col-xs-3 col-md-6 prijs"><span class="maxprijs pull-right">@ViewBag.geselecteerdeMaxPrijs</span><span class="pull-right">&euro;</span></div>
                 </div>
             </div>
             <input type="hidden" name="minPrijs" />
@@ -106,18 +106,20 @@
 
         <li class="head-filter">
             <a onclick="toggleNeklijnen()">
-                <span>Neklijn</span>
-                <div class="mx-auto pull-right"><img class="triangle" src="~/images/triangle.png" /></div>
+                <div class="neklijnfilter">
+                    <span >Neklijn</span>
+                    <div class="mx-auto pull-right"><img class="triangle-opposite" src="~/images/triangle-opposite.png" /><img class="triangle" src="~/images/triangle.png" /></div>
+                </div>
             </a>
             <fieldset class="neklijnen">
                 <ul>
-                    @foreach (var neklijn in Model.neklijnen)
+                    @foreach (var neklijn in Model.Neklijnen)
                     {
                         <li class="rbfilter">
-                            <input type="checkbox" class="filter-checkbox hide" value="@neklijn.id" name="kenmerk" @(Model.criteria.kenmerk != null && Model.criteria.kenmerk.Contains(neklijn.id) ? "checked=\"checked\"" : "" ) />
+                            <input type="checkbox" class="filter-checkbox hide" value="@neklijn.Id" name="kenmerk" @(Model.Criteria.Kenmerk != null && Model.Criteria.Kenmerk.Contains(neklijn.Id) ? "checked=\"checked\"" : "" ) />
                             <img class="rb outer" src="~/images/outer circle.png" />
                             <img class="rb inner" src="~/images/inner circle.png" />
-                            @neklijn.naam
+                            @neklijn.Naam
                         </li>
 
                     }
@@ -127,18 +129,20 @@
 
         <li class="head-filter">
             <a onclick="toggleSilhouettes()">
+                <div class="silhouettefilter">
                 <span>Silhouette</span>
-                <div class="mx-auto pull-right"><img class="triangle" src="~/images/triangle.png" /></div>
+                <div class="mx-auto pull-right"><img class="triangle-opposite" src="~/images/triangle-opposite.png" /><img class="triangle" src="~/images/triangle.png" /></div>
+                </div>
             </a>
             <fieldset class="silhouettes">
                 <ul>
-                    @foreach (var silhouette in Model.silhouettes)
+                    @foreach (var silhouette in Model.Silhouettes)
                     {
                         <li class="rbfilter">
-                            <input type="checkbox" class="filter-checkbox hide" value="@silhouette.id" name="kenmerk" @(Model.criteria.kenmerk != null && Model.criteria.kenmerk.Contains(silhouette.id) ? "checked=\"checked\"" : "" ) />
+                            <input type="checkbox" class="filter-checkbox hide" value="@silhouette.Id" name="Kenmerk" @(Model.Criteria.Kenmerk != null && Model.Criteria.Kenmerk.Contains(silhouette.Id) ? "checked=\"checked\"" : "" ) />
                             <img class="rb outer" src="~/images/outer circle.png" />
                             <img class="rb inner" src="~/images/inner circle.png" />
-                            @silhouette.naam
+                            @silhouette.Naam
                         </li>
 
                     }
@@ -147,17 +151,19 @@
         </li>
         <li class="head-filter">
             <a onclick="toggleKleuren()">
+                <div class="kleurfilter">
                 <span>Kleur</span>
-                <div class="mx-auto pull-right"><img class="triangle" src="~/images/triangle.png" /></div>
+                <div class="mx-auto pull-right"><img class="triangle-opposite" src="~/images/triangle-opposite.png" /><img class="triangle" src="~/images/triangle.png" /></div>
+                </div>
             </a>
             <fieldset class="kleuren">
                 <ul>
-                    @foreach (var kleur in Model.kleuren)
+                    @foreach (var kleur in Model.Kleuren)
                     {
                         <li class="rbkleur">
-                            <input type="checkbox" class="filter-checkbox hide" value="@kleur.id" name="gefilterdeKleur" @(Model.criteria.gefilterdeKleur != null && Model.criteria.gefilterdeKleur.Contains(kleur.id) ? "checked=\"checked\"" : "" ) />
-                            <span class="kleurbolletje" style="background-color:#@kleur.kleurCode; display:inline-block;"></span>
-                            @kleur.naam
+                            <input type="checkbox" class="filter-checkbox hide" value="@kleur.Id" name="gefilterdeKleur" @(Model.Criteria.Gefilterdekleur != null && Model.Criteria.Gefilterdekleur.Contains(kleur.Id) ? "checked=\"checked\"" : "" ) />
+                            <span class="kleurbolletje" style="background-color:#@kleur.KleurCode; display:inline-block;"></span>
+                            @kleur.Naam
                         </li>
                     }
                 </ul>

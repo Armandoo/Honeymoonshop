@@ -12,6 +12,6 @@ namespace Honeymoonshop.Models.ProductViewModels
         public List<Kenmerk> Kenmerken { get; set; }
         public SelectList Categorieen { get; set; }
         public List<Kleur> Kleuren { get; set; }
-        public Product product { get; set; }
+        public Product Product { get; set; }
     }
 }

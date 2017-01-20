@@ -12,62 +12,62 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.artikelnummer)
+            @Html.DisplayNameFor(model => model.Artikelnummer)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.artikelnummer)
+            @Html.DisplayFor(model => model.Artikelnummer)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.kleuren)
+            @Html.DisplayNameFor(model => model.Kleuren)
         </dt>
         <dd>
-            @foreach (var k in Model.kleuren)
+            @foreach (var k in Model.Kleuren)
             {
-                <span>@k.kleur.naam &nbsp; &nbsp; &nbsp; </span>
+                <span>@k.Kleur.Naam &nbsp; &nbsp; &nbsp; </span>
             }
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.kenmerken)
+            @Html.DisplayNameFor(model => model.Kenmerken)
         </dt>
         <dd>
-            @foreach (var k in Model.kenmerken)
+            @foreach (var k in Model.Kenmerken)
                 {
-                <span>@k.kenmerk.naam &nbsp; &nbsp; &nbsp; </span>
+                <span>@k.Kenmerk.Naam &nbsp; &nbsp; &nbsp; </span>
             }
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.geslacht)
+            @Html.DisplayNameFor(model => model.Geslacht)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.geslacht)
+            @Html.DisplayFor(model => model.Geslacht)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.categorie)
+            @Html.DisplayNameFor(model => model.Categorie)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.categorie.naam)
+            @Html.DisplayFor(model => model.Categorie.Naam)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.merk)
+            @Html.DisplayNameFor(model => model.Merk)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.merk.merkNaam)
+            @Html.DisplayFor(model => model.Merk.MerkNaam)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.omschrijving)
+            @Html.DisplayNameFor(model => model.Omschrijving)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.omschrijving)
+            @Html.DisplayFor(model => model.Omschrijving)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.prijs)
+            @Html.DisplayNameFor(model => model.Prijs)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.prijs)
+            @Html.DisplayFor(model => model.Prijs)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.id">Wijzigen</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Id">Wijzigen</a> |
     <a asp-action="Index">Back to List</a>
 </div>

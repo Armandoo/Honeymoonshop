@@ -56,7 +56,7 @@ namespace Honeymoonshop.Controllers
         public IActionResult ProductPagina(int productId, int kleurId, int merk)
         {
             //Rewritten na images met kleur zijn gekoppeld
-            var hetProduct = Context.ktKleurProduct.Include(k => k.kleur).Include(x => x.product).ThenInclude(x => x.merk).Include(x => x.product.kleuren).ThenInclude(c => c.kleur).Include(c => c.product.categorie).Include(x => x.images).Include(x => x.product.kenmerken).ThenInclude(x => x.kenmerk).FirstOrDefault(kleurproduct => kleurproduct.productId == productId && kleurproduct.kleurId == kleurId);
+            var hetProduct = Context.ktKleurProduct.Include(k => k.Kleur).Include(x => x.Product).ThenInclude(x => x.Merk).Include(x => x.Product.Kleuren).ThenInclude(c => c.Kleur).Include(c => c.Product.Categorie).Include(x => x.Images).Include(x => x.Product.Kenmerken).ThenInclude(x => x.Kenmerk).FirstOrDefault(kleurproduct => kleurproduct.ProductId == productId && kleurproduct.KleurId == kleurId);
             if (hetProduct == null)
             {
                 return new NotFoundResult();
@@ -64,7 +64,7 @@ namespace Honeymoonshop.Controllers
             var gerelateerdeProducten = new List<Kleurproduct>();
             try
             {
-                gerelateerdeProducten = Context.ktKleurProduct.Include(x => x.product).ThenInclude(x => x.merk).Include(x => x.images).Where(kleurproduct => kleurproduct.product.categorieId == hetProduct.product.categorieId && kleurproduct.productId != productId && kleurproduct.kleurId == kleurId).Take(4).ToList();
+                gerelateerdeProducten = Context.ktKleurProduct.Include(x => x.Product).ThenInclude(x => x.Merk).Include(x => x.Images).Where(kleurproduct => kleurproduct.Product.CategorieId == hetProduct.Product.CategorieId && kleurproduct.ProductId != productId && kleurproduct.KleurId == kleurId).Take(4).ToList();
             }
             catch (Exception e)
             {
@@ -78,7 +78,7 @@ namespace Honeymoonshop.Controllers
             var accessoires = new List<Kleurproduct>();
             try
             {
-                accessoires = Context.ktKleurProduct.Include(x => x.product).ThenInclude(x => x.merk).Include(x => x.images).Take(4).Where(kleurproduct => kleurproduct.kleurId == hetProduct.kleurId && kleurproduct.product.categorie.isAccessoire == true).ToList();
+                accessoires = Context.ktKleurProduct.Include(x => x.Product).ThenInclude(x => x.Merk).Include(x => x.Images).Take(4).Where(kleurproduct => kleurproduct.KleurId == hetProduct.KleurId && kleurproduct.Product.Categorie.IsAccessoire == true).ToList();
             }
             catch (Exception e)
             {

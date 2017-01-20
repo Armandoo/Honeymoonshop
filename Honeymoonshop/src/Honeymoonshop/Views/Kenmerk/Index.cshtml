@@ -21,15 +21,15 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.naam)
+                    @Html.DisplayFor(modelItem => item.Naam)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.kenmerktype)
+                    @Html.DisplayFor(modelItem => item.KenmerkType)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.id">Wijzig</a> |
-                    <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.id">Verwijder</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Wijzig</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Verwijder</a>
                 </td>
             </tr>
         }

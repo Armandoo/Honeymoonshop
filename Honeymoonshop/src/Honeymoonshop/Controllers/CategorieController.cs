@@ -33,7 +33,7 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Category.SingleOrDefaultAsync(m => m.id == id);
+            var category = await _context.Category.SingleOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,naam,isAccessoire")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Naam,IsAccessoire")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Category.SingleOrDefaultAsync(m => m.id == id);
+            var category = await _context.Category.SingleOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -85,9 +85,9 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,naam,isAccessoire")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,IsAccessoire")] Category category)
         {
-            if (id != category.id)
+            if (id != category.Id)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace Honeymoonshop.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.id))
+                    if (!CategoryExists(category.Id))
                     {
                         return NotFound();
                     }
@@ -123,7 +123,7 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Category.SingleOrDefaultAsync(m => m.id == id);
+            var category = await _context.Category.SingleOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -137,7 +137,7 @@ namespace Honeymoonshop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _context.Category.SingleOrDefaultAsync(m => m.id == id);
+            var category = await _context.Category.SingleOrDefaultAsync(m => m.Id == id);
             _context.Category.Remove(category);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -145,7 +145,7 @@ namespace Honeymoonshop.Controllers
 
         private bool CategoryExists(int id)
         {
-            return _context.Category.Any(e => e.id == id);
+            return _context.Category.Any(e => e.Id == id);
         }
     }
 }

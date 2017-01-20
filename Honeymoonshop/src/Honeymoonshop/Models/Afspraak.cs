@@ -7,8 +7,9 @@ namespace Honeymoonshop.Models
 {
     public class Afspraak
     {
-        public int id { get; set; }
-        public Klant klant { get; set; }
-        public DateTime datum { get; set; }
+        public int Id { get; set; }
+        public Klant Klant { get; set; }
+        public DateTime Datum { get; set; }
+        public string Type { get; set; }
     }
 }

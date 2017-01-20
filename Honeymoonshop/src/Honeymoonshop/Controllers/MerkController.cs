@@ -33,7 +33,7 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var merk = await _context.Merken.SingleOrDefaultAsync(m => m.id == id);
+            var merk = await _context.Merken.SingleOrDefaultAsync(m => m.Id == id);
             if (merk == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,merkNaam")] Merk merk)
+        public async Task<IActionResult> Create([Bind("Id,MerkNaam")] Merk merk)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var merk = await _context.Merken.SingleOrDefaultAsync(m => m.id == id);
+            var merk = await _context.Merken.SingleOrDefaultAsync(m => m.Id == id);
             if (merk == null)
             {
                 return NotFound();
@@ -85,9 +85,9 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,merkNaam")] Merk merk)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,MerkNaam")] Merk merk)
         {
-            if (id != merk.id)
+            if (id != merk.Id)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace Honeymoonshop.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MerkExists(merk.id))
+                    if (!MerkExists(merk.Id))
                     {
                         return NotFound();
                     }
@@ -123,7 +123,7 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var merk = await _context.Merken.SingleOrDefaultAsync(m => m.id == id);
+            var merk = await _context.Merken.SingleOrDefaultAsync(m => m.Id == id);
             if (merk == null)
             {
                 return NotFound();
@@ -137,7 +137,7 @@ namespace Honeymoonshop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var merk = await _context.Merken.SingleOrDefaultAsync(m => m.id == id);
+            var merk = await _context.Merken.SingleOrDefaultAsync(m => m.Id == id);
             _context.Merken.Remove(merk);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -145,7 +145,7 @@ namespace Honeymoonshop.Controllers
 
         private bool MerkExists(int id)
         {
-            return _context.Merken.Any(e => e.id == id);
+            return _context.Merken.Any(e => e.Id == id);
         }
     }
 }

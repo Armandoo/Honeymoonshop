@@ -31,25 +31,25 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.artikelnummer)
+                @Html.DisplayFor(modelItem => item.Artikelnummer)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.merk.merkNaam)
+                @Html.DisplayFor(modelItem => item.Merk.MerkNaam)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.categorie.naam)
+                @Html.DisplayFor(modelItem => item.Categorie.Naam)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.geslacht)
+                @Html.DisplayFor(modelItem => item.Geslacht)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.categorie.isAccessoire)
+                @Html.DisplayFor(modelItem => item.Categorie.IsAccessoire)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Wijzig</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Verwijder</a>  |
-                <a asp-action="Images" asp-route-id="@item.id">Afbeeldingen</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Wijzig</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Verwijder</a>  |
+                <a asp-action="Images" asp-route-id="@item.Id">Afbeeldingen</a>
             </td>
         </tr>
 }

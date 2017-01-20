@@ -9,26 +9,26 @@ namespace Honeymoonshop.Models.Catalogus
     public class CatalogusVM
     {
         
-        public IEnumerable<Merk> merken { get; set; }
+        public IEnumerable<Merk> Merken { get; set; }
 
         
-        public IEnumerable<Kenmerk> stijlen { get; set; }
+        public IEnumerable<Kenmerk> Stijlen { get; set; }
 
-        public IEnumerable<Kenmerk> neklijnen { get; set; }
-        public IEnumerable<Kenmerk> silhouettes { get; set; }
+        public IEnumerable<Kenmerk> Neklijnen { get; set; }
+        public IEnumerable<Kenmerk> Silhouettes { get; set; }
   
-        public IEnumerable<Kleur> kleuren { get; set; }
+        public IEnumerable<Kleur> Kleuren { get; set; }
         
-        public IEnumerable<Product> producten { get; set; }
+        public IEnumerable<Product> Producten { get; set; }
 
-        public IEnumerable<Category> categorieen { get; set; }
+        public IEnumerable<Category> Categorieen { get; set; }
 
         public Category ActieveCategorie { get; set; }
         
 
-        public Filter criteria { get; set; }
+        public Filter Criteria { get; set; }
 
-        public int aantalpaginas { get; set; }
+        public int Aantalpaginas { get; set; }
 
         public IEnumerable<SelectListItem> SoorteerMogelijkheden { get; set; }
 

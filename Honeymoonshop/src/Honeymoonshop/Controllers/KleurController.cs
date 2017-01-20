@@ -33,7 +33,7 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var kleur = await _context.Kleuren.SingleOrDefaultAsync(m => m.id == id);
+            var kleur = await _context.Kleuren.SingleOrDefaultAsync(m => m.Id == id);
             if (kleur == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("naam,kleurCode")] Kleur kleur)
+        public async Task<IActionResult> Create([Bind("Naam,KleurCode")] Kleur kleur)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var kleur = await _context.Kleuren.SingleOrDefaultAsync(m => m.id == id);
+            var kleur = await _context.Kleuren.SingleOrDefaultAsync(m => m.Id == id);
             if (kleur == null)
             {
                 return NotFound();
@@ -85,9 +85,9 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,naam")] Kleur kleur)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,KleurCode")] Kleur kleur)
         {
-            if (id != kleur.id)
+            if (id != kleur.Id)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace Honeymoonshop.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!KleurExists(kleur.id))
+                    if (!KleurExists(kleur.Id))
                     {
                         return NotFound();
                     }
@@ -123,7 +123,7 @@ namespace Honeymoonshop.Controllers
                 return NotFound();
             }
 
-            var kleur = await _context.Kleuren.SingleOrDefaultAsync(m => m.id == id);
+            var kleur = await _context.Kleuren.SingleOrDefaultAsync(m => m.Id == id);
             if (kleur == null)
             {
                 return NotFound();
@@ -137,7 +137,12 @@ namespace Honeymoonshop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var kleur = await _context.Kleuren.SingleOrDefaultAsync(m => m.id == id);
+            var kleur = await _context.Kleuren.SingleOrDefaultAsync(m => m.Id == id);
+            //verwijder eerst de afbeeldingen die gekoppeld zijn aan deze kleur
+            _context.ProductAfbeeldingen.RemoveRange(_context.ProductAfbeeldingen.Where(x => x.Kleurproduct.KleurId == id).ToList());
+            //Verwijder daarna de relatie tussen de kleur en de producten die bij deze kleur horen.
+            _context.ktKleurProduct.RemoveRange(_context.ktKleurProduct.Where(x => x.KleurId == id ).ToList());
+            //Verwijder daarna de kleur
             _context.Kleuren.Remove(kleur);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -145,7 +150,7 @@ namespace Honeymoonshop.Controllers
 
         private bool KleurExists(int id)
         {
-            return _context.Kleuren.Any(e => e.id == id);
+            return _context.Kleuren.Any(e => e.Id == id);
         }
     }
 }

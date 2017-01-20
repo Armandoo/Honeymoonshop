@@ -13,10 +13,10 @@
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="product.artikelnummer" class="col-md-2 control-label"></label>
+            <label asp-for="Product.Artikelnummer" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="product.artikelnummer" class="form-control" />
-                <span asp-validation-for="product.artikelnummer" class="text-danger" />
+                <input asp-for="Product.Artikelnummer" class="form-control" />
+                <span asp-validation-for="Product.Artikelnummer" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
@@ -24,7 +24,7 @@
             <div class="col-md-10">
                 @foreach (var k in Model.Kleuren)
                 {
-                    <input type="checkbox" name="kleur" value="@k.id" /> @k.naam
+                    <input type="checkbox" name="kleur" value="@k.Id" /> @k.Naam
                 }
             </div>
         </div>
@@ -33,14 +33,14 @@
             <div class="col-md-10">
                 @foreach (var k in Model.Kenmerken)
             {
-                    <input type="checkbox" name="kenmerk" value="@k.id" /> @k.naam
+                    <input type="checkbox" name="kenmerk" value="@k.Id" /> @k.Naam
                 }
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="product.geslacht" class="col-md-2 control-label"></label>
+            <label asp-for="Product.Geslacht" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select input asp-for="product.geslacht">
+                <select input asp-for="Product.Geslacht">
                     <option value="bruid">Bruid</option>
                     <option value="bruidegom">Bruidegom</option>
                     <option value="geen">Geen</option>
@@ -48,29 +48,29 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="product.categorie" class="col-md-2 control-label"></label>
+            <label asp-for="Product.Categorie" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="product.categorieId" class="form-control" asp-items="Model.Categorieen"></select>
+                <select asp-for="Product.CategorieId" class="form-control" asp-items="Model.Categorieen"></select>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="product.merk" class="col-md-2 control-label"></label>
+            <label asp-for="Product.Merk" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="product.merkId" class="form-control" asp-items="Model.Merken"></select>
+                <select asp-for="Product.MerkId" class="form-control" asp-items="Model.Merken"></select>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="product.omschrijving" class="col-md-2 control-label"></label>
+            <label asp-for="Product.Omschrijving" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="product.omschrijving" class="form-control" />
-                <span asp-validation-for="product.omschrijving" class="text-danger" />
+                <input asp-for="Product.Omschrijving" class="form-control" />
+                <span asp-validation-for="Product.Omschrijving" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="product.prijs" class="col-md-2 control-label"></label>
+            <label asp-for="Product.Prijs" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="product.prijs" class="form-control" />
-                <span asp-validation-for="product.prijs" class="text-danger" />
+                <input asp-for="Product.Prijs" class="form-control" />
+                <span asp-validation-for="Product.Prijs" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
@@ -81,6 +81,7 @@
             </div>
 
         </div>
+    </div>
 </form>
 
 <div>
