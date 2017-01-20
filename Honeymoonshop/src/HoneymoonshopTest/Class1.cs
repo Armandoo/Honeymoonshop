@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace HoneymoonshopTest
 {
-    public class Program
+    public class Class1
     {
-        public static void Main(string[] args)
+        public Class1()
         {
-
         }
     }
 }

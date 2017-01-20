@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Honeymoonshop.Data;
 using Honeymoonshop.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Honeymoonshop.Controllers
 {
+    [Authorize]
     public class CategorieController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,20 +22,20 @@ namespace Honeymoonshop.Controllers
         }
 
         // GET: Categories
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Category.ToListAsync());
+            return View( _context.Category.ToList());
         }
 
         // GET: Categories/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Category.SingleOrDefaultAsync(m => m.Id == id);
+            var category = _context.Category.SingleOrDefault(m => m.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -53,26 +55,26 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam,IsAccessoire")] Category category)
+        public IActionResult Create([Bind("Id,Naam,IsAccessoire")] Category category)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(category);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(category);
         }
 
         // GET: Categories/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Category.SingleOrDefaultAsync(m => m.Id == id);
+            var category = _context.Category.SingleOrDefault(m => m.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -85,7 +87,7 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,IsAccessoire")] Category category)
+        public IActionResult Edit(int id, [Bind("Id,Naam,IsAccessoire")] Category category)
         {
             if (id != category.Id)
             {
@@ -97,7 +99,7 @@ namespace Honeymoonshop.Controllers
                 try
                 {
                     _context.Update(category);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -116,14 +118,14 @@ namespace Honeymoonshop.Controllers
         }
 
         // GET: Categories/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Category.SingleOrDefaultAsync(m => m.Id == id);
+            var category = _context.Category.SingleOrDefault(m => m.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -135,11 +137,11 @@ namespace Honeymoonshop.Controllers
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var category = await _context.Category.SingleOrDefaultAsync(m => m.Id == id);
+            var category = _context.Category.SingleOrDefault(m => m.Id == id);
             _context.Category.Remove(category);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 

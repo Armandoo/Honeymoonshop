@@ -11,9 +11,11 @@ using Honeymoonshop.Models.ProductViewModels;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using Honeymoonshop.Models.Utils;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Honeymoonshop.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -24,25 +26,25 @@ namespace Honeymoonshop.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var applicationDbContext = _context.Producten.Include(p => p.Categorie).Include(p => p.Merk);
-            return View(await applicationDbContext.ToListAsync());
+            return View(applicationDbContext.ToList());
         }
 
         // GET: Products/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Producten.Include(x => x.Merk)
+            var product = _context.Producten.Include(x => x.Merk)
                 .Include(x => x.Categorie)
                 .Include(x => x.Kenmerken).ThenInclude(x => x.Kenmerk)
                 .Include(x => x.Kleuren).ThenInclude(x => x.Kleur)
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .SingleOrDefault(m => m.Id == id);
             if (product == null)
             {
                 return NotFound();
@@ -75,7 +77,7 @@ namespace Honeymoonshop.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Images(int id, int kid,  IFormFile[] afbeeldingen)
+        public IActionResult Images(int id, int kid,  IFormFile[] afbeeldingen)
         {
             var product = _context.Producten.Include(p => p.Kleuren).ThenInclude(l => l.Kleur).Include(f => f.Kleuren).SingleOrDefault(p => p.Id == id);
             var kleur = _context.Kleuren.SingleOrDefault(k => k.Id == kid);
@@ -90,7 +92,7 @@ namespace Honeymoonshop.Controllers
                 try
                 {
                     _context.Update(product);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -115,7 +117,7 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Artikelnummer,Geslacht,CategorieId,MerkId,Omschrijving,Prijs")] Product product, string[] kleur, string[] kenmerk)
+        public IActionResult Create([Bind("Id,Artikelnummer,Geslacht,CategorieId,MerkId,Omschrijving,Prijs")] Product product, string[] kleur, string[] kenmerk)
         {
             if (kleur != null)
             {
@@ -143,7 +145,7 @@ namespace Honeymoonshop.Controllers
             if (ModelState.IsValid && kleur.Length > 0 && kenmerk.Length > 0)
             {
                 _context.Add(product);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return RedirectToAction("Images", new { id = product.Id });
             }
             
@@ -159,7 +161,7 @@ namespace Honeymoonshop.Controllers
         }
 
         // GET: Products/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -290,14 +292,14 @@ namespace Honeymoonshop.Controllers
         }
 
         // GET: Products/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Producten.SingleOrDefaultAsync(m => m.Id == id);
+            var product = _context.Producten.SingleOrDefault(m => m.Id == id);
             if (product == null)
             {
                 return NotFound();
@@ -319,15 +321,15 @@ namespace Honeymoonshop.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var product = await _context.Producten.SingleOrDefaultAsync(m => m.Id == id);
+            var product = _context.Producten.SingleOrDefault(m => m.Id == id);
             List<ProductImage> teVerwijderenImages = _context.ProductAfbeeldingen.Include(x => x.Kleurproduct).ToList().FindAll(x => x.Kleurproduct.ProductId == id);
             List<Kleurproduct> teVerwijderenKleuren = _context.ktKleurProduct.ToList().FindAll(x => x.ProductId == id);
             _context.ProductAfbeeldingen.RemoveRange(teVerwijderenImages);
             _context.ktKleurProduct.RemoveRange(teVerwijderenKleuren);
             _context.Producten.Remove(product);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 

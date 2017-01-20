@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Honeymoonshop.Data;
 using Honeymoonshop.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Honeymoonshop.Controllers
 {
+    [Authorize]
     public class KleurController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private ApplicationDbContext _context;
 
         public KleurController(ApplicationDbContext context)
         {
@@ -20,20 +22,21 @@ namespace Honeymoonshop.Controllers
         }
 
         // GET: Kleur
-        public async Task<IActionResult> Index()
+        
+        public IActionResult Index()
         {
-            return View(await _context.Kleuren.ToListAsync());
+            return View( _context.Kleuren.ToList());
         }
 
         // GET: Kleur/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var kleur = await _context.Kleuren.SingleOrDefaultAsync(m => m.Id == id);
+            var kleur =  _context.Kleuren.SingleOrDefault(m => m.Id == id);
             if (kleur == null)
             {
                 return NotFound();
@@ -53,26 +56,26 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Naam,KleurCode")] Kleur kleur)
+        public IActionResult Create([Bind("Naam,KleurCode")] Kleur kleur)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(kleur);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(kleur);
         }
 
         // GET: Kleur/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var kleur = await _context.Kleuren.SingleOrDefaultAsync(m => m.Id == id);
+            var kleur = _context.Kleuren.SingleOrDefault(m => m.Id == id);
             if (kleur == null)
             {
                 return NotFound();
@@ -85,7 +88,7 @@ namespace Honeymoonshop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,KleurCode")] Kleur kleur)
+        public IActionResult Edit(int id, [Bind("Id,Naam,KleurCode")] Kleur kleur)
         {
             if (id != kleur.Id)
             {
@@ -97,7 +100,7 @@ namespace Honeymoonshop.Controllers
                 try
                 {
                     _context.Update(kleur);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -116,14 +119,14 @@ namespace Honeymoonshop.Controllers
         }
 
         // GET: Kleur/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var kleur = await _context.Kleuren.SingleOrDefaultAsync(m => m.Id == id);
+            var kleur = _context.Kleuren.SingleOrDefault(m => m.Id == id);
             if (kleur == null)
             {
                 return NotFound();
@@ -135,16 +138,16 @@ namespace Honeymoonshop.Controllers
         // POST: Kleur/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var kleur = await _context.Kleuren.SingleOrDefaultAsync(m => m.Id == id);
+            var kleur = _context.Kleuren.SingleOrDefault(m => m.Id == id);
             //verwijder eerst de afbeeldingen die gekoppeld zijn aan deze kleur
             _context.ProductAfbeeldingen.RemoveRange(_context.ProductAfbeeldingen.Where(x => x.Kleurproduct.KleurId == id).ToList());
             //Verwijder daarna de relatie tussen de kleur en de producten die bij deze kleur horen.
             _context.ktKleurProduct.RemoveRange(_context.ktKleurProduct.Where(x => x.KleurId == id ).ToList());
             //Verwijder daarna de kleur
             _context.Kleuren.Remove(kleur);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
