@@ -28,7 +28,16 @@
                 }
 
                 <a asp-action="productpagina" asp-route-productid="@p.Id" asp-route-kleurid="@p.Kleuren[0].KleurId">
-                    <span class="col-md-8 slide-btn text-uppercase text-center bold">bekijk de jurk</span>
+                    @if (p.Geslacht == "bruid")
+                    {
+                        <span class="col-md-8 slide-btn text-uppercase text-center bold">Bekijk de jurk</span>
+                    }
+
+                    else
+                    {
+                        <span class="col-md-8 slide-btn text-uppercase text-center bold">Bekijk dit pak</span>
+                    }
+                    
                 </a>
             </div>
             }

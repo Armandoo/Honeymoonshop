@@ -79,12 +79,12 @@ namespace Honeymoonshop.Controllers
         [HttpPost]
         public IActionResult Images(int id, int kid,  IFormFile[] afbeeldingen)
         {
-            var product = _context.Producten.Include(p => p.Kleuren).ThenInclude(l => l.Kleur).Include(f => f.Kleuren).SingleOrDefault(p => p.Id == id);
-            var kleur = _context.Kleuren.SingleOrDefault(k => k.Id == kid);
+            var product = _context.Producten.Include(p => p.Kleuren).ThenInclude(l => l.Kleur).Include(f => f.Kleuren).SingleOrDefault(p => p.Id == id);//Haal het product op waaraan de afbeeldingen worden gekoppeld
+            var kleur = _context.Kleuren.SingleOrDefault(k => k.Id == kid);//Haal de kleur op waar aan de afbeeldingen worden gekoppeld
 
             var x = FileUploader<ProductImage>.UploadImages(afbeeldingen);
 
-            var kp = _context.ktKleurProduct.ToList().Find(f => f.Kleur == kleur && f.ProductId == product.Id);
+            var kp = _context.ktKleurProduct.ToList().Find(f => f.Kleur == kleur && f.ProductId == product.Id);//Koppeltabel ophalen voor deze kleur en het product
             kp.Images = x;
             product.Kleuren.Add(kp);
             if (ModelState.IsValid)
@@ -125,7 +125,7 @@ namespace Honeymoonshop.Controllers
                 foreach (var k in kleur)
                 {
                     var kleurId = 0;
-                    int.TryParse(k, out kleurId);
+                    int.TryParse(k, out kleurId);//Verander naar int voor het opslaan
                     product.Kleuren.Add(new Kleurproduct() { Kleur = _context.Kleuren.ToList().Find(x => x.Id == kleurId) });
                 }
             }
@@ -136,19 +136,19 @@ namespace Honeymoonshop.Controllers
                 foreach (var k in kenmerk)
                 {
                     var kenmerkId = 0;
-                    int.TryParse(k, out kenmerkId);
+                    int.TryParse(k, out kenmerkId);//Verander naar int voor het opslaan
                     product.Kenmerken.Add(new Kenmerkproduct() { Kenmerk = _context.Kenmerken.ToList().Find(x => x.Id == kenmerkId) });
 
                 }
             }
-
+            //Als de modelstate valid is, er WEL kleuren en kenmerken zijn aangevinkt, dan mag er worden opgeslagen. Anders niet.
             if (ModelState.IsValid && kleur.Length > 0 && kenmerk.Length > 0)
             {
                 _context.Add(product);
                 _context.SaveChanges();
                 return RedirectToAction("Images", new { id = product.Id });
             }
-            
+            //Anders wordt men weer terug gestuurd naar de Create pagina met de opgegeven waarden
             return View(new CreateProduct()
             {
                 Categorieen = new SelectList(_context.Category, "Id", "Naam", product.CategorieId),
@@ -205,14 +205,14 @@ namespace Honeymoonshop.Controllers
                 List<int> idVanHuidigeKleuren = new List<int>();
                 foreach (Kleurproduct kleur in huidigeKleurenVanProduct)
                 {
-                    idVanHuidigeKleuren.Add(kleur.KleurId);
+                    idVanHuidigeKleuren.Add(kleur.KleurId);//Sla de ids op om daarmee later te vergelijken met Intersect/Except methodes.
                 }
                 List<int> kleurenIds = new List<int>();
                 var kleurId = 0;
                 foreach (var kleur in kleuren)
                 {
                     if (int.TryParse(kleur, out kleurId))
-                        kleurenIds.Add(kleurId);
+                        kleurenIds.Add(kleurId);//Haal de IDs uit de Post op en verander deze naar int om te vergelijken met Intersect/Except methodes.
                 }
 
                 IEnumerable<int> overeenkomsten = kleurenIds.Intersect(idVanHuidigeKleuren);//Bepaal de overeenkomsten tussen de aangevinkte kleuren van het formulier en de kleuren die opgeslagen waren in de database

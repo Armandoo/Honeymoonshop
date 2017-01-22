@@ -25,7 +25,7 @@ namespace Honeymoonshop.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            var producten = Context.Producten.Include(x => x.Kleuren).Include(x => x.Kleuren).ThenInclude(x => x.Images).Where(x => x.Geslacht == "bruid").ToList();
+            var producten = Context.Producten.Include(x => x.Categorie).Include(x => x.Kleuren).ThenInclude(x => x.Images).Where(x => x.Geslacht == "bruid" && x.Categorie.IsAccessoire == false).ToList();
 
             producten.ForEach(x => x.Kleuren.Sort((k1, k2) => k2.Images.Count.CompareTo(k1.Images.Count)));
 
@@ -45,9 +45,9 @@ namespace Honeymoonshop.Controllers
             ViewBag.hoogstePrijs = hoogstePrijs;
             ViewBag.geselecteerdeMaxPrijs = geselecteerdeMaxPrijs;
             ViewBag.geselecteerdeMinPrijs = geselecteerdeMinPrijs;
-            var producten = Context.Producten.Include(x => x.Merk).Include(x => x.Kenmerken).ThenInclude(x => x.Kenmerk).Include(x => x.Kleuren).ThenInclude(x => x.Kleur).Include(x => x.Kleuren).ThenInclude(x=>x.Images).Where(x => x.Geslacht == "Bruid" && x.Prijs <= geselecteerdeMaxPrijs).ToList();
+            var producten = Context.Producten.Include(x => x.Merk).Include(x => x.Kenmerken).ThenInclude(x => x.Kenmerk).Include(x => x.Kleuren).ThenInclude(x => x.Kleur).Include(x => x.Kleuren).ThenInclude(x=>x.Images).Where(x => x.Geslacht == "Bruid" && x.Prijs <= geselecteerdeMaxPrijs && x.Categorie.IsAccessoire == false).ToList();
             
-            var categorieen = Context.Category.ToList();
+            var categorieen = Context.Category.Where(x => x.IsAccessoire == false).ToList();
             Category actievecat = categorieen.SingleOrDefault(x => x.Id == filtercriteria.CategorieId);
 
             producten = filtercriteria.filterContent(producten);
@@ -58,9 +58,9 @@ namespace Honeymoonshop.Controllers
             var stijlen = Context.Kenmerken.ToList().FindAll(x => x.KenmerkType == "Stijl Jurk");
 
 
-            int limiet = filtercriteria.Limiet ?? 12;
+            int limiet = filtercriteria.Limiet ?? 12;//Controleert of er een limiet is ingesteld, anders wordt het limiet standaard 12.
 
-            var aantalpaginas = Math.Ceiling((double)producten.Count() / (double)limiet);
+            var aantalpaginas = Math.Ceiling((double)producten.Count() / (double)limiet);//Aantal paginas wordt bepaald door het totaal aantal producten te delen door het limiet per pagina. Rond dit af naar boven.
             int pagina = filtercriteria.Paginering ?? 1;
 
             producten = producten.Skip(pagina * limiet - limiet).Take(limiet).ToList();

@@ -27,7 +27,7 @@ namespace Honeymoonshop.Controllers
         {
             //ViewBag.menu = "inverted";
             ViewBag.opmaak = "bruidegom";
-            var producten = Context.Producten.Include(x => x.Kleuren).Include(x => x.Kleuren).ThenInclude(x => x.Images).Where(x => x.Geslacht == "bruidegom").ToList();
+            var producten = Context.Producten.Include(x => x.Categorie).Include(x => x.Kleuren).ThenInclude(x => x.Images).Where(x => x.Geslacht == "bruidegom" && x.Categorie.IsAccessoire == false).ToList();
             producten.ForEach(x => x.Kleuren.Sort((k1, k2) => k2.Images.Count.CompareTo(k1.Images.Count)));
             return View(producten);
         }
@@ -46,9 +46,9 @@ namespace Honeymoonshop.Controllers
             ViewBag.hoogstePrijs = hoogstePrijs;
             ViewBag.geselecteerdeMaxPrijs = geselecteerdeMaxPrijs;
             ViewBag.geselecteerdeMinPrijs = geselecteerdeMinPrijs;
-            var producten = Context.Producten.Include(x => x.Merk).Include(x => x.Kenmerken).ThenInclude(x => x.Kenmerk).Include(x => x.Kleuren).ThenInclude(x => x.Kleur).Include(x => x.Kleuren).ThenInclude(x => x.Images).Where(x => x.Geslacht == "bruidegom" && x.Prijs <= geselecteerdeMaxPrijs).ToList();
+            var producten = Context.Producten.Include(x => x.Merk).Include(x => x.Kenmerken).ThenInclude(x => x.Kenmerk).Include(x => x.Kleuren).ThenInclude(x => x.Kleur).Include(x => x.Kleuren).ThenInclude(x => x.Images).Where(x => x.Geslacht == "bruidegom" && x.Prijs <= geselecteerdeMaxPrijs && x.Categorie.IsAccessoire == false).ToList();
 
-            var categorieen = Context.Category.ToList();
+            var categorieen = Context.Category.Where(x => x.IsAccessoire == false).ToList();
             Category actievecat = categorieen.SingleOrDefault(x => x.Id == filtercriteria.CategorieId);
 
             producten = filtercriteria.filterContent(producten);
@@ -119,7 +119,7 @@ namespace Honeymoonshop.Controllers
             }
             catch (Exception e)
             {
-
+                //Als er geen gerelateerde producten zijn, dan worden deze niet in de view gezet. 
             }
             finally
             {
@@ -127,13 +127,14 @@ namespace Honeymoonshop.Controllers
             }
 
             var accessoires = new List<Kleurproduct>();
+            //Haal accessoires op uit de database.
             try
             {
                 accessoires = Context.ktKleurProduct.Include(x => x.Product).ThenInclude(x => x.Merk).Include(x => x.Images).Where(kleurproduct => kleurproduct.KleurId == hetProduct.KleurId && kleurproduct.Product.Categorie.IsAccessoire == true && kleurproduct.Product.Geslacht != "bruid").Take(4).ToList();
             }
             catch (Exception e)
             {
-
+                //Als er geen accessoires zijn, dan worden deze niet in de view gezet. 
             }
             finally
             {

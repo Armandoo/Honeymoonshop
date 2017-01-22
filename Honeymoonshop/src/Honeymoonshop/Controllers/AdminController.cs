@@ -23,7 +23,7 @@ namespace Honeymoonshop.Controllers
         {
             return View();
         }
-
+        /*
         public IActionResult Categorie() {
             return View();
         }
@@ -65,6 +65,6 @@ namespace Honeymoonshop.Controllers
         public IActionResult CategorieOverzicht()
         {
             return View(new List<Category>());
-        }
+        }*/
     }
 }

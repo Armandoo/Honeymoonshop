@@ -60,7 +60,7 @@ namespace Honeymoonshop.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(merk);
-                _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(merk);

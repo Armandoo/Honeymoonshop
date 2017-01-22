@@ -42,7 +42,7 @@
             <div class="col-md-10">
                 @foreach (var knmrk in Model.Kenmerken)
                 {
-                    if (Model.Product.Kleuren.Select(x => x.KleurId).Contains(knmrk.Id))
+                    if (Model.Product.Kenmerken.Select(x => x.KenmerkId).Contains(knmrk.Id))
                     {
                         <input type="checkbox" name="kenmerken" value="@knmrk.Id" checked /> @knmrk.Naam
                     }

@@ -97,45 +97,48 @@
             }
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12" id="tussenkopje">
-            <hr class="col-xs-4 col-md-4" />
-            <h4 class="col-xs-4 col-md-4 text-uppercase text-center bold">Bijpassende Accessoires</h4>
-            <hr class="col-xs-4 col-md-4" />
-        </div>
-        <div class="col-md-12" id="bijpassend">
-            <div>
-                @{
-                    if (accessoires.Count > 0)
-                    {
-                        foreach (Kleurproduct kleurproduct in accessoires)
+    @if (hetProduct.Product.Categorie.IsAccessoire == false)
+    { 
+        <div class="row">
+            <div class="col-md-12" id="tussenkopje">
+                <hr class="col-xs-4 col-md-4" />
+                <h4 class="col-xs-4 col-md-4 text-uppercase text-center bold">Bijpassende Accessoires</h4>
+                <hr class="col-xs-4 col-md-4" />
+            </div>
+            <div class="col-md-12" id="bijpassend">
+                <div>
+                    @{
+                        if (accessoires.Count > 0)
                         {
-                            <div class="col-xs-3 col-md-3 pull-left">
-                                @if (kleurproduct.Images.Count > 0)
-                                {
-                                    <div class="text-center"><img src="~/images/productenimages/@kleurproduct.Images.First().BestandsNaam" class="img-responsive" /></div>
-                                }
-                                else
-                                {
-                                    <div class="text-center"><img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="img-responsive" /></div>
-                                }
-                                <span>@kleurproduct.Product.Merk.MerkNaam</span>
-                            </div>
+                            foreach (Kleurproduct kleurproduct in accessoires)
+                            {
+                                <div class="col-xs-3 col-md-3 pull-left">
+                                    @if (kleurproduct.Images.Count > 0)
+                                    {
+                                        <div class="text-center"><img src="~/images/productenimages/@kleurproduct.Images.First().BestandsNaam" class="img-responsive" /></div>
+                                    }
+                                    else
+                                    {
+                                        <div class="text-center"><img src="~/images/productenimages/placeholders/placeholderbruidegom.jpeg" class="img-responsive" /></div>
+                                    }
+                                    <span><a href="/bruidegom/productpagina/?productid=@kleurproduct.ProductId&kleurid=@kleurproduct.KleurId">@kleurproduct.Product.Merk.MerkNaam</a></span>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="text-center">Er zijn geen bijpassende accessoires gevonden voor dit product of deze kleur.</div>
                         }
                     }
-                    else
-                    {
-                        <div class="text-center">Er zijn geen bijpassende accessoires gevonden voor dit product of deze kleur.</div>
-                    }
-                }
-            </div>
-            <a href="/bruidegom/dressfinder/">
-                <div class="col-md-12">
-                    <span class="text-uppercase">Bezoek de webshop</span>
                 </div>
-            </a>
+                <a href="/bruidegom/dressfinder/">
+                    <div class="col-md-12">
+                        <span class="text-uppercase">Bezoek de webshop</span>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
+    }
     <div class="row">
         <div class="col-md-12" id="tussenkopje">
             <hr class="col-xs-3 col-md-3" />

@@ -27,11 +27,9 @@ namespace Honeymoonshop.Controllers
         public IActionResult Afspraakmaken(string typeafspraak)
         {
             ViewBag.menu = "inverted";
-            /*
-                Vind datums waar er geen afspraken gemaakt kunnen worden / lijst met datums
-             */
             ViewBag.type = typeafspraak;
-
+            // Vind datums waar er geen afspraken gemaakt kunnen worden / lijst met datums
+            //Als een datum meer dan twee keer voor komt, dan zijn alle tijden voor deze datum bezet.
             DateTime[] datums = _context.Afspraken.GroupBy(x => x.Datum.Date).Where(x => x.Count() > 2).Select(x => x.Key).ToArray();
             
             return View(datums); // geef lijst mee aan view
@@ -84,8 +82,7 @@ namespace Honeymoonshop.Controllers
             EmailSender sender = new EmailSender();
             sender.sendEmail(klantafspraak);
 
-
-                return RedirectToAction("Bevestiging");
+            return RedirectToAction("Bevestiging");
         }
 
         [HttpPost]

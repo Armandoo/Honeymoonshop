@@ -7,8 +7,6 @@ $(document).ready(function () {
     toggleNeklijnen();
     toggleSilhouettes();
     toggleImage();
-    //toggleActievePagina();
-    slider();
     button1active();
 
     $("#slider").slider().on('slideStop', function (ev) {
@@ -24,11 +22,6 @@ $(document).ready(function () {
 
         $('input:hidden[name=minPrijs]').val( minPrijs);
         $('input:hidden[name=maxPrijs]').val( maxPrijs);
-    });
-
-    $('select[name=sorteer] option:selected').each(function () {
-        
-        console.log("a");
     });
 
         /*Carousel sleep actie*/
@@ -141,16 +134,6 @@ function toggleImage() {
         $(".triangle-opposite", this).toggle();
     });
 };
-        
- 
-
-function toggleActievePagina(){
-$('.navbar-nav a').click(function () {
-    
-    $(".navbar-nav li a").removeClass("actief");
-    $(this).addClass('actief');
-    });
-}
 
 function toggleMerken() {
     $(".merken").toggle();
@@ -171,11 +154,6 @@ function toggleNeklijnen() {
 function toggleSilhouettes() {
     $(".silhouettes").toggle();
 }
-
-function slider() {
-    $("#slider").slider();
-}
-
 
 
 function getDate() {

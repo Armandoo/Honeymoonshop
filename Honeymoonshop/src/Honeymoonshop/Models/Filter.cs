@@ -27,7 +27,7 @@ namespace Honeymoonshop.Models
             producten = filterOpKenmerken(producten);
             producten = filterOpKleur(producten);
             producten = filterOpPrijs(producten);
-            producten = soorteer(producten);            
+            producten = sorteer(producten);            
 
             return producten;
 
@@ -37,7 +37,7 @@ namespace Honeymoonshop.Models
         {
             if (this.CategorieId != null)
             {
-                producten = producten.FindAll(x => x.Categorie.Id == this.CategorieId);
+                producten = producten.FindAll(x => x.CategorieId == this.CategorieId);
             }
             return producten;
         }
@@ -70,17 +70,6 @@ namespace Honeymoonshop.Models
             {
                 producten = producten.FindAll(x => x.Kenmerken.Any(z => Kenmerk.Contains( z.Kenmerk.Id )));
             }
-            /*
-            if (this.neklijn != null)
-            {
-                producten = producten.FindAll(x => x.kenmerken.Any(z => z.kenmerk.id == this.neklijn));
-            }
-
-            if (this.silhouette != null)
-            {
-                producten = producten.FindAll(x => x.kenmerken.Any(z => z.kenmerk.id == this.silhouette));
-
-            }*/
 
             return producten;
         }
@@ -101,7 +90,7 @@ namespace Honeymoonshop.Models
             return producten;
         }
 
-        public List<Product> soorteer(List<Product> producten)
+        public List<Product> sorteer(List<Product> producten)
         {
             if (this.Sorteer == "desc")
             {
